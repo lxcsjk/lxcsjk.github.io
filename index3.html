@@ -1,0 +1,137 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<title> You are beautiful ~</title>
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #FF62FF;
+}
+.content {
+	width: 80%;
+	color: #90F;
+	height: 100%;
+	top: 0px;
+	left: 10%;
+	font-size: 18px;
+	line-height: 25px;
+	font-family: "微软雅黑";
+	margin-top: 0px;
+}
+body {
+	color: #FFF;
+	padding: 10px;
+	background: #FFF url(/bg_105_wrap2.jpg) no-repeat fixed top center;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.des {
+	font-size: 15px;
+	color: #3C3C3C;
+	/*width: 100%;*/
+	text-shadow : 0px 0px 1px #fff;
+	z-index:1000;					
+	right:20px;
+	position:fixed !important;
+	bottom:0px;
+}
+.des a {
+	color: #3C3C3C;
+	text-shadow : 0px 0px 1px #fff;
+}
+</style>
+<script src="jquery-1.7.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="tao.js" language="javascript" type="text/javascript"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*禁止右键和隐藏鼠标*/
+	$("body").bind("contextmenu", function() {
+      return false;
+    });
+	/*定义文字最底部显示到哪儿*/
+	
+	
+	
+	var guangs=["　","|","　","|"];
+	var guangBiao="/";
+	var guangSub=0;
+	var guang=setInterval("$.guang()",120);
+	
+	var subs=0;
+    var string="Hey Girl…… ██我喜欢你~！██（轻晃鼠标会有星星~）███一直都在关注着你，看着你██有时候很想帮帮你或者。。却不知道该如何去做，该怎样去做是最好的……想多了也就什么也做不成了██这句话说得就是我……平时快刀斩乱麻的我遇到了你，██变得如此犹豫██No matter what happens I will always stand on your side██我的确没那么优秀……可能配不上你██............██I won't give up. Waiting for you ~~██████████PS.女神就想想就好。整那么些个没用。what are you 弄啥来！ 哈哈哈 <-- The End -->";
+	$.intent=function(str){
+		str="　　"+str;
+		//var reg=new RegExp("/█{1,2}/","i"); //创建正则RegExp对象
+        str=str.replace(eval("/█/gi"),"█");
+
+		return str;
+	}
+	string=$.intent(string);
+	
+	var echo=setInterval("$.echo()",300);
+		
+	
+	
+	$.guang=function(){
+		  if(guangSub<guangs.length-1){
+			    guangSub++;
+			  }else{
+				  guangSub=0;
+				  }
+			guangBiao=guangs[guangSub];
+			$("#guang").html(guangBiao);
+			
+		}
+	
+	$.echo=function(){
+		if(subs<string.length){
+		$("#txt").html($("#txt").html()+$.repl(string.substr(subs,1)));
+		if($("#guang").offset().top > document.body.scrollHeight / 2){
+		  window.scrollTo(0,$("#guang").offset().top);
+		}
+               $(".des").css("bottom","0px");
+		subs++;
+		}
+	}
+	$.repl=function(str){
+		str=str.replace("\r\n","<br/>");
+		str=str.replace("\n","<br/>");
+		str=str.replace("█","<br/>");
+		return str;
+		}
+});
+
+</script>
+</head>
+
+<body>
+<audio src="def.mp3" autoplay="autoplay">
+</audio>
+
+<center>
+<div align="left" class="content"><span  id="txt"></span><span id="guang"></span>
+<span></span>
+</div>
+</center>
+
+
+
+
+<!--下面是浮动的桃心-->
+<div id="bubbles" style="visibility:hidden">
+<img src="img/1.png">
+<img src="img/2.png">
+<img src="img/1.png">
+</div>
+<!---->
+
+
+
+</body>
+</html>
