@@ -1,0 +1,125 @@
+﻿<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>My Love</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        @font-face {
+            font-family: digit;
+            src: url('digital-7_mono.ttf') format("truetype");
+        } 
+<audio src="/abc.mp3" autoplay="autoplay">
+    </style>
+    <link href="style/default.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="style/jquery.js"></script>
+    <script type="text/javascript" src="style/garden.js"></script>
+    <script type="text/javascript" src="style/functions.js"></script>
+</head>
+
+<body>
+    <div id="mainDiv">
+        <div id="content">
+            <div id="code">
+                <span class="comments">/**</span><br />
+                <span class="space"/><span class="comments">*我就一吊思程序员,</span><br />
+                <span class="space"/><span class="comments">* 没有房没有车，长得也不行，个子也不高.</span><br />
+                <span class="space"/><span class="comments">*/</span><br />
+                Boy i = <span class="keyword">new</span> Boy(<span class="string">"me"</span>);<br />
+                Girl u = <span class="keyword">new</span> Girl(<span class="string">"you"</span>);<br />
+                <span class="comments">// 我想努力的让自己变得好一些.更好一些。做个Better Man </span><br />
+                i.love(u);<br />
+                <span class="comments">// 但是......总是心有余而力不足，总想着多学点学快点，多挣点钱早点买房子，</span><br />
+                u.sayOtherthing();<br />
+                <span class="comments">// 但是合肥房价已然均价8600，还是在往上涨。刚刚毕业一个月区区4000多块钱能干嘛。</span><br />
+                <span class="keyword">var</span> reason=i.ask(u);<br />
+                <span class="comments">// 想给你一个好的生活。焦躁的心情。嗨。。</span><br />
+                $("body").append(reason);<br />
+                <span class="comments">// 不过还是希望你能给我一个机会，我会成长的更快更努力，认识那么久，在我心里真没觉得有比你好的女孩。</span><br />
+                <span class="comments">// You will always be my only, no matter how long after。 </span><br />
+                i.takeCareOf(u);<br />
+                <span class="comments">// 所以我一直在等待，在期望。不过我也清楚现实是什么样的。</span><br />
+                <span class="keyword">boolean</span> isAccept = <span class="keyword">false</span>;<br />
+                <span class="keyword">while</span> (isAccept) {<br />
+                <span class="placeholder"/>i.waitFor(u);<br />
+                <span class="placeholder"/><span class="comments">// You are my most beautiful dream。</span><br />
+                <span class="placeholder"/><span class="comments">// 总而言之，只要你幸福，过的不错就好。</span><br />
+                <span class="placeholder"/>isAccept = u.thinkOver();<br />
+                }<br />
+                <span class="comments">//我们依然还是好朋友。</span><br />
+                u.accept(i);<br />
+                i.liveHappilyWith(u);<br />
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3712320065678109";
+/* lovead */
+google_ad_slot = "0650322805";
+google_ad_width = 320;
+google_ad_height = 50;
+//-->
+</script>
+
+            </div>
+            <div id="loveHeart">
+                <canvas id="garden"></canvas>
+                <div id="words">
+                    <div id="messages">
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3712320065678109";
+/* lovead */
+google_ad_slot = "0650322805";
+google_ad_width = 320;
+google_ad_height = 50;
+//-->
+</script>
+</center>
+                        Lucky girl，希望你能多笑笑，你笑起来喜欢吐舌头，真是逗~ 俏皮~~
+                        <div id="elapseClock" style="display:none"></div>
+                        <a href='index3.html' id="accept">Click Here！ </a>
+                    </div>
+                    <div id="loveu">
+                        You have been in my heart。<br/>
+                        <div class="signature">- boy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="copyright">
+            <br />
+        </div>
+    </div>
+    <script type="text/javascript">
+        var offsetX = $("#loveHeart").width() / 2;
+        var offsetY = $("#loveHeart").height() / 2 - 55;
+        
+        if (!document.createElement('canvas').getContext) {
+            var msg = document.createElement("div");
+            msg.id = "errorMsg";
+            msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
+            document.body.appendChild(msg);
+            $("#code").css("display", "none")
+            $("#copyright").css("position", "absolute");
+            $("#copyright").css("bottom", "10px");
+            document.execCommand("stop");
+        } else {
+            setTimeout(function () {
+                adjustWordsPosition();
+                startHeartAnimation();
+            }, 10000);
+            
+            $("#accept").click(function(){
+                $(this).hide();
+                $("#elapseClock").show();
+                var together = new Date();
+                timeElapse(together);
+                setInterval(function () {
+                    timeElapse(together);
+                }, 500);
+            })
+            adjustCodePosition();
+            $("#code").typewriter();
+        }
+    </script>
+<audio src="/abc.mp3" autoplay="autoplay">
+</body>
+
+</html>
