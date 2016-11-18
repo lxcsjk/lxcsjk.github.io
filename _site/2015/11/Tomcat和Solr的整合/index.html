@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Tomcat和Solr的整合</title>
+  <meta name="description" content="这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tomcat和Solr的整合">
+  <meta name="twitter:description" content="这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Tomcat和Solr的整合">
+  <meta property="og:description" content="这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/">
+  <link rel="alternate" type="application/rss+xml" title="YoRuo:技术成长之路~" href="http://localhost:4000/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 百度统计 -->
+  
+
+<!-- google 统计 -->
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-87669753-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 YoRuo:技术成长之路~ 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                YoRuo
+                            
+                        </h2>
+                        <p>
+                           
+                                Java & iOS
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for YoRuo:技术成长之路~" class="blog-button">YoRuo:技术成长之路~</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">爱折腾 - 乐于折腾 - 享受折腾</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的Blog~</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-clear"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">Tomcat和Solr的整合</h1>
+    <div class="post-meta">
+      <time datetime="2015-11-11 06:15:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-11</time>
+     
+      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <span id="busuanzi_container_page_pv">　　阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  <section class="post">
+    <p>这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。
+Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。</p>
+
+<p>1 .  搭建环境</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> MacBook pro 15款840 
+ OS X 10.10.5
+ solr-5.2.1.tgz
+ apache-tomcat-8.0.26
+</code></pre>
+</div>
+
+<p>2 . 解压压缩包</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    tar -zxf  solr-5.2.1.tgz
+</code></pre>
+</div>
+
+<p>3 . 移动war包
+     <img src="http://img.blog.csdn.net/20151111053404840" alt="这里写图片描述" /></p>
+
+<p>将这个war包，移动到 tomcat的webapps，然后启动或者解压war。</p>
+
+<p><img src="http://img.blog.csdn.net/20151111053535622" alt="这里写图片描述" /></p>
+
+<p>启动命令： 进入tomcat的bin下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>      ./startup.sh
+</code></pre>
+</div>
+<p>4 .拷贝依赖需要的jar包</p>
+
+<ol>
+  <li>
+    <p>复制solr-5.2.1/dist/ solr-dataimporthandler-5.2.1.jar ，solr-dataimporthandler-extras-5.2.1.jar，solr-cell-5.2.1.jar，到tomcat中的solr/WEB-INF/lib下，将数据库驱动也需要放入这里。</p>
+  </li>
+  <li>
+    <p>复制solr-5.2.1\server\lib\ext下的jar包到solr/WEB-INF/lib下。这是打印日志所需要的jar包，然后在solr/WEB-INF 下新建classes文件夹 ，将solr-5.2.1/example/resources/log4j.properties 复制到 /usr/local/tomcat/webapps/solr/WEB-INF/classes/</p>
+  </li>
+  <li>
+    <p>这里使用smartcn作为中文分词组件，将solr-5.2.1/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-5.2.1.jar复制到tomcat/solr/WEB-INF/lib下</p>
+  </li>
+</ol>
+
+<p>5 .创建Solr_Home</p>
+
+<p>创建新的文件夹，solr_home，将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。</p>
+
+<p>6 .SOLR_HOME配置
+将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。
+配置修改tomcat/webapps/solr/WEB-INF/web.xml
+释放对这句话的注释。并且修改tomcat的server.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;env-entry&gt;
+       &lt;env-entry-name&gt;solr/home&lt;/env-entry-name&gt;
+       &lt;env-entry-value&gt;/Users/lxc/JavaSofe/solr_home&lt;/env-entry-value&gt;
+       &lt;env-entry-type&gt;java.lang.String&lt;/env-entry-type&gt;
+    &lt;/env-entry&gt;
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" 
+               URLEncoding="UTF-8"/&gt;
+</code></pre>
+</div>
+
+<p>7 .配置core目录
+    在solr_home下创建一个文件夹szss，并且复制solr-5.2.1/service/solr/configsets/basic_configs/conf  到   solr_home/szss下。</p>
+
+<p>修改solrconfig.xml
+修改solr_home/test/conf/solrconfig.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler"&gt;
+     &lt;lst name="defaults"&gt;
+          &lt;str name="config"&gt;data-config.xml&lt;/str&gt;
+     &lt;/lst&gt;
+&lt;/requestHandler&gt;
+</code></pre>
+</div>
+<p>新建一个data-config.xml文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
+<span class="nt">&lt;dataConfig&gt;</span>
+    <span class="nt">&lt;dataSource</span> <span class="na">type=</span><span class="s">"JdbcDataSource"</span>
+              <span class="na">driver=</span><span class="s">"com.microsoft.sqlserver.jdbc.SQLServerDriver"</span>
+              <span class="na">url=</span><span class="s">"jdbc:sqlserver://127.0.0.1:6372;databaseName=cs_szssapp"</span>
+              <span class="na">user=</span><span class="s">"sa"</span>
+              <span class="na">password=</span><span class="s">"szss"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;document&gt;</span>
+        <span class="nt">&lt;entity</span> <span class="na">name=</span><span class="s">"solr_test"</span> <span class="na">transformer=</span><span class="s">"DateFormatTransformer"</span>
+            <span class="na">query=</span><span class="s">"select id,product_full_name,product_short_name,product_content,specification,taste_type,date_created,last_updated from product_b"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">column=</span><span class="s">'date_created'</span> <span class="na">dateTimeFormat=</span><span class="s">'yyyy-MM-dd HH:mm:ss'</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">column=</span><span class="s">'last_updated'</span> <span class="na">dateTimeFormat=</span><span class="s">'yyyy-MM-dd HH:mm:ss'</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/entity&gt;</span>
+    <span class="nt">&lt;/document&gt;</span>
+<span class="nt">&lt;/dataConfig&gt;</span>
+</code></pre>
+</div>
+
+<p>8 .编辑schema.xml</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
+//这个name要和你新建的solr_home文件下得那个文件名相同
+<span class="nt">&lt;schema</span> <span class="na">name=</span><span class="s">"test"</span> <span class="na">version=</span><span class="s">"1.5"</span><span class="nt">&gt;</span>
+  
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"_version_"</span> <span class="na">type=</span><span class="s">"long"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"_root_"</span> <span class="na">type=</span><span class="s">"string"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"id"</span> <span class="na">type=</span><span class="s">"string"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="na">required=</span><span class="s">"true"</span> <span class="na">multiValued=</span><span class="s">"false"</span> <span class="nt">/&gt;</span> 
+   
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_i"</span>  <span class="na">type=</span><span class="s">"int"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_is"</span> <span class="na">type=</span><span class="s">"int"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span>  <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_s"</span>  <span class="na">type=</span><span class="s">"string"</span>  <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_ss"</span> <span class="na">type=</span><span class="s">"string"</span>  <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span> <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_l"</span>  <span class="na">type=</span><span class="s">"long"</span>   <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_ls"</span> <span class="na">type=</span><span class="s">"long"</span>   <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span>  <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_t"</span>  <span class="na">type=</span><span class="s">"text_general"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_txt"</span> <span class="na">type=</span><span class="s">"text_general"</span>   <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span> <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_en"</span>  <span class="na">type=</span><span class="s">"text_en"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span> <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_b"</span>  <span class="na">type=</span><span class="s">"boolean"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_bs"</span> <span class="na">type=</span><span class="s">"boolean"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span>  <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_f"</span>  <span class="na">type=</span><span class="s">"float"</span>  <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_fs"</span> <span class="na">type=</span><span class="s">"float"</span>  <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span>  <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_d"</span>  <span class="na">type=</span><span class="s">"double"</span> <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_ds"</span> <span class="na">type=</span><span class="s">"double"</span> <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span>  <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+   <span class="c">&lt;!-- Type used to index the lat and lon components for the "location" FieldType --&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_coordinate"</span>  <span class="na">type=</span><span class="s">"tdouble"</span> <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_dt"</span>  <span class="na">type=</span><span class="s">"date"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_dts"</span> <span class="na">type=</span><span class="s">"date"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span> <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_p"</span>  <span class="na">type=</span><span class="s">"location"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+   <span class="c">&lt;!-- some trie-coded dynamic fields for faster range queries --&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_ti"</span> <span class="na">type=</span><span class="s">"tint"</span>    <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_tl"</span> <span class="na">type=</span><span class="s">"tlong"</span>   <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_tf"</span> <span class="na">type=</span><span class="s">"tfloat"</span>  <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_td"</span> <span class="na">type=</span><span class="s">"tdouble"</span> <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_tdt"</span> <span class="na">type=</span><span class="s">"tdate"</span>  <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"*_c"</span>   <span class="na">type=</span><span class="s">"currency"</span> <span class="na">indexed=</span><span class="s">"true"</span>  <span class="na">stored=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"ignored_*"</span> <span class="na">type=</span><span class="s">"ignored"</span> <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"attr_*"</span> <span class="na">type=</span><span class="s">"text_general"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="na">multiValued=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;dynamicField</span> <span class="na">name=</span><span class="s">"random_*"</span> <span class="na">type=</span><span class="s">"random"</span> <span class="nt">/&gt;</span>
+
+   <span class="c">&lt;!-- uncomment the following to ignore any fields that don't already match an existing 
+        field name or dynamic field, rather than reporting them as an error. 
+        alternately, change the type="ignored" to some other type e.g. "text" if you want 
+        unknown fields indexed and/or stored by default --&gt;</span> 
+   <span class="c">&lt;!--dynamicField name="*" type="ignored" multiValued="true" /--&gt;</span>
+
+ <span class="c">&lt;!-- Field to use to determine and enforce document uniqueness. 
+      Unless this field is marked with required="false", it will be a required field
+   --&gt;</span>
+ <span class="nt">&lt;uniqueKey&gt;</span>id<span class="nt">&lt;/uniqueKey&gt;</span>
+ 
+ <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_cn"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"index"</span> <span class="na">class=</span><span class="s">"org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"query"</span> <span class="na">class=</span><span class="s">"org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer"</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"string"</span> <span class="na">class=</span><span class="s">"solr.StrField"</span> <span class="na">sortMissingLast=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- boolean type: "true" or "false" --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"boolean"</span> <span class="na">class=</span><span class="s">"solr.BoolField"</span> <span class="na">sortMissingLast=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"int"</span> <span class="na">class=</span><span class="s">"solr.TrieIntField"</span> <span class="na">precisionStep=</span><span class="s">"0"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"float"</span> <span class="na">class=</span><span class="s">"solr.TrieFloatField"</span> <span class="na">precisionStep=</span><span class="s">"0"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"long"</span> <span class="na">class=</span><span class="s">"solr.TrieLongField"</span> <span class="na">precisionStep=</span><span class="s">"0"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"double"</span> <span class="na">class=</span><span class="s">"solr.TrieDoubleField"</span> <span class="na">precisionStep=</span><span class="s">"0"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"tint"</span> <span class="na">class=</span><span class="s">"solr.TrieIntField"</span> <span class="na">precisionStep=</span><span class="s">"8"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"tfloat"</span> <span class="na">class=</span><span class="s">"solr.TrieFloatField"</span> <span class="na">precisionStep=</span><span class="s">"8"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"tlong"</span> <span class="na">class=</span><span class="s">"solr.TrieLongField"</span> <span class="na">precisionStep=</span><span class="s">"8"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"tdouble"</span> <span class="na">class=</span><span class="s">"solr.TrieDoubleField"</span> <span class="na">precisionStep=</span><span class="s">"8"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"date"</span> <span class="na">class=</span><span class="s">"solr.TrieDateField"</span> <span class="na">precisionStep=</span><span class="s">"0"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- A Trie based date field for faster date range queries and date faceting. --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"tdate"</span> <span class="na">class=</span><span class="s">"solr.TrieDateField"</span> <span class="na">precisionStep=</span><span class="s">"6"</span> <span class="na">positionIncrementGap=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+
+
+    <span class="c">&lt;!--Binary data type. The data should be sent/retrieved in as Base64 encoded Strings --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"binary"</span> <span class="na">class=</span><span class="s">"solr.BinaryField"</span><span class="nt">/&gt;</span>
+
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"random"</span> <span class="na">class=</span><span class="s">"solr.RandomSortField"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- A text field that only splits on whitespace for exact matching of words --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_ws"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.WhitespaceTokenizerFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_general"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.StandardTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"stopwords.txt"</span> <span class="nt">/&gt;</span>
+        
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.StandardTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"stopwords.txt"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.SynonymFilterFactory"</span> <span class="na">synonyms=</span><span class="s">"synonyms.txt"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">expand=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_en"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.StandardTokenizerFactory"</span><span class="nt">/&gt;</span>
+    
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span>
+                <span class="na">ignoreCase=</span><span class="s">"true"</span>
+                <span class="na">words=</span><span class="s">"lang/stopwords_en.txt"</span>
+                <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.EnglishPossessiveFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.KeywordMarkerFilterFactory"</span> <span class="na">protected=</span><span class="s">"protwords.txt"</span><span class="nt">/&gt;</span>
+	
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.PorterStemFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.StandardTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.SynonymFilterFactory"</span> <span class="na">synonyms=</span><span class="s">"synonyms.txt"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">expand=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span>
+                <span class="na">ignoreCase=</span><span class="s">"true"</span>
+                <span class="na">words=</span><span class="s">"lang/stopwords_en.txt"</span>
+                <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.EnglishPossessiveFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.KeywordMarkerFilterFactory"</span> <span class="na">protected=</span><span class="s">"protwords.txt"</span><span class="nt">/&gt;</span>
+	<span class="c">&lt;!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
+        &lt;filter class="solr.EnglishMinimalStemFilterFactory"/&gt;
+	--&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.PorterStemFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_en_splitting"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span> <span class="na">autoGeneratePhraseQueries=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.WhitespaceTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span>
+                <span class="na">ignoreCase=</span><span class="s">"true"</span>
+                <span class="na">words=</span><span class="s">"lang/stopwords_en.txt"</span>
+                <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.WordDelimiterFilterFactory"</span> <span class="na">generateWordParts=</span><span class="s">"1"</span> <span class="na">generateNumberParts=</span><span class="s">"1"</span> <span class="na">catenateWords=</span><span class="s">"1"</span> <span class="na">catenateNumbers=</span><span class="s">"1"</span> <span class="na">catenateAll=</span><span class="s">"0"</span> <span class="na">splitOnCaseChange=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.KeywordMarkerFilterFactory"</span> <span class="na">protected=</span><span class="s">"protwords.txt"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.PorterStemFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.WhitespaceTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.SynonymFilterFactory"</span> <span class="na">synonyms=</span><span class="s">"synonyms.txt"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">expand=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span>
+                <span class="na">ignoreCase=</span><span class="s">"true"</span>
+                <span class="na">words=</span><span class="s">"lang/stopwords_en.txt"</span>
+                <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.WordDelimiterFilterFactory"</span> <span class="na">generateWordParts=</span><span class="s">"1"</span> <span class="na">generateNumberParts=</span><span class="s">"1"</span> <span class="na">catenateWords=</span><span class="s">"0"</span> <span class="na">catenateNumbers=</span><span class="s">"0"</span> <span class="na">catenateAll=</span><span class="s">"0"</span> <span class="na">splitOnCaseChange=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.KeywordMarkerFilterFactory"</span> <span class="na">protected=</span><span class="s">"protwords.txt"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.PorterStemFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="c">&lt;!-- Less flexible matching, but less false matches.  Probably not ideal for product names,
+         but may be good for SKUs.  Can insert dashes in the wrong place and still match. --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_en_splitting_tight"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span> <span class="na">autoGeneratePhraseQueries=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.WhitespaceTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.SynonymFilterFactory"</span> <span class="na">synonyms=</span><span class="s">"synonyms.txt"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">expand=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"lang/stopwords_en.txt"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.WordDelimiterFilterFactory"</span> <span class="na">generateWordParts=</span><span class="s">"0"</span> <span class="na">generateNumberParts=</span><span class="s">"0"</span> <span class="na">catenateWords=</span><span class="s">"1"</span> <span class="na">catenateNumbers=</span><span class="s">"1"</span> <span class="na">catenateAll=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.KeywordMarkerFilterFactory"</span> <span class="na">protected=</span><span class="s">"protwords.txt"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.EnglishMinimalStemFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- this filter can remove any duplicate tokens that appear at the same position - sometimes
+             possible with WordDelimiterFilter in conjuncton with stemming. --&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.RemoveDuplicatesTokenFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="c">&lt;!-- Just like text_general except it reverses the characters of
+	 each token, to enable more efficient leading wildcard queries. --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"text_general_rev"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"index"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.StandardTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"stopwords.txt"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.ReversedWildcardFilterFactory"</span> <span class="na">withOriginal=</span><span class="s">"true"</span>
+           <span class="na">maxPosAsterisk=</span><span class="s">"3"</span> <span class="na">maxPosQuestion=</span><span class="s">"2"</span> <span class="na">maxFractionAsterisk=</span><span class="s">"0.33"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+      <span class="nt">&lt;analyzer</span> <span class="na">type=</span><span class="s">"query"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.StandardTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.SynonymFilterFactory"</span> <span class="na">synonyms=</span><span class="s">"synonyms.txt"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">expand=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.StopFilterFactory"</span> <span class="na">ignoreCase=</span><span class="s">"true"</span> <span class="na">words=</span><span class="s">"stopwords.txt"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="c">&lt;!-- This is an example of using the KeywordTokenizer along
+         With various TokenFilterFactories to produce a sortable field
+         that does not include some properties of the source text
+      --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"alphaOnlySort"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">sortMissingLast=</span><span class="s">"true"</span> <span class="na">omitNorms=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer&gt;</span>
+        <span class="c">&lt;!-- KeywordTokenizer does no actual tokenizing, so the entire
+             input string is preserved as a single token
+          --&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.KeywordTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- The LowerCase TokenFilter does what you expect, which can be
+             when you want your sorting to be case insensitive
+          --&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span> <span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- The TrimFilter removes any leading or trailing whitespace --&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.TrimFilterFactory"</span> <span class="nt">/&gt;</span>
+    
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.PatternReplaceFilterFactory"</span>
+                <span class="na">pattern=</span><span class="s">"([^a-z])"</span> <span class="na">replacement=</span><span class="s">""</span> <span class="na">replace=</span><span class="s">"all"</span>
+        <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="c">&lt;!-- lowercases the entire field value, keeping it as a single token.  --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"lowercase"</span> <span class="na">class=</span><span class="s">"solr.TextField"</span> <span class="na">positionIncrementGap=</span><span class="s">"100"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;analyzer&gt;</span>
+        <span class="nt">&lt;tokenizer</span> <span class="na">class=</span><span class="s">"solr.KeywordTokenizerFactory"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;filter</span> <span class="na">class=</span><span class="s">"solr.LowerCaseFilterFactory"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/analyzer&gt;</span>
+    <span class="nt">&lt;/fieldType&gt;</span>
+
+    <span class="c">&lt;!-- since fields of this type are by default not stored or indexed,
+         any data added to them will be ignored outright.  --&gt;</span> 
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"ignored"</span> <span class="na">stored=</span><span class="s">"false"</span> <span class="na">indexed=</span><span class="s">"false"</span> <span class="na">multiValued=</span><span class="s">"true"</span> <span class="na">class=</span><span class="s">"solr.StrField"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"point"</span> <span class="na">class=</span><span class="s">"solr.PointType"</span> <span class="na">dimension=</span><span class="s">"2"</span> <span class="na">subFieldSuffix=</span><span class="s">"_d"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- A specialized field for geospatial search. If indexed, this fieldType must not be multivalued. --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"location"</span> <span class="na">class=</span><span class="s">"solr.LatLonType"</span> <span class="na">subFieldSuffix=</span><span class="s">"_coordinate"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"location_rpt"</span> <span class="na">class=</span><span class="s">"solr.SpatialRecursivePrefixTreeFieldType"</span>
+        <span class="na">geo=</span><span class="s">"true"</span> <span class="na">distErrPct=</span><span class="s">"0.025"</span> <span class="na">maxDistErr=</span><span class="s">"0.001"</span> <span class="na">distanceUnits=</span><span class="s">"kilometers"</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- Spatial rectangle (bounding box) field. It supports most spatial predicates, and has
+     special relevancy modes: score=overlapRatio|area|area2D (local-param to the query).  DocValues is recommended for
+     relevancy. --&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"bbox"</span> <span class="na">class=</span><span class="s">"solr.BBoxField"</span>
+               <span class="na">geo=</span><span class="s">"true"</span> <span class="na">distanceUnits=</span><span class="s">"kilometers"</span> <span class="na">numberType=</span><span class="s">"_bbox_coord"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"_bbox_coord"</span> <span class="na">class=</span><span class="s">"solr.TrieDoubleField"</span> <span class="na">precisionStep=</span><span class="s">"8"</span> <span class="na">docValues=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;fieldType</span> <span class="na">name=</span><span class="s">"currency"</span> <span class="na">class=</span><span class="s">"solr.CurrencyField"</span> <span class="na">precisionStep=</span><span class="s">"8"</span> <span class="na">defaultCurrency=</span><span class="s">"USD"</span> <span class="na">currencyConfig=</span><span class="s">"currency.xml"</span> <span class="nt">/&gt;</span>
+    
+    **<span class="c">&lt;!-- general --&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"product_full_name"</span> <span class="na">type=</span><span class="s">"text_cn"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"product_short_name"</span> <span class="na">type=</span><span class="s">"text_cn"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"product_content"</span> <span class="na">type=</span><span class="s">"text_cn"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"specification"</span> <span class="na">type=</span><span class="s">"text_cn"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"taste_type"</span> <span class="na">type=</span><span class="s">"text_cn"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"date_created"</span> <span class="na">type=</span><span class="s">"date"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">"last_updated"</span> <span class="na">type=</span><span class="s">"date"</span> <span class="na">indexed=</span><span class="s">"true"</span> <span class="na">stored=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;defaultSearchField&gt;</span>product_full_name<span class="nt">&lt;/defaultSearchField&gt;</span>
+    <span class="nt">&lt;solrQueryParser</span> <span class="na">defaultOperator=</span><span class="s">"OR"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/schema&gt;</span>**
+
+</code></pre>
+</div>
+
+<p>主要加了查询的参数类型什么的。</p>
+
+<p>9 .打开浏览器localhost:8080/solr
+<img src="http://img.blog.csdn.net/20151111060058755" alt="这里写图片描述" /></p>
+
+<p>然后点击
+<img src="http://img.blog.csdn.net/20151111060516777" alt="这里写图片描述" /></p>
+
+<p>这个名字不能取成其他的 需要和你在solr_home下新建文件夹名相同。
+<img src="http://img.blog.csdn.net/20151111060707483" alt="这里写图片描述" /></p>
+
+<p>然后
+<img src="http://img.blog.csdn.net/20151111060818274" alt="这里写图片描述" /></p>
+
+<p>因为我之前新建过所以是test1</p>
+
+<p>点击DataImport 引入数据 生成索引，
+<img src="http://img.blog.csdn.net/20151111060957295" alt="这里写图片描述" /></p>
+
+<p><img src="http://img.blog.csdn.net/20151111061155512" alt="这里写图片描述" /></p>
+
+<p>查询一个 试试 
+<img src="http://img.blog.csdn.net/20151111061436373" alt="这里写图片描述" /></p>
+
+<p>完毕。 肚子疼。等会回去休息了。  下午还是要回来。 双十一电商工作人员真是累成狗了。</p>
+
+
+  </section>
+  <!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2119692"></script>
+<!-- UY END -->
+
+
+</article>
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2015/11/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" data-toggle="tooltip" data-placement="top" title="zookeeper集群搭建">上一篇：  <span>zookeeper集群搭建</span>
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/" data-toggle="tooltip" data-placement="top" title="zookeeper和solr搭建集群分片查询">下一篇：  <span>zookeeper和solr搭建集群分片查询</span>
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+  
+    <div class="ds-thread" data-thread-key="/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/" data-title="Tomcat和Solr的整合" data-url="http://localhost:4000/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/"></div>
+
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"YoRuo"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <i class='social fa fa-weibo fa-2x'></i>
+              <span class="label">Weibo</span>
+            </a>
+          </li>
+          
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
+              <i class='social fa fa-github fa-2x'></i>
+              <span class="label">Github</span>
+            </a>
+          </li>
+          
+          
+          
+
+          
+
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <i class='social fa fa-rss fa-2x'></i>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:yoruolxc@outlook.com" title="Contact me">
+              <i class='social fa fa-envelope fa-2x'></i>
+              <span class="label">Email</span>
+            </a>
+          </li>
+          
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; YoRuo:技术成长之路~ 2016 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    			<span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+          	</div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87669753-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+  </body>
+
+</html>
