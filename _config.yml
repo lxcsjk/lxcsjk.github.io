@@ -8,6 +8,10 @@ avatarTitle: YoRuo
 avatarDesc: Java & iOS
 url: "http://lxcsjk.github.io"
 
+pygments: true
+safe: true
+auto: true
+
 # Comment
 comment:
     # disqus: leopard
