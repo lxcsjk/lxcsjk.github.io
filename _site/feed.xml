@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Nov 2016 14:27:21 +0800</pubDate>
-    <lastBuildDate>Sat, 19 Nov 2016 14:27:21 +0800</lastBuildDate>
+    <pubDate>Sat, 19 Nov 2016 14:28:59 +0800</pubDate>
+    <lastBuildDate>Sat, 19 Nov 2016 14:28:59 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -1939,19 +1939,23 @@ szss:SECONDARY&amp;gt; db.test.count()
 &lt;/div&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;rabbitmq的搭建
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.rabbitmq.com/releases/erlang/erlang-17.4-1.el6.x86_64.rpm
+  &lt;li&gt;rabbitmq的搭建&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.rabbitmq.com/releases/erlang/erlang-17.4-1.el6.x86_64.rpm
 yum install erlang-17.4-1.el6.x86_64.rpm
 &lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;安装rabbitmq
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
+&lt;/div&gt;
+&lt;ol&gt;
+  &lt;li&gt;安装rabbitmq&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
 rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 yum install rabbitmq-server-3.5.6-1.noarch.rpm
 &lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
+&lt;/div&gt;
+&lt;ol&gt;
   &lt;li&gt;安装rabbitmq插件
 安装RabbitMQ WebUI管理插件&lt;/li&gt;
 &lt;/ol&gt;
