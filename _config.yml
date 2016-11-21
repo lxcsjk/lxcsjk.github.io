@@ -11,25 +11,25 @@ url: "http://lxcsjk.github.io"
 # Comment
 comment:
     # disqus: leopard
-    duoshuo: yoruo 
+    duoshuo: yoruo
 
 # Social
 social:
-    weibo: GrazyLXC 
+    weibo: GrazyLXC
     github: lxcsjk
-    # twitter: 
+    # twitter:
     mail: yoruolxc@outlook.com
 
- # 百度统计 
- # 使用博客模板请去掉或者更换 id 
+ # 百度统计
+ # 使用博客模板请去掉或者更换 id
 # baidu:
- #    id: 41e6519316b78acb0f86b69b1ca93bc2  
+ #    id: 41e6519316b78acb0f86b69b1ca93bc2
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
 ga:
-    id: UA-87669753-1   
-    host: auto  
+    id: UA-87669753-1
+    host: auto
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
@@ -45,6 +45,10 @@ ga:
 permalink: /:year/:month/:title/
 # Format
 highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
 # cover_color: clear
@@ -55,14 +59,12 @@ blog_button:
 
 # Navigation buttons in the front page.s
 nav:
-    - {title: 所有文章, description: archive, url: '/archive'}   
-    - {title: 标签, description: tags, url: '/tags'}      
-    - {title: 关于我, description: about, url: '/about'}      
-    
+    - {title: 所有文章, description: archive, url: '/archive'}
+    - {title: 标签, description: tags, url: '/tags'}
+    - {title: 关于我, description: about, url: '/about'}
+
 
 # Pagination
 gems: [jekyll-paginate,jekyll-sitemap]
 paginate: 20
 paginate_path: "page/:num/"
-
-

@@ -8,25 +8,27 @@
 
   <title>修改rabbitmq Web UI 监控页面的端口</title>
   <meta name="description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
-  <meta name="author" content="leopardpan">
+  <meta name="author" content="YoRuo">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="修改rabbitmq Web UI 监控页面的端口">
   <meta name="twitter:description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
-  
+
   <meta property="og:type" content="article">
   <meta property="og:title" content="修改rabbitmq Web UI 监控页面的端口">
   <meta property="og:description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
-  
+
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-  
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-  
+
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
 
 <!-- 百度统计 -->
@@ -297,7 +299,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 
             <section class="footer">
     <footer>
-        <div class = "footer_div">  
+        <div class = "footer_div">
         <nav class="cover-navigation navigation--social">
           <ul class="navigation">
 
@@ -320,7 +322,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
             </a>
           </li>
           
-          
+
           
 
           
@@ -348,7 +350,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 
         </div>
 
-        <div class = "footer_div">  
+        <div class = "footer_div">
            <p class="copyright text-muted">
             Copyright &copy; YoRuo:想变得更好 2016 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
@@ -359,8 +361,8 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
             </p>
         	<div align="right">
     			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    			<span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
-          	</div>
+    			<!-- <span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+          	</div> -->
         <div>
     </footer>
 </section>
