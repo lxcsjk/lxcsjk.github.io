@@ -2,6 +2,11 @@
 layout: page
 title: 关于我 
 ---
+### 一些朋友
+
+- [何宗苡 iOS](http://ripperhe.tk)
+
+---
 
 ### 联系方式
 
