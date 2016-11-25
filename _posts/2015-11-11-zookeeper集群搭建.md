@@ -3,7 +3,7 @@ layout: post
 title:  "zookeeper集群搭建"
 date:   2015-11-11 04:04:03 +0800
 categories: jekyll update
-tags: zookeeper &nbsp; 集群
+tags: zookeeper  集群
 ---
 
 

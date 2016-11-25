@@ -3,7 +3,7 @@ layout: post
 title:  "Tomcat和Solr的整合"
 date:   2015-11-11 06:15:03 +0800
 categories: jekyll update
-tags: Tomcat &nbsp; Solr
+tags: Tomcat  Solr
 ---
 
 这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。

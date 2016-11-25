@@ -3,7 +3,7 @@ layout: post
 title:  "zookeeper和solr搭建集群分片查询"
 date:   2015-11-15 19:02:03 +0800
 categories: jekyll update
-tags: zookeeper &nbsp; Solr &nbsp; 集群 &nbsp; 分片
+tags: zookeeper  Solr  集群  分片
 ---
 
 这几天双十一弄得不要不要的。各种困。出差有一些时间。晚上回头摆弄摆弄。白天不忙就是找个地方想想写写。就这样一周多过去了。好了。不扯了入正题。
