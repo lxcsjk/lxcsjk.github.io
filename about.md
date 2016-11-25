@@ -18,7 +18,7 @@ title: 关于我
 ### 个人信息
 
  - 刘欣成/男/1993.9.8
- - 本科/安徽农业大学电子信息工程专业 
+ - 本科 / 安徽农业大学 - 电子信息工程专业 
  - 工作年限：2年
  - 技术博客：<http://lxcsjk.github.io> (访问不稳定已指向 <http://yoruo.tk>)
  - Github: <https://github.com/lxcsjk>
