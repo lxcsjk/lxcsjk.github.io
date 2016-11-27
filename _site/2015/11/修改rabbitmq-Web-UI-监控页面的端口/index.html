@@ -8,28 +8,31 @@
 
   <title>修改rabbitmq Web UI 监控页面的端口</title>
   <meta name="description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
-  <meta name="author" content="YoRuo">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="修改rabbitmq Web UI 监控页面的端口">
   <meta name="twitter:description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="修改rabbitmq Web UI 监控页面的端口">
   <meta property="og:description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 站点统计 -->
+  <script 
+  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
   
@@ -156,13 +159,14 @@
   <header class="post-header">
     <h1 class="post-title">修改rabbitmq Web UI 监控页面的端口</h1>
     <div class="post-meta">
-      <time datetime="2015-11-03 11:04:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-03</time>
-     
-      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-      <span id="busuanzi_container_page_pv">　　阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2015-11-03 11:04:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-03</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
+
 
   <section class="post">
     <p>在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web UI组件启动的端口号，两个是不一样的。然后尝试的rabbitmqadmin，因为web UI 监控页面也是调用的httpapi ，rabbitmqadmin是从官网下载一个文本文件赋予可执行权限才可，注意你放置这个文件的位置要在你的PATH里面。百度了半天都没，然后去了</p>
@@ -299,7 +303,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 
             <section class="footer">
     <footer>
-        <div class = "footer_div">
+        <div class = "footer_div">  
         <nav class="cover-navigation navigation--social">
           <ul class="navigation">
 
@@ -322,7 +326,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
             </a>
           </li>
           
-
+          
           
 
           
@@ -350,7 +354,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 
         </div>
 
-        <div class = "footer_div">
+        <div class = "footer_div">  
            <p class="copyright text-muted">
             Copyright &copy; YoRuo:想变得更好 2016 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
@@ -361,8 +365,14 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
             </p>
         	<div align="right">
     			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    			<!-- <span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
-          	</div> -->
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
         <div>
     </footer>
 </section>

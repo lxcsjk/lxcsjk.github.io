@@ -8,28 +8,31 @@
 
   <title>我的博客是如何搭建的</title>
   <meta name="description" content="拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。">
-  <meta name="author" content="YoRuo">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="我的博客是如何搭建的">
   <meta name="twitter:description" content="拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="我的博客是如何搭建的">
   <meta property="og:description" content="拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。">
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 站点统计 -->
+  <script 
+  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
   
@@ -156,13 +159,14 @@
   <header class="post-header">
     <h1 class="post-title">我的博客是如何搭建的</h1>
     <div class="post-meta">
-      <time datetime="2016-11-27 20:40:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-27</time>
-     
-      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-      <span id="busuanzi_container_page_pv">　　阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2016-11-27 20:40:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-27</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
+
 
   <section class="post">
     <p>拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。</p>
@@ -190,21 +194,18 @@
 <p>环境都已经具备后安装</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>gem install jekyll 
-
 </code></pre>
 </div>
 
 <p>创建你的博客所在文件夹</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>jekyll new myBlog    
-
 </code></pre>
 </div>
 
 <p>进入博客文件夹的目录</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cd yourBlogFolder
-
 </code></pre>
 </div>
 
@@ -221,6 +222,8 @@ jekyll serve
 <p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-0.png" alt="" /></p>
 
 <p>安装完成了。</p>
+
+<hr />
 
 <h3 id="jekyll-1">配置jekyll</h3>
 
@@ -240,7 +243,6 @@ Parsing documentation for bundler-1.13.5
 Installing ri documentation for bundler-1.13.5
 Done installing documentation for bundler after 5 seconds
 1 gem installed
-
 </code></pre>
 </div>
 
@@ -254,14 +256,12 @@ Done installing documentation for bundler after 5 seconds
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&lt;main&gt;'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&lt;main&gt;'
-
 </code></pre>
 </div>
 
 <p>然后执行 之前记得修改 <code class="highlighter-rouge">gem</code> 的镜像源</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>bundle install
-
 </code></pre>
 </div>
 
@@ -277,8 +277,6 @@ https://gems.ruby-china.org
 # 确保只有 gems.ruby-china.org
 
 $ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-
-
 </code></pre>
 </div>
 
@@ -288,14 +286,12 @@ $ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
 
 <div class="highlighter-rouge"><pre class="highlight"><code>gem install jekyll-paginate
 gem install jekyll-sitemap
-
 </code></pre>
 </div>
 
 <p>最后</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-Configuration file: /data/static/img/yourBlog/_config.yml
+<div class="highlighter-rouge"><pre class="highlight"><code>Configuration file: /data/static/img/yourBlog/_config.yml
 Configuration file: /data/static/img/yourBlog/_config.yml
             Source: /data/static/img/yourBlog
        Destination: /data/static/img/yourBlog/_site
@@ -311,10 +307,14 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 <p>打开浏览器输入 <a href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a> 就OK啦</p>
 
+<hr />
+
 <h3 id="section">加入第三方的社会化工具</h3>
 
 <p>Disqus 已经被墙了 So 用国内的吧 <a href="http://duoshuo.com/">多说</a>就挺好的 
 把多说代码片段复制到 <code class="highlighter-rouge">_layouts</code>文件夹下 <code class="highlighter-rouge">post.html</code>文件内的<code class="highlighter-rouge"> &lt;/article&gt;</code> 和 <code class="highlighter-rouge">&lt;/div&gt;</code>标签之间即可</p>
+
+<hr />
 
 <h3 id="section-1">加入统计之类的代码</h3>
 
@@ -326,6 +326,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 <p>选择一个</p>
 
 <p>复制到 <code class="highlighter-rouge">_layouts</code> 文件夹下 <code class="highlighter-rouge">default.html</code> 文件内的 <code class="highlighter-rouge">&lt;/body&gt;</code>标签之上即可。 当然也可以在 <code class="highlighter-rouge">_config.yml</code>配置</p>
+
+<hr />
 
 <h3 id="section-2">申请自己的域名</h3>
 
@@ -366,6 +368,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 <p>成功了~</p>
 
+<hr />
+
 <h3 id="cname">添加CNAME文件</h3>
 
 <p>在你的github pages项目根目录上新建一个CNAME文件，在CNAME文件上编辑刚才申请到的域名，比如 yoruo.tk ，那么我就写上 yoruo.tk (推荐)，当然你也可以写 www.yoruo.tk ，两种写法处理方式不同：</p>
@@ -378,6 +382,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 <p>注意，两种写法都不需要在前面加 http 。</p>
 
 <p>引用这篇 <a href="http://www.tuicool.com/articles/NrUrY33">文章</a></p>
+
+<hr />
 
 <h3 id="dnspoda">在DNSPod添加A记录</h3>
 
@@ -401,6 +407,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 <p>另外，如果你添加CNAME记录把域名指向 xxx.github.io 的话，也会成功(网上某些教程就是这么做的)。但是官方是不推荐最终做法的，因为可能会”导致其他服务出现问题”。</p>
 
 <p>引用这篇 <a href="http://www.tuicool.com/articles/NrUrY33">文章</a></p>
+
+<hr />
 
 <h3 id="dns">修改域名的DNS</h3>
 
@@ -474,7 +482,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
             <section class="footer">
     <footer>
-        <div class = "footer_div">
+        <div class = "footer_div">  
         <nav class="cover-navigation navigation--social">
           <ul class="navigation">
 
@@ -497,7 +505,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
             </a>
           </li>
           
-
+          
           
 
           
@@ -525,7 +533,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
         </div>
 
-        <div class = "footer_div">
+        <div class = "footer_div">  
            <p class="copyright text-muted">
             Copyright &copy; YoRuo:想变得更好 2016 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
@@ -536,8 +544,14 @@ Configuration file: /data/static/img/yourBlog/_config.yml
             </p>
         	<div align="right">
     			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    			<!-- <span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
-          	</div> -->
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
         <div>
     </footer>
 </section>

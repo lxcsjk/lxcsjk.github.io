@@ -8,28 +8,31 @@
 
   <title>rabbitmq 集群搭建</title>
   <meta name="description" content="消息队列对于处理高并发还是非常不错的选择。所以电商必然会采取这种方式。废话不多说。贴代码先。">
-  <meta name="author" content="YoRuo">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="rabbitmq 集群搭建">
   <meta name="twitter:description" content="消息队列对于处理高并发还是非常不错的选择。所以电商必然会采取这种方式。废话不多说。贴代码先。">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="rabbitmq 集群搭建">
   <meta property="og:description" content="消息队列对于处理高并发还是非常不错的选择。所以电商必然会采取这种方式。废话不多说。贴代码先。">
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2015/11/rabbitmq-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 站点统计 -->
+  <script 
+  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
   
@@ -156,13 +159,14 @@
   <header class="post-header">
     <h1 class="post-title">rabbitmq 集群搭建</h1>
     <div class="post-meta">
-      <time datetime="2015-11-04 16:14:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-04</time>
-     
-      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-      <span id="busuanzi_container_page_pv">　　阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2015-11-04 16:14:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-04</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
+
 
   <section class="post">
     <p>消息队列对于处理高并发还是非常不错的选择。所以电商必然会采取这种方式。废话不多说。贴代码先。</p>
@@ -874,7 +878,7 @@ Starting node 'rabbit@rabbitmq-node3' ...
 
             <section class="footer">
     <footer>
-        <div class = "footer_div">
+        <div class = "footer_div">  
         <nav class="cover-navigation navigation--social">
           <ul class="navigation">
 
@@ -897,7 +901,7 @@ Starting node 'rabbit@rabbitmq-node3' ...
             </a>
           </li>
           
-
+          
           
 
           
@@ -925,7 +929,7 @@ Starting node 'rabbit@rabbitmq-node3' ...
 
         </div>
 
-        <div class = "footer_div">
+        <div class = "footer_div">  
            <p class="copyright text-muted">
             Copyright &copy; YoRuo:想变得更好 2016 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
@@ -936,8 +940,14 @@ Starting node 'rabbit@rabbitmq-node3' ...
             </p>
         	<div align="right">
     			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    			<!-- <span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
-          	</div> -->
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
         <div>
     </footer>
 </section>

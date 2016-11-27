@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Nov 2016 22:55:58 +0800</pubDate>
-    <lastBuildDate>Sun, 27 Nov 2016 22:55:58 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Nov 2016 23:26:45 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Nov 2016 23:26:45 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -36,21 +36,18 @@
 &lt;p&gt;环境都已经具备后安装&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll 
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;创建你的博客所在文件夹&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll new myBlog    
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;进入博客文件夹的目录&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd yourBlogFolder
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -67,6 +64,8 @@ jekyll serve
 &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;安装完成了。&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;jekyll-1&quot;&gt;配置jekyll&lt;/h3&gt;
 
@@ -86,7 +85,6 @@ Parsing documentation for bundler-1.13.5
 Installing ri documentation for bundler-1.13.5
 Done installing documentation for bundler after 5 seconds
 1 gem installed
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -100,14 +98,12 @@ Done installing documentation for bundler after 5 seconds
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&amp;lt;main&amp;gt;'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&amp;lt;main&amp;gt;'
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;然后执行 之前记得修改 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 的镜像源&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle install
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -123,8 +119,6 @@ https://gems.ruby-china.org
 # 确保只有 gems.ruby-china.org
 
 $ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -134,14 +128,12 @@ $ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll-paginate
 gem install jekyll-sitemap
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;最后&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-Configuration file: /data/static/img/yourBlog/_config.yml
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Configuration file: /data/static/img/yourBlog/_config.yml
 Configuration file: /data/static/img/yourBlog/_config.yml
             Source: /data/static/img/yourBlog
        Destination: /data/static/img/yourBlog/_site
@@ -157,10 +149,14 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 &lt;p&gt;打开浏览器输入 &lt;a href=&quot;http://127.0.0.1:4000/&quot;&gt;http://127.0.0.1:4000/&lt;/a&gt; 就OK啦&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h3 id=&quot;section&quot;&gt;加入第三方的社会化工具&lt;/h3&gt;
 
 &lt;p&gt;Disqus 已经被墙了 So 用国内的吧 &lt;a href=&quot;http://duoshuo.com/&quot;&gt;多说&lt;/a&gt;就挺好的 
 把多说代码片段复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;post.html&lt;/code&gt;文件内的&lt;code class=&quot;highlighter-rouge&quot;&gt; &amp;lt;/article&amp;gt;&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签之间即可&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;加入统计之类的代码&lt;/h3&gt;
 
@@ -172,6 +168,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 &lt;p&gt;选择一个&lt;/p&gt;
 
 &lt;p&gt;复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; 文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;default.html&lt;/code&gt; 文件内的 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;标签之上即可。 当然也可以在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;配置&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;申请自己的域名&lt;/h3&gt;
 
@@ -212,6 +210,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 &lt;p&gt;成功了~&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h3 id=&quot;cname&quot;&gt;添加CNAME文件&lt;/h3&gt;
 
 &lt;p&gt;在你的github pages项目根目录上新建一个CNAME文件，在CNAME文件上编辑刚才申请到的域名，比如 yoruo.tk ，那么我就写上 yoruo.tk (推荐)，当然你也可以写 www.yoruo.tk ，两种写法处理方式不同：&lt;/p&gt;
@@ -224,6 +224,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 &lt;p&gt;注意，两种写法都不需要在前面加 http 。&lt;/p&gt;
 
 &lt;p&gt;引用这篇 &lt;a href=&quot;http://www.tuicool.com/articles/NrUrY33&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;dnspoda&quot;&gt;在DNSPod添加A记录&lt;/h3&gt;
 
@@ -247,6 +249,8 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 &lt;p&gt;另外，如果你添加CNAME记录把域名指向 xxx.github.io 的话，也会成功(网上某些教程就是这么做的)。但是官方是不推荐最终做法的，因为可能会”导致其他服务出现问题”。&lt;/p&gt;
 
 &lt;p&gt;引用这篇 &lt;a href=&quot;http://www.tuicool.com/articles/NrUrY33&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;dns&quot;&gt;修改域名的DNS&lt;/h3&gt;
 
