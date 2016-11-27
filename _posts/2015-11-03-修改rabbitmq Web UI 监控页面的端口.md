@@ -82,5 +82,5 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 粘进去时候注意括号啥的，如果启动不起来 看日志 添加或者减少括号即可
 
 
-![这里写图片描述](http://img.blog.csdn.net/20151103110335638)
+![](http://oh6uhie7j.bkt.clouddn.com/20151103110335638)
 

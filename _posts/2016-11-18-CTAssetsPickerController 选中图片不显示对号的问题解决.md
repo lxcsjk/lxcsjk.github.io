@@ -10,12 +10,12 @@ tags: iOS  CTAssetsPickerControlle  相册
 
 如图 
 对号木有了！！！木有了！！！
-![对号木有了！！！木有了！！！](http://img.blog.csdn.net/20161118163705576)
+![对号木有了！！！木有了！！！](http://oh6uhie7j.bkt.clouddn.com/20161118163705576)
 
 
 本来应该是这样的
 
-![这里写图片描述](http://img.blog.csdn.net/20161118164044906)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118164044906)
 
 
 那么久开始看github 
@@ -35,11 +35,11 @@ tags: iOS  CTAssetsPickerControlle  相册
 直接看最后的回答前面的 bula bula 说的试了没啥用 
 
 这位大哥说的很对。
-![这里写图片描述](http://img.blog.csdn.net/20161118165004449)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118165004449)
 
 为啥呢。 因为图片没找到。
 
-![这里写图片描述](http://img.blog.csdn.net/20161118165222983)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118165222983)
 
 我看了一下源码还真是。上线前手贱升级了CocoaPods 还 
 
@@ -49,15 +49,15 @@ tags: iOS  CTAssetsPickerControlle  相册
 
 然后找到CTAssetsPickerController的demo 再找到资源
 
-![这里写图片描述](http://img.blog.csdn.net/20161118165720224)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118165720224)
 
 选中所有png 往提前new出来的Bundle里拖
 
-![这里写图片描述](http://img.blog.csdn.net/20161118165839054)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118165839054)
 
 
 看看项目的target有木有
 
-![这里写图片描述](http://img.blog.csdn.net/20161118165947946)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118165947946)
 
 然后Clean一下项目 重新R一下就可以了。
