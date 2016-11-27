@@ -5,9 +5,278 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Nov 2016 20:18:03 +0800</pubDate>
-    <lastBuildDate>Sun, 27 Nov 2016 20:18:03 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Nov 2016 22:55:58 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Nov 2016 22:55:58 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>我的博客是如何搭建的</title>
+        <description>&lt;p&gt;拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。&lt;/p&gt;
+
+&lt;p&gt;　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上。&lt;/p&gt;
+
+&lt;h3 id=&quot;jekyll&quot;&gt;安装 jekyll&lt;/h3&gt;
+
+&lt;p&gt;需要本机的环境 Git 环境（用于部署到远端）、Ruby 环境（Jekyll 是基于 Ruby 开发的）、包管理器 &lt;a href=&quot;https://gems.ruby-china.org/&quot;&gt;RubyGems&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;由于我是MacOS系统所以就不需要了 需要安装Xcode 和 命令行工具就行了&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xcode-select --install 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.ruby-lang.org/zh_cn/documentation/installation/#building-from-source&quot;&gt;安装Ruby&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;推荐一个git管理项目的工具 可能需要登录账户注册 所以 翻出去吧  = =&lt;/p&gt;
+
+&lt;p&gt;不用翻墙访问&lt;a href=&quot;https://www.google.com.hk/&quot;&gt;Google&lt;/a&gt;等等 修改&lt;a href=&quot;https://github.com/racaljk/hosts&quot;&gt;hosts&lt;/a&gt;的方法&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/SourceTree_2.3.1.zip&quot;&gt;SourceTree&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;环境都已经具备后安装&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll 
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;创建你的博客所在文件夹&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll new myBlog    
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;进入博客文件夹的目录&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd yourBlogFolder
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;启动jekyll服务&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll server
+或者
+jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在 Chrome 浏览器 输入 &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;http://127.0.0.1:4000&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;安装完成了。&lt;/p&gt;
+
+&lt;h3 id=&quot;jekyll-1&quot;&gt;配置jekyll&lt;/h3&gt;
+
+&lt;p&gt;jekyll是通过目录下面的 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;配置的&lt;/p&gt;
+
+&lt;p&gt;jekyll &lt;a href=&quot;http://jekyll.com.cn/&quot;&gt;文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;我博客&lt;a href=&quot;https://github.com/lxcsjk/lxcsjk.github.io&quot;&gt;主题&lt;/a&gt; fork 是 这位大神&lt;a href=&quot;http://baixin.io/&quot;&gt;潘柏信&lt;/a&gt;的 &lt;a href=&quot;https://github.com/leopardpan/leopardpan.github.io&quot;&gt;仓库&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;你下载主题后 进入到文件夹 先安装一下 &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt;  命令&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install bundler&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Fetching: bundler-1.13.5.gem (100%)
+Successfully installed bundler-1.13.5
+Parsing documentation for bundler-1.13.5
+Installing ri documentation for bundler-1.13.5
+Done installing documentation for bundler after 5 seconds
+1 gem installed
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;不然会报错&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/Users/lxc/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- bundler (LoadError)
+	from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in `require_from_bundler'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in `&amp;lt;top (required)&amp;gt;'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `load'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&amp;lt;main&amp;gt;'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&amp;lt;main&amp;gt;'
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;然后执行 之前记得修改 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 的镜像源&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle install
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;更新 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem update --system # 这里请翻墙一下
+$ gem -v
+2.6.3
+
+$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+$ gem sources -l
+https://gems.ruby-china.org
+# 确保只有 gems.ruby-china.org
+
+$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;然后如果报错 缺少什么安装什么包就行了&lt;/p&gt;
+
+&lt;p&gt;例如&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll-paginate
+gem install jekyll-sitemap
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最后&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+Configuration file: /data/static/img/yourBlog/_config.yml
+Configuration file: /data/static/img/yourBlog/_config.yml
+            Source: /data/static/img/yourBlog
+       Destination: /data/static/img/yourBlog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.475 seconds.
+ Auto-regeneration: enabled for '/data/static/img/yourBlog'
+Configuration file: /data/static/img/yourBlog/_config.yml
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;打开浏览器输入 &lt;a href=&quot;http://127.0.0.1:4000/&quot;&gt;http://127.0.0.1:4000/&lt;/a&gt; 就OK啦&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;加入第三方的社会化工具&lt;/h3&gt;
+
+&lt;p&gt;Disqus 已经被墙了 So 用国内的吧 &lt;a href=&quot;http://duoshuo.com/&quot;&gt;多说&lt;/a&gt;就挺好的 
+把多说代码片段复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;post.html&lt;/code&gt;文件内的&lt;code class=&quot;highlighter-rouge&quot;&gt; &amp;lt;/article&amp;gt;&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签之间即可&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;加入统计之类的代码&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://analytics.google.com/&quot;&gt;Google Analytics&lt;/a&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;用google的需要改hosts 上面有提到方法&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tongji.baidu.com/&quot;&gt;百度统计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;选择一个&lt;/p&gt;
+
+&lt;p&gt;复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; 文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;default.html&lt;/code&gt; 文件内的 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;标签之上即可。 当然也可以在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;配置&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;申请自己的域名&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;这一步之前得将你本地博客所以文件通过 GitHub Desktop 提交到你的GITHub Pages仓库&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;由于  &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub Pages&lt;/code&gt; 时常不能访问 原因是 TC的大炮攻击&lt;a href=&quot;https://github.com&quot;&gt;Github&lt;/a&gt;所致 所以最好自己添加一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;CNAME&lt;/code&gt;  那么问题来了域名从哪里来呢。 So…  Come on!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://my.freenom.com&quot;&gt;往死里戳这里&lt;/a&gt;
+可以申请 免费域名只有  &lt;code class=&quot;highlighter-rouge&quot;&gt;[.tk .ml .ga .cf .gq]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://my.freenom.com/domains.php&quot;&gt;查询一个你想要的域名&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点击 选择一个 第一个已经有人用了 那就是我 = =&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后 checkout&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;选择时间&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;填写信息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点击 My Domains&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;看你的域名列表&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;成功了~&lt;/p&gt;
+
+&lt;h3 id=&quot;cname&quot;&gt;添加CNAME文件&lt;/h3&gt;
+
+&lt;p&gt;在你的github pages项目根目录上新建一个CNAME文件，在CNAME文件上编辑刚才申请到的域名，比如 yoruo.tk ，那么我就写上 yoruo.tk (推荐)，当然你也可以写 www.yoruo.tk ，两种写法处理方式不同：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果你写的是 yoruo.tk ，那么 www.yoruo.tk 就会指向 yoruo.tk&lt;/li&gt;
+  &lt;li&gt;如果你写的是 www.yoruo.tk k ,那么 yoruo.tk 就会指向 www.yoruo.tk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意，两种写法都不需要在前面加 http 。&lt;/p&gt;
+
+&lt;p&gt;引用这篇 &lt;a href=&quot;http://www.tuicool.com/articles/NrUrY33&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dnspoda&quot;&gt;在DNSPod添加A记录&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后进入管理中心，选择添加域名。&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为域名添加记录，这里的NS记录是自动生成，不用修改，因为我们需要我们的网站可以通过 yoruo.tk 和 www.yoruo.tk 都能访问，所以需要添加两组A记录。&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;为什么  &lt;code class=&quot;highlighter-rouge&quot;&gt; 192.30.252.153&lt;/code&gt;  和  &lt;code class=&quot;highlighter-rouge&quot;&gt; 192.30.252.154 &lt;/code&gt; ，因为这是github pages官网说的咯。网上有些人说A记录是 ping xxx.github.io 之后的IP地址，这些都是不可信的。&lt;/p&gt;
+
+&lt;p&gt;但是你可能会奇怪，每个人都是这两个IP地址的话，那么Github怎么知道我的域名 yoruo.tk 和 www.yoruo.tk 对应的是 lxcsjk.github.io 而不是其他人的github pages呢？答案就在上一步操作中的CNAME文件，这里指定了其所对应的域名，github会自动处理，将两者对应起来。&lt;/p&gt;
+
+&lt;p&gt;另外，如果你添加CNAME记录把域名指向 xxx.github.io 的话，也会成功(网上某些教程就是这么做的)。但是官方是不推荐最终做法的，因为可能会”导致其他服务出现问题”。&lt;/p&gt;
+
+&lt;p&gt;引用这篇 &lt;a href=&quot;http://www.tuicool.com/articles/NrUrY33&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dns&quot;&gt;修改域名的DNS&lt;/h3&gt;
+
+&lt;p&gt;到&lt;a href=&quot;https://my.freenom.com/clientarea.php?action=domains&quot;&gt;域名注册网站&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后 
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;填上 DNSPod 的DNS地址 等待DNS服务器刷新 应该很快 我当时几分钟就好了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后打开你的博客 开始书写所见所想吧。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 27 Nov 2016 20:40:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/</guid>
+        
+        <category>jekyll</category>
+        
+        <category>博客</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>h5上传图片压缩包服务端解压并上传图片</title>
@@ -3002,98 +3271,6 @@ Starting node 'rabbit@rabbitmq-node3' ...
         <category>rabbitmq</category>
         
         <category>集群</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>修改rabbitmq Web UI 监控页面的端口</title>
-        <description>&lt;p&gt;在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web UI组件启动的端口号，两个是不一样的。然后尝试的rabbitmqadmin，因为web UI 监控页面也是调用的httpapi ，rabbitmqadmin是从官网下载一个文本文件赋予可执行权限才可，注意你放置这个文件的位置要在你的PATH里面。百度了半天都没，然后去了&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/28461823/rabbitmq-management-console-on-cloud9/28472142#28472142&quot;&gt;http://stackoverflow.com/questions/28461823/rabbitmq-management-console-on-cloud9/28472142#28472142&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;这个上面查答案，平时没VPN也就很少用了。还是这个比较溜，几分钟就找到了。&lt;/p&gt;
-
-&lt;p&gt;原文：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I’m new to RabbitMQ, but after a bit of googling and experimentation,
-I was able to run the management console.&lt;/p&gt;
-
-  &lt;p&gt;The problem is that only port 8080 is forwarded from your Cloud9
-workspace, and RabbitMQ’s default port is explained here:&lt;/p&gt;
-
-  &lt;p&gt;The web UI is located at: http://server-name:15672/ To fix, we need to
-modify the configuration to start the web UI at port 8080. Here are
-the steps I followed to get that working:&lt;/p&gt;
-
-  &lt;p&gt;Install RabbitMQ (Steps outlined here:
-http://www.rabbitmq.com/install-debian.html) Enable the management
-console: sudo rabbitmq-plugins enable rabbitmq_management There wasn’t
-a rabbitmq.config file for me in $RABBITMQ_HOME/etc/rabbitmq/, so I
-copied the example from /usr/share/doc/rabbitmq-server/ (after
-unzipping it). Edited $RABBITMQ_HOME/etc/rabbitmq/rabbitmq.config and
-found the rabbitmq_management key. There’s already an existing setup
-that’s commented out. I replaced it with:&lt;/p&gt;
-
-  &lt;p&gt;{listener, [{port,     8080},
-             {ip,       “0.0.0.0”},
-             {ssl,     false}]}&lt;/p&gt;
-
-  &lt;p&gt;Then I restarted the RabbitMQ server and visiting my url, i.e.:
-https://&lt;workspacename&gt;-&lt;username&gt;.c9.io showed me the RabbitMQ
-management login screen.&lt;/username&gt;&lt;/workspacename&gt;&lt;/p&gt;
-
-  &lt;p&gt;Hope this helps!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;其实感觉他的这个配置文件的格式 有点奇怪 不像json却又像json。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@localhost ~]# ls
-anaconda-ks.cfg               post-install
-Desktop                      post-install.log
-Documents                    Public
-Downloads                    rabbitmq-server-3.5.6-1.noarch.rpm
-erlang-17.4-1.el6.x86_64.rpm  Templates
-Music                        Videos
-Pictures
-[root@localhost ~]# cd /usr/share/doc/rabbitmq-server-3.5.6/
-[root@localhost rabbitmq-server-3.5.6]# ls
-LICENSE                         LICENSE-BSD-glMatrix   LICENSE-MIT-Mochi
-LICENSE-APACHE2-ExplorerCanvas  LICENSE-MIT-EJS10      LICENSE-MIT-Sammy060
-LICENSE-Apache-Basho            LICENSE-MIT-eldap      LICENSE-MPL-RabbitMQ
-LICENSE-APL2-Stomp-Websocket    LICENSE-MIT-Flot       rabbitmq.config.example
-LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
-[root@localhost rabbitmq-server-3.5.6]#  cp /usr/share/doc/rabbitmq-server-3.5.6/rabbitmq.config.example /etc/rabbitmq/
-[root@localhost rabbitmq]# cd /etc/rabbitmq/
-[root@localhost rabbitmq]# mv rabbitmq.config.example rabbitmq.config
-[root@localhost rabbitmq]# vim rabbitmq.config
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;rabbitmq_management,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{listener,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;[{port,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-             &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ip,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;0.0.0.0&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-             &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ssl,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;粘进去时候注意括号啥的，如果启动不起来 看日志 添加或者减少括号即可&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151103110335638&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 03 Nov 2015 11:04:03 +0800</pubDate>
-        <link>http://localhost:4000/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/</guid>
-        
-        <category>rabbitmq</category>
         
         
         <category>jekyll</category>
