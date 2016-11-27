@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Nov 2016 23:26:45 +0800</pubDate>
-    <lastBuildDate>Sun, 27 Nov 2016 23:26:45 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Nov 2016 23:30:30 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Nov 2016 23:30:30 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -177,7 +177,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 &lt;p&gt;由于  &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub Pages&lt;/code&gt; 时常不能访问 原因是 TC的大炮攻击&lt;a href=&quot;https://github.com&quot;&gt;Github&lt;/a&gt;所致 所以最好自己添加一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;CNAME&lt;/code&gt;  那么问题来了域名从哪里来呢。 So…  Come on!&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://my.freenom.com&quot;&gt;往死里戳这里&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;https://my.freenom.com&quot;&gt;戳这里&lt;/a&gt;
 可以申请 免费域名只有  &lt;code class=&quot;highlighter-rouge&quot;&gt;[.tk .ml .ga .cf .gq]&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://my.freenom.com/domains.php&quot;&gt;查询一个你想要的域名&lt;/a&gt;&lt;/p&gt;
