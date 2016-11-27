@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>h5上传图片压缩包服务端解压并上传图片</title>
+  <meta name="description" content="CMS后台有上传多个图片的需求，多个图片上传也一样麻烦。就想做个上传压缩包服务端解压上传的东西。">
+  <meta name="author" content="YoRuo">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="h5上传图片压缩包服务端解压并上传图片">
+  <meta name="twitter:description" content="CMS后台有上传多个图片的需求，多个图片上传也一样麻烦。就想做个上传压缩包服务端解压上传的东西。">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="h5上传图片压缩包服务端解压并上传图片">
+  <meta property="og:description" content="CMS后台有上传多个图片的需求，多个图片上传也一样麻烦。就想做个上传压缩包服务端解压上传的东西。">
+
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/">
+  <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
+
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 百度统计 -->
+  
+
+<!-- google 统计 -->
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-87669753-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                YoRuo
+                            
+                        </h2>
+                        <p>
+                           
+                                Java & iOS
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for YoRuo:想变得更好" class="blog-button">YoRuo:想变得更好</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">爱折腾 - 乐于折腾 - 享受折腾</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的Blog~</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-disabled"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">h5上传图片压缩包服务端解压并上传图片</h1>
+    <div class="post-meta">
+      <time datetime="2016-11-27 19:40:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-27</time>
+     
+      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <span id="busuanzi_container_page_pv">　　阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  <section class="post">
+    <p>CMS后台有上传多个图片的需求，多个图片上传也一样麻烦。就想做个上传压缩包服务端解压上传的东西。</p>
+
+<h3 id="section">页面</h3>
+
+<p>使用h5的上传api</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> 	  /*
+             *
+             * name: 上传字段标示
+             postUrl: 文件数据处理URL
+             onClientAbort: 读取操作终止时调用
+             onClientError: 出错时调用
+             onClientLoad: 读取操作成功时调用
+             onClientLoadEnd: 无论是否成功，读取完成时调用。通常在onload和onerror后调用
+             onClientLoadStart: 读取将要开始时调用
+             onClientProgress: 数据在读取过程中周期性调用
+             onServerAbort: post操作结束时调用
+             onServerError: 错误发生时调用
+             onServerLoad: post操作成功时调用
+             onServerLoadStart: post数据将要开始时调用
+             onServerProgress: 数据正在被post的过程中周期性调用
+             onServerReadyStateChange: 一个javascript功能对象无论任何时候readyState属性变化时调用。callback由用户界面现成调用。
+             *
+             *
+             * */
+
+            $("#uploadZip").html5Uploader({
+                url: "rest/material/uploadZip",
+                onSuccess: function (e, file, response) {
+                    var res = JSON.parse(response);
+                    if (res == "200") {
+                        $.sticky("已经成功上传并且存入原始素材库！");
+                        swal("SUCCESS!", "已经成功上传并且存入原始素材库！", "success");
+                    } else {
+                        $.sticky("压缩格式错误或压缩过程出现错误");
+                        swal("OMG!", "压缩包有错误请重新压缩并重新上传 = = ！！！", "error");
+                    }
+                },
+                onClientLoad: function () {
+                    $.sticky("文件读取成功! ! !");
+                },
+                onClientLoadEnd: function () {
+                    $.sticky("文件上传完成! ! !");
+                },
+                onClientLoadStart: function () {
+                    $.sticky("文件将要开始读取! ! !");
+                },
+                onClientProgress: function () {
+
+                },
+                onServerError: function () {
+                    console.log(11111111 + "========")
+                },
+                onServerProgress: function () {
+                    $.sticky("文件正在上传! ! !");
+                }
+            });
+
+</code></pre>
+</div>
+<p>用了一些美化过的弹窗控件</p>
+
+<p><a href="http://www.dglives.com/demo/sweetalert-master/example/">SweetAlert</a></p>
+
+<p>引入js就行了。</p>
+
+<p>后台模板之前常用<a href="https://github.com/bopoda/ace">ACE</a>的。
+扣下来改吧改吧。</p>
+
+<h3 id="section-1">服务端</h3>
+
+<p>服务端用的Java写的。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+    @Transactional
+    @RequestMapping(value = "uploadZip", method = RequestMethod.POST)
+    public Map&lt;String, Object&gt; uploadZip(HttpServletRequest request) throws Exception {
+
+        Map&lt;String, Object&gt; result = new HashMap&lt;&gt;();
+        User user = GrantedFilter.threadLocal.get();
+        final Integer userId = user.getId();
+
+        Uploader uploader = new Uploader(request);
+        // 解压
+        final File[] fileList = uploader.uploadMaterialZip();
+        // 有时候压缩会出问题  Mac 和 Windows 
+        if (fileList.length &lt; 1 || fileList.length&gt;1?fileList[1].isDirectory():fileList[0].isDirectory()) {
+            File f = null;
+            try {
+                f = new File(fileList[0].getParent());
+                deleteFile(f);
+            } catch (Exception e) {
+
+            }
+            result.put("code", "400");
+            return result;
+        } else {
+            threadPoolTaskExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    String temp = fileList[0].getParent();
+                    for (File file : fileList) {
+                        if (file.getName().endsWith(".gif")||file.getName().endsWith(".GIF")) {
+                            UFileRequest uFileRequest = new UFileRequest();
+                            String gifKey = RandomStringUtils.randomAlphanumeric(32) + ".gif";
+                            uFileRequest.setBucketName(SysConfigDao.getValue(SysConfig.otherConfig, "ufile_bucket"));
+                            uFileRequest.setFilePath(file.getPath());
+                            uFileRequest.setKey(gifKey);
+                            uFileAPI.putFile(uFileRequest);
+                            String url = uFileAPI.getDownloadUrl(uFileRequest, 0, false);
+                            MaterialRaw materialRaw = new MaterialRaw();
+                            materialRaw.setTag("3");
+                            materialRaw.setGifurl(url);
+                            materialRaw.setCreateAt(new Date());
+                            materialRaw.setStatus("t");
+                            materialRaw.setChannl("r");
+                            try {
+                                materialRaw.setMd5(MD5Util.getMd5ByFile(file));
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            materialRaw.setSize((int) file.length());
+                            materialRaw.setCreateBy(userId);
+                            try {
+                                materialRaw.setTitle(file.getName().substring(0, file.getName().lastIndexOf(".gif")));
+                            } catch (Exception e) {
+                                materialRaw.setTitle(file.getName().substring(0, file.getName().lastIndexOf(".GIF")));
+                            }
+                            materialRawDao.save(materialRaw);
+                        }
+                        file.delete();
+                    }
+                    File f = new File(temp);
+                    deleteFile(f);
+                }
+            });
+        }
+        result.put("code", "200");
+        return result;
+    }
+
+
+</code></pre>
+</div>
+
+<p>解压的Util类</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    public File[] uploadMaterialZip() throws Exception {
+        originalName = request.getHeader("X-File-Name");
+        type = FileUtil.getFileExt(originalName);
+        if (!".zip".equals(type.toLowerCase())) {
+            throw new BadRequestException("格式错误！");
+        }
+        if (request.getContentLength() / 1024000 &gt; 100) {
+            throw new BadRequestException("文件太大！");
+        }
+        fileName = Util.RunTimeSequence() + type;
+        path = DateUtil.zipDateFormat(new Date()) + File.separator + fileName;
+        File file = new File(savePath + File.separator + path);
+        file.getParentFile().mkdirs();
+        try (InputStream is = request.getInputStream();
+             FileOutputStream fos = new FileOutputStream(file)) {
+            IOUtils.copy(is, fos);
+            size = file.length();
+        }
+        String str = savePath + File.separator + System.currentTimeMillis();
+        File dir = new File(str);
+        if (!dir.exists() || !dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        String temp = savePath + File.separator + DateUtil.zipDateFormat(new Date()) + File.separator;
+        // 加压的工具类
+        DeCompressUtil.deCompress(savePath + File.separator + path, str, temp);
+        File gifFile = new File(str);
+        File[] fileList = gifFile.listFiles();
+        if (fileList.length&lt;1){
+            gifFile.delete();
+        }
+        return fileList;
+    }
+
+</code></pre>
+</div>
+
+<p>解压</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.an.core.utils.zip;
+
+import com.an.core.exception.BadRequestException;
+import de.innosystec.unrar.Archive;
+import de.innosystec.unrar.rarfile.FileHeader;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Expand;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
+public class DeCompressUtil {
+    /**
+     * 解压zip格式压缩包
+     * 对应的是ant.jar
+     */
+    private static void unzip(String sourceZip, String destDir, String temp) throws Exception {
+        try {
+            Project p = new Project();
+            Expand e = new Expand();
+            e.setProject(p);
+            e.setSrc(new File(sourceZip));
+            e.setOverwrite(false);
+            e.setDest(new File(destDir));
+           /*
+           ant下的zip工具默认压缩编码为UTF-8编码，
+           而winRAR软件压缩是用的windows默认的GBK或者GB2312编码
+           所以解压缩时要制定编码格式
+           */
+
+            try {
+                e.setEncoding("GBK");
+                e.execute();
+            } catch (Exception e1) {
+                e.setEncoding("UTF-8");
+                e.execute();
+            }
+            File zipFile = new File(sourceZip);
+            File zipPath = new File(temp);
+            zipFile.delete();
+            zipPath.delete();
+
+        } catch (Exception e) {
+            throw new BadRequestException(e);
+        }
+    }
+
+    /**
+     * 解压rar格式压缩包。
+     * 对应的是java-unrar-0.3.jar，但是java-unrar-0.3.jar又会用到commons-logging-1.1.1.jar
+     */
+    private static void unrar(String sourceRar, String destDir, String temp) throws Exception {
+        Archive a = null;
+        FileOutputStream fos = null;
+        try {
+            a = new Archive(new File(sourceRar));
+            FileHeader fh = a.nextFileHeader();
+            while (fh != null) {
+                if (!fh.isDirectory()) {
+                    //1 根据不同的操作系统拿到相应的 destDirName 和 destFileName
+                    String compressFileName = fh.getFileNameString().trim();
+                    String destFileName = "";
+                    String destDirName = "";
+                    //非windows系统
+                    if (File.separator.equals("/")) {
+                        destFileName = destDir + compressFileName.replaceAll("\\\\", "/");
+                        destDirName = destFileName.substring(0, destFileName.lastIndexOf("/"));
+                        //windows系统
+                    } else {
+                        destFileName = destDir + compressFileName.replaceAll("/", "\\\\");
+                        destDirName = destFileName.substring(0, destFileName.lastIndexOf("\\"));
+                    }
+                    //2创建文件夹
+                    File dir = new File(destDirName);
+                    if (!dir.exists() || !dir.isDirectory()) {
+                        dir.mkdirs();
+                    }
+                    //3解压缩文件
+                    fos = new FileOutputStream(new File(destFileName));
+                    a.extractFile(fh, fos);
+                    fos.close();
+                    fos = null;
+                }
+                fh = a.nextFileHeader();
+            }
+            a.close();
+            a = null;
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                    fos = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (a != null) {
+                try {
+                    a.close();
+                    a = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * 解压缩
+     */
+    public static void deCompress(String sourceFile, String destDir, String temp) throws Exception {
+        //保证文件夹路径最后是"/"或者"\"
+        char lastChar = destDir.charAt(destDir.length() - 1);
+        if (lastChar != '/' &amp;&amp; lastChar != '\\') {
+            destDir += File.separator;
+        }
+        //根据类型，进行相应的解压缩
+        String type = sourceFile.substring(sourceFile.lastIndexOf(".") + 1);
+        if (!".zip".equals(type.toLowerCase())) {
+            DeCompressUtil.unzip(sourceFile, destDir, temp);
+        } else if (type.equals("rar")) {
+            DeCompressUtil.unrar(sourceFile, destDir, temp);
+        } else {
+
+        }
+    }
+} 
+
+</code></pre>
+</div>
+
+<p>删除文件夹下面的所有内容</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	/**
+	 * 删除文件夹所有的文件和文件夹
+	 *
+	 * @param file
+     */
+	public static void deleteFile(File file){
+		if(file.isFile()){
+			file.delete();
+			return;
+		}
+		if(file.isDirectory()){
+			File[] childFile = file.listFiles();
+			if(childFile == null || childFile.length == 0){
+				file.delete();
+				return;
+			}
+			for(File f : childFile){
+				RecursionDeleteFile(f);
+			}
+			file.delete();
+		}
+	}
+
+</code></pre>
+</div>
+
+<p>之前有找过一个<a href="http://download.csdn.net/detail/clyao_123456/7624815">Demo</a></p>
+
+<p><a href="http://oh6uhie7j.bkt.clouddn.com/MyUpload.zip">下载链接</a></p>
+
+<p>希望对你有帮助 😂😂😂。</p>
+
+
+
+  </section>
+
+<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+</article>
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/" data-toggle="tooltip" data-placement="top" title="IDEA maven 项目打包 jdk版本问题">上一篇：  <span>IDEA maven 项目打包 jdk版本问题</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+  
+    <div class="ds-thread" data-thread-key="/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/" data-title="h5上传图片压缩包服务端解压并上传图片" data-url="http://localhost:4000/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/"></div>
+
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"yoruo"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <i class='social fa fa-weibo fa-2x'></i>
+              <span class="label">Weibo</span>
+            </a>
+          </li>
+          
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
+              <i class='social fa fa-github fa-2x'></i>
+              <span class="label">Github</span>
+            </a>
+          </li>
+          
+
+          
+
+          
+
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <i class='social fa fa-rss fa-2x'></i>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:yoruolxc@outlook.com" title="Contact me">
+              <i class='social fa fa-envelope fa-2x'></i>
+              <span class="label">Email</span>
+            </a>
+          </li>
+          
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">
+           <p class="copyright text-muted">
+            Copyright &copy; YoRuo:想变得更好 2016 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    			<!-- <span id="busuanzi_value_page_pv"></span> 本站访问：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+          	</div> -->
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87669753-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+
+
+    
+
+  </body>
+
+</html>

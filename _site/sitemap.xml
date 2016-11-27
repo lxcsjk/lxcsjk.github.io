@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/</loc>
+<lastmod>2016-11-27T19:40:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/</loc>
 <lastmod>2016-11-25T15:48:03+08:00</lastmod>
 </url>
