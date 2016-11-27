@@ -5,9 +5,56 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Nov 2016 22:13:36 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Nov 2016 22:13:36 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Nov 2016 19:27:07 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Nov 2016 19:27:07 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>IDEA maven 项目打包 jdk版本问题</title>
+        <description>&lt;p&gt;之前在使用Maven构建的项目中打包总是报错。
+本机是  &lt;code class=&quot;highlighter-rouge&quot;&gt;jdk1.7.0_79&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;打包确是1.5&lt;/p&gt;
+
+&lt;p&gt;那么要在 &lt;code class=&quot;highlighter-rouge&quot;&gt;setting.xml&lt;/code&gt;  的  &lt;code class=&quot;highlighter-rouge&quot;&gt;profiles&lt;/code&gt;  节点中加这么一段配置&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;profile&amp;gt; 
+  &amp;lt;id&amp;gt;jdk17&amp;lt;/id&amp;gt;  
+  &amp;lt;activation&amp;gt; 
+    &amp;lt;activeByDefault&amp;gt;true&amp;lt;/activeByDefault&amp;gt;  
+    &amp;lt;jdk&amp;gt;1.7&amp;lt;/jdk&amp;gt; 
+  &amp;lt;/activation&amp;gt;  
+  &amp;lt;properties&amp;gt; 
+    &amp;lt;maven.compiler.source&amp;gt;1.7&amp;lt;/maven.compiler.source&amp;gt;  
+    &amp;lt;maven.compiler.target&amp;gt;1.7&amp;lt;/maven.compiler.target&amp;gt;  
+    &amp;lt;maven.compiler.compilerVersion&amp;gt;1.7&amp;lt;/maven.compiler.compilerVersion&amp;gt; 
+  &amp;lt;/properties&amp;gt; 
+&amp;lt;/profile&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在IDEA 勾选上这个&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161125-0.png&quot; alt=&quot;勾选&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再执行编译即可&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 25 Nov 2016 15:48:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/</guid>
+        
+        <category>IDEA</category>
+        
+        <category>maven</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>CTAssetsPickerController 选中图片不显示对号的问题解决</title>
@@ -15,11 +62,11 @@
 
 &lt;p&gt;如图 
 对号木有了！！！木有了！！！
-&lt;img src=&quot;http://img.blog.csdn.net/20161118163705576&quot; alt=&quot;对号木有了！！！木有了！！！&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118163705576&quot; alt=&quot;对号木有了！！！木有了！！！&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;本来应该是这样的&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161118164044906&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118164044906&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;那么久开始看github&lt;/p&gt;
 
@@ -38,11 +85,11 @@
 &lt;p&gt;直接看最后的回答前面的 bula bula 说的试了没啥用&lt;/p&gt;
 
 &lt;p&gt;这位大哥说的很对。
-&lt;img src=&quot;http://img.blog.csdn.net/20161118165004449&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118165004449&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;为啥呢。 因为图片没找到。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161118165222983&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118165222983&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我看了一下源码还真是。上线前手贱升级了CocoaPods 还&lt;/p&gt;
 
@@ -52,15 +99,15 @@
 
 &lt;p&gt;然后找到CTAssetsPickerController的demo 再找到资源&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161118165720224&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118165720224&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;选中所有png 往提前new出来的Bundle里拖&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161118165839054&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118165839054&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;看看项目的target有木有&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161118165947946&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118165947946&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;然后Clean一下项目 重新R一下就可以了。&lt;/p&gt;
 </description>
@@ -70,7 +117,7 @@
         
         <category>iOS</category>
         
-        <category>CTAssetsPickerController</category>
+        <category>CTAssetsPickerControlle</category>
         
         <category>相册</category>
         
@@ -379,7 +426,7 @@ Started Solr server on port 8983 (pid=3201). Happy searching!
 
 &lt;p&gt;这时候通过浏览器访问以下 ip:8983.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151115161225934&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115161225934&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;会出现这个 如果报错。看log日志。&lt;/p&gt;
 
@@ -446,19 +493,19 @@ create -e /temp sss  创建临时节点
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;打开浏览器。
-&lt;img src=&quot;http://img.blog.csdn.net/20151115162540354&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162540354&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;一些参数信息
-&lt;img src=&quot;http://img.blog.csdn.net/20151115162620511&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162620511&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;这里是虚拟机运行的参数
-&lt;img src=&quot;http://img.blog.csdn.net/20151115162712016&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162712016&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;log日志 以及打印的等级
-&lt;img src=&quot;http://img.blog.csdn.net/20151115162809408&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162809408&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;分片的信息
-&lt;img src=&quot;http://img.blog.csdn.net/20151115162902672&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162902672&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;之后的分词，还有数据连接和之前写的都是一样的。在solr_home里面操作。加入3个jar，加入/dataimport data-config.xml 还有managed-schema。&lt;/p&gt;
 
@@ -484,7 +531,7 @@ vim solrconfig.xml
 &amp;lt;/requestHandler&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151115163159992&quot; alt=&quot;这里写图片描述&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115163159992&quot; alt=&quot;这里写图片描述&quot; /&gt;
 3、新建data-config.xml
 新建一个data-config.xml文件，与solrconfig.xml同一个目录下,内容如下，数据库驱动/链接地址/sql语句请修改。&lt;/p&gt;
 
@@ -517,7 +564,7 @@ vim solrconfig.xml
     &amp;lt;field name=&quot;last_updated&quot; type=&quot;date&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151115165729329&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115165729329&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 15 Nov 2015 19:02:03 +0800</pubDate>
         <link>http://localhost:4000/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/</link>
@@ -559,11 +606,11 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 &lt;/div&gt;
 
 &lt;p&gt;3 . 移动war包
-     &lt;img src=&quot;http://img.blog.csdn.net/20151111053404840&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+     &lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111053404840&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;将这个war包，移动到 tomcat的webapps，然后启动或者解压war。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151111053535622&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111053535622&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;启动命令： 进入tomcat的bin下&lt;/p&gt;
 
@@ -916,26 +963,26 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 &lt;p&gt;主要加了查询的参数类型什么的。&lt;/p&gt;
 
 &lt;p&gt;9 .打开浏览器localhost:8080/solr
-&lt;img src=&quot;http://img.blog.csdn.net/20151111060058755&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111060058755&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;然后点击
-&lt;img src=&quot;http://img.blog.csdn.net/20151111060516777&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060516777&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;这个名字不能取成其他的 需要和你在solr_home下新建文件夹名相同。
-&lt;img src=&quot;http://img.blog.csdn.net/20151111060707483&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060707483&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;然后
-&lt;img src=&quot;http://img.blog.csdn.net/20151111060818274&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060818274&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;因为我之前新建过所以是test1&lt;/p&gt;
 
 &lt;p&gt;点击DataImport 引入数据 生成索引，
-&lt;img src=&quot;http://img.blog.csdn.net/20151111060957295&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060957295&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151111061155512&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111061155512&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;查询一个 试试 
-&lt;img src=&quot;http://img.blog.csdn.net/20151111061436373&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111061436373&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;完毕。 肚子疼。等会回去休息了。  下午还是要回来。 双十一电商工作人员真是累成狗了。&lt;/p&gt;
 </description>
@@ -963,7 +1010,7 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 &lt;p&gt;zookeeper其实对于服务器集群确实是一个不错的中间件，可以将各种中间件相互链接起来。有点类似nginx对http请求的负载均衡。它将一个服务的状态保存在各个单机中，当某一个单机状态发生了改变了，它会通知所有的单机发生的变化。也就是watch机制。并且无论访问其他哪一个单机，状态都是一样的。
 而最近遇到一个乐观锁的例子，解决同一个定时器的主备问题。类似抢位子。这个之后我会贴出代码。&lt;/p&gt;
 
-&lt;p&gt;zookeeper中的角色， 有三种，借用其他的博客的一个图片&lt;img src=&quot;http://img.blog.csdn.net/20151111033156766&quot; alt=&quot;这里写图片描述&quot; /&gt;
+&lt;p&gt;zookeeper中的角色， 有三种，借用其他的博客的一个图片&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111033156766&quot; alt=&quot;这里写图片描述&quot; /&gt;
  原文地址&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://cailin.iteye.com/blog/2014486/&quot;&gt;http://cailin.iteye.com/blog/2014486/&lt;/a&gt;&lt;/p&gt;
@@ -1590,7 +1637,7 @@ bye
 &lt;/div&gt;
 &lt;p&gt;–rest是开启webUI监考页面&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151104223649490&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104223649490&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;这里说 使用使用这种方式关闭服务 必须在有登录验证情况下远程ssh才拥有这个权限的，所以&lt;/p&gt;
 
@@ -1848,7 +1895,7 @@ szss:PRIMARY&amp;gt; rs.reconfig(cfgs)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;进入到浏览器 输入  192.168.31.101:28017 如果是27017将访问不了，需要将启动端口号加上1000
-&lt;img src=&quot;http://img.blog.csdn.net/20151104230038762&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104230038762&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;测试
@@ -2569,7 +2616,7 @@ Starting node 'rabbit@rabbitmq-node3' ...
 &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151104165318320&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104165318320&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我也借鉴了一些大神的博客。也看了官方文档。还在继续提高中~~~&lt;/p&gt;
 </description>
@@ -2664,7 +2711,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 
 &lt;p&gt;粘进去时候注意括号啥的，如果启动不起来 看日志 添加或者减少括号即可&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151103110335638&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151103110335638&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 03 Nov 2015 11:04:03 +0800</pubDate>

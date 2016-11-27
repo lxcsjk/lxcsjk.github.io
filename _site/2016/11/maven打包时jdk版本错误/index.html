@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>修改rabbitmq Web UI 监控页面的端口</title>
-  <meta name="description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
+  <title>IDEA maven 项目打包 jdk版本问题</title>
+  <meta name="description" content="之前在使用Maven构建的项目中打包总是报错。本机是  jdk1.7.0_79">
   <meta name="author" content="YoRuo">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="修改rabbitmq Web UI 监控页面的端口">
-  <meta name="twitter:description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
+  <meta name="twitter:title" content="IDEA maven 项目打包 jdk版本问题">
+  <meta name="twitter:description" content="之前在使用Maven构建的项目中打包总是报错。本机是  jdk1.7.0_79">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="修改rabbitmq Web UI 监控页面的端口">
-  <meta property="og:description" content="在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web ...">
+  <meta property="og:title" content="IDEA maven 项目打包 jdk版本问题">
+  <meta property="og:description" content="之前在使用Maven构建的项目中打包总是报错。本机是  jdk1.7.0_79">
 
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/">
+  <link rel="canonical" href="http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
 
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -154,9 +154,9 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">修改rabbitmq Web UI 监控页面的端口</h1>
+    <h1 class="post-title">IDEA maven 项目打包 jdk版本问题</h1>
     <div class="post-meta">
-      <time datetime="2015-11-03 11:04:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-03</time>
+      <time datetime="2016-11-25 15:48:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-25</time>
      
       <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       <span id="busuanzi_container_page_pv">　　阅读：<span id="busuanzi_value_page_pv"></span>次</span>
@@ -165,81 +165,34 @@
   </header>
 
   <section class="post">
-    <p>在前几天工作中遇到一个问题，部署服务器，需要用rabbitmq自带的一个web UI监控组件，但是15672的端口没有对外映射。尝试了几种办法。开始修改rabbitmq.config，rabbitmq-ebv.config，总是不成功，因为修改的是rabbitmq-server的启动端口号，从外面访问的是web UI组件启动的端口号，两个是不一样的。然后尝试的rabbitmqadmin，因为web UI 监控页面也是调用的httpapi ，rabbitmqadmin是从官网下载一个文本文件赋予可执行权限才可，注意你放置这个文件的位置要在你的PATH里面。百度了半天都没，然后去了</p>
+    <p>之前在使用Maven构建的项目中打包总是报错。
+本机是  <code class="highlighter-rouge">jdk1.7.0_79</code></p>
 
-<p><a href="http://stackoverflow.com/questions/28461823/rabbitmq-management-console-on-cloud9/28472142#28472142">http://stackoverflow.com/questions/28461823/rabbitmq-management-console-on-cloud9/28472142#28472142</a></p>
+<p>打包确是1.5</p>
 
-<p>这个上面查答案，平时没VPN也就很少用了。还是这个比较溜，几分钟就找到了。</p>
+<p>那么要在 <code class="highlighter-rouge">setting.xml</code>  的  <code class="highlighter-rouge">profiles</code>  节点中加这么一段配置</p>
 
-<p>原文：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;profile&gt; 
+  &lt;id&gt;jdk17&lt;/id&gt;  
+  &lt;activation&gt; 
+    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;  
+    &lt;jdk&gt;1.7&lt;/jdk&gt; 
+  &lt;/activation&gt;  
+  &lt;properties&gt; 
+    &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;  
+    &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;  
+    &lt;maven.compiler.compilerVersion&gt;1.7&lt;/maven.compiler.compilerVersion&gt; 
+  &lt;/properties&gt; 
+&lt;/profile&gt;
 
-<blockquote>
-  <p>I’m new to RabbitMQ, but after a bit of googling and experimentation,
-I was able to run the management console.</p>
-
-  <p>The problem is that only port 8080 is forwarded from your Cloud9
-workspace, and RabbitMQ’s default port is explained here:</p>
-
-  <p>The web UI is located at: http://server-name:15672/ To fix, we need to
-modify the configuration to start the web UI at port 8080. Here are
-the steps I followed to get that working:</p>
-
-  <p>Install RabbitMQ (Steps outlined here:
-http://www.rabbitmq.com/install-debian.html) Enable the management
-console: sudo rabbitmq-plugins enable rabbitmq_management There wasn’t
-a rabbitmq.config file for me in $RABBITMQ_HOME/etc/rabbitmq/, so I
-copied the example from /usr/share/doc/rabbitmq-server/ (after
-unzipping it). Edited $RABBITMQ_HOME/etc/rabbitmq/rabbitmq.config and
-found the rabbitmq_management key. There’s already an existing setup
-that’s commented out. I replaced it with:</p>
-
-  <p>{listener, [{port,     8080},
-             {ip,       “0.0.0.0”},
-             {ssl,     false}]}</p>
-
-  <p>Then I restarted the RabbitMQ server and visiting my url, i.e.:
-https://<workspacename>-<username>.c9.io showed me the RabbitMQ
-management login screen.</username></workspacename></p>
-
-  <p>Hope this helps!</p>
-</blockquote>
-
-<p>其实感觉他的这个配置文件的格式 有点奇怪 不像json却又像json。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>[root@localhost ~]# ls
-anaconda-ks.cfg               post-install
-Desktop                      post-install.log
-Documents                    Public
-Downloads                    rabbitmq-server-3.5.6-1.noarch.rpm
-erlang-17.4-1.el6.x86_64.rpm  Templates
-Music                        Videos
-Pictures
-[root@localhost ~]# cd /usr/share/doc/rabbitmq-server-3.5.6/
-[root@localhost rabbitmq-server-3.5.6]# ls
-LICENSE                         LICENSE-BSD-glMatrix   LICENSE-MIT-Mochi
-LICENSE-APACHE2-ExplorerCanvas  LICENSE-MIT-EJS10      LICENSE-MIT-Sammy060
-LICENSE-Apache-Basho            LICENSE-MIT-eldap      LICENSE-MPL-RabbitMQ
-LICENSE-APL2-Stomp-Websocket    LICENSE-MIT-Flot       rabbitmq.config.example
-LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
-[root@localhost rabbitmq-server-3.5.6]#  cp /usr/share/doc/rabbitmq-server-3.5.6/rabbitmq.config.example /etc/rabbitmq/
-[root@localhost rabbitmq]# cd /etc/rabbitmq/
-[root@localhost rabbitmq]# mv rabbitmq.config.example rabbitmq.config
-[root@localhost rabbitmq]# vim rabbitmq.config
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="err">rabbitmq_management,</span><span class="w">
-  </span><span class="err">[</span><span class="w">
-</span><span class="err">{listener,</span><span class="w"> </span><span class="err">[{port,</span><span class="w">     </span><span class="err">8080</span><span class="p">}</span><span class="err">,</span><span class="w">
-             </span><span class="p">{</span><span class="err">ip,</span><span class="w">       </span><span class="nt">"0.0.0.0"</span><span class="err">},</span><span class="w">
-             </span><span class="p">{</span><span class="err">ssl,</span><span class="w">     </span><span class="err">false</span><span class="p">}</span><span class="w">
-</span><span class="err">]},</span><span class="w">
-</span></code></pre>
-</div>
+<p>在IDEA 勾选上这个</p>
 
-<p>粘进去时候注意括号啥的，如果启动不起来 看日志 添加或者减少括号即可</p>
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161125-0.png" alt="勾选" /></p>
 
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/20151103110335638" alt="" /></p>
+<p>再执行编译即可</p>
 
 
 
@@ -266,11 +219,11 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 <section>
        <ul class="pager">
         
-        
-        <li class="next">
-            <a href="/2015/11/rabbitmq-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" data-toggle="tooltip" data-placement="top" title="rabbitmq 集群搭建">下一篇：  <span>rabbitmq 集群搭建</span>
+        <li class="previous">
+            <a href="/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-toggle="tooltip" data-placement="top" title="CTAssetsPickerController 选中图片不显示对号的问题解决">上一篇：  <span>CTAssetsPickerController 选中图片不显示对号的问题解决</span>
             </a>
         </li>
+        
         
     </ul>
 </section>
@@ -278,7 +231,7 @@ LICENSE-BSD-base64js            LICENSE-MIT-jQuery164  README
 <section class="post-comments">
 
   
-    <div class="ds-thread" data-thread-key="/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/" data-title="修改rabbitmq Web UI 监控页面的端口" data-url="http://localhost:4000/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/"></div>
+    <div class="ds-thread" data-thread-key="/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/" data-title="IDEA maven 项目打包 jdk版本问题" data-url="http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/"></div>
 
     <script type="text/javascript">
         var duoshuoQuery = {short_name:"yoruo"};
