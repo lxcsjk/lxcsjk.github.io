@@ -2,6 +2,13 @@
 layout: page
 title: 关于我 
 ---
+
+### Mckenzie 💗 YoRuo:
+
+![](http://oh6uhie7j.bkt.clouddn.com/IMG_2646.JPG)
+
+---
+
 ### 一些朋友
 
 - [何宗苡 iOS](http://ripperhe.tk)
