@@ -49,7 +49,7 @@ tags: iOS  CTAssetsPickerControlle  相册
 
 然后找到CTAssetsPickerController的demo 再找到资源
 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20161118165720224)
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/QQ20161129-0@2x.png)
 
 选中所有png 往提前new出来的Bundle里拖
 
