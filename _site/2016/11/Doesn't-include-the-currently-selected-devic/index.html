@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>文章</title>
-  <meta name="description" content="欢迎来到我的Blog~">
+  <title>Doesn&#39;t include the currently selected device </title>
+  <meta name="description" content="昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="文章">
-  <meta name="twitter:description" content="欢迎来到我的Blog~">
+  <meta name="twitter:title" content="Doesn&#39;t include the currently selected device ">
+  <meta name="twitter:description" content="昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="文章">
-  <meta property="og:description" content="欢迎来到我的Blog~">
+  <meta property="og:title" content="Doesn&#39;t include the currently selected device ">
+  <meta property="og:description" content="昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/archive/">
+  <link rel="canonical" href="http://localhost:4000/2016/11/Doesn't-include-the-currently-selected-devic/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -157,284 +157,136 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
+    <h1 class="post-title">Doesn't include the currently selected device </h1>
     <div class="post-meta">
-      <time datetime="" itemprop="datePublished" class="post-meta__date date"></time>
-      <span class="post-meta__tags tags"></span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2016-11-30 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-30</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
     </div>
-    <h1 class="post-title">文章</h1>
   </header>
 
+
   <section class="post">
-    
+    <p>昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。</p>
+
+<p>本来一天都在弄文件下载，断点下载进度条多线程之类的事情，老大说把我们app RUN 到iPad上看看。R了一下bulid失败了。错误信息</p>
+
+<blockquote>
+  <p>Provisioning profile “match Development com.XXX.YYY” doesn’t include the currently selected device “XXX”.
+Code signing is required for product type ‘Application’ in SDK ‘iOS 10.0’</p>
+</blockquote>
+
+<p>Xcode已经是最新的了，iPad是10.0.1绝对是没问题的应该。于是Google了一下。找到了这个解答</p>
+
+<blockquote>
+  <p><a href="http://stackoverflow.com/questions/39426287/xcode-8-cannot-run-on-device-provisioning-profile-problems-mentioning-apple-wat">Xcode 8 cannot run on device, provisioning profile problems mentioning Apple Watch</a></p>
+</blockquote>
+
+<hr />
+
+<p><strong>Answer</strong></p>
+
+<blockquote>
+  <p>I had the same issue today - XCode Version 8.0 (8A218a) - and fixed it with two simple steps (instead of the more complicated approach above:</p>
+
+  <ol>
+    <li>add the Apple Watch to member center (did not find a copy&amp;paste option either)</li>
+    <li>edit the development provisioning profile and add the watch to devices, save</li>
+    <li>go to XCode prefs, move the old provisioning profile to trash (right click on the name) and download the new version</li>
+    <li>set the new provisioning profile in project editor
+No restart, clean or anything else needed. Worked like a charm</li>
+  </ol>
+</blockquote>
+
+<p>需要在描述文件添加设备的UDID</p>
+
+<p>UDID可以通过 <code class="highlighter-rouge">iTunes</code> 拿到。
+<img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-0@2x.png" alt="" />
+<strong>如果看不到UDID多点几下我抹红的地方就行了</strong></p>
+
+<p>拿到这个UDID 登录到 <a href="https://developer.apple.com">苹果开发者中心</a></p>
+
+<p>登录账号后 找到</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-2@2x.png" alt="" /></p>
+
+<p>然后</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-3@2x.png" alt="" /></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-4@2x.png" alt="" /></p>
+
+<p>最好在描述文件添加这个设备</p>
+
+<p>点 <strong>edit</strong></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-1@2x.png" alt="" /></p>
+
+<p><strong>Select All</strong></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-5@2x.png" alt="" /></p>
+
+<p><strong>Generate</strong></p>
+
+<p>再去xcode 重新下载一下描述文件 clean 一下就OK了</p>
 
 
-<div class="page card">
 
-
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-      <div class="hat_title">
-        <h3>2016</h3>
-      </div>
-      <div class="post_list">
-      <ul>
-      
-    
-  
-    <li>
-      <span>
-        2016-11-30
-      </span>
-       &raquo; 
-      <a href="/2016/11/Doesn't-include-the-currently-selected-devic/">Doesn't include the currently selected device </a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-27
-      </span>
-       &raquo; 
-      <a href="/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/">我的博客是如何搭建的</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-27
-      </span>
-       &raquo; 
-      <a href="/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/">h5上传图片压缩包服务端解压并上传图片</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-25
-      </span>
-       &raquo; 
-      <a href="/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/">IDEA maven 项目打包 jdk版本问题</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-18
-      </span>
-       &raquo; 
-      <a href="/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">CTAssetsPickerController 选中图片不显示对号的问题解决</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-01- 7
-      </span>
-       &raquo; 
-      <a href="/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">OC 字符串操作整理</a>
-    </li>
- 
-    
-      
-        </ul>
-         </div>         
-         
-        <div class="hat_title">
-         <h3> 2015</h3>
-        </div>
-        <div class="post_list">
-        <ul>
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11-15
-      </span>
-       &raquo; 
-      <a href="/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/">zookeeper和solr搭建集群分片查询</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11-11
-      </span>
-       &raquo; 
-      <a href="/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/">Tomcat和Solr的整合</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11-11
-      </span>
-       &raquo; 
-      <a href="/2015/11/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">zookeeper集群搭建</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11- 4
-      </span>
-       &raquo; 
-      <a href="/2015/11/MongoDB%E5%89%AF%E6%9C%AC%E9%9B%86%E6%90%AD%E5%BB%BA%E5%92%8C%E6%B5%8B%E8%AF%95/">MongoDB副本集搭建和测试</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11- 4
-      </span>
-       &raquo; 
-      <a href="/2015/11/rabbitmq-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">rabbitmq 集群搭建</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11- 3
-      </span>
-       &raquo; 
-      <a href="/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/">修改rabbitmq Web UI 监控页面的端口</a>
-    </li>
- 
-    
-      </ul>
-      
-    
-  
-
-</div>
-</div>
   </section>
+
+<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
 </article>
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/" data-toggle="tooltip" data-placement="top" title="我的博客是如何搭建的">上一篇：  <span>我的博客是如何搭建的</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+  
+    <div class="ds-thread" data-thread-key="/2016/11/Doesn't-include-the-currently-selected-devic/" data-title="Doesn't include the currently selected device " data-url="http://localhost:4000/2016/11/Doesn't-include-the-currently-selected-devic/"></div>
+
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"yoruo"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+  
+  
+  
+  
+</section>
+
 
             <section class="footer">
     <footer>

@@ -5,9 +5,90 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 30 Nov 2016 18:23:07 +0800</pubDate>
-    <lastBuildDate>Wed, 30 Nov 2016 18:23:07 +0800</lastBuildDate>
+    <pubDate>Wed, 30 Nov 2016 21:34:52 +0800</pubDate>
+    <lastBuildDate>Wed, 30 Nov 2016 21:34:52 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Doesn't include the currently selected device </title>
+        <description>&lt;p&gt;昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。&lt;/p&gt;
+
+&lt;p&gt;本来一天都在弄文件下载，断点下载进度条多线程之类的事情，老大说把我们app RUN 到iPad上看看。R了一下bulid失败了。错误信息&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Provisioning profile “match Development com.XXX.YYY” doesn’t include the currently selected device “XXX”.
+Code signing is required for product type ‘Application’ in SDK ‘iOS 10.0’&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Xcode已经是最新的了，iPad是10.0.1绝对是没问题的应该。于是Google了一下。找到了这个解答&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/39426287/xcode-8-cannot-run-on-device-provisioning-profile-problems-mentioning-apple-wat&quot;&gt;Xcode 8 cannot run on device, provisioning profile problems mentioning Apple Watch&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I had the same issue today - XCode Version 8.0 (8A218a) - and fixed it with two simple steps (instead of the more complicated approach above:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;add the Apple Watch to member center (did not find a copy&amp;amp;paste option either)&lt;/li&gt;
+    &lt;li&gt;edit the development provisioning profile and add the watch to devices, save&lt;/li&gt;
+    &lt;li&gt;go to XCode prefs, move the old provisioning profile to trash (right click on the name) and download the new version&lt;/li&gt;
+    &lt;li&gt;set the new provisioning profile in project editor
+No restart, clean or anything else needed. Worked like a charm&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;需要在描述文件添加设备的UDID&lt;/p&gt;
+
+&lt;p&gt;UDID可以通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;iTunes&lt;/code&gt; 拿到。
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-0@2x.png&quot; alt=&quot;&quot; /&gt;
+&lt;strong&gt;如果看不到UDID多点几下我抹红的地方就行了&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;拿到这个UDID 登录到 &lt;a href=&quot;https://developer.apple.com&quot;&gt;苹果开发者中心&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;登录账号后 找到&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-2@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-3@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-4@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最好在描述文件添加这个设备&lt;/p&gt;
+
+&lt;p&gt;点 &lt;strong&gt;edit&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-1@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Select All&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-5@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Generate&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;再去xcode 重新下载一下描述文件 clean 一下就OK了&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 30 Nov 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/Doesn't-include-the-currently-selected-devic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/Doesn't-include-the-currently-selected-devic/</guid>
+        
+        <category>iPad</category>
+        
+        <category>iOS</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>我的博客是如何搭建的</title>
@@ -2623,670 +2704,6 @@ szss:SECONDARY&amp;gt; db.test.count()
         <guid isPermaLink="true">http://localhost:4000/2015/11/MongoDB%E5%89%AF%E6%9C%AC%E9%9B%86%E6%90%AD%E5%BB%BA%E5%92%8C%E6%B5%8B%E8%AF%95/</guid>
         
         <category>MongoDB</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>rabbitmq 集群搭建</title>
-        <description>&lt;p&gt;消息队列对于处理高并发还是非常不错的选择。所以电商必然会采取这种方式。废话不多说。贴代码先。&lt;/p&gt;
-
-&lt;p&gt;1 .搭建环境&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Mac OS X 10.10.5   
- VMware Fusion8  
- Centos 6.7 
- rabbitmq-server-3.5.6-1.noarch.rpm 
- erlang-17.4-1.el6.x86_64.rpm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;rabbitmq的搭建&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.rabbitmq.com/releases/erlang/erlang-17.4-1.el6.x86_64.rpm
-yum install erlang-17.4-1.el6.x86_64.rpm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ol&gt;
-  &lt;li&gt;安装rabbitmq&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
-rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-yum install rabbitmq-server-3.5.6-1.noarch.rpm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ol&gt;
-  &lt;li&gt;安装rabbitmq插件
-安装RabbitMQ WebUI管理插件&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rabbitmq-plugins enable rabbitmq_management
-service abbitmq-server restart
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;打开浏览器登录http://127.0.0.1: 15672&lt;/p&gt;
-
-&lt;p&gt;启动RabbitMQ Server&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service rabbitmq-server start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;集群搭建&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;太啰嗦的就不说了。需要注意的我会在这里提出：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;你的host需要修改 在node1代码块可以看到。如果不改变，重启 shutdown -r  now&lt;/li&gt;
-  &lt;li&gt;你的.erlang.cookie 也是需要修改并都保持一样。&lt;/li&gt;
-  &lt;li&gt;修改配置文件的时候要注意括号。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    stop [&amp;lt;pid_file&amp;gt;] 停止服务根据进程号
-    stop_app
-    start_app
-    wait &amp;lt;pid_file&amp;gt;   暂停
-    reset             重置
-    force_reset       强制重置
-    rotate_logs &amp;lt;suffix&amp;gt; 日志文件 后缀
-
-    join_cluster &amp;lt;clusternode&amp;gt; [—ram]  加入集群
-    cluster_status                     集群状态
-    change_cluster_node_type disc | ram  改变集群节点类型
-    forget_cluster_node [--offline]      取消节点
-    rename_cluster_node oldnode1 newnode1 [oldnode2] [newnode2 …]  重命名节点
-    update_cluster_nodes clusternode  更新节点
-    force_boot                        重置引导
-    sync_queue queue                  同步队列
-    cancel_sync_queue queue           取消同步队列
-    purge_queue queue                 清除队列
-    set_cluster_name name             设置集群名称
-
-    add_user &amp;lt;username&amp;gt; &amp;lt;password&amp;gt;    添加用户
-    delete_user &amp;lt;username&amp;gt;            删除用户
-    change_password &amp;lt;username&amp;gt; &amp;lt;newpassword&amp;gt;  修改密码
-    clear_password &amp;lt;username&amp;gt;         清除密码
-    set_user_tags &amp;lt;username&amp;gt; &amp;lt;tag&amp;gt; ...设置角色权限
-    list_users                        查看所有的用户
-
-    add_vhost &amp;lt;vhostpath&amp;gt;             添加主机
-    delete_vhost &amp;lt;vhostpath&amp;gt;          删除主机
-    list_vhosts [&amp;lt;vhostinfoitem&amp;gt; …]   所有主机
-    set_permissions [-p &amp;lt;vhostpath&amp;gt;] &amp;lt;user&amp;gt; &amp;lt;conf&amp;gt; &amp;lt;write&amp;gt; &amp;lt;read&amp;gt;  给主机指定用户
-    clear_permissions [-p &amp;lt;vhostpath&amp;gt;] &amp;lt;username&amp;gt;     清除一个主机的用户
-    list_permissions [-p &amp;lt;vhostpath&amp;gt;]                 一个主机下面的绑定的用户
-    list_user_permissions &amp;lt;username&amp;gt;                  用户的权限
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;node1：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sjk@192.168.10.73's password: 
-
-Last login: Tue Nov  3 00:16:23 2015 from 192.168.10.14
-
-[sjk@rabbitmq-node1 ~]$ ls
-
-Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
-
-[sjk@rabbitmq-node1 ~]$ cd /usr/local/
-
-[sjk@rabbitmq-node1 local]$ ls
-
-bin  games    jdk1.7.0_80  lib64    nginx    sbin   src     usr
-
-etc  include  lib          libexec  openssl  share  tomcat
-
-[sjk@rabbitmq-node1 local]$ ls
-
-bin  games    jdk1.7.0_80  lib64    nginx    sbin   src     usr
-
-etc  include  lib          libexec  openssl  share  tomcat
-
-[sjk@rabbitmq-node1 local]$ cd /usr/programmer/
-
-[sjk@rabbitmq-node1 programmer]$ ls
-
-apache-tomcat-8.0.26.tar.gz     nginx-1.9.4.tar.gz
-
-erlang-17.4-1.el6.x86_64.rpm    openssl-1.0.2c.tar.gz
-
-go1.4.2.linux-amd64.tar.gz      rabbitmq-server-3.5.6-1.noarch.rpm
-
-jdk-7u80-linux-x64.tar.gz       redis-3.0.3.tar
-
-mongodb-linux-x86_64-3.0.6.tgz  solr-5.2.1.tgz
-
-mongodb-osx-x86_64-3.0.6.tgz    zookeeper-3.4.6.tar.gz
-
-nginx-1.8.0.tar.gz
-
-[sjk@rabbitmq-node1 programmer]$ cat /etc/hosts
-
-192.168.10.73   rabbitmq-node1.com rabbitmq-node1
-
-192.168.10.74   rabbitmq-node2.com rabbitmq-node2
-
-192.168.10.75   rabbitmq-node3.com rabbitmq-node3
-
-[sjk@rabbitmq-node1 programmer]$ vim /etc/hosts
-
-[sjk@rabbitmq-node1 programmer]$ sudo -i
-
-[sudo] password for sjk: 
-
-[root@rabbitmq-node1 ~]# vim /etc/hosts
-
-[root@rabbitmq-node1 ~]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node1 ~]# cd /etc/rabbitmq/
-
-[root@rabbitmq-node1 rabbitmq]# ls
-
-enabled_plugins
-
-[root@rabbitmq-node1 rabbitmq]# mv /usr/rabbitmq.config /etc/rabbitmq/
-
-[root@rabbitmq-node1 rabbitmq]# cat /var/lib/rabbitmq/.erlang.cookie 
-
-ATDTSAHIFSBKTQDSYKMA
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server stop
-
-Stopping rabbitmq-server: rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# vim rabbitmq.config 
-
-[root@rabbitmq-node1 rabbitmq]# vim /etc/rabbitmq/rabbitmq-env.conf
-
-[root@rabbitmq-node1 rabbitmq]# vim /etc/rabbitmq/rabbitmq-env.conf
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server stop
-
-Stopping rabbitmq-server: rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# ls
-
-enabled_plugins  rabbitmq.config  rabbitmq-env.conf
-
-[root@rabbitmq-node1 rabbitmq]# cat rabbitmq-env.conf 
-
-RABBITMQ_MNESIA_BASE=/var/lib/rabbitmq/
-
-#需要使用的MNESIA数据库的路径
-
-RABBITMQ_LOG_BASE=/var/log/rabbitmq/
-
-#log的路径
-
-RABBITMQ_PLUGINS_DIR=/usr/lib/rabbitmq/lib/rabbitmq_server-3.5.6/plugins/
-
-#插件的路径
-
-[root@rabbitmq-node1 rabbitmq]# vim rabbitmq.config 
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
-
-Starting rabbitmq-server: FAILED - check /var/log/rabbitmq/startup_{log, _err}
-
-rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# cat /var/log/rabbitmq/startup_err 
-
-Crash dump was written to: erl_crash.dump
-
-could not start kernel pid (application_controller) (error in config file &quot;/etc/rabbitmq/rabbitmq.config&quot; (253): syntax error before: ']')
-
-[root@rabbitmq-node1 rabbitmq]# vim rabbitmq.config 
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server stop
-
-Stopping rabbitmq-server: rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl cluster_status
-
-Cluster status of node 'rabbit@rabbitmq-node1' ...
-
-[{nodes,[{disc,['rabbit@rabbitmq-node1']}]},
-
- {running_nodes,['rabbit@rabbitmq-node1']},
-
- {cluster_name,&amp;lt;&amp;lt;&quot;rabbit@rabbitmq-node1.com&quot;&amp;gt;&amp;gt;},
-
- {partitions,[]}]
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl stop_app
-
-Stopping node 'rabbit@rabbitmq-node1' ...
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl reset
-
-Resetting node 'rabbit@rabbitmq-node1' ...
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
-
-Clustering node 'rabbit@rabbitmq-node1' with 'rabbit@rabbitmq-node1' ...
-
-Error: cannot_cluster_node_with_itself
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl start_app
-
-Starting node 'rabbit@rabbitmq-node1' ...
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl cluster_status
-
-Cluster status of node 'rabbit@rabbitmq-node1' ...
-
-[{nodes,[{disc,['rabbit@rabbitmq-node1','rabbit@rabbitmq-node2',
-
-                'rabbit@rabbitmq-node3']}]},
-
- {running_nodes,['rabbit@rabbitmq-node1']},
-
- {cluster_name,&amp;lt;&amp;lt;&quot;rabbit@rabbitmq-node1.com&quot;&amp;gt;&amp;gt;},
-
- {partitions,[]}]
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl add_user lxc root
-
-Creating user &quot;lxc&quot; ...
-
-[root@rabbitmq-node1 rabbitmq]# rabbitmqctl set_user_tags lxc  administrator
-
-Setting tags for user &quot;lxc&quot; to [administrator] ...
-
-[root@rabbitmq-node1 rabbitmq]# 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;node2：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sjk@192.168.10.74's password: 
-
-Last login: Tue Nov  3 12:52:44 2015 from 192.168.10.14
-
-[sjk@rabbitmq-node2 ~]$ cd /usr/local/
-
-[sjk@rabbitmq-node2 local]$ ls
-
-bin  games    jdk1.7.0_80  lib64    sbin   src
-
-etc  include  lib          libexec  share  tomcat
-
-[sjk@rabbitmq-node2 local]$ cd /usr/programmer/
-
-[sjk@rabbitmq-node2 programmer]$ l;s
-
--bash: l: command not found
-
--bash: s: command not found
-
-[sjk@rabbitmq-node2 programmer]$ ls
-
-apache-tomcat-8.0.26.tar.gz     nginx-1.8.0.tar.gz
-
-erlang-17.4-1.el6.x86_64.rpm    nginx-1.9.4.tar.gz
-
-go1.4.2.linux-amd64.tar.gz      rabbitmq-server-3.5.6-1.noarch.rpm
-
-jdk-7u80-linux-x64.tar.gz       redis-3.0.3.tar
-
-mongodb-linux-x86_64-3.0.6.tgz  solr-5.2.1.tgz
-
-mongodb-osx-x86_64-3.0.6.tgz    zookeeper-3.4.6.tar.gz
-
-[sjk@rabbitmq-node2 programmer]$ sudo -i
-
-[sudo] password for sjk: 
-
-[root@rabbitmq-node2 ~]# vim /etc/hosts
-
-[root@rabbitmq-node2 ~]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node2 ~]# cd /etc/rabbitmq/
-
-[root@rabbitmq-node2 rabbitmq]# ls
-
-enabled_plugins
-
-[root@rabbitmq-node2 rabbitmq]# mv /usr/rabbitmq.config /etc/rabbitmq/
-
-[root@rabbitmq-node2 rabbitmq]# cat /var/lib/rabbitmq/.erlang.cookie 
-
-ATDTSAHIFSBKTQDSYKMA
-
-[root@rabbitmq-node2 rabbitmq]# service rabbitmq-server stop
-
-Stopping rabbitmq-server: rabbitmq-server.
-
-[root@rabbitmq-node2 rabbitmq]# ls
-
-enabled_plugins  rabbitmq.config
-
-[root@rabbitmq-node2 rabbitmq]# vim rabbitmq-env.conf 
-
-[root@rabbitmq-node2 rabbitmq]# vim rabbitmq-env.conf 
-
-[root@rabbitmq-node2 rabbitmq]# vim rabbitmq.config 
-
-[root@rabbitmq-node2 rabbitmq]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node2 rabbitmq]# rabbitmqctl cluster_status
-
-Cluster status of node 'rabbit@rabbitmq-node2' ...
-
-[{nodes,[{disc,['rabbit@rabbitmq-node2']}]},
-
- {running_nodes,['rabbit@rabbitmq-node2']},
-
- {cluster_name,&amp;lt;&amp;lt;&quot;rabbit@rabbitmq-node2.com&quot;&amp;gt;&amp;gt;},
-
- {partitions,[]}]
-
-[root@rabbitmq-node2 rabbitmq]# rabbitmqctl stop_app
-
-Stopping node 'rabbit@rabbitmq-node2' ...
-
-[root@rabbitmq-node2 rabbitmq]# rabbitmqctl reset
-
-Resetting node 'rabbit@rabbitmq-node2' ...
-
-[root@rabbitmq-node2 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
-
-Clustering node 'rabbit@rabbitmq-node2' with 'rabbit@rabbitmq-node1' ...
-
-[root@rabbitmq-node2 rabbitmq]# 
-
-[root@rabbitmq-node2 rabbitmq]# rabbitmqctl start_app
-
-Starting node 'rabbit@rabbitmq-node2' ...
-
-[root@rabbitmq-node2 rabbitmq]# 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;node3：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sjk@192.168.10.75's password: 
-
-Last login: Tue Nov  3 12:59:37 2015 from 192.168.10.14
-
-[sjk@rabbitmq-node3 ~]$ cat /etc/rabbitmq/
-
-cat: /etc/rabbitmq/: 是一个目录
-
-[sjk@rabbitmq-node3 ~]$ ls
-
-Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
-
-[sjk@rabbitmq-node3 ~]$ sudo -i
-
-[sudo] password for sjk: 
-
-[root@rabbitmq-node3 ~]# vim /etc/hosts
-
-[root@rabbitmq-node3 ~]# 
-
-[root@rabbitmq-node3 ~]# 
-
-[root@rabbitmq-node3 ~]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node3 ~]# cd /etc/rabbitmq/
-
-[root@rabbitmq-node3 rabbitmq]# ls
-
-enabled_plugins  rabbitmq.config  rabbitmq.config.example
-
-[root@rabbitmq-node3 rabbitmq]# scp rabbitmq.config root@192.168.10.73:/usr/
-
-The authenticity of host '192.168.10.73 (192.168.10.73)' can't be established.
-
-RSA key fingerprint is ba:e1:f0:bd:2f:67:15:cd:50:e2:cf:df:87:01:b9:13.
-
-Are you sure you want to continue connecting (yes/no)? yes
-
-Warning: Permanently added '192.168.10.73' (RSA) to the list of known hosts.
-
-root@192.168.10.73's password: 
-
-rabbitmq.config                               100%   19KB  19.1KB/s   00:00    
-
-[root@rabbitmq-node3 rabbitmq]# scp rabbitmq.config root@192.168.10.74:/usr/
-
-The authenticity of host '192.168.10.74 (192.168.10.74)' can't be established.
-
-RSA key fingerprint is ba:e1:f0:bd:2f:67:15:cd:50:e2:cf:df:87:01:b9:13.
-
-Are you sure you want to continue connecting (yes/no)? yes
-
-Warning: Permanently added '192.168.10.74' (RSA) to the list of known hosts.
-
-root@192.168.10.74's password: 
-
-rabbitmq.config                               100%   19KB  19.1KB/s   00:00    
-
-[root@rabbitmq-node3 rabbitmq]# cat /var/lib/rabbitmq/.erlang.cookie 
-
-ATDTSAHIFSBKTQDSYKMA
-
-[root@rabbitmq-node3 rabbitmq]# service rabbitmq-server stop
-
-Stopping rabbitmq-server: rabbitmq-server.
-
-[root@rabbitmq-node3 rabbitmq]# ls
-
-enabled_plugins  rabbitmq.config  rabbitmq.config.example
-
-[root@rabbitmq-node3 rabbitmq]# vim rabbitmq-env.conf 
-
-[root@rabbitmq-node3 rabbitmq]# vim rabbitmq-env.conf 
-
-[root@rabbitmq-node3 rabbitmq]# vim rabbitmq.config
-
-[root@rabbitmq-node3 rabbitmq]# service rabbitmq-server start
-
-Starting rabbitmq-server: SUCCESS
-
-rabbitmq-server.
-
-[root@rabbitmq-node3 rabbitmq]# rabbitmqctl cluster_status
-
-Cluster status of node 'rabbit@rabbitmq-node3' ...
-
-[{nodes,[{disc,['rabbit@rabbitmq-node3']}]},
-
- {running_nodes,['rabbit@rabbitmq-node3']},
-
- {cluster_name,&amp;lt;&amp;lt;&quot;rabbit@rabbitmq-node3.com&quot;&amp;gt;&amp;gt;},
-
- {partitions,[]}]
-
-[root@rabbitmq-node3 rabbitmq]# rabbitmqctl stop_app
-
-Stopping node 'rabbit@rabbitmq-node3' ...
-
-[root@rabbitmq-node3 rabbitmq]# rabbitmqctl reset
-
-Resetting node 'rabbit@rabbitmq-node3' ...
-
-[root@rabbitmq-node3 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
-
-Clustering node 'rabbit@rabbitmq-node3' with 'rabbit@rabbitmq-node1' ...
-
-Error: mnesia_not_running
-
-[root@rabbitmq-node3 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
-
-Clustering node 'rabbit@rabbitmq-node3' with 'rabbit@rabbitmq-node1' ...
-
-[root@rabbitmq-node3 rabbitmq]# rabbitmqctl start_app
-
-Starting node 'rabbit@rabbitmq-node3' ...
-
-[root@rabbitmq-node3 rabbitmq]# 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;rabbitmq.config 的内容：我删除了一些注释。因为So Long~&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;%% -*- mode: erlang -*-
-%% ----------------------------------------------------------------------------
-%% RabbitMQ Sample Configuration File.
-%%
-%% See http://www.rabbitmq.com/configure.html for details.
-%% ----------------------------------------------------------------------------
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster_nodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;' rabbit@rabbitmq-node1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;' rabbit@rabbitmq-node2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;' rabbit@rabbitmq-node3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% Advanced Erlang Networking/Clustering Options.
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See http://www.rabbitmq.com/clustering.html for details
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;%% Sets the net_kernel tick time.
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%% Please see http://erlang.org/doc/man/kernel_app.html and
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%% http://www.rabbitmq.com/nettick.html for further details.
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%% {net_ticktime, 60}
-&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% RabbitMQ Management Plugin
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See http://www.rabbitmq.com/management.html for details
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbitmq_management&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;     &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-             &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;       &lt;span class=&quot;s&quot;&gt;&quot;0.0.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-             &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}]}&lt;/span&gt; 
- &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% RabbitMQ Shovel Plugin
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See http://www.rabbitmq.com/shovel.html for details
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbitmq_shovel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shovels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;
-   &lt;span class=&quot;c&quot;&gt;%% Rather than specifying some values per-shovel, you can specify
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%% them for all shovels here.
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%% {defaults, [{prefetch_count,     0},
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%%             {ack_mode,           on_confirm},
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%%             {publish_fields,     []},
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%%             {publish_properties, [{delivery_mode, 2}]},
-&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;%%             {reconnect_delay,    2.5}]}
-&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% RabbitMQ Stomp Adapter
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See http://www.rabbitmq.com/stomp.html for details
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbitmq_stomp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% RabbitMQ MQTT Adapter
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See https://github.com/rabbitmq/rabbitmq-mqtt/blob/stable/README.md
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% for details
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbitmq_mqtt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% RabbitMQ AMQP 1.0 Support
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See https://github.com/rabbitmq/rabbitmq-amqp1.0/blob/stable/README.md
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% for details
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbitmq_amqp1_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]},&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% RabbitMQ LDAP Plugin
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% See http://www.rabbitmq.com/ldap.html for details.
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%%
-&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%% ----------------------------------------------------------------------------
-&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rabbitmq_auth_backend_ldap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104165318320&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我也借鉴了一些大神的博客。也看了官方文档。还在继续提高中~~~&lt;/p&gt;
-</description>
-        <pubDate>Wed, 04 Nov 2015 16:14:03 +0800</pubDate>
-        <link>http://localhost:4000/2015/11/rabbitmq-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/11/rabbitmq-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</guid>
-        
-        <category>rabbitmq</category>
-        
-        <category>集群</category>
         
         
         <category>jekyll</category>
