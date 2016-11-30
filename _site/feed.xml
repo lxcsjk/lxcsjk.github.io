@@ -5,15 +5,27 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Nov 2016 23:54:12 +0800</pubDate>
-    <lastBuildDate>Sun, 27 Nov 2016 23:54:12 +0800</lastBuildDate>
+    <pubDate>Wed, 30 Nov 2016 18:23:07 +0800</pubDate>
+    <lastBuildDate>Wed, 30 Nov 2016 18:23:07 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
         <title>我的博客是如何搭建的</title>
         <description>&lt;p&gt;拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。&lt;/p&gt;
 
-&lt;p&gt;　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;首先你需要了解 &lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt; 仓库托管 和 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; 的相关内容&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;不需要买服务器部署搭建环境等等&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;不需要购买域名和备案&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;很快的上手&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;原理&lt;/h3&gt;
+
+&lt;p&gt;Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Pages 上。接下在自己的电脑搭建一个测试环境吧 😎😎😎&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;jekyll&quot;&gt;安装 jekyll&lt;/h3&gt;
 
@@ -151,14 +163,14 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;加入第三方的社会化工具&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;加入第三方的社会化工具&lt;/h3&gt;
 
 &lt;p&gt;Disqus 已经被墙了 So 用国内的吧 &lt;a href=&quot;http://duoshuo.com/&quot;&gt;多说&lt;/a&gt;就挺好的 
 把多说代码片段复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;post.html&lt;/code&gt;文件内的&lt;code class=&quot;highlighter-rouge&quot;&gt; &amp;lt;/article&amp;gt;&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签之间即可&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;加入统计之类的代码&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;加入统计之类的代码&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://analytics.google.com/&quot;&gt;Google Analytics&lt;/a&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;用google的需要改hosts 上面有提到方法&lt;/code&gt;&lt;/p&gt;
@@ -171,7 +183,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;申请自己的域名&lt;/h3&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;申请自己的域名&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;这一步之前得将你本地博客所以文件通过 GitHub Desktop 提交到你的GITHub Pages仓库&lt;/strong&gt;&lt;/p&gt;
 
@@ -745,7 +757,7 @@ public class DeCompressUtil {
 
 &lt;p&gt;然后找到CTAssetsPickerController的demo 再找到资源&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20161118165720224&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161129-0@2x.png&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;选中所有png 往提前new出来的Bundle里拖&lt;/p&gt;
 

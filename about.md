@@ -26,6 +26,8 @@ title: 关于我
  - Github: <https://github.com/lxcsjk>
  - 籍贯：皖
  - 所在城市：上海
+ 
+![](http://oh6uhie7j.bkt.clouddn.com/F09F4676-B261-4E21-A48A-718E5334C935.png)
 
 ---
 
@@ -37,8 +39,6 @@ title: 关于我
 <p>
 
 
-![](http://oh6uhie7j.bkt.clouddn.com/F09F4676-B261-4E21-A48A-718E5334C935.png)
 
 
----
 
