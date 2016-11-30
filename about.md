@@ -3,15 +3,10 @@ layout: page
 title: 关于我 
 ---
 
-### Jennifer 💗 YoRuo:
-
-![](http://oh6uhie7j.bkt.clouddn.com/F09F4676-B261-4E21-A48A-718E5334C935.png)
-
----
-
 ### 一些朋友
 
-- [何宗苡 iOS](http://ripperhe.tk)
+- [何宗苡 - (iOS)](http://ripperhe.tk)
+- [潘柏信 - (看了这位大神的Blog才知道如何搭建)](http://baixin.io)
 
 ---
 
@@ -40,4 +35,12 @@ title: 关于我
 <p>
 爱篮球，爱🚀队，爱玩游戏，电子发烧友
 <p>
+
+---
+
+### Jennifer 💗 YoRuo:
+
+![](http://oh6uhie7j.bkt.clouddn.com/F09F4676-B261-4E21-A48A-718E5334C935.png)
+
+---
 
