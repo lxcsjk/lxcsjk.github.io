@@ -5,9 +5,461 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 30 Nov 2016 21:34:52 +0800</pubDate>
-    <lastBuildDate>Wed, 30 Nov 2016 21:34:52 +0800</lastBuildDate>
+    <pubDate>Sat, 03 Dec 2016 23:25:10 +0800</pubDate>
+    <lastBuildDate>Sat, 03 Dec 2016 23:25:10 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>FMDB 整理总结</title>
+        <description>&lt;p&gt;这几天在写文件下载，断点续传，需要用到FMDB进行数据的管理，等写完也总结一下。&lt;/p&gt;
+
+&lt;p&gt;其实也是这两天才学习 &lt;code class=&quot;highlighter-rouge&quot;&gt;FMDB&lt;/code&gt;，google了一下资料有很多，就去 github 上面先 &lt;a href=&quot;https://github.com/ccgus/fmdb&quot;&gt;Star&lt;/a&gt; 一下&lt;code class=&quot;highlighter-rouge&quot;&gt;FMDB&lt;/code&gt;，发现他&lt;code class=&quot;highlighter-rouge&quot;&gt;README.markdown&lt;/code&gt;写的很详细。然后也看了唐巧大牛的&lt;a href=&quot;http://blog.devtang.com/2012/04/22/use-fmdb/&quot;&gt;技术博客&lt;/a&gt;，然后写了&lt;a href=&quot;https://github.com/lxcsjk/FMDBDemo&quot;&gt;FMDBDemo&lt;/a&gt;玩玩。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;集成到项目&lt;/h3&gt;
+
+&lt;p&gt;通过 &lt;a href=&quot;https://cocoapods.org&quot;&gt;CocoaPods&lt;/a&gt; 添加 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod 'FMDB'&lt;/code&gt; 然后 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod update --verbose --no-repo-update&lt;/code&gt; OK~&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;创建数据库&lt;/h3&gt;
+
+&lt;p&gt;导入 &lt;code class=&quot;highlighter-rouge&quot;&gt;libsqlite3.tbd&lt;/code&gt;  (&lt;code class=&quot;highlighter-rouge&quot;&gt;libsqlite3.0.tbd&lt;/code&gt; 也可以)
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161203-223307@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;引入 &lt;code class=&quot;highlighter-rouge&quot;&gt;#import &quot;FMDB.h&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;section-2&quot;&gt;创建数据库&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    NSString *doc =[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) lastObject];
+    
+    fileName = [doc stringByAppendingPathComponent:@&quot;downCourse.sqlite&quot;];
+    
+    DLog(@&quot;sql文件路径 ： %@&quot;,fileName);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;我创建在&lt;code class=&quot;highlighter-rouge&quot;&gt;Documents&lt;/code&gt;目录下&lt;/p&gt;
+
+&lt;p&gt;关于创建数据库：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;An &lt;code class=&quot;highlighter-rouge&quot;&gt;FMDatabase&lt;/code&gt; is created with a path to a SQLite database file. This path can be one of these three:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;A file system path. The file does not have to exist on disk. If it does not exist, it is created for you.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;An empty string (@””). An empty database is created at a temporary location. This database is deleted with the &lt;code class=&quot;highlighter-rouge&quot;&gt;FMDatabase&lt;/code&gt; connection is closed.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NULL&lt;/code&gt;. An in-memory database is created. This database will be destroyed with the FMDatabase connection is closed.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;意思就是&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;建立数据库只需要如下一行即可 , 当该文件不存在时，fmdb 会自己创建一个。如果你传入的参数是空串：@”” ，则 fmdb 会在临时文件目录下创建这个数据库，如果你传入的参数是 NULL，则它会建立一个在内存中的数据库。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;打开数据库&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+    	// sql
+    }
+    [db close];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;就可以了 执行完 注意一定要 &lt;code class=&quot;highlighter-rouge&quot;&gt;[db close]&lt;/code&gt; 关闭数据库&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;创建表&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)createTable{
+    //    NSFileManager * fileManager = [NSFileManager defaultManager];
+    //    if ([fileManager fileExistsAtPath:fileName] == NO) {
+    if (!isTableExist) {
+        FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+        if ([db open]){
+            //  创建表
+            BOOL result = [db executeUpdate:@&quot;CREATE TABLE 't_down_course' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL , 'courseId' INTEGER, 'downPath' VARCHAR(255),'courseInfo' text)&quot;];
+            if (result){
+                DLog(@&quot;创建表成功&quot;);
+                isTableExist = YES;
+                [self showAlertWithMessage:@&quot;创建表 --- 成功&quot; completion:nil];
+            }else{
+                [self showAlertWithMessage:@&quot;创建表 --- 失败&quot; completion:nil];
+            }
+            [db close];
+        }else{
+            [self showAlertWithMessage:@&quot;打开数据库 --- 失败&quot; completion:nil];
+        }
+    }
+    //    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;创建名称为 &lt;code class=&quot;highlighter-rouge&quot;&gt;t_down_course&lt;/code&gt; 的表&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;插入数据&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)addData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    
+    NSDictionary *dic = @{
+                          @&quot;code&quot;: @0,
+                          @&quot;msg&quot;: @&quot;success&quot;,
+                          @&quot;data&quot;: @{
+                              @&quot;course&quot;: @{
+                                  @&quot;id&quot;: @24,
+                                  @&quot;crowdId&quot;: @4,
+                                  @&quot;ccode&quot;: @&quot;KIa8nNpVmc&quot;,
+                                  @&quot;cname&quot;: @&quot;健健康康&quot;,
+                                  @&quot;coverImg&quot;: @&quot;http://ocd2lp9uj.bkt.clouddn.com/FaceQ1445612150222.jpg&quot;,
+                                  @&quot;description&quot;: @&quot;淋漓尽致&quot;,
+                                  @&quot;speaker&quot;: @2,
+                                  @&quot;speakerName&quot;: @&quot;刘欣成&quot;,
+                                  @&quot;speakerHeadIcon&quot;: @&quot;http://ocd2lp9uj.bkt.clouddn.com/FaceQ1445612150222.jpg&quot;,
+                                  @&quot;startTime&quot;: @&quot;2016-10-15 11:21:44&quot;,
+                                  @&quot;endTime&quot;: @&quot;2016-10-15 11:26:50&quot;,
+                                  @&quot;liveStatus&quot;: @&quot;2&quot;,
+                                  @&quot;saveStatus&quot;: @&quot;2&quot;
+                              }
+                          }
+                    };
+    NSString *json = [self dictionaryToJson:dic];
+    
+    if ([db open]){
+        NSString *insertSql = @&quot;insert into 't_down_course'(courseId,downPath,courseInfo) values(?,?,?)&quot;;
+        BOOL result = [db executeUpdate:insertSql,[NSString stringWithFormat:@&quot;%d&quot;,count],fileName,json];
+        if (result){
+            DLog(@&quot;添加数据成功&quot;);
+            [self showAlertWithMessage:@&quot;添加数据 --- 成功&quot; completion:nil];
+        }else{
+            DLog(@&quot;添加数据失败&quot;);
+            [self showAlertWithMessage:@&quot;添加数据 --- 失败&quot; completion:nil];
+        }
+        count++;
+        [db close];
+    }else{
+        [self showAlertWithMessage:@&quot;打开数据库 --- 失败&quot; completion:nil];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;插入数据类型必须为&lt;code class=&quot;highlighter-rouge&quot;&gt;NSObject&lt;/code&gt; 的子类&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;基本类型需要封装为对应的包装类&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;支持占位符，后添加再数据&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;section-6&quot;&gt;插入也支持以字典的方式&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NSDictionary *arguments = @{@&quot;identifier&quot;: @(identifier), @&quot;name&quot;: name, @&quot;date&quot;: date, @&quot;comment&quot;: comment ?: [NSNull null]};
+BOOL success = [db executeUpdate:@&quot;INSERT INTO authors (identifier, name, date, comment) VALUES (:identifier, :name, :date, :comment)&quot; withParameterDictionary:arguments];
+if (!success) {
+    NSLog(@&quot;error = %@&quot;, [db lastErrorMessage]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h5 id=&quot;section-7&quot;&gt;支持对事务的控制&lt;/h5&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[db open]
+
+[db beginDeferredTransaction];//开启事务
+
+BOOL result = [db executeUpdate:insertSql,[NSString stringWithFormat:@&quot;%d&quot;,count],fileName,json];
+
+if(result){
+	[db commit];// 提交事务
+}else{
+	[db rollback];// 回滚事务
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;查询数据&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)selectData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        NSString *selectSql = @&quot;select * from t_down_course&quot;;
+        FMResultSet * rs = [db executeQuery:selectSql];
+        while ([rs next]) {
+            int course = [rs intForColumn:@&quot;id&quot;];
+            NSString * courseId = [rs stringForColumn:@&quot;courseId&quot;];
+            NSString * downPath = [rs stringForColumn:@&quot;downPath&quot;];
+            NSString * courseInfo = [rs stringForColumn:@&quot;courseInfo&quot;];
+
+            DLog(@&quot;course id = %d, courseId = %@, downPath = %@  courseInfo = %@&quot;, course, courseId, downPath,courseInfo);
+            
+            NSMutableDictionary *dic = [self dictionaryWithJsonString:courseInfo];
+            DLog(@&quot;%@&quot;,dic);
+        }
+        [db close];
+    }else{
+        [self showAlertWithMessage:@&quot;打开数据库 --- 失败&quot; completion:nil];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;注意：即使操作结果只有一行，也需要先调用 FMResultSet 的 next 方法。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;FMDB提供了多个方法获取不同类型的数据&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;intForColumn:&lt;/li&gt;
+  &lt;li&gt;longForColumn:&lt;/li&gt;
+  &lt;li&gt;longLongIntForColumn:&lt;/li&gt;
+  &lt;li&gt;boolForColumn:&lt;/li&gt;
+  &lt;li&gt;doubleForColumn:&lt;/li&gt;
+  &lt;li&gt;stringForColumn:&lt;/li&gt;
+  &lt;li&gt;dateForColumn:&lt;/li&gt;
+  &lt;li&gt;dataForColumn:&lt;/li&gt;
+  &lt;li&gt;dataNoCopyForColumn:&lt;/li&gt;
+  &lt;li&gt;UTF8StringForColumnIndex:&lt;/li&gt;
+  &lt;li&gt;objectForColumn:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;这些方法也都有一个{类型} ForColumnIndex:,用于检索数据基于列的位置的结果,而不是列的名称。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;比如  &lt;code class=&quot;highlighter-rouge&quot;&gt;[rs intForColumnIndex:0]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;支持多个语句批处理&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NSString *sql = @&quot;create table bulktest1 (id integer primary key autoincrement, x text);&quot;
+                 &quot;create table bulktest2 (id integer primary key autoincrement, y text);&quot;
+                 &quot;create table bulktest3 (id integer primary key autoincrement, z text);&quot;
+                 &quot;insert into bulktest1 (x) values ('XXX');&quot;
+                 &quot;insert into bulktest2 (y) values ('YYY');&quot;
+                 &quot;insert into bulktest3 (z) values ('ZZZ');&quot;;
+
+success = [db executeStatements:sql];
+
+sql = @&quot;select count(*) as count from bulktest1;&quot;
+       &quot;select count(*) as count from bulktest2;&quot;
+       &quot;select count(*) as count from bulktest3;&quot;;
+
+success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dictionary) {
+    NSInteger count = [dictionary[@&quot;count&quot;] integerValue];
+    XCTAssertEqual(count, 1, @&quot;expected one record for dictionary %@&quot;, dictionary);
+    return 0;
+}];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;更新数据&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)updateData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        BOOL result = [db executeUpdate:@&quot;update t_down_course set downPath = '更新的数据' where id = 3&quot;];
+        if (result){
+            DLog(@&quot;更新数据成功&quot;);
+            [self showAlertWithMessage:@&quot;更新数据 --- 成功&quot; completion:nil];
+        }else{
+            DLog(@&quot;更新数据失败&quot;);
+            [self showAlertWithMessage:@&quot;更新数据 --- 失败&quot; completion:nil];
+        }
+        
+        [db close];
+    }else{
+        [self showAlertWithMessage:@&quot;打开数据库 --- 失败&quot; completion:nil];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;删除数据&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)deleteData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        BOOL result = [db executeUpdate:@&quot;delete from t_down_course where id = 2&quot;];
+        if (result){
+            DLog(@&quot;删除数据成功&quot;);
+            [self showAlertWithMessage:@&quot;删除数据 --- 成功&quot; completion:nil];
+        }else{
+            DLog(@&quot;删除数据失败&quot;);
+            [self showAlertWithMessage:@&quot;删除数据 --- 失败&quot; completion:nil];
+        }
+        
+        [db close];
+    }else{
+        [self showAlertWithMessage:@&quot;打开数据库 --- 失败&quot; completion:nil];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;删除表&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)dropTable{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        BOOL result = [db executeUpdate:@&quot;drop table t_down_course&quot;];
+        if (result){
+            DLog(@&quot;删除表成功&quot;);
+            isTableExist = NO;
+            [self showAlertWithMessage:@&quot;删除表 --- 成功&quot; completion:nil];
+        }else{
+            DLog(@&quot;删除表失败&quot;);
+            [self showAlertWithMessage:@&quot;删除表 --- 失败&quot; completion:nil];
+        }
+        
+        [db close];
+    }else{
+        [self showAlertWithMessage:@&quot;打开数据库 --- 失败&quot; completion:nil];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;多线程操作&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果应用中使用了多线程操作数据库，那么就需要使用FMDatabaseQueue来保证线程安全了。 应用中不可在多个线程中共同使用一个FMDatabase对象操作数据库，这样会引起数据库数据混乱。 为了多线程操作数据库安全，FMDB使用了FMDatabaseQueue，使用FMDatabaseQueue很简单，首先用一个数据库文件地址来初使化FMDatabaseQueue，然后就可以将一个闭包(block)传入inDatabase方法中。 在闭包中操作数据库，而不直接参与FMDatabase的管理。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;section-13&quot;&gt;创建单例&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//
+//  XCDatabaseHelper.h
+//  Training
+//
+//  Created by LXC on 2016/12/3.
+//  Copyright © 2016年 LXC. All rights reserved.
+//
+&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+#import &quot;FMDB.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;XCDatabaseHelper&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCDatabaseHelper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inDatabase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FMDatabase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//
+//  XCDatabaseHelper.m
+//  Training
+//
+//  Created by LXC on 2016/12/3.
+//  Copyright © 2016年 LXC. All rights reserved.
+//
+&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#import &quot;XCDatabaseHelper.h&quot;
+&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;XCDatabaseHelper&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;FMDatabaseQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSSearchPathForDirectoriesInDomains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSDocumentDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSUserDomainMask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lastObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbFilePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;doc&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stringByAppendingPathComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&quot;downCourse.sqlite&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FMDatabaseQueue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;databaseQueueWithPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbFilePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCDatabaseHelper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dispatch_once_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;__strong&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_sharedObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dispatch_once&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;_sharedObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_sharedObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inDatabase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FMDatabase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inDatabase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FMDatabase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h5 id=&quot;section-14&quot;&gt;调用&lt;/h5&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        [[XCDatabaseHelper sharedInstance] inDatabase:^(FMDatabase *db) {
+            BOOL result = [db executeUpdate:@&quot;update t_down_course set downloadStatus = '1' where courseId = ?&quot;,_course.ids];
+            if (result){
+
+            }
+        }];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这里就不需要 &lt;code class=&quot;highlighter-rouge&quot;&gt;close&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;section-15&quot;&gt;注意&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;FMDatabaseQueue虽然看似一个队列，实际上它本身并不是，它通过内部创建一个Serial的dispatch_queue_t来处理通过inDatabase和inTransaction传入的Blocks，所以当我们在主线程（或者后台）调用inDatabase或者inTransaction时，代码实际上是同步的。FMDatabaseQueue这么设计的目的是让我们避免发生并发访问数据库的问题，因为对数据库的访问可能是随机的（在任何时候）、不同线程间（不同的网络回调等）的请求。内置一个Serial队列后，FMDatabaseQueue就变成线程安全了，所有的数据库访问都是同步执行，而且这比使用@synchronized或NSLock要高效得多。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;但是这么一来就有了一个问题：如果后台在执行大量的更新，而主线程也需要访问数据库，虽然要访问的数据量很少，但是在后台执行完之前，还是会阻塞主线程。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;引用这篇&lt;a href=&quot;http://blog.csdn.net/zhangao0086/article/details/44223007&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Over~~ 洗澡睡觉😴😴😴&lt;/p&gt;
+</description>
+        <pubDate>Sat, 03 Dec 2016 23:24:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/FMDB%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/FMDB%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/</guid>
+        
+        <category>FMDB</category>
+        
+        <category>多线程</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>Doesn't include the currently selected device </title>
@@ -2194,516 +2646,6 @@ Stopping zookeeper ... STOPPED
         <category>zookeeper</category>
         
         <category>集群</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>MongoDB副本集搭建和测试</title>
-        <description>&lt;p&gt;前段时间花了时间看了看mongodb，室友买了mongodb权威指南也借过来瞅瞅，书对于刚刚接触的人还是不错的。废话不多说上代码。&lt;/p&gt;
-
-&lt;p&gt;1 .搭建环境&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; MacBook pro 15款840 &amp;lt;p&amp;gt;
- VMWare Fusion8 &amp;lt;p&amp;gt;
- Centos 6.7 &amp;lt;p&amp;gt;
- mongodb-linux-x86_64-3.0.6.tgz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;安装mongodb
- 这一步其实就是一个解压的过程。很简单。
- &lt;strong&gt;在安装前把dbpath和logpath路径新建好，然后会报错。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;     [root@rabbitmq-node2 ~]# mkdir -p /mongodb/data/arbiter
-     [root@rabbitmq-node2 ~]# mkdir -p /mongodb/logs
-     [root@rabbitmq-node2 data]# cd /usr/programmer/
-     [root@rabbitmq-node2 programmer]# tar zxf mongodb-linux-x86_64-3.0.6.tgz 
-     [root@rabbitmq-node2 programmer]# mv mongodb-linux-x86_64-3.0.6 mongodb
-     [root@rabbitmq-node2 programmer]# mv mongodb /usr/local/
-     [root@rabbitmq-node2 programmer]# ls
-		apache-tomcat-8.0.26.tar.gz     nginx-1.9.4.tar.gz
-		erlang-17.4-1.el6.x86_64.rpm    openssl-1.0.2c.tar.gz
-		go1.4.2.linux-amd64.tar.gz      rabbitmq-server-3.5.6-1.noarch.rpm
-		jdk-7u80-linux-x64.tar.gz       redis-3.0.3.tar
-		mongodb-linux-x86_64-3.0.6.tgz  solr-5.2.1.tgz
-		mongodb-osx-x86_64-3.0.6.tgz    zookeeper-3.4.6.tar.gz
-		nginx-1.8.0.tar.gz
-     [root@rabbitmq-node2 programmer]# cd /usr/local/
-     [root@rabbitmq-node2 local]# cd mongodb/
-     [root@rabbitmq-node2 mongodb]# ls
-	      bin  GNU-AGPL-3.0  README  THIRD-PARTY-NOTICES
-     [root@rabbitmq-node2 mongodb]# mkdir conf
-     [root@rabbitmq-node2 mongodb]# cd conf/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  这里有三台虚拟机都是一样这样安装。我就省略其他的了。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;副本集群搭建
-     进入集群搭建，需要加一些配置：如下&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#master.conf
-#数据存放目录
-dbpath=/mongodb/data/master
-#日志存放目录
-logpath=/mongodb/logs/master.log
-#进程文件
-pidfilepath=/mongodb/master.pid
-#按照数据库名字建立目录存放数据
-directoryperdb=true
-#指定日志文件，该文件将保存所有的日志记录、诊断信息。除非另有指定，
-#mongod将所有的日志信息输出到标准输出。如果没有指定logappend，重启则日
-#志会进行覆盖操作
-logappend=true
-#副本集名字
-replSet=szss
-#绑定IP地址
-bind_ip=192.168.31.101
-#端口号
-port=27017
-#操作日志大小
-oplogSize=10000
-#是否后台运行 进程在后台运行的守护进程模式
-fork=true
-#预分配文件缩短启动时间
-noprealloc=true
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;注意如果之后关闭mongodb后重启报错，可能是你强行关闭造成锁表，或者因为你的磁盘不够大了。需要加上 nojournal = true 关闭操作日志。 但是 非常不建议这样做。因为它可以帮助你备份和故障修复，提高写入的速率。&lt;/p&gt;
-
-&lt;p&gt;其他的两个配置也是大差不差。就不一一贴代码了。&lt;/p&gt;
-
-&lt;p&gt;启动mongodb服务：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 bin]# ./mongod --fork --rest ../conf/master.config 
-
-2015-11-04T15:58:02.803-0500 I CONTROL  ** WARNING: --rest is specified without --httpinterface,
-
-2015-11-04T15:58:02.803-0500 I CONTROL  **          enabling http interface
-
-BadValue --fork has to be used with --logpath or --syslog
-
-try './mongod --help' for more information
-
-[root@rabbitmq-node1 bin]# ./mongod --rest -f  ../conf/master.config 
-
-2015-11-04T15:58:41.235-0500 I CONTROL  ** WARNING: --rest is specified without --httpinterface,
-
-2015-11-04T15:58:41.235-0500 I CONTROL  **          enabling http interface
-
-note: noprealloc may hurt performance in many applications
-
-about to fork child process, waiting until server is ready for connections.
-
-forked process: 2494
-
-child process started successfully, parent exiting
-[root@rabbitmq-node1 bin]# ps -ef | grep mongod
-root       2494      1  0 15:58 ?        00:00:00 ./mongod --rest -f ../conf/master.config
-root       2537   2382  0 16:01 pts/0    00:00:00 grep mongod
-[root@rabbitmq-node1 bin]# ./mongo 192.168.31.101:27017
-
-MongoDB shell version: 3.0.6
-
-connecting to: 192.168.31.101:27017/test
-
-Server has startup warnings: 
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] 
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] 
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] 
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
-
-2015-11-04T15:49:55.987-0500 I CONTROL  [initandlisten] 
-
-&amp;gt; use admin
-
-switched to db admin
-
-&amp;gt; db.shutdownServer();
-
-assert failed : unexpected error: Error: shutdownServer failed: shutdown must run from localhost when running db without auth
-
-Error: assert failed : unexpected error: Error: shutdownServer failed: shutdown must run from localhost when running db without auth
-
-    at Error (&amp;lt;anonymous&amp;gt;)
-
-    at doassert (src/mongo/shell/assert.js:11:14)
-
-    at assert (src/mongo/shell/assert.js:20:5)
-
-    at DB.shutdownServer (src/mongo/shell/db.js:212:9)
-
-    at (shell):1:4
-
-2015-11-04T15:54:48.911-0500 E QUERY    Error: assert failed : unexpected error: Error: shutdownServer failed: shutdown must run from localhost when running db without auth
-
-    at Error (&amp;lt;anonymous&amp;gt;)
-
-    at doassert (src/mongo/shell/assert.js:11:14)
-
-    at assert (src/mongo/shell/assert.js:20:5)
-
-    at DB.shutdownServer (src/mongo/shell/db.js:212:9)
-
-    at (shell):1:4 at src/mongo/shell/assert.js:13
-
-&amp;gt; ^C
-
-bye
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;–rest是开启webUI监考页面&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104223649490&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这里说 使用使用这种方式关闭服务 必须在有登录验证情况下远程ssh才拥有这个权限的，所以&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 bin]# ./mongod --shutdown --dbpath /mongodb/data/master/
-
-killing process with pid: 2434
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;使用客户端命令来关闭。&lt;/p&gt;
-
-&lt;p&gt;启动mongodb服务：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 bin]# ./mongo 127.0.0.1
-
-MongoDB shell version: 3.0.6
-
-connecting to: 127.0.0.1/test
-
-2015-11-04T16:01:53.200-0500 W NETWORK  Failed to connect to 127.0.0.1:27017, reason: errno:111 Connection refused
-
-2015-11-04T16:01:53.201-0500 E QUERY    Error: couldn't connect to server 127.0.0.1:27017 (127.0.0.1), connection attempt failed
-
-    at connect (src/mongo/shell/mongo.js:181:14)
-
-    at (connect):1:6 at src/mongo/shell/mongo.js:181
-
-exception: connect failed
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;可以看出是不识别localhost 127.0.0.1的&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 bin]# ./mongo 192.168.31.101
-MongoDB shell version: 3.0.6
-connecting to: 192.168.31.101/test
-Server has startup warnings: 
-2015-11-04T15:58:41.235-0500 I CONTROL  ** WARNING: --rest is specified without --httpinterface,
-2015-11-04T15:58:41.235-0500 I CONTROL  **          enabling http interface
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] 
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] 
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] 
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
-2015-11-04T15:58:41.304-0500 I CONTROL  [initandlisten] 
-&amp;gt; use admin
-switched to db admin
-&amp;gt; cfg={ &quot;_id&quot; : &quot;szss&quot;, &quot;members&quot; : [ {  &quot;_id&quot; : 0,  &quot;host&quot; : &quot;192.168.31.101:27017&quot;  }  ]  }
-{
-    &quot;_id&quot;: &quot;szss&quot;,
-    &quot;members&quot;: [
-        {
-            &quot;_id&quot;: 0,
-            &quot;host&quot;: &quot;192.168.31.101:27017&quot;
-        }
-    ]
-}
-&amp;gt; rs.initiate(cfg)
-{ &quot;ok&quot; : 1 }
-szss:OTHER&amp;gt; rs.add(&quot;192.168.31.154:27017&quot;)
-{ &quot;ok&quot; : 1 }
-szss:PRIMARY&amp;gt; rs.add(&quot;192.168.31.159:27017&quot;)
-{ &quot;ok&quot; : 1 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;加入集群配置 并初始化 并且加上其他虚机的服务 这里也可以一步到位。 我也比较推荐这种方式。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_id:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;szss&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;members&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_id:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;0,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;host:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'192.168.31.101:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;27017',&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;priority:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_id:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;1,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;host:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'192.168.31.154:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;27017',&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;priority:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_id:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;2,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;host:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'192.168.31.159:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;27017',&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;arbiterOnly:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;这种方式是 主节点，备节点，仲裁节点的副本集集群，但是在实际中，仲裁节点比较鸡肋，他要占用一个服务，但是只是为了投票而已，只要将备节点的个数控制在奇数就足够了。
-回到现在的这种副本集集群搭建的方式，现在要赋予节点权重。权重是选举中优先级最高的。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;szss:PRIMARY&amp;gt; rs.conf()
-{
-    &quot;_id&quot;: &quot;szss&quot;,
-    &quot;version&quot;: 3,
-    &quot;members&quot;: [
-        {
-            &quot;_id&quot;: 0,
-            &quot;host&quot;: &quot;192.168.31.101:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {
-                
-            },
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        },
-        {
-            &quot;_id&quot;: 1,
-            &quot;host&quot;: &quot;192.168.31.154:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {
-                
-            },
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        },
-        {
-            &quot;_id&quot;: 2,
-            &quot;host&quot;: &quot;192.168.31.159:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {
-                
-            },
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        }
-    ],
-    &quot;settings&quot;: {
-        &quot;chainingAllowed&quot;: true,
-        &quot;heartbeatTimeoutSecs&quot;: 10,
-        &quot;getLastErrorModes&quot;: {
-            
-        },
-        &quot;getLastErrorDefaults&quot;: {
-            &quot;w&quot;: 1,
-            &quot;wtimeout&quot;: 0
-        }
-    }
-}
-szss:PRIMARY&amp;gt; cfgs=rs.conf()
-{
-    &quot;_id&quot;: &quot;szss&quot;,
-    &quot;version&quot;: 3,
-    &quot;members&quot;: [
-        {
-            &quot;_id&quot;: 0,
-            &quot;host&quot;: &quot;192.168.31.101:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {},
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        },
-        {
-            &quot;_id&quot;: 1,
-            &quot;host&quot;: &quot;192.168.31.154:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {},
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        },
-        {
-            &quot;_id&quot;: 2,
-            &quot;host&quot;: &quot;192.168.31.159:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {},
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        }
-    ],
-    &quot;settings&quot;: {
-        &quot;chainingAllowed&quot;: true,
-        &quot;heartbeatTimeoutSecs&quot;: 10,
-        &quot;getLastErrorModes&quot;: {},
-        &quot;getLastErrorDefaults&quot;: {
-            &quot;w&quot;: 1,
-            &quot;wtimeout&quot;: 0
-        }
-    }
-}
-#赋予权重
-szss:PRIMARY&amp;gt; cfgs.members[0].priority=2
-2
-szss:PRIMARY&amp;gt; rs.conf()
-{
-    &quot;_id&quot;: &quot;szss&quot;,
-    &quot;version&quot;: 3,
-    &quot;members&quot;: [
-        {
-            &quot;_id&quot;: 0,
-            &quot;host&quot;: &quot;192.168.31.101:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {},
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        },
-        {
-            &quot;_id&quot;: 1,
-            &quot;host&quot;: &quot;192.168.31.154:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {},
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        },
-        {
-            &quot;_id&quot;: 2,
-            &quot;host&quot;: &quot;192.168.31.159:27017&quot;,
-            &quot;arbiterOnly&quot;: false,
-            &quot;buildIndexes&quot;: true,
-            &quot;hidden&quot;: false,
-            &quot;priority&quot;: 1,
-            &quot;tags&quot;: {},
-            &quot;slaveDelay&quot;: 0,
-            &quot;votes&quot;: 1
-        }
-    ],
-    &quot;settings&quot;: {
-        &quot;chainingAllowed&quot;: true,
-        &quot;heartbeatTimeoutSecs&quot;: 10,
-        &quot;getLastErrorModes&quot;: {},
-        &quot;getLastErrorDefaults&quot;: {
-            &quot;w&quot;: 1,
-            &quot;wtimeout&quot;: 0
-        }
-    }
-}
-#重新读取 初始化
-szss:PRIMARY&amp;gt; rs.reconfig(cfgs)
-{ &quot;ok&quot; : 1 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;进入到浏览器 输入  192.168.31.101:28017 如果是27017将访问不了，需要将启动端口号加上1000
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104230038762&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;测试
-测试一下集群是否可用：
-关掉主节点，模拟主节点宕机的情景&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 bin]# ps -ef | grep mongod
-root       2494      1  0 15:58 ?        00:00:17 ./mongod --rest -f ../conf/master.config
-root       3344   2382  0 16:30 pts/0    00:00:00 grep mongod
-[root@rabbitmq-node1 bin]# kill -9 2494
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;看一下备节点的状态：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151104230609134&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这里可以看到备节点已经变为主节点。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;szss:PRIMARY&amp;gt; 
-for(var i=0;i&amp;lt;10000;i++)db.test.insert(
- {
-    &quot;name&quot;: &quot;lxc&quot;+i,
-    &quot;age&quot;: 22,
-    &quot;sex&quot;: &quot;man&quot;
- }
-)
-WriteResult({ &quot;nInserted&quot; : 1 })
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;在主节点插入1w条数据。再看看备节点。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;szss:SECONDARY&amp;gt; use admin
-switched to db admin
-szss:SECONDARY&amp;gt; use test
-switched to db test
-szss:SECONDARY&amp;gt; db.getMongo().setSlaveOk()
-szss:SECONDARY&amp;gt; db.test.count()
-10000
-szss:SECONDARY&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;szss:SECONDARY&amp;gt; use test
-switched to db test
-szss:SECONDARY&amp;gt; db.getMongo().setSlaveOk()
-szss:SECONDARY&amp;gt; db.test.count()
-10000
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;均已经同步过来了。&lt;/p&gt;
-
-&lt;p&gt;到这里就基本完成搭建了。mongodb的中文社区也很不错。而且它的官方文档写的也很不错。一起学习吧~&lt;/p&gt;
-
-&lt;p&gt;借鉴大神的文章：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/zhanjindong/category/507349.html&quot;&gt;http://www.cnblogs.com/zhanjindong/category/507349.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.mongoing.com&quot;&gt;http://www.mongoing.com&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/luonanqin/article/details/8497860&quot;&gt;http://blog.csdn.net/luonanqin/article/details/8497860&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 04 Nov 2015 23:15:03 +0800</pubDate>
-        <link>http://localhost:4000/2015/11/MongoDB%E5%89%AF%E6%9C%AC%E9%9B%86%E6%90%AD%E5%BB%BA%E5%92%8C%E6%B5%8B%E8%AF%95/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/11/MongoDB%E5%89%AF%E6%9C%AC%E9%9B%86%E6%90%AD%E5%BB%BA%E5%92%8C%E6%B5%8B%E8%AF%95/</guid>
-        
-        <category>MongoDB</category>
         
         
         <category>jekyll</category>
