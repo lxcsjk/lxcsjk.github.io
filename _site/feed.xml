@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 03 Dec 2016 23:25:10 +0800</pubDate>
-    <lastBuildDate>Sat, 03 Dec 2016 23:25:10 +0800</lastBuildDate>
+    <pubDate>Sun, 04 Dec 2016 20:43:35 +0800</pubDate>
+    <lastBuildDate>Sun, 04 Dec 2016 20:43:35 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -117,9 +117,41 @@
 
 &lt;p&gt;创建名称为 &lt;code class=&quot;highlighter-rouge&quot;&gt;t_down_course&lt;/code&gt; 的表&lt;/p&gt;
 
+&lt;h5 id=&quot;section-5&quot;&gt;对表的属性怎删改&lt;/h5&gt;
+
+&lt;p&gt;语法:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BOOL result = [db executeUpdate:sql]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;如需在表中添加列，请使用下列语法:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+ ALTER TABLE table_name ADD column_name datatype
+&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;要删除表中的列，请使用下列语法:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+ ALTER TABLE table_name DROP COLUMN column_name
+&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;更新表中列的属性，请使用下列语法:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+ ALTER TABLE table_name MODIFY COLUMN column_name datatype
+&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;插入数据&lt;/h3&gt;
+&lt;h3 id=&quot;section-6&quot;&gt;插入数据&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)addData{
     FMDatabase *db = [FMDatabase databaseWithPath:fileName];
@@ -172,7 +204,7 @@
 
 &lt;p&gt;&lt;strong&gt;支持占位符，后添加再数据&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;section-6&quot;&gt;插入也支持以字典的方式&lt;/h5&gt;
+&lt;h5 id=&quot;section-7&quot;&gt;插入也支持以字典的方式&lt;/h5&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NSDictionary *arguments = @{@&quot;identifier&quot;: @(identifier), @&quot;name&quot;: name, @&quot;date&quot;: date, @&quot;comment&quot;: comment ?: [NSNull null]};
 BOOL success = [db executeUpdate:@&quot;INSERT INTO authors (identifier, name, date, comment) VALUES (:identifier, :name, :date, :comment)&quot; withParameterDictionary:arguments];
@@ -182,7 +214,7 @@ if (!success) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h5 id=&quot;section-7&quot;&gt;支持对事务的控制&lt;/h5&gt;
+&lt;h5 id=&quot;section-8&quot;&gt;支持对事务的控制&lt;/h5&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[db open]
 
 [db beginDeferredTransaction];//开启事务
@@ -200,7 +232,7 @@ if(result){
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-8&quot;&gt;查询数据&lt;/h3&gt;
+&lt;h3 id=&quot;section-9&quot;&gt;查询数据&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)selectData{
     FMDatabase *db = [FMDatabase databaseWithPath:fileName];
@@ -273,7 +305,7 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-9&quot;&gt;更新数据&lt;/h3&gt;
+&lt;h3 id=&quot;section-10&quot;&gt;更新数据&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)updateData{
     FMDatabase *db = [FMDatabase databaseWithPath:fileName];
@@ -297,7 +329,7 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-10&quot;&gt;删除数据&lt;/h3&gt;
+&lt;h3 id=&quot;section-11&quot;&gt;删除数据&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)deleteData{
     FMDatabase *db = [FMDatabase databaseWithPath:fileName];
@@ -321,7 +353,7 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-11&quot;&gt;删除表&lt;/h3&gt;
+&lt;h3 id=&quot;section-12&quot;&gt;删除表&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-(void)dropTable{
     FMDatabase *db = [FMDatabase databaseWithPath:fileName];
@@ -346,13 +378,13 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-12&quot;&gt;多线程操作&lt;/h3&gt;
+&lt;h3 id=&quot;section-13&quot;&gt;多线程操作&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;如果应用中使用了多线程操作数据库，那么就需要使用FMDatabaseQueue来保证线程安全了。 应用中不可在多个线程中共同使用一个FMDatabase对象操作数据库，这样会引起数据库数据混乱。 为了多线程操作数据库安全，FMDB使用了FMDatabaseQueue，使用FMDatabaseQueue很简单，首先用一个数据库文件地址来初使化FMDatabaseQueue，然后就可以将一个闭包(block)传入inDatabase方法中。 在闭包中操作数据库，而不直接参与FMDatabase的管理。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h5 id=&quot;section-13&quot;&gt;创建单例&lt;/h5&gt;
+&lt;h5 id=&quot;section-14&quot;&gt;创建单例&lt;/h5&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//
 //  XCDatabaseHelper.h
@@ -420,7 +452,7 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h5 id=&quot;section-14&quot;&gt;调用&lt;/h5&gt;
+&lt;h5 id=&quot;section-15&quot;&gt;调用&lt;/h5&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        [[XCDatabaseHelper sharedInstance] inDatabase:^(FMDatabase *db) {
             BOOL result = [db executeUpdate:@&quot;update t_down_course set downloadStatus = '1' where courseId = ?&quot;,_course.ids];
             if (result){
@@ -432,7 +464,7 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
 
 &lt;p&gt;这里就不需要 &lt;code class=&quot;highlighter-rouge&quot;&gt;close&lt;/code&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;section-15&quot;&gt;注意&lt;/h5&gt;
+&lt;h5 id=&quot;section-16&quot;&gt;注意&lt;/h5&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;FMDatabaseQueue虽然看似一个队列，实际上它本身并不是，它通过内部创建一个Serial的dispatch_queue_t来处理通过inDatabase和inTransaction传入的Blocks，所以当我们在主线程（或者后台）调用inDatabase或者inTransaction时，代码实际上是同步的。FMDatabaseQueue这么设计的目的是让我们避免发生并发访问数据库的问题，因为对数据库的访问可能是随机的（在任何时候）、不同线程间（不同的网络回调等）的请求。内置一个Serial队列后，FMDatabaseQueue就变成线程安全了，所有的数据库访问都是同步执行，而且这比使用@synchronized或NSLock要高效得多。&lt;/p&gt;
