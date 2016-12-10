@@ -5,15 +5,304 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Dec 2016 20:43:35 +0800</pubDate>
-    <lastBuildDate>Sun, 04 Dec 2016 20:43:35 +0800</lastBuildDate>
+    <pubDate>Sat, 10 Dec 2016 10:59:06 +0800</pubDate>
+    <lastBuildDate>Sat, 10 Dec 2016 10:59:06 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>录音文件lame转换MP3相关配置</title>
+        <description>&lt;p&gt;文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;业务需求是录制音频然后上传到七牛并且Android可以读。&lt;/p&gt;
+
+&lt;p&gt;与安卓沟通了一下统一了mp3格式，大小质量都不错。由于&lt;code class=&quot;highlighter-rouge&quot;&gt;AVAudioRecorder&lt;/code&gt;录音的格式为.caf或者.wav而且很大需要进行转换压缩为MP3格式。这里需要用到三方库 &lt;code class=&quot;highlighter-rouge&quot;&gt;lame&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;使用lame转换后音频的质量和&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; _recorder = [[AVAudioRecorder alloc] initWithURL:_recordFilePath settings:setting error:NULL];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;里的 &lt;strong&gt;&lt;em&gt;setting&lt;/em&gt;&lt;/strong&gt; 息息相关。 所以整理了两个配置。&lt;/p&gt;
+
+&lt;p&gt;我把这两种的配置写在了工具类所以直接贴代码了~要用的话直接CV大法就可以。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/lame.zip&quot;&gt;lame三方库的资源&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;获取转换文件所在文件夹&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getRecPathUrl{
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *recordDir = [str stringByAppendingPathComponent:@&quot;RecordCourse&quot;];
+    
+    return recordDir;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;获取时间戳用于文件的命名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getTimestamp{
+    NSDate *nowDate = [NSDate date];
+    double timestamp = (double)[nowDate timeIntervalSince1970]*1000;
+    long nowTimestamp = [[NSNumber numberWithDouble:timestamp] longValue];
+    NSString *timestampStr = [NSString stringWithFormat:@&quot;%ld&quot;,nowTimestamp];
+    return timestampStr;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PCM转换MP3配置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithPCM {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    //设置录音格式
+    [dic setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
+    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
+    [dic setObject:@(44100.0) forKey:AVSampleRateKey];
+    //设置通道,这里采用双声道
+    [dic setObject:@(1) forKey:AVNumberOfChannelsKey];
+    //每个采样点位数,分为8、16、24、32
+    [dic setObject:@(16) forKey:AVLinearPCMBitDepthKey];
+    //是否使用浮点数采样
+    [dic setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
+    //....其他设置等
+    return dic;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CAF转换MP3配置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithCAF {
+    NSDictionary *setting = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithInt:AVAudioQualityMin],
+                             AVEncoderAudioQualityKey,
+                             [NSNumber numberWithInt:16],
+                             AVEncoderBitRateKey,
+                             [NSNumber numberWithInt:2],
+                             AVNumberOfChannelsKey,
+                             [NSNumber numberWithFloat:44100.0],
+                             AVSampleRateKey,
+                             nil];
+
+    return setting;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PCM转换MP3的lame方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioPCMtoMP3:(NSString *)wavPath {
+    NSString *cafFilePath = wavPath;
+    
+    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if([fileManager removeItemAtPath:mp3FilePath error:nil]){
+        NSLog(@&quot;删除原MP3文件&quot;);
+    }
+    @try {
+        int read, write;
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_in_samplerate(lame, 22050.0);
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@&quot;%@&quot;,[exception description]);
+    }
+    @finally {
+        return mp3FilePath;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CAF转换MP3的lame方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioCAFtoMP3:(NSString *)wavPath {
+    
+    NSString *cafFilePath = wavPath;
+    
+    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
+    
+    @try {
+        int read, write;
+        
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
+        
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_num_channels(lame,1);//设置1为单通道，默认为2双通道
+        lame_set_in_samplerate(lame, 44100.0);
+        lame_set_VBR(lame, vbr_default);
+        
+        lame_set_brate(lame,8);
+        
+        lame_set_mode(lame,3);
+        
+        lame_set_quality(lame,2);
+        
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@&quot;%@&quot;,[exception description]);
+    }
+    @finally {
+        return mp3FilePath;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;两种质量大小不错都可以使用😁😁&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Dec 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</guid>
+        
+        <category>iOS||lame||mp3</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Mac更新10.12后关机很慢的问题</title>
+        <description>&lt;p&gt;之前电脑升级了MacOS Sierra，然后关机都特别慢，起码要20分钟。问了周围朋友有的出现有的没有。今天才知道是因为本地MySQL服务的问题。So那就重新装一个吧。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;macmysql-&quot;&gt;下载最新mac版本的mysql 地址&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://dev.mysql.com/downloads/file/?id=466265&quot;&gt;mysql-5.7.16-osx10.11-x86_64.dmg&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;mysql&quot;&gt;卸载MySQL&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo rm /usr/local/mysql
+sudo rm -rf /usr/local/mysql*
+sudo rm -rf /Library/StartupItems/MySQLCOM
+sudo rm -rf /Library/PreferencePanes/My*
+vim /etc/hostconfig  (and removed the line MYSQLCOM=-YES-)
+rm -rf ~/Library/PreferencePanes/My*
+sudo rm -rf /Library/Receipts/mysql*
+sudo rm -rf /Library/Receipts/MySQL*
+sudo rm -rf /var/db/receipts/com.mysql.*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这么多rm -rf 不敢写个脚本直接跑。。。 😂😂😂 虽然机器比我靠谱&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;mysql-1&quot;&gt;安装MySQL&lt;/h3&gt;
+
+&lt;p&gt;直接安装dmg文件就OK了。&lt;/p&gt;
+
+&lt;p&gt;会出一个提示，root的密码。这之后需要改一下。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2016-12-03T05:27:15.648601Z 1 [Note] A temporary password is generated for root@localhost: 
+pju%C!a?t4ek
+If you lose this password, please consult the section How to Reset the Root Password in the MySQL reference manual.
+You must reset your password using ALTER USER statement before executing this statement.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;电脑上有 &lt;code class=&quot;highlighter-rouge&quot;&gt;MySQL Workbench&lt;/code&gt; 所以就直接改了 没用命令行了。&lt;/p&gt;
+
+&lt;p&gt;最后Navicat连上了 就OK了。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;记得卸载之前保存一下sql脚本来恢复数据&lt;/strong&gt; 😂😂😂&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 05 Dec 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/Mac%E6%9B%B4%E6%96%B010.12%E5%90%8E%E5%85%B3%E6%9C%BA%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/Mac%E6%9B%B4%E6%96%B010.12%E5%90%8E%E5%85%B3%E6%9C%BA%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+        
+        <category>Mac</category>
+        
+        <category>MySQL</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>FMDB 整理总结</title>
         <description>&lt;p&gt;这几天在写文件下载，断点续传，需要用到FMDB进行数据的管理，等写完也总结一下。&lt;/p&gt;
 
-&lt;p&gt;其实也是这两天才学习 &lt;code class=&quot;highlighter-rouge&quot;&gt;FMDB&lt;/code&gt;，google了一下资料有很多，就去 github 上面先 &lt;a href=&quot;https://github.com/ccgus/fmdb&quot;&gt;Star&lt;/a&gt; 一下&lt;code class=&quot;highlighter-rouge&quot;&gt;FMDB&lt;/code&gt;，发现他&lt;code class=&quot;highlighter-rouge&quot;&gt;README.markdown&lt;/code&gt;写的很详细。然后也看了唐巧大牛的&lt;a href=&quot;http://blog.devtang.com/2012/04/22/use-fmdb/&quot;&gt;技术博客&lt;/a&gt;，然后写了&lt;a href=&quot;https://github.com/lxcsjk/FMDBDemo&quot;&gt;FMDBDemo&lt;/a&gt;玩玩。&lt;/p&gt;
+&lt;p&gt;其实也是这两天才学习 &lt;code class=&quot;highlighter-rouge&quot;&gt;FMDB&lt;/code&gt;，google了一下资料有很多，就去 github 上面先 &lt;a href=&quot;https://github.com/ccgus/fmdb&quot;&gt;Star&lt;/a&gt; 一下&lt;code class=&quot;highlighter-rouge&quot;&gt;FMDB&lt;/code&gt;，发现他&lt;code class=&quot;highlighter-rouge&quot;&gt;README.markdown&lt;/code&gt;写的很详细。然后也看了唐巧大牛的&lt;a href=&quot;http://blog.devtang.com/2012/04/22/use-fmdb/&quot;&gt;技术博客&lt;/a&gt;，写了&lt;a href=&quot;https://github.com/lxcsjk/FMDBDemo&quot;&gt;FMDBDemo&lt;/a&gt;玩玩。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1800,884 +2089,6 @@ vim solrconfig.xml
         <category>集群</category>
         
         <category>分片</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Tomcat和Solr的整合</title>
-        <description>&lt;p&gt;这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。
-Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。&lt;/p&gt;
-
-&lt;p&gt;1 .  搭建环境&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; MacBook pro 15款840 
- OS X 10.10.5
- solr-5.2.1.tgz
- apache-tomcat-8.0.26
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;2 . 解压压缩包&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    tar -zxf  solr-5.2.1.tgz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;3 . 移动war包
-     &lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111053404840&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;将这个war包，移动到 tomcat的webapps，然后启动或者解压war。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111053535622&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;启动命令： 进入tomcat的bin下&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      ./startup.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;4 .拷贝依赖需要的jar包&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;复制solr-5.2.1/dist/ solr-dataimporthandler-5.2.1.jar ，solr-dataimporthandler-extras-5.2.1.jar，solr-cell-5.2.1.jar，到tomcat中的solr/WEB-INF/lib下，将数据库驱动也需要放入这里。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;复制solr-5.2.1\server\lib\ext下的jar包到solr/WEB-INF/lib下。这是打印日志所需要的jar包，然后在solr/WEB-INF 下新建classes文件夹 ，将solr-5.2.1/example/resources/log4j.properties 复制到 /usr/local/tomcat/webapps/solr/WEB-INF/classes/&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;这里使用smartcn作为中文分词组件，将solr-5.2.1/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-5.2.1.jar复制到tomcat/solr/WEB-INF/lib下&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;5 .创建Solr_Home&lt;/p&gt;
-
-&lt;p&gt;创建新的文件夹，solr_home，将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。&lt;/p&gt;
-
-&lt;p&gt;6 .SOLR_HOME配置
-将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。
-配置修改tomcat/webapps/solr/WEB-INF/web.xml
-释放对这句话的注释。并且修改tomcat的server.xml&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &amp;lt;env-entry&amp;gt;
-       &amp;lt;env-entry-name&amp;gt;solr/home&amp;lt;/env-entry-name&amp;gt;
-       &amp;lt;env-entry-value&amp;gt;/Users/lxc/JavaSofe/solr_home&amp;lt;/env-entry-value&amp;gt;
-       &amp;lt;env-entry-type&amp;gt;java.lang.String&amp;lt;/env-entry-type&amp;gt;
-    &amp;lt;/env-entry&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &amp;lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;
-               connectionTimeout=&quot;20000&quot;
-               redirectPort=&quot;8443&quot; 
-               URLEncoding=&quot;UTF-8&quot;/&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;7 .配置core目录
-    在solr_home下创建一个文件夹szss，并且复制solr-5.2.1/service/solr/configsets/basic_configs/conf  到   solr_home/szss下。&lt;/p&gt;
-
-&lt;p&gt;修改solrconfig.xml
-修改solr_home/test/conf/solrconfig.xml&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;requestHandler name=&quot;/dataimport&quot; class=&quot;org.apache.solr.handler.dataimport.DataImportHandler&quot;&amp;gt;
-     &amp;lt;lst name=&quot;defaults&quot;&amp;gt;
-          &amp;lt;str name=&quot;config&quot;&amp;gt;data-config.xml&amp;lt;/str&amp;gt;
-     &amp;lt;/lst&amp;gt;
-&amp;lt;/requestHandler&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;新建一个data-config.xml文件&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;dataConfig&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dataSource&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JdbcDataSource&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;driver=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;url=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbc:sqlserver://127.0.0.1:6372;databaseName=cs_szssapp&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sa&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;szss&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;document&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;entity&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr_test&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transformer=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DateFormatTransformer&quot;&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;query=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;select id,product_full_name,product_short_name,product_content,specification,taste_type,date_created,last_updated from product_b&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'date_created'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dateTimeFormat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yyyy-MM-dd HH:mm:ss'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'last_updated'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dateTimeFormat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yyyy-MM-dd HH:mm:ss'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/entity&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/document&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dataConfig&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;8 .编辑schema.xml&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&lt;/span&gt;
-//这个name要和你新建的solr_home文件下得那个文件名相同
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;schema&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.5&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_version_&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_root_&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt; 
-   
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_i&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_is&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_s&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_ss&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_l&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_ls&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_t&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_general&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_txt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_general&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_en&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_en&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_b&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boolean&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_bs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boolean&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_f&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_fs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_d&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;double&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_ds&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;double&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Type used to index the lat and lon components for the &quot;location&quot; FieldType --&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_coordinate&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tdouble&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_dt&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_dts&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_p&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;location&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- some trie-coded dynamic fields for faster range queries --&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_ti&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tint&quot;&lt;/span&gt;    &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_tl&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tlong&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_tf&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tfloat&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_td&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tdouble&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_tdt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tdate&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*_c&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;currency&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ignored_*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ignored&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;attr_*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_general&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dynamicField&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;random_*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;random&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-   &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- uncomment the following to ignore any fields that don't already match an existing 
-        field name or dynamic field, rather than reporting them as an error. 
-        alternately, change the type=&quot;ignored&quot; to some other type e.g. &quot;text&quot; if you want 
-        unknown fields indexed and/or stored by default --&amp;gt;&lt;/span&gt; 
-   &lt;span class=&quot;c&quot;&gt;&amp;lt;!--dynamicField name=&quot;*&quot; type=&quot;ignored&quot; multiValued=&quot;true&quot; /--&amp;gt;&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Field to use to determine and enforce document uniqueness. 
-      Unless this field is marked with required=&quot;false&quot;, it will be a required field
-   --&amp;gt;&lt;/span&gt;
- &lt;span class=&quot;nt&quot;&gt;&amp;lt;uniqueKey&amp;gt;&lt;/span&gt;id&lt;span class=&quot;nt&quot;&gt;&amp;lt;/uniqueKey&amp;gt;&lt;/span&gt;
- 
- &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_cn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
- &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StrField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sortMissingLast=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- boolean type: &quot;true&quot; or &quot;false&quot; --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boolean&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.BoolField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sortMissingLast=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;int&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieIntField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieFloatField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieLongField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;double&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieDoubleField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tint&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieIntField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tfloat&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieFloatField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tlong&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieLongField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tdouble&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieDoubleField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieDateField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- A Trie based date field for faster date range queries and date faceting. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tdate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieDateField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;6&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!--Binary data type. The data should be sent/retrieved in as Base64 encoded Strings --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;binary&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.BinaryField&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;random&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.RandomSortField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- A text field that only splits on whitespace for exact matching of words --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_ws&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WhitespaceTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_general&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StandardTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stopwords.txt&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StandardTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stopwords.txt&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.SynonymFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;synonyms=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;synonyms.txt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expand=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_en&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StandardTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lang/stopwords_en.txt&quot;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.EnglishPossessiveFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordMarkerFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protected=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;protwords.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.PorterStemFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StandardTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.SynonymFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;synonyms=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;synonyms.txt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expand=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lang/stopwords_en.txt&quot;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.EnglishPossessiveFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordMarkerFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protected=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;protwords.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
-        &amp;lt;filter class=&quot;solr.EnglishMinimalStemFilterFactory&quot;/&amp;gt;
-	--&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.PorterStemFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_en_splitting&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autoGeneratePhraseQueries=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WhitespaceTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lang/stopwords_en.txt&quot;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WordDelimiterFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;generateWordParts=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;generateNumberParts=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateWords=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateNumbers=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateAll=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;splitOnCaseChange=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordMarkerFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protected=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;protwords.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.PorterStemFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WhitespaceTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.SynonymFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;synonyms=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;synonyms.txt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expand=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lang/stopwords_en.txt&quot;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WordDelimiterFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;generateWordParts=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;generateNumberParts=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateWords=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateNumbers=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateAll=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;splitOnCaseChange=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordMarkerFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protected=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;protwords.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.PorterStemFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Less flexible matching, but less false matches.  Probably not ideal for product names,
-         but may be good for SKUs.  Can insert dashes in the wrong place and still match. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_en_splitting_tight&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autoGeneratePhraseQueries=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WhitespaceTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.SynonymFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;synonyms=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;synonyms.txt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expand=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lang/stopwords_en.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.WordDelimiterFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;generateWordParts=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;generateNumberParts=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateWords=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateNumbers=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;catenateAll=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordMarkerFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protected=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;protwords.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.EnglishMinimalStemFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- this filter can remove any duplicate tokens that appear at the same position - sometimes
-             possible with WordDelimiterFilter in conjuncton with stemming. --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.RemoveDuplicatesTokenFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Just like text_general except it reverses the characters of
-	 each token, to enable more efficient leading wildcard queries. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_general_rev&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StandardTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stopwords.txt&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.ReversedWildcardFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;withOriginal=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-           &lt;span class=&quot;na&quot;&gt;maxPosAsterisk=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxPosQuestion=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxFractionAsterisk=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.33&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;query&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StandardTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.SynonymFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;synonyms=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;synonyms.txt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expand=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StopFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignoreCase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;words=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stopwords.txt&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- This is an example of using the KeywordTokenizer along
-         With various TokenFilterFactories to produce a sortable field
-         that does not include some properties of the source text
-      --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;alphaOnlySort&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sortMissingLast=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;omitNorms=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- KeywordTokenizer does no actual tokenizing, so the entire
-             input string is preserved as a single token
-          --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The LowerCase TokenFilter does what you expect, which can be
-             when you want your sorting to be case insensitive
-          --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The TrimFilter removes any leading or trailing whitespace --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrimFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.PatternReplaceFilterFactory&quot;&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;([^a-z])&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;replacement=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;replace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;all&quot;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- lowercases the entire field value, keeping it as a single token.  --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lowercase&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TextField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;positionIncrementGap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;analyzer&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;tokenizer&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.KeywordTokenizerFactory&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LowerCaseFilterFactory&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/analyzer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/fieldType&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- since fields of this type are by default not stored or indexed,
-         any data added to them will be ignored outright.  --&amp;gt;&lt;/span&gt; 
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ignored&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;multiValued=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.StrField&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;point&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.PointType&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dimension=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;subFieldSuffix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_d&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- A specialized field for geospatial search. If indexed, this fieldType must not be multivalued. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;location&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.LatLonType&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;subFieldSuffix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_coordinate&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;location_rpt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.SpatialRecursivePrefixTreeFieldType&quot;&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;geo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;distErrPct=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.025&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxDistErr=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.001&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;distanceUnits=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kilometers&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Spatial rectangle (bounding box) field. It supports most spatial predicates, and has
-     special relevancy modes: score=overlapRatio|area|area2D (local-param to the query).  DocValues is recommended for
-     relevancy. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bbox&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.BBoxField&quot;&lt;/span&gt;
-               &lt;span class=&quot;na&quot;&gt;geo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;distanceUnits=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kilometers&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;numberType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_bbox_coord&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_bbox_coord&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.TrieDoubleField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;docValues=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;fieldType&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;currency&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr.CurrencyField&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;precisionStep=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;defaultCurrency=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;USD&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;currencyConfig=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;currency.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    
-    **&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- general --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;product_full_name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_cn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;product_short_name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_cn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;product_content&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_cn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;specification&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_cn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;taste_type&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_cn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date_created&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;last_updated&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;indexed=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;stored=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;defaultSearchField&amp;gt;&lt;/span&gt;product_full_name&lt;span class=&quot;nt&quot;&gt;&amp;lt;/defaultSearchField&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;solrQueryParser&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;defaultOperator=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OR&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/schema&amp;gt;&lt;/span&gt;**
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;主要加了查询的参数类型什么的。&lt;/p&gt;
-
-&lt;p&gt;9 .打开浏览器localhost:8080/solr
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111060058755&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后点击
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060516777&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这个名字不能取成其他的 需要和你在solr_home下新建文件夹名相同。
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060707483&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060818274&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;因为我之前新建过所以是test1&lt;/p&gt;
-
-&lt;p&gt;点击DataImport 引入数据 生成索引，
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111060957295&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111061155512&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;查询一个 试试 
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com//20151111061436373&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;完毕。 肚子疼。等会回去休息了。  下午还是要回来。 双十一电商工作人员真是累成狗了。&lt;/p&gt;
-</description>
-        <pubDate>Wed, 11 Nov 2015 06:15:03 +0800</pubDate>
-        <link>http://localhost:4000/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/</guid>
-        
-        <category>Tomcat</category>
-        
-        <category>Solr</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>zookeeper集群搭建</title>
-        <description>&lt;p&gt;今天是双十一，这个写的比较水。没啥实在东西。在工厂里面。没办法 虽然是java组的，临时支援到其他组，帮助解决一些问题。 现在很困，但是随便写点东西。打发打发时间吧。好困呐。怎么写代码到4点无所谓。。
-双十一，你们买的爽，但是我们累到炸了。
-扯了好多犊子 = = 开始。&lt;/p&gt;
-
-&lt;p&gt;zookeeper其实对于服务器集群确实是一个不错的中间件，可以将各种中间件相互链接起来。有点类似nginx对http请求的负载均衡。它将一个服务的状态保存在各个单机中，当某一个单机状态发生了改变了，它会通知所有的单机发生的变化。也就是watch机制。并且无论访问其他哪一个单机，状态都是一样的。
-而最近遇到一个乐观锁的例子，解决同一个定时器的主备问题。类似抢位子。这个之后我会贴出代码。&lt;/p&gt;
-
-&lt;p&gt;zookeeper中的角色， 有三种，借用其他的博客的一个图片&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151111033156766&quot; alt=&quot;这里写图片描述&quot; /&gt;
- 原文地址&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://cailin.iteye.com/blog/2014486/&quot;&gt;http://cailin.iteye.com/blog/2014486/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;1 .  搭建环境&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MacBook pro 15款840 
-VMWare Fusion8 
-Centos 6.7 
-zookeeper-3.4.6.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;开始贴代码了。&lt;/p&gt;
-
-&lt;p&gt;node1:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sjk@192.148.1.104's password: 
-
-Last login: Mon Nov  9 16:46:49 2015 from 192.148.1.102
-
-[sjk@rabbitmq-node1 ~]$ sudo -i
-
-[sudo] password for sjk: 
-
-[root@rabbitmq-node1 ~]# cd /usr/local/
-
-[root@rabbitmq-node1 local]# ls
-
-bin  games    jdk1.7.0_80  lib64    mongodb  share  tomcat
-
-etc  include  lib          libexec  sbin     src    zookeeper
-
-[root@rabbitmq-node1 local]# cd zookeeper/
-
-[root@rabbitmq-node1 zookeeper]# ls
-
-bin          dist-maven       LICENSE.txt           src
-
-build.xml    docs             NOTICE.txt            zookeeper-3.4.6.jar
-
-CHANGES.txt  ivysettings.xml  README_packaging.txt  zookeeper-3.4.6.jar.asc
-
-conf         ivy.xml          README.txt            zookeeper-3.4.6.jar.md5
-
-contrib      lib              recipes               zookeeper-3.4.6.jar.sha1
-
-[root@rabbitmq-node1 zookeeper]# cd conf/
-
-[root@rabbitmq-node1 conf]# ls
-
-configuration.xsl  log4j.properties  zoo.cfg  zoo_sample.cfg
-
-[root@rabbitmq-node1 conf]# vim zoo.cfg 
-
-[root@rabbitmq-node1 conf]# cat zoo.cfg 
-
-# The number of milliseconds of each tick
-
-tickTime=2000
-
-# The number of ticks that the initial 
-
-# synchronization phase can take
-
-initLimit=10
-
-# The number of ticks that can pass between 
-
-# sending a request and getting an acknowledgement
-
-syncLimit=5
-
-# the directory where the snapshot is stored.
-
-# do not use /tmp for storage, /tmp here is just 
-
-# example sakes.
-
-dataDir=/zookeeper/data
-
-# the port at which the clients will connect
-
-clientPort=2181
-
-# the maximum number of client connections.
-
-# increase this if you need to handle more clients
-
-#maxClientCnxns=60
-
-dataLogDir=/zookeeper/log
-
-# Be sure to read the maintenance section of the 
-
-# administrator guide before turning on autopurge.
-
-server.1=192.148.1.104:2888:3888
-
-server.2=192.148.1.105:2888:3888
-
-server.3=192.148.1.106:2888:3888
-
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-
-# The number of snapshots to retain in dataDir
-
-#autopurge.snapRetainCount=3
-
-# Purge task interval in hours
-
-# Set to &quot;0&quot; to disable auto purge feature
-
-#autopurge.purgeInterval=1
-
-[root@rabbitmq-node1 conf]# vim /etc/profile
-
-[root@rabbitmq-node1 conf]# source /etc/profile
-
-[root@rabbitmq-node1 conf]# mkdir -p /zookeeper/log
-
-[root@rabbitmq-node1 conf]# mkdir -p /zookeeper/data
-
-[root@rabbitmq-node1 conf]# cd /zookeeper/
-
-[root@rabbitmq-node1 zookeeper]# ls
-
-data  log
-
-[root@rabbitmq-node1 zookeeper]# echo $ZOOKEEPER_HOME
-
-/usr/local/zookeeper
-
-[root@rabbitmq-node1 zookeeper]# cd /usr/local/zookeeper/
-
-[root@rabbitmq-node1 zookeeper]# ls
-
-bin          dist-maven       LICENSE.txt           src
-
-build.xml    docs             NOTICE.txt            zookeeper-3.4.6.jar
-
-CHANGES.txt  ivysettings.xml  README_packaging.txt  zookeeper-3.4.6.jar.asc
-
-conf         ivy.xml          README.txt            zookeeper-3.4.6.jar.md5
-
-contrib      lib              recipes               zookeeper-3.4.6.jar.sha1
-//dataDir下告诉本机的id
-[root@rabbitmq-node1 zookeeper]# cd /zookeeper/data/
-
-[root@rabbitmq-node1 data]# ls
-
-[root@rabbitmq-node1 data]# vim myid
-
-[root@rabbitmq-node1 data]# cat myid 
-
-1
-
-[root@rabbitmq-node1 data]# scp -r /usr/local/zookeeper root@192.148.1.105:/usr/local/
-
-[root@rabbitmq-node1 data]# scp -r /usr/local/zookeeper  root@192.148.1.106:/usr/local/
-
-[root@rabbitmq-node1 data]# cd /usr/local/zookeeper/bin/
-
-[root@rabbitmq-node1 bin]# ls
-
-README.txt    zkCli.cmd  zkEnv.cmd  zkServer.cmd
-
-zkCleanup.sh  zkCli.sh   zkEnv.sh   zkServer.sh
-//三个启动很快。如果很慢 你将会在日志看到报错。 但是重启一下就行了
-[root@rabbitmq-node1 bin]# ./zkServer.sh start
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Starting zookeeper ... STARTED
-
-[root@rabbitmq-node1 bin]# ./zkServer.sh status
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Mode: follower
-
-[root@rabbitmq-node1 bin]# jps
-
-2344 QuorumPeerMain
-
-2398 Jps
-
-[root@rabbitmq-node1 bin]# 
-
-[root@rabbitmq-node1 bin]# ./zkServer.sh start
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Starting zookeeper … STARTED
-
-[root@rabbitmq-node1 bin]# ./zkServer.sh status
-
-JMX enabled by default
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-Mode: follower
-
-[root@rabbitmq-node1 bin]# jps
-2344 QuorumPeerMain
-2398 Jps
-
-//查看集群状态  为跟随者
-[root@rabbitmq-node1 bin]# ./zkServer.sh status
-JMX enabled by default
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-Mode: follower
-//这是我关掉了其他两个服务后只剩下一个时候
-[root@rabbitmq-node1 bin]# ./zkServer.sh status
-JMX enabled by default
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-Error contacting service. It is probably not running.
-
-[root@rabbitmq-node1 bin]# ./zkServer.sh stop
-JMX enabled by default
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-Stopping zookeeper ... STOPPED
-[root@rabbitmq-node1 bin]# 
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;node2:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sjk@192.148.1.105's password: 
-
-Last login: Mon Nov  9 04:15:34 2015 from 192.148.1.102
-
-[sjk@rabbitmq-node2 ~]$ sudo -i
-
-[sudo] password for sjk: 
-
-[root@rabbitmq-node2 ~]# cd /usr/local/
-
-[root@rabbitmq-node2 local]# ls
-
-bin  games    jdk1.7.0_80  lib64    mongodb  openssl  share  tomcat  zookeeper
-
-etc  include  lib          libexec  nginx    sbin     src    usr
-
-[root@rabbitmq-node2 local]# mkdir -p /zookeeper/log
-
-[root@rabbitmq-node2 local]# mkdir -p /zookeeper/data
-
-[root@rabbitmq-node2 local]# cd /zookeeper/data/
-
-[root@rabbitmq-node2 data]# vim myid
-
-[root@rabbitmq-node2 data]# cat myid 
-
-2
-
-[root@rabbitmq-node2 data]# vim /etc/profile
-
-[root@rabbitmq-node2 data]# source /etc/profile
-
-[root@rabbitmq-node2 data]# ls
-
-myid
-
-[root@rabbitmq-node2 data]# cd /usr/local/zookeeper/
-
-[root@rabbitmq-node2 zookeeper]# cd b
-
--bash: cd: b: 没有那个文件或目录
-
-[root@rabbitmq-node2 zookeeper]# cd bin/
-
-[root@rabbitmq-node2 bin]# ls
-
-README.txt    zkCli.cmd  zkEnv.cmd  zkServer.cmd
-
-zkCleanup.sh  zkCli.sh   zkEnv.sh   zkServer.sh
-
-[root@rabbitmq-node2 bin]# ./zkServer.sh start
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Starting zookeeper ... STARTED
-
-[root@rabbitmq-node2 bin]# ./zkServer.sh status
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Mode: leader
-
-[root@rabbitmq-node2 bin]# jps
-
-2369 QuorumPeerMain
-
-2429 Jps
-
-[root@rabbitmq-node2 bin]# 
-
-[root@rabbitmq-node2 bin]# ./zkServer.sh start
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Starting zookeeper ... STARTED
-//为领导者
-[root@rabbitmq-node2 bin]# ./zkServer.sh status
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Mode: leader
-
-[root@rabbitmq-node2 bin]# jps
-
-2369 QuorumPeerMain
-
-2429 Jps
-
-[root@rabbitmq-node2 bin]# ./zkServer.sh stop
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Stopping zookeeper ... STOPPED
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;node3：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sjk@192.148.1.106's password: 
-
-Last login: Mon Nov  9 16:47:06 2015 from 192.148.1.102
-
-[sjk@rabbitmq-node3 ~]$ sudo -i
-
-[sudo] password for sjk: 
-
-[root@rabbitmq-node3 ~]# cd /usr/local/zookeeper/
-
-[root@rabbitmq-node3 zookeeper]# ls
-
-bin          dist-maven       LICENSE.txt           src
-
-build.xml    docs             NOTICE.txt            zookeeper-3.4.6.jar
-
-CHANGES.txt  ivysettings.xml  README_packaging.txt  zookeeper-3.4.6.jar.asc
-
-conf         ivy.xml          README.txt            zookeeper-3.4.6.jar.md5
-
-contrib      lib              recipes               zookeeper-3.4.6.jar.sha1
-
-[root@rabbitmq-node3 zookeeper]# cd ..
-
-[root@rabbitmq-node3 local]# ls
-
-bin  games    jdk1.7.0_80  lib64    mongodb   sbin   src
-etc  include  lib          libexec  python27  share  zookeeper
-
-[root@rabbitmq-node3 local]# mkdir -p /zookeeper/log
-
-[root@rabbitmq-node3 local]# mkdir -p /zookeeper/data
-
-[root@rabbitmq-node3 local]# cd /zookeeper/data/
-
-[root@rabbitmq-node3 data]# vim myid
-
-[root@rabbitmq-node3 data]# cat myid 
-
-3
-//设置zookeeperhome的环境变量
-[root@rabbitmq-node3 data]# vim /etc/profile
-
-[root@rabbitmq-node3 data]# source /etc/profile
-
-[root@rabbitmq-node3 data]# cd /usr/local/zookeeper/bin/
-
-[root@rabbitmq-node3 bin]# ls
-
-README.txt    zkCli.cmd  zkEnv.cmd  zkServer.cmd
-
-zkCleanup.sh  zkCli.sh   zkEnv.sh   zkServer.sh
-
-[root@rabbitmq-node3 bin]# ./zkServer.sh start
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Starting zookeeper ... STARTED
-
-[root@rabbitmq-node3 bin]# ./zkServer.sh status
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Mode: follower
-
-[root@rabbitmq-node3 bin]# jps
-
-2344 QuorumPeerMain
-
-2399 Jps
-
-//将其中一个节点关闭掉
-[root@rabbitmq-node3 bin]# ./zkServer.sh status
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Mode: leader
-
-[root@rabbitmq-node3 bin]# ./zkServer.sh stop
-
-JMX enabled by default
-
-Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
-
-Stopping zookeeper ... STOPPED
-
-[root@rabbitmq-node3 bin]# 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;真水。 等之后和solr的整合吧。 好累 = = 困。。。&lt;/p&gt;
-</description>
-        <pubDate>Wed, 11 Nov 2015 04:04:03 +0800</pubDate>
-        <link>http://localhost:4000/2015/11/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/11/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</guid>
-        
-        <category>zookeeper</category>
-        
-        <category>集群</category>
         
         
         <category>jekyll</category>
