@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 24 Dec 2016 13:42:26 +0800</pubDate>
-    <lastBuildDate>Sat, 24 Dec 2016 13:42:26 +0800</lastBuildDate>
+    <pubDate>Sat, 24 Dec 2016 14:13:38 +0800</pubDate>
+    <lastBuildDate>Sat, 24 Dec 2016 14:13:38 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -31,6 +31,68 @@
         <pubDate>Thu, 22 Dec 2016 20:00:03 +0800</pubDate>
         <link>http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</link>
         <guid isPermaLink="true">http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</guid>
+        
+        <category>iOS</category>
+        
+        <category>AppStore</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>PresentViewController 在 iPad 上执行失败</title>
+        <description>&lt;p&gt;在选择头像图片的时候 使用  &lt;code class=&quot;highlighter-rouge&quot;&gt;imagePickerController&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  [self presentViewController:imagePickerController animated:YES completion:^{
+            
+  }];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;异常信息&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2016-12-20 13:50:23.096416 Training[1963:904966] Warning: Attempt to present &amp;lt;UIImagePickerController: 0x14a9d0c00&amp;gt;  on &amp;lt;MySelfViewController: 0x149d2d480&amp;gt; which is already presenting (null)&lt;/p&gt;
+
+  &lt;p&gt;2016-12-20 13:50:23.106841 Training[1963:904966] [Warning] &amp;lt;_UIPopoverBackgroundVisualEffectView 0x149dcbd40&amp;gt; is being asked to animate its opacity. This will cause the effect to appear broken until opacity returns to 1.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;google了一下 找到了解决方法 &lt;a href=&quot;http://stackoverflow.com/questions/32380967/presentviewcontroller-animated-not-displaying-on-ipad&quot;&gt;presentviewcontroller-animated-not-displaying-on-ipad&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;但是这是为啥呢 在iPhone上没问题 歪果仁是这样说的 &lt;a href=&quot;http://stackoverflow.com/questions/24854802/presenting-a-view-controller-modally-from-an-action-sheets-delegate-in-ios8-i/24854803#24854803&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The problem seems to come from Apple’s switch to using UIAlertController internally to implement the functionality of alert views and action sheets. The issue is seen mostly on iPad and action sheets, because on iPad, action sheets are presented as a popover within a specified view, and what Apple does is travel the responder chain until it finds a view controller and calls presentViewController:animated:completion: with the internal UIAlertController. The problem is less obvious on iPhone and with alert views, because there Apple actually creates a separate window, an empty view controller and presents the internal UIAlertController on top of that, so it seems to not interfere with other presentation.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;大概意思是这样的&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;presentViewController 需要找到一个视图控制器然后执行，在iPhone上，Apple实际上创建了一个单独的窗口，一个空视图控制器，并在其上显示，因此不会干扰其他显示。而iPad上面没有这样做。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Tue, 20 Dec 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</guid>
         
         <category>iOS</category>
         
@@ -1670,58 +1732,6 @@ public class DeCompressUtil {
         <category>CTAssetsPickerControlle</category>
         
         <category>相册</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Missing or invalid signature. The bundle xxxx at bundle path 'Payload</title>
-        <description>&lt;p&gt;第一次提交AppStore，遇到很多坑 = =。&lt;/p&gt;
-
-&lt;p&gt;一直很迷 = =&lt;/p&gt;
-
-&lt;p&gt;等结束整理一下。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;提交AppStore时候报了这个&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Missing or invalid signature. The bundle ‘&lt;strong&gt;&lt;em&gt;’ at bundle path ‘Payload&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;查了查 发现是 &lt;a href=&quot;https://developer.apple.com/certificationauthority/AppleWWDRCA.cer&quot;&gt;AppleWWDRCA.cer&lt;/a&gt; 证书过期，需要重新下载&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;先从链接下载证书，然后在 钥匙串 &lt;strong&gt;Apple Worldwide Developer Relations Certification Authority&lt;/strong&gt; 过期证书删了&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;再把你的其他相关开发的证书删除 推送什么的。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重新导入下载的 &lt;strong&gt;AppleWWDRCA.cer 和 其他相关的证书&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重新打包提交就好了。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-</description>
-        <pubDate>Sat, 25 Jun 2016 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/</guid>
-        
-        <category>iOS</category>
-        
-        <category>AppStore</category>
         
         
         <category>jekyll</category>

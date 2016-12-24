@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>录音文件lame转换MP3相关配置</title>
-  <meta name="description" content="文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~">
+  <title>PresentViewController 在 iPad 上执行失败</title>
+  <meta name="description" content="在选择头像图片的时候 使用  imagePickerController">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="录音文件lame转换MP3相关配置">
-  <meta name="twitter:description" content="文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~">
+  <meta name="twitter:title" content="PresentViewController 在 iPad 上执行失败">
+  <meta name="twitter:description" content="在选择头像图片的时候 使用  imagePickerController">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="录音文件lame转换MP3相关配置">
-  <meta property="og:description" content="文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~">
+  <meta property="og:title" content="PresentViewController 在 iPad 上执行失败">
+  <meta property="og:description" content="在选择头像图片的时候 使用  imagePickerController">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/">
+  <link rel="canonical" href="http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -157,10 +157,10 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">录音文件lame转换MP3相关配置</h1>
+    <h1 class="post-title">PresentViewController 在 iPad 上执行失败</h1>
     <div class="post-meta">
       <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2016-12-09 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-12-09</time>  
+      <time datetime="2016-12-20 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-12-20</time>  
          
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
@@ -169,212 +169,50 @@
 
 
   <section class="post">
-    <p>文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~</p>
+    <p>在选择头像图片的时候 使用  <code class="highlighter-rouge">imagePickerController</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  [self presentViewController:imagePickerController animated:YES completion:^{
+            
+  }];
+</code></pre>
+</div>
 
 <hr />
 
-<p>业务需求是录制音频然后上传到七牛并且Android可以读。</p>
+<p>异常信息</p>
 
-<p>与安卓沟通了一下统一了mp3格式，大小质量都不错。由于<code class="highlighter-rouge">AVAudioRecorder</code>录音的格式为.caf或者.wav而且很大需要进行转换压缩为MP3格式。这里需要用到三方库 <code class="highlighter-rouge">lame</code>。</p>
+<blockquote>
+  <p>2016-12-20 13:50:23.096416 Training[1963:904966] Warning: Attempt to present &lt;UIImagePickerController: 0x14a9d0c00&gt;  on &lt;MySelfViewController: 0x149d2d480&gt; which is already presenting (null)</p>
 
-<p>使用lame转换后音频的质量和</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code> _recorder = [[AVAudioRecorder alloc] initWithURL:_recordFilePath settings:setting error:NULL];
-</code></pre>
-</div>
-<p>里的 <strong><em>setting</em></strong> 息息相关。 所以整理了两个配置。</p>
-
-<p>我把这两种的配置写在了工具类所以直接贴代码了~要用的话直接CV大法就可以。</p>
-
-<p><a href="http://oh6uhie7j.bkt.clouddn.com/lame.zip">lame三方库的资源</a></p>
+  <p>2016-12-20 13:50:23.106841 Training[1963:904966] [Warning] &lt;_UIPopoverBackgroundVisualEffectView 0x149dcbd40&gt; is being asked to animate its opacity. This will cause the effect to appear broken until opacity returns to 1.</p>
+</blockquote>
 
 <hr />
 
-<ul>
-  <li>获取转换文件所在文件夹</li>
-</ul>
+<p>google了一下 找到了解决方法 <a href="http://stackoverflow.com/questions/32380967/presentviewcontroller-animated-not-displaying-on-ipad">presentviewcontroller-animated-not-displaying-on-ipad</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)getRecPathUrl{
-    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    NSString *recordDir = [str stringByAppendingPathComponent:@"RecordCourse"];
-    
-    return recordDir;
-}
-</code></pre>
-</div>
-
-<ul>
-  <li>获取时间戳用于文件的命名</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)getTimestamp{
-    NSDate *nowDate = [NSDate date];
-    double timestamp = (double)[nowDate timeIntervalSince1970]*1000;
-    long nowTimestamp = [[NSNumber numberWithDouble:timestamp] longValue];
-    NSString *timestampStr = [NSString stringWithFormat:@"%ld",nowTimestamp];
-    return timestampStr;
-}
-</code></pre>
-</div>
-
-<ul>
-  <li>PCM转换MP3配置</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSDictionary *)getAudioSettingWithPCM {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    //设置录音格式
-    [dic setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
-    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
-    [dic setObject:@(44100.0) forKey:AVSampleRateKey];
-    //设置通道,这里采用双声道
-    [dic setObject:@(1) forKey:AVNumberOfChannelsKey];
-    //每个采样点位数,分为8、16、24、32
-    [dic setObject:@(16) forKey:AVLinearPCMBitDepthKey];
-    //是否使用浮点数采样
-    [dic setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
-    //....其他设置等
-    return dic;
-}
-</code></pre>
-</div>
-
-<ul>
-  <li>CAF转换MP3配置</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSDictionary *)getAudioSettingWithCAF {
-    NSDictionary *setting = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithInt:AVAudioQualityMin],
-                             AVEncoderAudioQualityKey,
-                             [NSNumber numberWithInt:16],
-                             AVEncoderBitRateKey,
-                             [NSNumber numberWithInt:2],
-                             AVNumberOfChannelsKey,
-                             [NSNumber numberWithFloat:44100.0],
-                             AVSampleRateKey,
-                             nil];
-
-    return setting;
-}
-</code></pre>
-</div>
-
-<ul>
-  <li>PCM转换MP3的lame方法</li>
-</ul>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)audioPCMtoMP3:(NSString *)wavPath {
-    NSString *cafFilePath = wavPath;
-    
-    NSString *mp3FilePath = [NSString stringWithFormat:@"%@.mp3",[NSString stringWithFormat:@"%@%@",[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
-    
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    if([fileManager removeItemAtPath:mp3FilePath error:nil]){
-        NSLog(@"删除原MP3文件");
-    }
-    @try {
-        int read, write;
-        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        lame_set_in_samplerate(lame, 22050.0);
-        lame_set_VBR(lame, vbr_default);
-        lame_init_params(lame);
-        
-        do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+<div class="highlighter-rouge"><pre class="highlight"><code>    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self presentViewController:imagePickerController animated:YES completion:^{
             
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%@",[exception description]);
-    }
-    @finally {
-        return mp3FilePath;
-    }
-}
+        }];
+    });
 </code></pre>
 </div>
 
-<ul>
-  <li>CAF转换MP3的lame方法</li>
-</ul>
+<hr />
 
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)audioCAFtoMP3:(NSString *)wavPath {
-    
-    NSString *cafFilePath = wavPath;
-    
-    NSString *mp3FilePath = [NSString stringWithFormat:@"%@.mp3",[NSString stringWithFormat:@"%@%@",[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
-    
-    @try {
-        int read, write;
-        
-        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
-        
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        lame_set_num_channels(lame,1);//设置1为单通道，默认为2双通道
-        lame_set_in_samplerate(lame, 44100.0);
-        lame_set_VBR(lame, vbr_default);
-        
-        lame_set_brate(lame,8);
-        
-        lame_set_mode(lame,3);
-        
-        lame_set_quality(lame,2);
-        
-        lame_init_params(lame);
-        
-        do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-            
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%@",[exception description]);
-    }
-    @finally {
-        return mp3FilePath;
-    }
-}
-</code></pre>
-</div>
+<p>但是这是为啥呢 在iPhone上没问题 歪果仁是这样说的 <a href="http://stackoverflow.com/questions/24854802/presenting-a-view-controller-modally-from-an-action-sheets-delegate-in-ios8-i/24854803#24854803">here</a></p>
 
-<p>两种质量大小不错都可以使用😁😁</p>
+<blockquote>
+  <p>The problem seems to come from Apple’s switch to using UIAlertController internally to implement the functionality of alert views and action sheets. The issue is seen mostly on iPad and action sheets, because on iPad, action sheets are presented as a popover within a specified view, and what Apple does is travel the responder chain until it finds a view controller and calls presentViewController:animated:completion: with the internal UIAlertController. The problem is less obvious on iPhone and with alert views, because there Apple actually creates a separate window, an empty view controller and presents the internal UIAlertController on top of that, so it seems to not interfere with other presentation.</p>
+</blockquote>
+
+<p>大概意思是这样的</p>
+
+<p><strong>presentViewController 需要找到一个视图控制器然后执行，在iPhone上，Apple实际上创建了一个单独的窗口，一个空视图控制器，并在其上显示，因此不会干扰其他显示。而iPad上面没有这样做。</strong></p>
+
+<hr />
+
 
 
   </section>
@@ -401,13 +239,13 @@
        <ul class="pager">
         
         <li class="previous">
-            <a href="/2016/12/Mac%E6%9B%B4%E6%96%B010.12%E5%90%8E%E5%85%B3%E6%9C%BA%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" data-toggle="tooltip" data-placement="top" title="Mac更新10.12后关机很慢的问题">上一篇：  <span>Mac更新10.12后关机很慢的问题</span>
+            <a href="/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/" data-toggle="tooltip" data-placement="top" title="录音文件lame转换MP3相关配置">上一篇：  <span>录音文件lame转换MP3相关配置</span>
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/" data-toggle="tooltip" data-placement="top" title="PresentViewController 在 iPad 上执行失败">下一篇：  <span>PresentViewController 在 iPad 上执行失败</span>
+            <a href="/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/" data-toggle="tooltip" data-placement="top" title="Invalid Bundle. iPad Multitasking support requires these orientations">下一篇：  <span>Invalid Bundle. iPad Multitasking support requires these orientations</span>
             </a>
         </li>
         
@@ -417,7 +255,7 @@
 <section class="post-comments">
 
   
-    <div class="ds-thread" data-thread-key="/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/" data-title="录音文件lame转换MP3相关配置" data-url="http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/"></div>
+    <div class="ds-thread" data-thread-key="/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/" data-title="PresentViewController 在 iPad 上执行失败" data-url="http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/"></div>
 
     <script type="text/javascript">
         var duoshuoQuery = {short_name:"yoruo"};
