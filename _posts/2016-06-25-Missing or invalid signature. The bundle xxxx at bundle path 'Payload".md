@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Missing or invalid signature. The bundle xxxx at bundle path 'Payload"
+title:  "Missing or invalid signature. The bundle xxxx at bundle path 'Payload'"
 date:   2016-06-25 20:00:03 +0800
 categories: jekyll update
 tags: iOS AppStore
@@ -16,7 +16,7 @@ tags: iOS AppStore
 
 提交AppStore时候报了这个
 
->Missing or invalid signature. The bundle '***' at bundle path 'Payload***
+>Missing or invalid signature. The bundle xxxx at bundle path 'Payload'
 
 查了查 发现是 [AppleWWDRCA.cer](https://developer.apple.com/certificationauthority/AppleWWDRCA.cer) 证书过期，需要重新下载
 
