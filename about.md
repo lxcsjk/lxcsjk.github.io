@@ -27,7 +27,9 @@ title: 关于我
  - 籍贯：皖
  - 所在城市：上海
  
-![](http://oh6uhie7j.bkt.clouddn.com/F09F4676-B261-4E21-A48A-718E5334C935.png)
+ 领导要求上镜 = = So。。。
+ 
+![](http://oh6uhie7j.bkt.clouddn.com/aa.jpg)
 
 ---
 
