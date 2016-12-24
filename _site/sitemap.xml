@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</loc>
+<lastmod>2016-12-22T20:00:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</loc>
 <lastmod>2016-12-09T20:00:03+08:00</lastmod>
 </url>
@@ -31,6 +35,10 @@
 <url>
 <loc>http://localhost:4000/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
 <lastmod>2016-11-18T19:02:03+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/</loc>
+<lastmod>2016-06-25T20:00:03+08:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</loc>

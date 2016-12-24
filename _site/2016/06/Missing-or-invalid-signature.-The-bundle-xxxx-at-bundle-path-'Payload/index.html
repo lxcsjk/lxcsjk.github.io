@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>文章</title>
-  <meta name="description" content="欢迎来到我的Blog~">
+  <title>Missing or invalid signature. The bundle xxxx at bundle path &#39;Payload</title>
+  <meta name="description" content="第一次提交AppStore，遇到很多坑 = =。">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="文章">
-  <meta name="twitter:description" content="欢迎来到我的Blog~">
+  <meta name="twitter:title" content="Missing or invalid signature. The bundle xxxx at bundle path &#39;Payload">
+  <meta name="twitter:description" content="第一次提交AppStore，遇到很多坑 = =。">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="文章">
-  <meta property="og:description" content="欢迎来到我的Blog~">
+  <meta property="og:title" content="Missing or invalid signature. The bundle xxxx at bundle path &#39;Payload">
+  <meta property="og:description" content="第一次提交AppStore，遇到很多坑 = =。">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/archive/">
+  <link rel="canonical" href="http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -157,384 +157,112 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
+    <h1 class="post-title">Missing or invalid signature. The bundle xxxx at bundle path 'Payload</h1>
     <div class="post-meta">
-      <time datetime="" itemprop="datePublished" class="post-meta__date date"></time>
-      <span class="post-meta__tags tags"></span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2016-06-25 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-06-25</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
     </div>
-    <h1 class="post-title">文章</h1>
   </header>
 
+
   <section class="post">
-    
+    <p>第一次提交AppStore，遇到很多坑 = =。</p>
+
+<p>一直很迷 = =</p>
+
+<p>等结束整理一下。</p>
+
+<hr />
+
+<p>提交AppStore时候报了这个</p>
+
+<blockquote>
+  <p>Missing or invalid signature. The bundle ‘<strong><em>’ at bundle path ‘Payload</em></strong></p>
+</blockquote>
+
+<p>查了查 发现是 <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer">AppleWWDRCA.cer</a> 证书过期，需要重新下载</p>
+
+<hr />
+
+<ul>
+  <li>
+    <p>先从链接下载证书，然后在 钥匙串 <strong>Apple Worldwide Developer Relations Certification Authority</strong> 过期证书删了</p>
+  </li>
+  <li>
+    <p>再把你的其他相关开发的证书删除 推送什么的。</p>
+  </li>
+  <li>
+    <p>重新导入下载的 <strong>AppleWWDRCA.cer 和 其他相关的证书</strong></p>
+  </li>
+  <li>
+    <p>重新打包提交就好了。</p>
+  </li>
+</ul>
+
+<hr />
 
 
-<div class="page card">
-
-
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-      <div class="hat_title">
-        <h3>2016</h3>
-      </div>
-      <div class="post_list">
-      <ul>
-      
-    
-  
-    <li>
-      <span>
-        2016-12-22
-      </span>
-       &raquo; 
-      <a href="/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/">Invalid Bundle. iPad Multitasking support requires these orientations</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-12- 9
-      </span>
-       &raquo; 
-      <a href="/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/">录音文件lame转换MP3相关配置</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-12- 5
-      </span>
-       &raquo; 
-      <a href="/2016/12/Mac%E6%9B%B4%E6%96%B010.12%E5%90%8E%E5%85%B3%E6%9C%BA%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">Mac更新10.12后关机很慢的问题</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-12- 3
-      </span>
-       &raquo; 
-      <a href="/2016/12/FMDB%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/">FMDB 整理总结</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-30
-      </span>
-       &raquo; 
-      <a href="/2016/11/Doesn't-include-the-currently-selected-devic/">Doesn't include the currently selected device </a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-27
-      </span>
-       &raquo; 
-      <a href="/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/">我的博客是如何搭建的</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-27
-      </span>
-       &raquo; 
-      <a href="/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/">h5上传图片压缩包服务端解压并上传图片</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-25
-      </span>
-       &raquo; 
-      <a href="/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/">IDEA maven 项目打包 jdk版本问题</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-11-18
-      </span>
-       &raquo; 
-      <a href="/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">CTAssetsPickerController 选中图片不显示对号的问题解决</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-06-25
-      </span>
-       &raquo; 
-      <a href="/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/">Missing or invalid signature. The bundle xxxx at bundle path 'Payload</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2016-01- 7
-      </span>
-       &raquo; 
-      <a href="/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">OC 字符串操作整理</a>
-    </li>
- 
-    
-      
-        </ul>
-         </div>         
-         
-        <div class="hat_title">
-         <h3> 2015</h3>
-        </div>
-        <div class="post_list">
-        <ul>
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11-15
-      </span>
-       &raquo; 
-      <a href="/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/">zookeeper和solr搭建集群分片查询</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11-11
-      </span>
-       &raquo; 
-      <a href="/2015/11/Tomcat%E5%92%8CSolr%E7%9A%84%E6%95%B4%E5%90%88/">Tomcat和Solr的整合</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11-11
-      </span>
-       &raquo; 
-      <a href="/2015/11/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">zookeeper集群搭建</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11- 4
-      </span>
-       &raquo; 
-      <a href="/2015/11/MongoDB%E5%89%AF%E6%9C%AC%E9%9B%86%E6%90%AD%E5%BB%BA%E5%92%8C%E6%B5%8B%E8%AF%95/">MongoDB副本集搭建和测试</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11- 4
-      </span>
-       &raquo; 
-      <a href="/2015/11/rabbitmq-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">rabbitmq 集群搭建</a>
-    </li>
- 
-    
-          
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li>
-      <span>
-        2015-11- 3
-      </span>
-       &raquo; 
-      <a href="/2015/11/%E4%BF%AE%E6%94%B9rabbitmq-Web-UI-%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3/">修改rabbitmq Web UI 监控页面的端口</a>
-    </li>
- 
-    
-      </ul>
-      
-    
-  
-
-</div>
-</div>
   </section>
+
+<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
 </article>
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" data-toggle="tooltip" data-placement="top" title="OC 字符串操作整理">上一篇：  <span>OC 字符串操作整理</span>
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-toggle="tooltip" data-placement="top" title="CTAssetsPickerController 选中图片不显示对号的问题解决">下一篇：  <span>CTAssetsPickerController 选中图片不显示对号的问题解决</span>
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+  
+    <div class="ds-thread" data-thread-key="/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/" data-title="Missing or invalid signature. The bundle xxxx at bundle path 'Payload" data-url="http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/"></div>
+
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"yoruo"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+  
+  
+  
+  
+</section>
+
 
             <section class="footer">
     <footer>

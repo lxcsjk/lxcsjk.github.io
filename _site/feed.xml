@@ -5,9 +5,43 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 12 Dec 2016 11:20:29 +0800</pubDate>
-    <lastBuildDate>Mon, 12 Dec 2016 11:20:29 +0800</lastBuildDate>
+    <pubDate>Sat, 24 Dec 2016 13:42:26 +0800</pubDate>
+    <lastBuildDate>Sat, 24 Dec 2016 13:42:26 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Invalid Bundle. iPad Multitasking support requires these orientations</title>
+        <description>&lt;p&gt;前段时间把app适配一下iPad，再提交的时候出了一些问题&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR ITMS-90474: “Invalid Bundle. iPad Multitasking support requires these orientations: ‘UIInterfaceOrientationPortrait,UIInterfaceOrientationPortraitUpsideDown,UIInterfaceOrientationLandscapeLeft,UIInterfaceOrientationLandscapeRight’. Found ‘UIInterfaceOrientationPortrait,UIInterfaceOrientationLandscapeLeft,UIInterfaceOrientationLandscapeRight’ in bundle “bundle_Name”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;查了一下资料原来是 &lt;strong&gt;ios9 iPad 的分屏适配&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So~
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161224-132228@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再次提交一下 OK啦&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Thu, 22 Dec 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</guid>
+        
+        <category>iOS</category>
+        
+        <category>AppStore</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>录音文件lame转换MP3相关配置</title>
@@ -1645,454 +1679,49 @@ public class DeCompressUtil {
       </item>
     
       <item>
-        <title>OC 字符串操作整理</title>
-        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//
-//  main.m
-//  StringMK
-//
-//  Created by LXC on 16/1/7.
-//  Copyright © 2016年 LXC. All rights reserved.
-//  2016年01月07日23:51:29
-//
+        <title>Missing or invalid signature. The bundle xxxx at bundle path 'Payload</title>
+        <description>&lt;p&gt;第一次提交AppStore，遇到很多坑 = =。&lt;/p&gt;
 
-#import &amp;lt;Foundation/Foundation.h&amp;gt;
+&lt;p&gt;一直很迷 = =&lt;/p&gt;
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        NSLog(@&quot;Hello, World!&quot;);
-        
-        //C
-        char *s = &quot;Hello C&quot;;
-        //OC
-        NSString *str = @&quot;Hello&quot;;
-        //C --&amp;gt; OC
-        NSString *str1 = [NSString stringWithUTF8String:s];
-        NSLog(@&quot;str1 = %@&quot;,str1);
-        //OC --&amp;gt; C
-        NSLog(@&quot;str2 = %s&quot;,[str UTF8String]);
-        
-        //创建字符串
-        NSString *str3 = @&quot;IOS&quot;;//不需要自己释放内存
-        NSString *str4 = [[NSString alloc] init];//先分配内存 在初始化
-        str4 = @&quot;IOS&quot;;
-        
-        //格式化字符串
-        int a = 10;
-        int b = 20;
-        
-        NSString *str5 = [NSString stringWithFormat:@&quot;a = %d,b = %d&quot;,a,b];
-        NSLog(@&quot;str5 = %@&quot;,str5);
-        
-        //拼接字符串
-        NSString *str6 = [str5 stringByAppendingString:str3];
-        NSLog(@&quot;str6 = %@&quot;,str6);
-        
-        //大小写转换
-        NSString *str7 = @&quot;ASDASDA&quot;;
-        NSString *str8 =  [str7 lowercaseString];
-        NSLog(@&quot;str8 = %@&quot;,str8);
-        NSString *str9 = [str7 uppercaseString];
-        NSLog(@&quot;str9 = %@&quot;,str9);
-        
-        //前缀和后缀的判断
-        NSString *str10 = @&quot;www.liuxincheng.win&quot;;
-        BOOL hasPrFix  = [str10 hasPrefix:@&quot;www.&quot;];
-        if (hasPrFix) {
-            NSLog(@&quot;YES&quot;);
-        }else{
-            NSLog(@&quot;NO&quot;);
-        }
-        BOOL hasSuffix  = [str10 hasSuffix:@&quot;.win&quot;];
-        if (hasSuffix) {
-            NSLog(@&quot;YES&quot;);
-        }else{
-            NSLog(@&quot;NO&quot;);
-        }
+&lt;p&gt;等结束整理一下。&lt;/p&gt;
 
-        //判断两个字符川是否相同
-        
-        NSString *str11 = @&quot;LXC&quot;;
-        NSString *str12 = @&quot; LXC&quot;;
-        if ([str11 isEqualToString:str12]) {
-            NSLog(@&quot;SAME&quot;);
-        }else{
-            NSLog(@&quot;diff&quot;);
-        }
-        
-        //比较字符串 NSComparisonResult
-        
-        //分割字符串
-        //按照指定字符分割字符串
-        NSString *str13 = @&quot;a,b,c,d,e,f&quot;;
-        NSArray *strarray = [str13 componentsSeparatedByString:@&quot;,&quot;];
-        for (NSString *str in strarray) {
-            NSLog(@&quot;STR = %@&quot;,str);
-        }
-        
-        //按照范围切割字符串
-        NSRange range = NSMakeRange(1,5);
-        NSString *str14 = [str13 substringWithRange:range];
-        NSLog(@&quot;STR14 = %@&quot;,str14);
-        
-        //从某一位开始截取
-        NSString *str15 = [str13 substringFromIndex:2];
-        NSLog(@&quot;STR15 = %@&quot;,str15);
-        //截取到某一位
-        NSString *str16 = [str13 substringToIndex:2];
-        NSLog(@&quot;STR16 = %@&quot;,str16);
-        //拆分到每一个字符
-        for(int i=0;i&amp;lt;[str13 length];i++){
-            NSLog(@&quot;STRCHAR =  %c&quot;,[str13 characterAtIndex:i]);
-        }
-        
-        
-        //查找
-        NSString *str17 = @&quot;ad ad fe ef cv gh&quot;;
-        NSRange range1 = [str17 rangeOfString:@&quot;cv&quot;];
-        NSLog(@&quot;range.location : %ld range1.length : %ld&quot;,range1.location,range1.length);
-        
-        //替换
-        NSString *str18 = @&quot;Hello ios ,hello lxc&quot;;
-        //替换某一个范围的内容
-        NSString *str19 = [str18 stringByReplacingCharactersInRange:NSMakeRange(0, 5) withString:@&quot;LXC&quot;];
-        NSLog(@&quot;%@&quot;,str19);
-        
-        //用指定字符串替换原字符串中的字串
-        /*
-         第一个参数是被替换的内容
-         第二个参数是要替换的内容
-         */
-        NSString *str20 = [str18 stringByReplacingOccurrencesOfString:@&quot;Hello&quot; withString:@&quot;ni hao&quot;];
-        NSLog(@&quot;%@&quot;,str20);
-        
-        //读取文件 文件来源
-        //本地文件 网络文件
-        
-        NSString *str21 = @&quot;www.liuxincheng.win&quot;;
-        //网络路径
-        NSURL *httpURL = [NSURL URLWithString:str21];
-        //本地路径
-        NSString *str22 = @&quot;/Users/lxc/Desktop/test.txt&quot;;
-        NSURL *fileURL = [NSURL fileURLWithPath:str22];
-        //读取网络文件
-        NSString *httpstr = [NSString stringWithContentsOfURL:httpURL encoding:NSUTF8StringEncoding error:nil];
-        //读取本地文件
-        NSString *filestr = [NSString stringWithContentsOfFile:str22 encoding:NSUTF8StringEncoding error:nil];
-        
-        NSLog(@&quot;HTTP %@ FILE %@&quot;,httpstr,filestr);
-        
-        //写入文件
-        NSString *str23 = @&quot;jinzhuanch&quot;;
-        BOOL isok =  [str23 writeToFile:@&quot;/Users/lxc/Desktop/demo.txt&quot; atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        
-        if (isok) {
-            NSLog(@&quot;OK&quot;);
-        }else{
-            NSLog(@&quot;NO&quot;);
-        }
-        //可变字符串是字符串的子类
-        NSMutableString *str24 = [[NSMutableString alloc] initWithCapacity:10];
-        [str24 setString:@&quot;kun&quot;];
-        
-        //追加字符串
-        [str24 appendFormat:@&quot; siwole&quot;];
-        NSLog(@&quot;str24 = %@&quot;,str24);
-        int c = 10;
-        [str24 appendFormat:@&quot; ---%i&quot;,c];
-        NSLog(@&quot;str25 ---- %@&quot;,str24);
-        
-        //替换字符串
-        NSRange ranges = [str24 rangeOfString:@&quot;siwole&quot;];
-        [str24 replaceCharactersInRange:ranges withString:@&quot;sleep&quot;];
-        NSLog(@&quot;str26 --- %@&quot;,str24);
-        
-        //插入字符串
-        [str24 insertString:@&quot;OMG&quot; atIndex:2];
-        NSLog(@&quot;str27 == %@&quot;,str24);
-        
-        //删除字符串
-        NSRange rangess = [str24 rangeOfString:@&quot;OMG&quot;];
-        [str24 deleteCharactersInRange:rangess];
-        NSLog(@&quot;str28 ==== %@&quot;,str24);
-        
-    }
-    return 0;
-}
+&lt;hr /&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;提交AppStore时候报了这个&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Missing or invalid signature. The bundle ‘&lt;strong&gt;&lt;em&gt;’ at bundle path ‘Payload&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;查了查 发现是 &lt;a href=&quot;https://developer.apple.com/certificationauthority/AppleWWDRCA.cer&quot;&gt;AppleWWDRCA.cer&lt;/a&gt; 证书过期，需要重新下载&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;先从链接下载证书，然后在 钥匙串 &lt;strong&gt;Apple Worldwide Developer Relations Certification Authority&lt;/strong&gt; 过期证书删了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;再把你的其他相关开发的证书删除 推送什么的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重新导入下载的 &lt;strong&gt;AppleWWDRCA.cer 和 其他相关的证书&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重新打包提交就好了。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
 </description>
-        <pubDate>Thu, 07 Jan 2016 23:57:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</guid>
+        <pubDate>Sat, 25 Jun 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload/</guid>
         
         <category>iOS</category>
         
-        <category>NSString</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>zookeeper和solr搭建集群分片查询</title>
-        <description>&lt;p&gt;这几天双十一弄得不要不要的。各种困。出差有一些时间。晚上回头摆弄摆弄。白天不忙就是找个地方想想写写。就这样一周多过去了。好了。不扯了入正题。&lt;/p&gt;
-
-&lt;p&gt;1 .环境搭建&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MacBook pro 15款840 
-OS X 10.10.5
-solr-5.2.1.tgz
-zookeeper-3.4.6.tar.gz
-VMWare Fusion8 
-Centos 6.7
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;2 .搭建solr集群&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 在之前说过zookeeper集群的搭建，所以在这就别啰嗦了。基本是一样的。不过因为之前搭建过rabbitmq集群，改了一些配置。而且这里网络环境总是在变，所以IP地址不稳定，虚拟出的主机ip搞得甚是头疼。
- 安装solr 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node2 bin]# cp /usr/programmer/solr-5.2.1.tgz /usr/local/
-
-[root@rabbitmq-node2 bin]# cd /usr/local/
-
-[root@rabbitmq-node2 local]# ls
-
-bin    include      lib64    nginx    share           tomcat
-
-etc    jdk1.7.0_80  libexec  openssl  solr-5.2.1.tgz  usr
-
-games  lib          mongodb  sbin     src             zookeeper
-
-[root@rabbitmq-node2 local]# tar xzf solr-5.2.1.tgz  solr-5.2.1/bin/install_solr_service.sh --strip-components=2
-
-[root@rabbitmq-node2 local]#  ./install_solr_service.sh  solr-5.2.1.tgz -i /usr/local  -u solr -s solr -p 8983
-
-Extracting solr-5.2.1.tgz to /usr/local
-
-Creating /etc/init.d/solr script ...
-
-Waiting to see Solr listening on port 8983 [/]  
-
-Started Solr server on port 8983 (pid=2859). Happy searching!
-
-Found 1 Solr nodes: 
-
-Solr process 2859 running on port 8983
-
-{
-
-  &quot;solr_home&quot;:&quot;/var/solr/data/&quot;,
-
-  &quot;version&quot;:&quot;5.2.1 1684708 - shalin - 2015-06-10 23:20:13&quot;,
-
-  &quot;startTime&quot;:&quot;2015-11-15T01:59:53.628Z&quot;,
-
-  &quot;uptime&quot;:&quot;0 days, 0 hours, 0 minutes, 11 seconds&quot;,
-
-  &quot;memory&quot;:&quot;25.5 MB (%5.2) of 490.7 MB&quot;}
-
-Service solr installed.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-i安装目录 指定solr的安装目录  (默认为/opt)
--d指定写文件的目录，包括索引/日志/初始环境变量的配置等，(默认为/var/solr)
--u 指定solr文件和运行的所属用户，默认solr账号
--s solr服务的名称  默认为solr
--p solr服务的监听端口 默认为8983 默认为8983```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;修改solr配置，与zookeeper进行通信&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node2 local]# vim /var/solr/solr.in.sh 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;这里需要注意 空格。&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ZK_HOST=&quot;192.168.1.167:2181,192.168.1.166:2181,192.168.1.168:2181&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在启动zookeeper时候要查看zookeeper.out这个启动日志文件，这个文件在你当前启动的目录。启动zookeeper集群要快一点。不然有报错。但是没事，看最后一个zookeeper启动日志 如果没有报错 基本上没有问题的。&lt;/p&gt;
-
-&lt;p&gt;同样的，solr启动日志 也是需要看的 但是会生成很多。我习惯把logs全部清楚只看新生成的solr.log。&lt;/p&gt;
-
-&lt;p&gt;修改之后重新启动一下solr服务&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node2 local]# service solr restart
-
-Sending stop command to Solr running on port 8983 ... waiting 5 seconds to allow Jetty process 2859 to stop gracefully.
-
-Waiting to see Solr listening on port 8983 [/]  
-
-Started Solr server on port 8983 (pid=3201). Happy searching!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;之前用的是tomcat和solr整合，但是我觉得solr自带jetty容器。可以不用tomcat了。同样也可以用nginx进行负载均衡。&lt;/p&gt;
-
-&lt;p&gt;这时候通过浏览器访问以下 ip:8983.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115161225934&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;会出现这个 如果报错。看log日志。&lt;/p&gt;
-
-&lt;p&gt;创建collection&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 logs]# cd /usr/local/solr
-
-[root@rabbitmq-node1 solr]# ls
-
-CHANGES.txt  LUCENE_CHANGES.txt  README.txt  contrib  docs     licenses
-
-LICENSE.txt  NOTICE.txt          bin         dist     example  server
-
-[root@rabbitmq-node1 solr]# bin/solr create -c szss-solr -d data_driven_schema_configs -s 3 -rf 3 -n myconf
-
-Connecting to ZooKeeper at 192.168.1.167:2181,192.168.1.166:2181,192.168.1.168:2181
-
-Uploading /usr/local/solr/server/solr/configsets/data_driven_schema_configs/conf for config myconf to ZooKeeper at 192.168.1.167:2181,192.168.1.166:2181,192.168.1.168:2181
-
-
-
-Creating new collection 'szss-solr' using command:
-
-http://192.168.1.167:8983/solr/admin/collections?action=CREATE&amp;amp;name=szss-solr&amp;amp;numShards=3&amp;amp;replicationFactor=3&amp;amp;maxShardsPerNode=3&amp;amp;collection.configName=myconf
-
-
-
-{
-
-  &quot;responseHeader&quot;:{
-
-    &quot;status&quot;:0,
-
-    &quot;QTime&quot;:19520},
-
-  &quot;success&quot;:{&quot;&quot;:{
-
-      &quot;responseHeader&quot;:{
-
-        &quot;status&quot;:0,
-
-        &quot;QTime&quot;:18974},
-
-      &quot;core&quot;:&quot;szss-solr_shard1_replica2&quot;}}}
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;-s分片个数
--rf  节点数&lt;/p&gt;
-
-&lt;p&gt;这时候可能会报错。我之前想把分两片 改为 分三片  需要在zookeeper里面修改&lt;/p&gt;
-
-&lt;p&gt;查看zookeeper的客户端命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;查看节点列表：ls /path
-获取节点数据：get /path
-删除所有节点：rmr path
-关闭节点:quit
-查看节点状态：stat path
-create -s /source sss  创建永久节点
-create -e /temp sss  创建临时节点
-集群状态的查看：./zkServer.sh status
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;打开浏览器。
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162540354&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;一些参数信息
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162620511&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这里是虚拟机运行的参数
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162712016&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;log日志 以及打印的等级
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162809408&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;分片的信息
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115162902672&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;之后的分词，还有数据连接和之前写的都是一样的。在solr_home里面操作。加入3个jar，加入/dataimport data-config.xml 还有managed-schema。&lt;/p&gt;
-
-&lt;p&gt;下载sqljdbc4.jar 包 放在 
-/usr/local/solr-5.2.1/server/solr-webapp/webapp/WEB-INF/lib/
-solr-5.2.1/dist/solr-dataimporthandler-5.x.jar    到 /usr/local/solr-5.2.1/server/solr-webapp/webapp/WEB-INF/lib/下&lt;/p&gt;
-
-&lt;p&gt;动态加载配置文件到zookeeper中并生效&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@rabbitmq-node1 solr]# /usr/local/solr-5.2.1/server/scripts/cloud-scripts/zkcli.sh -zkhost 192.168.1.168:2181 -cmd upconfig -collections szss-solr -confdir /usr/local/solr-5.2.1/server/solr/configsets/data_driven_schema_configs/conf -confname myconf
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;进入：
-/usr/local/solr/server/solr/configsets/data_driven_schema_configs/conf/
-vim solrconfig.xml
-在requestHandler处新建：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;requestHandler name=&quot;/dataimport&quot; class=&quot;org.apache.solr.handler.dataimport.DataImportHandler&quot;&amp;gt;
-     &amp;lt;lst name=&quot;defaults&quot;&amp;gt;
-          &amp;lt;str name=&quot;config&quot;&amp;gt;data-config.xml&amp;lt;/str&amp;gt;
-     &amp;lt;/lst&amp;gt;
-&amp;lt;/requestHandler&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115163159992&quot; alt=&quot;这里写图片描述&quot; /&gt;
-3、新建data-config.xml
-新建一个data-config.xml文件，与solrconfig.xml同一个目录下,内容如下，数据库驱动/链接地址/sql语句请修改。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;dataConfig&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dataSource&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JdbcDataSource&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;driver=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;url=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbc:sqlserver://127.0.0.1;databaseName=szss&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;user=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sa&quot;&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;szss&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;document&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;entity&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;solr_test&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transformer=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DateFormatTransformer&quot;&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;query=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;select id,product_full_name,product_short_name,product_content,specification,taste_type,date_created,last_updated from product_b&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'date_created'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dateTimeFormat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yyyy-MM-dd HH:mm:ss'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;field&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'last_updated'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dateTimeFormat=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yyyy-MM-dd HH:mm:ss'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/entity&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/document&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dataConfig&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;4、在managed-schema中增加域&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &amp;lt;field name=&quot;product_full_name&quot; type=&quot;string&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-    &amp;lt;field name=&quot;product_short_name&quot; type=&quot;string&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-    &amp;lt;field name=&quot;product_content&quot; type=&quot;string&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-    &amp;lt;field name=&quot;specification&quot; type=&quot;string&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-    &amp;lt;field name=&quot;taste_type&quot; type=&quot;string&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-    &amp;lt;field name=&quot;date_created&quot; type=&quot;date&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-    &amp;lt;field name=&quot;last_updated&quot; type=&quot;date&quot; indexed=&quot;true&quot; stored=&quot;true&quot; /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/20151115165729329&quot; alt=&quot;这里写图片描述&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 15 Nov 2015 19:02:03 +0800</pubDate>
-        <link>http://localhost:4000/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/</guid>
-        
-        <category>zookeeper</category>
-        
-        <category>Solr</category>
-        
-        <category>集群</category>
-        
-        <category>分片</category>
+        <category>AppStore</category>
         
         
         <category>jekyll</category>
