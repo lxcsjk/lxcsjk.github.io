@@ -3,7 +3,7 @@ layout: post
 title:  "Missing or invalid signature. The bundle xxxx at bundle path 'Payload'"
 date:   2016-06-25 20:00:03 +0800
 categories: jekyll update
-tags: iOS AppStore
+tags: iOS
 ---
 
 第一次提交AppStore，遇到很多坑 = =。

@@ -3,7 +3,7 @@ layout: post
 title:  "Doesn't include the currently selected device "
 date:   2016-11-30 20:00:03 +0800
 categories: jekyll update
-tags: iPad iOS
+tags: iPad
 ---
 
 昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。

@@ -3,7 +3,7 @@ layout: post
 title:  "Invalid Bundle. iPad Multitasking support requires these orientations"
 date:   2016-12-22 20:00:03 +0800
 categories: jekyll update
-tags: iOS AppStore
+tags: iOS
 ---
 
 前段时间把app适配一下iPad，再提交的时候出了一些问题 

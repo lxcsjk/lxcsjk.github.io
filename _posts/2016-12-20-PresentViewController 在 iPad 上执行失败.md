@@ -3,7 +3,7 @@ layout: post
 title:  "PresentViewController 在 iPad 上执行失败"
 date:   2016-12-20 20:00:03 +0800
 categories: jekyll update
-tags: iOS AppStore
+tags: iOS
 ---
 
 在选择头像图片的时候 使用  ``` imagePickerController ```

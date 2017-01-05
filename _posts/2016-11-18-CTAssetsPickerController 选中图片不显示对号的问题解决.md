@@ -3,7 +3,7 @@ layout: post
 title:  "CTAssetsPickerController 选中图片不显示对号的问题解决"
 date:   2016-11-18 19:02:03 +0800
 categories: jekyll update
-tags: iOS  CTAssetsPickerControlle  相册
+tags: iOS
 ---
 
 早上AppStore审核通过，下载来看看。突然发现一个选择图片时候选中的标识没有了。

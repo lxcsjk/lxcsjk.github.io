@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>OC 字符串操作整理</title>
-  <meta name="description" content="```////  main.m//  StringMK////  Created by LXC on 16/1/7.//  Copyright © 2016年 LXC. All rights reserved.//  2016年01月07日23:51:29//">
+  <title>Missing or invalid signature. The bundle xxxx at bundle path &#39;Payload&#39;</title>
+  <meta name="description" content="第一次提交AppStore，遇到很多坑 = =。">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OC 字符串操作整理">
-  <meta name="twitter:description" content="```////  main.m//  StringMK////  Created by LXC on 16/1/7.//  Copyright © 2016年 LXC. All rights reserved.//  2016年01月07日23:51:29//">
+  <meta name="twitter:title" content="Missing or invalid signature. The bundle xxxx at bundle path &#39;Payload&#39;">
+  <meta name="twitter:description" content="第一次提交AppStore，遇到很多坑 = =。">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="OC 字符串操作整理">
-  <meta property="og:description" content="```////  main.m//  StringMK////  Created by LXC on 16/1/7.//  Copyright © 2016年 LXC. All rights reserved.//  2016年01月07日23:51:29//">
+  <meta property="og:title" content="Missing or invalid signature. The bundle xxxx at bundle path &#39;Payload&#39;">
+  <meta property="og:description" content="第一次提交AppStore，遇到很多坑 = =。">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
+  <link rel="canonical" href="http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload'/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -157,10 +157,10 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">OC 字符串操作整理</h1>
+    <h1 class="post-title">Missing or invalid signature. The bundle xxxx at bundle path 'Payload'</h1>
     <div class="post-meta">
       <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2016-01-07 23:57:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-01-07</time>  
+      <time datetime="2016-06-25 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-06-25</time>  
          
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
@@ -169,182 +169,40 @@
 
 
   <section class="post">
-    <div class="highlighter-rouge"><pre class="highlight"><code>//
-//  main.m
-//  StringMK
-//
-//  Created by LXC on 16/1/7.
-//  Copyright © 2016年 LXC. All rights reserved.
-//  2016年01月07日23:51:29
-//
+    <p>第一次提交AppStore，遇到很多坑 = =。</p>
 
-#import &lt;Foundation/Foundation.h&gt;
+<p>一直很迷 = =</p>
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
-        //C
-        char *s = "Hello C";
-        //OC
-        NSString *str = @"Hello";
-        //C --&gt; OC
-        NSString *str1 = [NSString stringWithUTF8String:s];
-        NSLog(@"str1 = %@",str1);
-        //OC --&gt; C
-        NSLog(@"str2 = %s",[str UTF8String]);
-        
-        //创建字符串
-        NSString *str3 = @"IOS";//不需要自己释放内存
-        NSString *str4 = [[NSString alloc] init];//先分配内存 在初始化
-        str4 = @"IOS";
-        
-        //格式化字符串
-        int a = 10;
-        int b = 20;
-        
-        NSString *str5 = [NSString stringWithFormat:@"a = %d,b = %d",a,b];
-        NSLog(@"str5 = %@",str5);
-        
-        //拼接字符串
-        NSString *str6 = [str5 stringByAppendingString:str3];
-        NSLog(@"str6 = %@",str6);
-        
-        //大小写转换
-        NSString *str7 = @"ASDASDA";
-        NSString *str8 =  [str7 lowercaseString];
-        NSLog(@"str8 = %@",str8);
-        NSString *str9 = [str7 uppercaseString];
-        NSLog(@"str9 = %@",str9);
-        
-        //前缀和后缀的判断
-        NSString *str10 = @"www.liuxincheng.win";
-        BOOL hasPrFix  = [str10 hasPrefix:@"www."];
-        if (hasPrFix) {
-            NSLog(@"YES");
-        }else{
-            NSLog(@"NO");
-        }
-        BOOL hasSuffix  = [str10 hasSuffix:@".win"];
-        if (hasSuffix) {
-            NSLog(@"YES");
-        }else{
-            NSLog(@"NO");
-        }
+<p>等结束整理一下。</p>
 
-        //判断两个字符川是否相同
-        
-        NSString *str11 = @"LXC";
-        NSString *str12 = @" LXC";
-        if ([str11 isEqualToString:str12]) {
-            NSLog(@"SAME");
-        }else{
-            NSLog(@"diff");
-        }
-        
-        //比较字符串 NSComparisonResult
-        
-        //分割字符串
-        //按照指定字符分割字符串
-        NSString *str13 = @"a,b,c,d,e,f";
-        NSArray *strarray = [str13 componentsSeparatedByString:@","];
-        for (NSString *str in strarray) {
-            NSLog(@"STR = %@",str);
-        }
-        
-        //按照范围切割字符串
-        NSRange range = NSMakeRange(1,5);
-        NSString *str14 = [str13 substringWithRange:range];
-        NSLog(@"STR14 = %@",str14);
-        
-        //从某一位开始截取
-        NSString *str15 = [str13 substringFromIndex:2];
-        NSLog(@"STR15 = %@",str15);
-        //截取到某一位
-        NSString *str16 = [str13 substringToIndex:2];
-        NSLog(@"STR16 = %@",str16);
-        //拆分到每一个字符
-        for(int i=0;i&lt;[str13 length];i++){
-            NSLog(@"STRCHAR =  %c",[str13 characterAtIndex:i]);
-        }
-        
-        
-        //查找
-        NSString *str17 = @"ad ad fe ef cv gh";
-        NSRange range1 = [str17 rangeOfString:@"cv"];
-        NSLog(@"range.location : %ld range1.length : %ld",range1.location,range1.length);
-        
-        //替换
-        NSString *str18 = @"Hello ios ,hello lxc";
-        //替换某一个范围的内容
-        NSString *str19 = [str18 stringByReplacingCharactersInRange:NSMakeRange(0, 5) withString:@"LXC"];
-        NSLog(@"%@",str19);
-        
-        //用指定字符串替换原字符串中的字串
-        /*
-         第一个参数是被替换的内容
-         第二个参数是要替换的内容
-         */
-        NSString *str20 = [str18 stringByReplacingOccurrencesOfString:@"Hello" withString:@"ni hao"];
-        NSLog(@"%@",str20);
-        
-        //读取文件 文件来源
-        //本地文件 网络文件
-        
-        NSString *str21 = @"www.liuxincheng.win";
-        //网络路径
-        NSURL *httpURL = [NSURL URLWithString:str21];
-        //本地路径
-        NSString *str22 = @"/Users/lxc/Desktop/test.txt";
-        NSURL *fileURL = [NSURL fileURLWithPath:str22];
-        //读取网络文件
-        NSString *httpstr = [NSString stringWithContentsOfURL:httpURL encoding:NSUTF8StringEncoding error:nil];
-        //读取本地文件
-        NSString *filestr = [NSString stringWithContentsOfFile:str22 encoding:NSUTF8StringEncoding error:nil];
-        
-        NSLog(@"HTTP %@ FILE %@",httpstr,filestr);
-        
-        //写入文件
-        NSString *str23 = @"jinzhuanch";
-        BOOL isok =  [str23 writeToFile:@"/Users/lxc/Desktop/demo.txt" atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        
-        if (isok) {
-            NSLog(@"OK");
-        }else{
-            NSLog(@"NO");
-        }
-        //可变字符串是字符串的子类
-        NSMutableString *str24 = [[NSMutableString alloc] initWithCapacity:10];
-        [str24 setString:@"kun"];
-        
-        //追加字符串
-        [str24 appendFormat:@" siwole"];
-        NSLog(@"str24 = %@",str24);
-        int c = 10;
-        [str24 appendFormat:@" ---%i",c];
-        NSLog(@"str25 ---- %@",str24);
-        
-        //替换字符串
-        NSRange ranges = [str24 rangeOfString:@"siwole"];
-        [str24 replaceCharactersInRange:ranges withString:@"sleep"];
-        NSLog(@"str26 --- %@",str24);
-        
-        //插入字符串
-        [str24 insertString:@"OMG" atIndex:2];
-        NSLog(@"str27 == %@",str24);
-        
-        //删除字符串
-        NSRange rangess = [str24 rangeOfString:@"OMG"];
-        [str24 deleteCharactersInRange:rangess];
-        NSLog(@"str28 ==== %@",str24);
-        
-    }
-    return 0;
-}
+<hr />
 
-</code></pre>
-</div>
+<p>提交AppStore时候报了这个</p>
+
+<blockquote>
+  <p>Missing or invalid signature. The bundle xxxx at bundle path ‘Payload’</p>
+</blockquote>
+
+<p>查了查 发现是 <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer">AppleWWDRCA.cer</a> 证书过期，需要重新下载</p>
+
+<hr />
+
+<ul>
+  <li>
+    <p>先从链接下载证书，然后在 钥匙串 <strong>Apple Worldwide Developer Relations Certification Authority</strong> 过期证书删了</p>
+  </li>
+  <li>
+    <p>再把你的其他相关开发的证书删除 推送什么的。</p>
+  </li>
+  <li>
+    <p>重新导入下载的 <strong>AppleWWDRCA.cer 和 其他相关的证书</strong></p>
+  </li>
+  <li>
+    <p>重新打包提交就好了。</p>
+  </li>
+</ul>
+
+<hr />
 
 
   </section>
@@ -371,13 +229,13 @@ int main(int argc, const char * argv[]) {
        <ul class="pager">
         
         <li class="previous">
-            <a href="/2016/01/2016/" data-toggle="tooltip" data-placement="top" title="2016">上一篇：  <span>2016</span>
+            <a href="/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" data-toggle="tooltip" data-placement="top" title="OC 字符串操作整理">上一篇：  <span>OC 字符串操作整理</span>
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload'/" data-toggle="tooltip" data-placement="top" title="Missing or invalid signature. The bundle xxxx at bundle path 'Payload'">下一篇：  <span>Missing or invalid signature. The bundle xxxx at bundle path 'Payload'</span>
+            <a href="/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-toggle="tooltip" data-placement="top" title="CTAssetsPickerController 选中图片不显示对号的问题解决">下一篇：  <span>CTAssetsPickerController 选中图片不显示对号的问题解决</span>
             </a>
         </li>
         
@@ -387,7 +245,7 @@ int main(int argc, const char * argv[]) {
 <section class="post-comments">
 
   
-    <div class="ds-thread" data-thread-key="/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" data-title="OC 字符串操作整理" data-url="http://localhost:4000/2016/01/OC-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/"></div>
+    <div class="ds-thread" data-thread-key="/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload'/" data-title="Missing or invalid signature. The bundle xxxx at bundle path 'Payload'" data-url="http://localhost:4000/2016/06/Missing-or-invalid-signature.-The-bundle-xxxx-at-bundle-path-'Payload'/"></div>
 
     <script type="text/javascript">
         var duoshuoQuery = {short_name:"yoruo"};
