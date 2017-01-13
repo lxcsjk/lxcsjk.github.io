@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>IDEA maven 项目打包 jdk版本问题</title>
-  <meta name="description" content="之前在使用Maven构建的项目中打包总是报错。本机是  jdk1.7.0_79">
+  <title>YoRuo:想变得更好</title>
+  <meta name="description" content="欢迎来到我的Blog~">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="IDEA maven 项目打包 jdk版本问题">
-  <meta name="twitter:description" content="之前在使用Maven构建的项目中打包总是报错。本机是  jdk1.7.0_79">
+  <meta name="twitter:title" content="YoRuo:想变得更好">
+  <meta name="twitter:description" content="欢迎来到我的Blog~">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="IDEA maven 项目打包 jdk版本问题">
-  <meta property="og:description" content="之前在使用Maven构建的项目中打包总是报错。本机是  jdk1.7.0_79">
+  <meta property="og:title" content="YoRuo:想变得更好">
+  <meta property="og:description" content="欢迎来到我的Blog~">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/">
+  <link rel="canonical" href="http://localhost:4000/page/2/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -87,7 +87,7 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed" style="background-image: url('http://oh6uhie7j.bkt.clouddn.com/b1ackground-cover.jpg')">
+    <header class="panel-cover " style="background-image: url('http://oh6uhie7j.bkt.clouddn.com/b1ackground-cover.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
@@ -155,109 +155,50 @@
 
     <div class="content-wrapper">
         <div class="content-wrapper__inner">
-            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post-header">
-    <h1 class="post-title">IDEA maven 项目打包 jdk版本问题</h1>
-    <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2016-11-25 15:48:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-25</time>  
-         
-      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
-    </p>
-    </div>
-  </header>
+            <div class="main-post-list hidden">
 
-
-  <section class="post">
-    <p>之前在使用Maven构建的项目中打包总是报错。
-本机是  <code class="highlighter-rouge">jdk1.7.0_79</code></p>
-
-<p>打包确是1.5</p>
-
-<p>那么要在 <code class="highlighter-rouge">setting.xml</code>  的  <code class="highlighter-rouge">profiles</code>  节点中加这么一段配置</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;profile&gt; 
-  &lt;id&gt;jdk17&lt;/id&gt;  
-  &lt;activation&gt; 
-    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;  
-    &lt;jdk&gt;1.7&lt;/jdk&gt; 
-  &lt;/activation&gt;  
-  &lt;properties&gt; 
-    &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;  
-    &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;  
-    &lt;maven.compiler.compilerVersion&gt;1.7&lt;/maven.compiler.compilerVersion&gt; 
-  &lt;/properties&gt; 
-&lt;/profile&gt;
-
-</code></pre>
-</div>
-
-<p>在IDEA 勾选上这个</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161125-0.png" alt="勾选" /></p>
-
-<p>再执行编译即可</p>
-
-
-
-  </section>
-
-<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-        
-        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-        
-      </ul>
-      <div class="ds-share-icons-more">
+  <ol class="post-list">
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2015/06/%E5%86%8D%E8%A7%81-%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/" title="访问 再见，我的大学">再见，我的大学</a></h2>
+      <p class="excerpt">&hellip;</p>
+      <div class="post-list__meta">        
+        <time datetime="2015-06-30 20:00:03 +0800" class="post-list__meta--date date">
+          <img src="/images/calendar.png" width="20px" /> 
+          2015-06-30</time> 
+        <div class = "tag-img-icon">
+          <img src="/images/tag-icon.svg" width="20px" /> 
+        </div>
+        <a href="/tags">
+          <div class = "post-list-icon-mate">
+            <span class="post-list__meta--tags-right">iOS文件下载断点续传</span>
+          </div>
+          <div class = "post-list-small-mate">
+          <a class="btn-border-small" href=/2015/06/%E5%86%8D%E8%A7%81-%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/>阅读全文 » </a>
+          </div>
       </div>
-    </div>
- </div>
+      <hr class="post-list__divider" />
+    </li>
+    
+  </ol>
 
-</article>
+  <hr class="post-list__divider " />
 
-<section>
-       <ul class="pager">
-        
-        <li class="previous">
-            <a href="/2016/11/CTAssetsPickerController-%E9%80%89%E4%B8%AD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%AF%B9%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-toggle="tooltip" data-placement="top" title="CTAssetsPickerController 选中图片不显示对号的问题解决">上一篇：  <span>CTAssetsPickerController 选中图片不显示对号的问题解决</span>
-            </a>
-        </li>
-        
-        
-        <li class="next">
-            <a href="/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/" data-toggle="tooltip" data-placement="top" title="h5上传图片压缩包服务端解压并上传图片">下一篇：  <span>h5上传图片压缩包服务端解压并上传图片</span>
-            </a>
-        </li>
-        
-    </ul>
-</section>
+<nav class="pagination" role="navigation">
 
-<section class="post-comments">
+	<!-- 百度搜索 -->
+	<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=12441349038163667913' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+	</script>
+	
+    
+        <a class="newer-posts pagination__newer btn btn-small btn-tertiary" href="/#blog">&larr; 最近</a>
+    
+    <span class="pagination__page-number">2 / 2</span>
+    
+</nav>
 
-  
-    <div class="ds-thread" data-thread-key="/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/" data-title="IDEA maven 项目打包 jdk版本问题" data-url="http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/"></div>
 
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"yoruo"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-  
-  
-  
-  
-</section>
-
+</div>
 
             <section class="footer">
     <footer>
