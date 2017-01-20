@@ -7,16 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>Tomcat和Solr的整合</title>
-  <meta name="description" content="这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。">
+  <meta name="description" content="">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Tomcat和Solr的整合">
-  <meta name="twitter:description" content="这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。">
+  <meta name="twitter:description" content="">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="Tomcat和Solr的整合">
-  <meta property="og:description" content="这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。">
+  <meta property="og:description" content="">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -169,58 +169,82 @@
 
 
   <section class="post">
-    <p>这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。
+    <hr />
+
+<p>这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。
 Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。</p>
 
-<p>1 .  搭建环境</p>
+<hr />
 
-<div class="highlighter-rouge"><pre class="highlight"><code> MacBook pro 15款840 
- OS X 10.10.5
- solr-5.2.1.tgz
- apache-tomcat-8.0.26
+<h3 id="section">搭建环境</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>MacBook pro 15款840 
+OS X 10.10.5
+solr-5.2.1.tgz
+apache-tomcat-8.0.26
 </code></pre>
 </div>
 
-<p>2 . 解压压缩包</p>
+<hr />
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    tar -zxf  solr-5.2.1.tgz
+<h3 id="section-1">解压压缩包</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tar -zxf  solr-5.2.1.tgz
 </code></pre>
 </div>
 
-<p>3 . 移动war包
-     <img src="http://oh6uhie7j.bkt.clouddn.com/20151111053404840" alt="这里写图片描述" /></p>
+<hr />
 
-<p>将这个war包，移动到 tomcat的webapps，然后启动或者解压war。</p>
+<h3 id="war">移动war包</h3>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/20151111053404840" alt="这里写图片描述" /></p>
+
+<p><strong>将这个war包，移动到 tomcat的webapps，然后启动或者解压war。</strong></p>
 
 <p><img src="http://oh6uhie7j.bkt.clouddn.com/20151111053535622" alt="这里写图片描述" /></p>
 
 <p>启动命令： 进入tomcat的bin下</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>      ./startup.sh
+<div class="highlighter-rouge"><pre class="highlight"><code>./startup.sh
 </code></pre>
 </div>
-<p>4 .拷贝依赖需要的jar包</p>
 
-<ol>
+<hr />
+
+<h3 id="jar">拷贝依赖需要的jar包</h3>
+
+<ul>
   <li>
-    <p>复制solr-5.2.1/dist/ solr-dataimporthandler-5.2.1.jar ，solr-dataimporthandler-extras-5.2.1.jar，solr-cell-5.2.1.jar，到tomcat中的solr/WEB-INF/lib下，将数据库驱动也需要放入这里。</p>
+    <p>复制 <code class="highlighter-rouge">solr-5.2.1/dist/solr-dataimporthandler-5.2.1.jar</code> ，<code class="highlighter-rouge">solr-dataimporthandler-extras-5.2.1.jar</code>，<code class="highlighter-rouge">solr-cell-5.2.1.ja</code>r，到tomcat中的<code class="highlighter-rouge">solr/WEB-INF/lib</code>下，将<strong>数据库驱动</strong>也需要放入这里。</p>
   </li>
   <li>
-    <p>复制solr-5.2.1\server\lib\ext下的jar包到solr/WEB-INF/lib下。这是打印日志所需要的jar包，然后在solr/WEB-INF 下新建classes文件夹 ，将solr-5.2.1/example/resources/log4j.properties 复制到 /usr/local/tomcat/webapps/solr/WEB-INF/classes/</p>
+    <p>复制<code class="highlighter-rouge">solr-5.2.1\server\lib\ext</code>下的jar包到<code class="highlighter-rouge">solr/WEB-INF/lib</code>下。这是打印日志所需要的jar包，然后在<code class="highlighter-rouge">solr/WEB-INF</code> 下新建<code class="highlighter-rouge">classes</code>文件夹 ，将<code class="highlighter-rouge">solr-5.2.1/example/resources/log4j.properties</code> 复制到 <code class="highlighter-rouge">/usr/local/tomcat/webapps/solr/WEB-INF/classes/</code></p>
   </li>
   <li>
-    <p>这里使用smartcn作为中文分词组件，将solr-5.2.1/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-5.2.1.jar复制到tomcat/solr/WEB-INF/lib下</p>
+    <p>这里使用smartcn作为中文分词组件，将<code class="highlighter-rouge">solr-5.2.1/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-5.2.1.jar</code> 复制到 <code class="highlighter-rouge">tomcat/solr/WEB-INF/lib</code> 下</p>
   </li>
-</ol>
+</ul>
 
-<p>5 .创建Solr_Home</p>
+<hr />
 
-<p>创建新的文件夹，solr_home，将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。</p>
+<h3 id="solrhome">创建 Solr_Home</h3>
 
-<p>6 .SOLR_HOME配置
-将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。
-配置修改tomcat/webapps/solr/WEB-INF/web.xml
-释放对这句话的注释。并且修改tomcat的server.xml</p>
+<ul>
+  <li>创建新的文件夹，<code class="highlighter-rouge">solr_home</code>，将<code class="highlighter-rouge">solr-5.2.1/server/solr</code>中的文件复制到<code class="highlighter-rouge">/Users/lxc/JavaSofe/solr_home</code>下。</li>
+</ul>
+
+<hr />
+
+<h3 id="solrhome-1">SOLR_HOME配置</h3>
+
+<ul>
+  <li>
+    <p>将<code class="highlighter-rouge">solr-5.2.1/server/solr</code>中的文件复制到<code class="highlighter-rouge">/Users/lxc/JavaSofe/solr_home</code>下。</p>
+  </li>
+  <li>
+    <p>配置修改<code class="highlighter-rouge">tomcat/webapps/solr/WEB-INF/web.xml</code></p>
+  </li>
+</ul>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>    &lt;env-entry&gt;
        &lt;env-entry-name&gt;solr/home&lt;/env-entry-name&gt;
@@ -230,18 +254,32 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;Connector port="8080" protocol="HTTP/1.1"
+<ul>
+  <li>修改tomcat的<code class="highlighter-rouge">server.xml</code></li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;Connector port="8080" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443" 
                URLEncoding="UTF-8"/&gt;
 </code></pre>
 </div>
 
-<p>7 .配置core目录
-    在solr_home下创建一个文件夹szss，并且复制solr-5.2.1/service/solr/configsets/basic_configs/conf  到   solr_home/szss下。</p>
+<hr />
 
-<p>修改solrconfig.xml
-修改solr_home/test/conf/solrconfig.xml</p>
+<h3 id="core">配置core目录</h3>
+
+<ul>
+  <li>在<code class="highlighter-rouge">solr_home</code>下创建一个文件夹<code class="highlighter-rouge">szss</code>(名字随便)，并且复制<code class="highlighter-rouge">solr-5.2.1/service/solr/configsets/basic_configs/conf</code>  到   <code class="highlighter-rouge">solr_home/szss</code>下。</li>
+</ul>
+
+<hr />
+
+<h3 id="solrconfigxml">修改solrconfig.xml</h3>
+
+<ul>
+  <li>修改 <code class="highlighter-rouge">solr_home/test/conf/solrconfig.xml</code></li>
+</ul>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler"&gt;
      &lt;lst name="defaults"&gt;
@@ -250,7 +288,9 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 &lt;/requestHandler&gt;
 </code></pre>
 </div>
-<p>新建一个data-config.xml文件</p>
+<hr />
+
+<h3 id="data-configxml">新建一个data-config.xml文件</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
 <span class="nt">&lt;dataConfig&gt;</span>
@@ -270,7 +310,7 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 </code></pre>
 </div>
 
-<p>8 .编辑schema.xml</p>
+<h3 id="schemaxml">编辑schema.xml</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
 //这个name要和你新建的solr_home文件下得那个文件名相同
@@ -542,19 +582,30 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 </code></pre>
 </div>
 
-<p>主要加了查询的参数类型什么的。</p>
+<p><strong>主要加了查询的参数类型什么的。</strong></p>
 
-<p>9 .打开浏览器localhost:8080/solr
+<hr />
+
+<h3 id="section-2">测试</h3>
+
+<ul>
+  <li>
+    <p>测试一下  <code class="highlighter-rouge">localhost:8080/solr</code>
 <img src="http://oh6uhie7j.bkt.clouddn.com/20151111060058755" alt="这里写图片描述" /></p>
-
-<p>然后点击
+  </li>
+  <li>
+    <p>然后点击
 <img src="http://oh6uhie7j.bkt.clouddn.com//20151111060516777" alt="这里写图片描述" /></p>
-
-<p>这个名字不能取成其他的 需要和你在solr_home下新建文件夹名相同。
+  </li>
+  <li>
+    <p>这个名字不能取成其他的 需要和你在<code class="highlighter-rouge">solr_home</code>下新建文件夹名相同。
 <img src="http://oh6uhie7j.bkt.clouddn.com//20151111060707483" alt="这里写图片描述" /></p>
+  </li>
+</ul>
 
-<p>然后
-<img src="http://oh6uhie7j.bkt.clouddn.com//20151111060818274" alt="这里写图片描述" /></p>
+<p>然后</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com//20151111060818274" alt="这里写图片描述" /></p>
 
 <p>因为我之前新建过所以是test1</p>
 

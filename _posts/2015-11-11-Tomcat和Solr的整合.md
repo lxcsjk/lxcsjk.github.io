@@ -6,51 +6,73 @@ categories: jekyll update
 tags: Solr
 ---
 
+---
+
 这个本来在9月份就弄好了。太久了，已经忘了。所以晚上也闲着没事，反正通宵就想写着玩玩。发现好多已经忘了。等于又从头看一遍。
 Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而且在支持分词，这对于模糊查询有着极大的帮助。也不BB了。上代码。
 
- 1 .  搭建环境  
- 
-	 MacBook pro 15款840 
-     OS X 10.10.5
-     solr-5.2.1.tgz
-     apache-tomcat-8.0.26
-     
- 2 . 解压压缩包
+---
+
+
+### 搭建环境  
+
 
 ```
-    tar -zxf  solr-5.2.1.tgz
+MacBook pro 15款840 
+OS X 10.10.5
+solr-5.2.1.tgz
+apache-tomcat-8.0.26
 ```
 
- 3 . 移动war包
-     ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111053404840)
+---
      
-将这个war包，移动到 tomcat的webapps，然后启动或者解压war。
+### 解压压缩包
+
+
+```
+tar -zxf  solr-5.2.1.tgz
+```
+
+---
+
+### 移动war包
+
+![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111053404840)
+     
+**将这个war包，移动到 tomcat的webapps，然后启动或者解压war。**
 
 ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111053535622)
 
- 启动命令： 进入tomcat的bin下 
+启动命令： 进入tomcat的bin下 
             
 
 ```
-      ./startup.sh
+./startup.sh
 ```
-4 .拷贝依赖需要的jar包
 
- 1. 复制solr-5.2.1/dist/ solr-dataimporthandler-5.2.1.jar ，solr-dataimporthandler-extras-5.2.1.jar，solr-cell-5.2.1.jar，到tomcat中的solr/WEB-INF/lib下，将数据库驱动也需要放入这里。
+---
 
- 2. 复制solr-5.2.1\server\lib\ext下的jar包到solr/WEB-INF/lib下。这是打印日志所需要的jar包，然后在solr/WEB-INF 下新建classes文件夹 ，将solr-5.2.1/example/resources/log4j.properties 复制到 /usr/local/tomcat/webapps/solr/WEB-INF/classes/
+### 拷贝依赖需要的jar包
+
+ - 复制 ```solr-5.2.1/dist/solr-dataimporthandler-5.2.1.jar``` ，```solr-dataimporthandler-extras-5.2.1.jar```，```solr-cell-5.2.1.ja```r，到tomcat中的```solr/WEB-INF/lib```下，将**数据库驱动**也需要放入这里。
+
+ - 复制```solr-5.2.1\server\lib\ext```下的jar包到```solr/WEB-INF/lib```下。这是打印日志所需要的jar包，然后在```solr/WEB-INF``` 下新建```classes```文件夹 ，将```solr-5.2.1/example/resources/log4j.properties``` 复制到 ```/usr/local/tomcat/webapps/solr/WEB-INF/classes/```
  
- 3. 这里使用smartcn作为中文分词组件，将solr-5.2.1/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-5.2.1.jar复制到tomcat/solr/WEB-INF/lib下
+ - 这里使用smartcn作为中文分词组件，将```solr-5.2.1/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-5.2.1.jar``` 复制到 ```tomcat/solr/WEB-INF/lib``` 下
 
-5 .创建Solr_Home
+---
 
-创建新的文件夹，solr_home，将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。
+### 创建 Solr_Home
+	
+ - 创建新的文件夹，```solr_home```，将```solr-5.2.1/server/solr```中的文件复制到```/Users/lxc/JavaSofe/solr_home```下。
 
-6 .SOLR_HOME配置
-将solr-5.2.1/server/solr中的文件复制到/Users/lxc/JavaSofe/solr_home下。
-配置修改tomcat/webapps/solr/WEB-INF/web.xml
-释放对这句话的注释。并且修改tomcat的server.xml  
+---
+
+### SOLR_HOME配置
+
+ - 将```solr-5.2.1/server/solr```中的文件复制到```/Users/lxc/JavaSofe/solr_home```下。
+
+ - 配置修改```tomcat/webapps/solr/WEB-INF/web.xml```
 
 ```
     <env-entry>
@@ -60,18 +82,26 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
     </env-entry>
 ```
 
+ - 修改tomcat的```server.xml ``` 
+
 ```
-    <Connector port="8080" protocol="HTTP/1.1"
+<Connector port="8080" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443" 
                URLEncoding="UTF-8"/>
 ```
 
-7 .配置core目录
-    在solr_home下创建一个文件夹szss，并且复制solr-5.2.1/service/solr/configsets/basic_configs/conf  到   solr_home/szss下。
+---
 
-修改solrconfig.xml
-修改solr_home/test/conf/solrconfig.xml
+### 配置core目录  
+
+ - 在```solr_home```下创建一个文件夹```szss```(名字随便)，并且复制```solr-5.2.1/service/solr/configsets/basic_configs/conf```  到   ```solr_home/szss```下。
+
+---
+
+### 修改solrconfig.xml
+
+ - 修改 ```solr_home/test/conf/solrconfig.xml```
 
 ```
 <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
@@ -80,7 +110,9 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
      </lst>
 </requestHandler>
 ```
-新建一个data-config.xml文件
+---
+
+### 新建一个data-config.xml文件
 
 ```
 <?xml version="1.0" ?>
@@ -100,7 +132,7 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 </dataConfig>
 ```
 
-8 .编辑schema.xml
+### 编辑schema.xml
 
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -372,22 +404,26 @@ Solr全文搜索引擎，还是蛮实用的。很能提高查询的性能。而�
 
 ```
 
-主要加了查询的参数类型什么的。
+**主要加了查询的参数类型什么的。**
 
-9 .打开浏览器localhost:8080/solr
+---
+
+### 测试
+
+ - 测试一下  ```localhost:8080/solr```
 ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111060058755)
 
-然后点击
+ - 然后点击
 ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060516777)
 
-这个名字不能取成其他的 需要和你在solr_home下新建文件夹名相同。
+ - 这个名字不能取成其他的 需要和你在```solr_home```下新建文件夹名相同。
 ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060707483)
 
 然后
+
 ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060818274)
 
 因为我之前新建过所以是test1
-
 
 点击DataImport 引入数据 生成索引，
 ![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060957295) 
