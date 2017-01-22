@@ -5,9 +5,186 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Jan 2017 11:24:01 +0800</pubDate>
-    <lastBuildDate>Fri, 20 Jan 2017 11:24:01 +0800</lastBuildDate>
+    <pubDate>Sun, 22 Jan 2017 21:00:50 +0800</pubDate>
+    <lastBuildDate>Sun, 22 Jan 2017 21:00:50 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>iOS抓包工具 - Charles</title>
+        <description>&lt;p&gt;过年也在家也没啥事情，闲着无聊就整理整理自己学习iOS的经历以及解决的问题and知识点（虽然我很菜😂😂）。温故而知新吧😀😀&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Charles&lt;/strong&gt; 一个网络抓包工具，可以清晰看到网络请求参数值以及返回的response结果。对于日常开发还是非常有帮助的。&lt;/p&gt;
+
+&lt;h3 id=&quot;charles&quot;&gt;安装 Charles&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.charlesproxy.com/&quot;&gt;有钱请支持正版&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/charles-proxy-4.0.1.zip&quot;&gt;没钱戳这里(请支持正版)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;拖入  &lt;strong&gt;应用程序&lt;/strong&gt;  即可&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;charles-1&quot;&gt;Charles的简单使用&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将Charles设置成系统的代理服务器。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如图。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-193921@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后就可以看到很多网络请求出现在Charles的界面里&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-193551@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;显示视图&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Charles提供了两种显示视图的方式，分别为 &lt;strong&gt;Structure&lt;/strong&gt; 和 &lt;strong&gt;Sequence&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;区别如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Structure&lt;/strong&gt; 视图将网络请求按访问的域名分类。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sequence&lt;/strong&gt; 视图将网络请求按访问的时间排序。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;前面的图为&lt;strong&gt;Structure&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;下面的图为&lt;strong&gt;Sequence&lt;/strong&gt;
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-194802@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;单击其中一个网络请求，根据面板上的tag即可在下面空白看到相应的&lt;strong&gt;request&lt;/strong&gt;请求参数和&lt;strong&gt;response&lt;/strong&gt;返回结果了&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;过滤网络请求&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在 &lt;strong&gt;Sequence&lt;/strong&gt; 视图模式有一个 &lt;strong&gt;Filter&lt;/strong&gt; 的输入框&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-195706@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;另一种方式，选中一个在右键出的下拉菜单中点击 &lt;strong&gt;Focus&lt;/strong&gt;，然后&lt;strong&gt;Filter&lt;/strong&gt; 的输入框后面勾选 &lt;strong&gt;Focused&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-200349@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在 &lt;strong&gt;Structure&lt;/strong&gt; 视图模式 在菜单栏选择 &lt;code class=&quot;highlighter-rouge&quot;&gt;Proxy-&amp;gt;Recording Settings&lt;/code&gt;，然后选择 Include 栏，选择添加一个项目，然后填入需要监控的协议，主机地址，端口号。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-200139@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;抓取移动设备上的请求封包&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;设置Charles的代理功能 如图&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-201137@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;手机上的设置&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;PC和手机最好用同一个网关要方便点，毕竟都是在办公室工作嘛。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;获取到电脑的ip地址&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-201522@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置手机的HTTP代理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;进入到 “设置” - “无线局域网” - “【你的WiFi名字】旁边的详情”
+向下拉到最底，填入你PC的ip和Charles的代理端口号&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/6646E7369EAC5D316F3E2C9AFD4C5513.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;选择 &lt;strong&gt;Allow&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-202158@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在面版将会看到手机发出接受的网络请求了。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;https&quot;&gt;抓包HTTPS&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;安装 &lt;strong&gt;Charles&lt;/strong&gt; 的CA证书&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;“菜单栏” - “SSL Proxying” - “Install Charles Root Certificate”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-202745@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在钥匙串中可以搜索到
+&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-202909@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后选中一条 HTTPS 请求，右键选择 &lt;strong&gt;Enable SSL proxy&lt;/strong&gt; 然后就能看到不再乱码的请求信息了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-203656@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;抓包移动设备的SSL请求&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里需要在手机上安装一个证书，如图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/C140ACC2-C585-4CCA-9CE2-394FCA2B9359.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-203821@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;弹出一个提示告诉你 需要设置代理然后用手机浏览器打开一个地址安装一个证书  &lt;a href=&quot;http://chls.pro/ssl&quot;&gt;地址&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/1D32AC22C2B0BF8458259E30A7DF427F.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后和上面一样 &lt;strong&gt;Enable SSL proxy&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;example ~&lt;/p&gt;
+
+&lt;p&gt;抓包keep的小视频&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-205909@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;模拟网络环境差&lt;/h3&gt;
+
+&lt;p&gt;Charles提供这样的支持，只需要更改添加配置与host即可。如图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170122-205122@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;目前常常用到就是这么多~~~ 如果有不足可以看看 &lt;a href=&quot;http://blog.devtang.com/2015/11/14/charles-introduction/&quot;&gt;唐巧大神的博客&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 22 Jan 2017 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/01/iOS%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7-Charles/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/01/iOS%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7-Charles/</guid>
+        
+        <category>Charles</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>2017</title>
@@ -1652,51 +1829,6 @@ public class DeCompressUtil {
         <guid isPermaLink="true">http://localhost:4000/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/</guid>
         
         <category>java</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>IDEA maven 项目打包 jdk版本问题</title>
-        <description>&lt;p&gt;之前在使用Maven构建的项目中打包总是报错。
-本机是  &lt;code class=&quot;highlighter-rouge&quot;&gt;jdk1.7.0_79&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;打包确是1.5&lt;/p&gt;
-
-&lt;p&gt;那么要在 &lt;code class=&quot;highlighter-rouge&quot;&gt;setting.xml&lt;/code&gt;  的  &lt;code class=&quot;highlighter-rouge&quot;&gt;profiles&lt;/code&gt;  节点中加这么一段配置&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;profile&amp;gt; 
-  &amp;lt;id&amp;gt;jdk17&amp;lt;/id&amp;gt;  
-  &amp;lt;activation&amp;gt; 
-    &amp;lt;activeByDefault&amp;gt;true&amp;lt;/activeByDefault&amp;gt;  
-    &amp;lt;jdk&amp;gt;1.7&amp;lt;/jdk&amp;gt; 
-  &amp;lt;/activation&amp;gt;  
-  &amp;lt;properties&amp;gt; 
-    &amp;lt;maven.compiler.source&amp;gt;1.7&amp;lt;/maven.compiler.source&amp;gt;  
-    &amp;lt;maven.compiler.target&amp;gt;1.7&amp;lt;/maven.compiler.target&amp;gt;  
-    &amp;lt;maven.compiler.compilerVersion&amp;gt;1.7&amp;lt;/maven.compiler.compilerVersion&amp;gt; 
-  &amp;lt;/properties&amp;gt; 
-&amp;lt;/profile&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在IDEA 勾选上这个&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161125-0.png&quot; alt=&quot;勾选&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;再执行编译即可&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 25 Nov 2016 15:48:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/maven%E6%89%93%E5%8C%85%E6%97%B6jdk%E7%89%88%E6%9C%AC%E9%94%99%E8%AF%AF/</guid>
-        
-        <category>maven</category>
         
         
         <category>jekyll</category>
