@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/2017/02/%E5%AF%BC%E5%85%A5Excel%E6%95%B0%E6%8D%AE%E5%B8%B8%E7%94%A8API/</loc>
+<lastmod>2017-02-06T20:00:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/2017/01/iOS%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7-Charles/</loc>
 <lastmod>2017-01-22T20:00:03+08:00</lastmod>
 </url>

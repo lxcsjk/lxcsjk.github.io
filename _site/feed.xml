@@ -5,9 +5,483 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 01 Feb 2017 13:12:01 +0800</pubDate>
-    <lastBuildDate>Wed, 01 Feb 2017 13:12:01 +0800</lastBuildDate>
+    <pubDate>Tue, 07 Feb 2017 12:14:08 +0800</pubDate>
+    <lastBuildDate>Tue, 07 Feb 2017 12:14:08 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>POI导入Excel数据常用API</title>
+        <description>&lt;!--因为2003只支持65535行，2007支持1048576行
+--&gt;
+
+&lt;h3 id=&quot;poi&quot;&gt;POI简介&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;hssf&quot;&gt;HSSF概况&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel和eventusermodel，即“用户模型”和“事件-用户模型”。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;poi-excel&quot;&gt;POI EXCEL文档结构类&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HSSFWorkbook excel文档对象&lt;/li&gt;
+  &lt;li&gt;HSSFSheet excel的sheet HSSFRow excel的行&lt;/li&gt;
+  &lt;li&gt;HSSFCell excel的单元格 HSSFFont excel字体&lt;/li&gt;
+  &lt;li&gt;HSSFName 名称 HSSFDataFormat 日期格式&lt;/li&gt;
+  &lt;li&gt;HSSFHeader sheet头&lt;/li&gt;
+  &lt;li&gt;HSSFFooter sheet尾&lt;/li&gt;
+  &lt;li&gt;HSSFCellStyle cell样式&lt;/li&gt;
+  &lt;li&gt;HSSFDateUtil 日期&lt;/li&gt;
+  &lt;li&gt;HSSFPrintSetup 打印&lt;/li&gt;
+  &lt;li&gt;HSSFErrorConstants 错误信息表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;excel&quot;&gt;EXCEL常用操作方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;建立Excel常用对象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;POIFSFileSystem fs = newPOIFSFileSystem(new FileInputStream(&quot;d:/test.xls&quot;));
+	
+//得到Excel工作簿对象
+HSSFWorkbook wb = new HSSFWorkbook(fs);
+	
+//得到Excel工作表对象
+HSSFSheet sheet = wb.getSheetAt(0);
+	
+//得到Excel工作表的行
+HSSFRow row = sheet.getRow(i);
+
+//得到Excel工作表指定行的单元格
+HSSFCell cell = row.getCell((short) j);
+
+//得到单元格样式
+cellStyle = cell.getCellStyle();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;建立Excel常用对象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//创建Excel工作簿对象
+HSSFWorkbook wb = new HSSFWorkbook();
+
+//创建Excel工作表对象
+HSSFSheet sheet = wb.createSheet(&quot;new sheet&quot;);
+
+//创建Excel工作表的行
+HSSFRow row = sheet.createRow((short)0);
+
+//创建单元格样式
+cellStyle = wb.createCellStyle();
+
+//创建Excel工作表指定行的单元格
+row.createCell((short)0).setCellStyle(cellStyle);
+
+//设置Excel工作表的值
+row.createCell((short)0).setCellValue(1);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置sheet名称和单元格内容&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wb.setSheetName(1, &quot;第一张工作表&quot;,HSSFCell.ENCODING_UTF_16);
+            
+cell.setEncoding((short) 1);   
+   
+cell.setCellValue(&quot;单元格内容&quot;);  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;取得sheet的数目&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wb.getNumberOfSheets();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;根据index取得sheet对象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFSheet sheet = wb.getSheetAt(0);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;取得有效的行数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int rowcount = sheet.getLastRowNum();   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;取得一行的有效单元格个数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;row.getLastCellNum();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单元格值类型读写&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//设置单元格为STRING类型
+cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+	
+//读取为数值类型的单元格内容
+cell.getNumericCellValue();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置列宽、行高&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sheet.setColumnWidth((short)column,(short)width);
+
+row.setHeight((short)height);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;添加区域，合并单元格&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//合并从第rowFrom行columnFrom列
+Region region = new Region((short)rowFrom,(short)columnFrom,(short)rowTo  
+(short)columnTo);
+
+//到rowTo行columnTo的区域
+sheet.addMergedRegion(region);
+
+//得到所有区域       
+sheet.getNumMergedRegions()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;保存Excel文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FileOutputStream fileOut = new FileOutputStream(path); 
+wb.write(fileOut); 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;根据单元格不同属性返回字符串数值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    public String getCellStringValue(HSSFCell cell) {
+        String cellValue = &quot;&quot;;
+        switch (cell.getCellType()) {
+            case HSSFCell.CELL_TYPE_STRING://字符串类型 
+                cellValue = cell.getStringCellValue();
+                if (cellValue.trim().equals(&quot;&quot;) || cellValue.trim().length() &amp;lt;= 0)
+                    cellValue = &quot;&quot;;
+                break;
+            case HSSFCell.CELL_TYPE_NUMERIC://数值类型 
+                cellValue = String.valueOf(cell.getNumericCellValue());
+                break;
+            case HSSFCell.CELL_TYPE_FORMULA://公式 
+                cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+                cellValue = String.valueOf(cell.getNumericCellValue());
+                break;
+            case HSSFCell.CELL_TYPE_BLANK:
+                cellValue = &quot;&quot;;
+                break;
+            case HSSFCell.CELL_TYPE_BOOLEAN:
+                break;
+            case HSSFCell.CELL_TYPE_ERROR:
+                break;
+            default:
+                break;
+        }
+        return cellValue;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;保存Excel文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFCellStyle style = wb.createCellStyle();
+//下边框
+style.setBorderBottom(HSSFCellStyle.BORDER_DOTTED);
+//左边框  
+style.setBorderLeft(HSSFCellStyle.BORDER_DOTTED);
+//右边框
+style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+//上边框
+style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置字体和内容位置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFFont f  = wb.createFont();
+//字号
+f.setFontHeightInPoints((short) 11);
+//加粗
+f.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
+style.setFont(f);
+//左右居中
+style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+//上下居中
+style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+//单元格内容的旋转的角度
+style.setRotation(short rotation);
+
+HSSFDataFormat df = wb.createDataFormat();
+//设置单元格数据格式
+style1.setDataFormat(df.getFormat(&quot;0.00%&quot;));
+//给单元格设公式    
+cell.setCellFormula(string);
+//单元格内容的旋转的角度     
+style.setRotation(short rotation);  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;插入图片&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray       
+ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();      
+BufferedImage bufferImg = ImageIO.read(new File(&quot;ok.jpg&quot;));      
+ImageIO.write(bufferImg,&quot;jpg&quot;,byteArrayOut);      
+//读进一个excel模版       
+FileInputStream fos = new FileInputStream(filePathName+&quot;/stencil.xlt&quot;);       
+fs = new POIFSFileSystem(fos);      
+//创建一个工作薄       
+HSSFWorkbook wb = new HSSFWorkbook(fs);      
+HSSFSheet sheet = wb.getSheetAt(0);      
+HSSFPatriarch patriarch = sheet.createDrawingPatriarch();      
+HSSFClientAnchor anchor = new HSSFClientAnchor(0,0,1023,255,(short) 0,0,(short)10,10);           
+patriarch.createPicture(anchor , wb.addPicture(byteArrayOut.toByteArray(),HSSFWorkbook.PICTURE_TYPE_JPEG));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;调整工作表位置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet(&quot;format sheet&quot;);     
+HSSFPrintSetup ps = sheet.getPrintSetup();     
+sheet.setAutobreaks(true);     
+ps.setFitHeight((short)1);     
+ps.setFitWidth((short)1);   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置打印区域&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFSheet sheet = wb.createSheet(&quot;Sheet1&quot;);     
+wb.setPrintArea(0, &quot;$A$1:$C$2&quot;);   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;标注脚注&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFSheet sheet = wb.createSheet(&quot;format sheet&quot;);     
+HSSFFooter footer = sheet.getFooter()     
+footer.setRight( &quot;Page &quot; + HSSFFooter.page() + &quot; of &quot; + HSSFFooter.numPages() );  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在工作单中清空行数据，调整行位置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet(&quot;row sheet&quot;);     
+// Create various cells and rows for spreadsheet.      
+// Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)      
+sheet.shiftRows(5, 10, -5); 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;选中指定的工作表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFSheet sheet = wb.createSheet(&quot;row sheet&quot;);     
+heet.setSelected(true); 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;工作表的放大缩小&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFSheet sheet1 = wb.createSheet(&quot;new sheet&quot;);     
+sheet1.setZoom(1,2);   // 50 percent magnification   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;头注和脚注&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFSheet sheet = wb.createSheet(&quot;new sheet&quot;);     
+HSSFHeader header = sheet.getHeader();     
+header.setCenter(&quot;Center Header&quot;);     
+header.setLeft(&quot;Left Header&quot;);     
+header.setRight(HSSFHeader.font(&quot;Stencil-Normal&quot;, &quot;Italic&quot;) +     
+HSSFHeader.fontSize((short) 16) + &quot;Right w/ Stencil-Normal Italic font and size 16&quot;);    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;自定义颜色&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFCellStyle style = wb.createCellStyle();     
+style.setFillForegroundColor(HSSFColor.LIME.index);     
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
+HSSFFont font = wb.createFont();     
+font.setColor(HSSFColor.RED.index);     
+style.setFont(font);     
+cell.setCellStyle(style);    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;小结&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置不显示excel网格线 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sheet.setDisplayGridlines(false);
+其中sheet是Sheet对象 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置excel单元格中的内容换行 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cellStyle.setWrapText(true);
+
+其中cellStyle是WorkBook创建的CellStyle对象,然后将cellStyle设置到要换行的Cell对象,最后在要换行的对象(一般为字符串)加入&quot;/r/n&quot;。如  topTile.append(&quot;/r/n&quot; +&quot;cellContent&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单元格的合并 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sheet.addMergedRegion(new CellRangeAddress(0, 4, 0, 2));
+
+本示例为合并4行2列
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置页眉和页脚的页数 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFHeader header = sheet.getHeader(); 
+ header.setCenter(&quot;Center Header&quot;);
+ header.setLeft(&quot;Left Header&quot;);
+ header.setRight(HSSFHeader.font(&quot;Stencil-Normal&quot;, &quot;Italic&quot;) + HSSFHeader.fontSize((short) 16) + &quot;Right w/ Stencil-Normal Italic font and size 16&quot;);
+ HSSFFooter footer = (HSSFFooter )sheet.getFooter()  footer.setRight( &quot;Page &quot; + HSSFFooter.page() + &quot; of &quot; + HSSFFooter.numPages() );
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使得一个Sheet适合一页 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sheet.setAutobreaks(true); 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置放大属性 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sheet.setZoom(3,4);
+Zoom被明确为一个分数，例如下面的75%使用3作为分子，4作为分母
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置打印&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFPrintSetup print = (HSSFPrintSetup) sheet.getPrintSetup();
+ print.setLandscape(true);//设置横向打印
+ print.setScale((short) 70);//设置打印缩放70%
+ print.setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);//设置为A4纸张 
+ print.setLeftToRight(true);//設置打印顺序先行后列,默认为先列行
+             print.setFitHeight((short) 10);设置缩放调整为10页高 
+ print.setFitWidth((short) 10);设置缩放调整为宽高 
+ sheet.setAutobreaks(false); 
+ if (i != 0 &amp;amp;&amp;amp; i % 30 == 0) {
+     sheet.setRowBreak(i);//设置每30行分页打印
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;反复的行和列&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;HSSFWorkbook wb = new HSSFWorkbook();  wb.setRepeatingRowsAndColumns(0, 0, 12, 1, 6);
+//设置1到12列,行1到6每一页重复打印 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;调整单元格宽度&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sheet.setAutobreaks(true);
+sheet.setColumnWidth((short)i,colsWidth[i]);
+//设定单元格长度
+ sheet.autoSizeColumn((short) i);
+//自动根据长度调整单元格长度 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Mon, 06 Feb 2017 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/02/%E5%AF%BC%E5%85%A5Excel%E6%95%B0%E6%8D%AE%E5%B8%B8%E7%94%A8API/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/%E5%AF%BC%E5%85%A5Excel%E6%95%B0%E6%8D%AE%E5%B8%B8%E7%94%A8API/</guid>
+        
+        <category>POI</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>iOS抓包工具 - Charles</title>
@@ -1460,375 +1934,6 @@ Configuration file: /data/static/img/yourBlog/_config.yml
         <guid isPermaLink="true">http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/</guid>
         
         <category>博客</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>h5上传图片压缩包服务端解压并上传图片</title>
-        <description>&lt;p&gt;CMS后台有上传多个图片的需求，多个图片上传也一样麻烦。就想做个上传压缩包服务端解压上传的东西。&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;页面&lt;/h3&gt;
-
-&lt;p&gt;使用h5的上传api&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 	  /*
-             *
-             * name: 上传字段标示
-             postUrl: 文件数据处理URL
-             onClientAbort: 读取操作终止时调用
-             onClientError: 出错时调用
-             onClientLoad: 读取操作成功时调用
-             onClientLoadEnd: 无论是否成功，读取完成时调用。通常在onload和onerror后调用
-             onClientLoadStart: 读取将要开始时调用
-             onClientProgress: 数据在读取过程中周期性调用
-             onServerAbort: post操作结束时调用
-             onServerError: 错误发生时调用
-             onServerLoad: post操作成功时调用
-             onServerLoadStart: post数据将要开始时调用
-             onServerProgress: 数据正在被post的过程中周期性调用
-             onServerReadyStateChange: 一个javascript功能对象无论任何时候readyState属性变化时调用。callback由用户界面现成调用。
-             *
-             *
-             * */
-
-            $(&quot;#uploadZip&quot;).html5Uploader({
-                url: &quot;rest/material/uploadZip&quot;,
-                onSuccess: function (e, file, response) {
-                    var res = JSON.parse(response);
-                    if (res == &quot;200&quot;) {
-                        $.sticky(&quot;已经成功上传并且存入原始素材库！&quot;);
-                        swal(&quot;SUCCESS!&quot;, &quot;已经成功上传并且存入原始素材库！&quot;, &quot;success&quot;);
-                    } else {
-                        $.sticky(&quot;压缩格式错误或压缩过程出现错误&quot;);
-                        swal(&quot;OMG!&quot;, &quot;压缩包有错误请重新压缩并重新上传 = = ！！！&quot;, &quot;error&quot;);
-                    }
-                },
-                onClientLoad: function () {
-                    $.sticky(&quot;文件读取成功! ! !&quot;);
-                },
-                onClientLoadEnd: function () {
-                    $.sticky(&quot;文件上传完成! ! !&quot;);
-                },
-                onClientLoadStart: function () {
-                    $.sticky(&quot;文件将要开始读取! ! !&quot;);
-                },
-                onClientProgress: function () {
-
-                },
-                onServerError: function () {
-                    console.log(11111111 + &quot;========&quot;)
-                },
-                onServerProgress: function () {
-                    $.sticky(&quot;文件正在上传! ! !&quot;);
-                }
-            });
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;用了一些美化过的弹窗控件&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.dglives.com/demo/sweetalert-master/example/&quot;&gt;SweetAlert&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;引入js就行了。&lt;/p&gt;
-
-&lt;p&gt;后台模板之前常用&lt;a href=&quot;https://github.com/bopoda/ace&quot;&gt;ACE&lt;/a&gt;的。
-扣下来改吧改吧。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;服务端&lt;/h3&gt;
-
-&lt;p&gt;服务端用的Java写的。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    @Transactional
-    @RequestMapping(value = &quot;uploadZip&quot;, method = RequestMethod.POST)
-    public Map&amp;lt;String, Object&amp;gt; uploadZip(HttpServletRequest request) throws Exception {
-
-        Map&amp;lt;String, Object&amp;gt; result = new HashMap&amp;lt;&amp;gt;();
-        User user = GrantedFilter.threadLocal.get();
-        final Integer userId = user.getId();
-
-        Uploader uploader = new Uploader(request);
-        // 解压
-        final File[] fileList = uploader.uploadMaterialZip();
-        // 有时候压缩会出问题  Mac 和 Windows 
-        if (fileList.length &amp;lt; 1 || fileList.length&amp;gt;1?fileList[1].isDirectory():fileList[0].isDirectory()) {
-            File f = null;
-            try {
-                f = new File(fileList[0].getParent());
-                deleteFile(f);
-            } catch (Exception e) {
-
-            }
-            result.put(&quot;code&quot;, &quot;400&quot;);
-            return result;
-        } else {
-            threadPoolTaskExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    String temp = fileList[0].getParent();
-                    for (File file : fileList) {
-                        if (file.getName().endsWith(&quot;.gif&quot;)||file.getName().endsWith(&quot;.GIF&quot;)) {
-                            UFileRequest uFileRequest = new UFileRequest();
-                            String gifKey = RandomStringUtils.randomAlphanumeric(32) + &quot;.gif&quot;;
-                            uFileRequest.setBucketName(SysConfigDao.getValue(SysConfig.otherConfig, &quot;ufile_bucket&quot;));
-                            uFileRequest.setFilePath(file.getPath());
-                            uFileRequest.setKey(gifKey);
-                            uFileAPI.putFile(uFileRequest);
-                            String url = uFileAPI.getDownloadUrl(uFileRequest, 0, false);
-                            MaterialRaw materialRaw = new MaterialRaw();
-                            materialRaw.setTag(&quot;3&quot;);
-                            materialRaw.setGifurl(url);
-                            materialRaw.setCreateAt(new Date());
-                            materialRaw.setStatus(&quot;t&quot;);
-                            materialRaw.setChannl(&quot;r&quot;);
-                            try {
-                                materialRaw.setMd5(MD5Util.getMd5ByFile(file));
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            materialRaw.setSize((int) file.length());
-                            materialRaw.setCreateBy(userId);
-                            try {
-                                materialRaw.setTitle(file.getName().substring(0, file.getName().lastIndexOf(&quot;.gif&quot;)));
-                            } catch (Exception e) {
-                                materialRaw.setTitle(file.getName().substring(0, file.getName().lastIndexOf(&quot;.GIF&quot;)));
-                            }
-                            materialRawDao.save(materialRaw);
-                        }
-                        file.delete();
-                    }
-                    File f = new File(temp);
-                    deleteFile(f);
-                }
-            });
-        }
-        result.put(&quot;code&quot;, &quot;200&quot;);
-        return result;
-    }
-
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;解压的Util类&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    public File[] uploadMaterialZip() throws Exception {
-        originalName = request.getHeader(&quot;X-File-Name&quot;);
-        type = FileUtil.getFileExt(originalName);
-        if (!&quot;.zip&quot;.equals(type.toLowerCase())) {
-            throw new BadRequestException(&quot;格式错误！&quot;);
-        }
-        if (request.getContentLength() / 1024000 &amp;gt; 100) {
-            throw new BadRequestException(&quot;文件太大！&quot;);
-        }
-        fileName = Util.RunTimeSequence() + type;
-        path = DateUtil.zipDateFormat(new Date()) + File.separator + fileName;
-        File file = new File(savePath + File.separator + path);
-        file.getParentFile().mkdirs();
-        try (InputStream is = request.getInputStream();
-             FileOutputStream fos = new FileOutputStream(file)) {
-            IOUtils.copy(is, fos);
-            size = file.length();
-        }
-        String str = savePath + File.separator + System.currentTimeMillis();
-        File dir = new File(str);
-        if (!dir.exists() || !dir.isDirectory()) {
-            dir.mkdirs();
-        }
-        String temp = savePath + File.separator + DateUtil.zipDateFormat(new Date()) + File.separator;
-        // 加压的工具类
-        DeCompressUtil.deCompress(savePath + File.separator + path, str, temp);
-        File gifFile = new File(str);
-        File[] fileList = gifFile.listFiles();
-        if (fileList.length&amp;lt;1){
-            gifFile.delete();
-        }
-        return fileList;
-    }
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;解压&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.an.core.utils.zip;
-
-import com.an.core.exception.BadRequestException;
-import de.innosystec.unrar.Archive;
-import de.innosystec.unrar.rarfile.FileHeader;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.taskdefs.Expand;
-
-import java.io.File;
-import java.io.FileOutputStream;
-
-public class DeCompressUtil {
-    /**
-     * 解压zip格式压缩包
-     * 对应的是ant.jar
-     */
-    private static void unzip(String sourceZip, String destDir, String temp) throws Exception {
-        try {
-            Project p = new Project();
-            Expand e = new Expand();
-            e.setProject(p);
-            e.setSrc(new File(sourceZip));
-            e.setOverwrite(false);
-            e.setDest(new File(destDir));
-           /*
-           ant下的zip工具默认压缩编码为UTF-8编码，
-           而winRAR软件压缩是用的windows默认的GBK或者GB2312编码
-           所以解压缩时要制定编码格式
-           */
-
-            try {
-                e.setEncoding(&quot;GBK&quot;);
-                e.execute();
-            } catch (Exception e1) {
-                e.setEncoding(&quot;UTF-8&quot;);
-                e.execute();
-            }
-            File zipFile = new File(sourceZip);
-            File zipPath = new File(temp);
-            zipFile.delete();
-            zipPath.delete();
-
-        } catch (Exception e) {
-            throw new BadRequestException(e);
-        }
-    }
-
-    /**
-     * 解压rar格式压缩包。
-     * 对应的是java-unrar-0.3.jar，但是java-unrar-0.3.jar又会用到commons-logging-1.1.1.jar
-     */
-    private static void unrar(String sourceRar, String destDir, String temp) throws Exception {
-        Archive a = null;
-        FileOutputStream fos = null;
-        try {
-            a = new Archive(new File(sourceRar));
-            FileHeader fh = a.nextFileHeader();
-            while (fh != null) {
-                if (!fh.isDirectory()) {
-                    //1 根据不同的操作系统拿到相应的 destDirName 和 destFileName
-                    String compressFileName = fh.getFileNameString().trim();
-                    String destFileName = &quot;&quot;;
-                    String destDirName = &quot;&quot;;
-                    //非windows系统
-                    if (File.separator.equals(&quot;/&quot;)) {
-                        destFileName = destDir + compressFileName.replaceAll(&quot;\\\\&quot;, &quot;/&quot;);
-                        destDirName = destFileName.substring(0, destFileName.lastIndexOf(&quot;/&quot;));
-                        //windows系统
-                    } else {
-                        destFileName = destDir + compressFileName.replaceAll(&quot;/&quot;, &quot;\\\\&quot;);
-                        destDirName = destFileName.substring(0, destFileName.lastIndexOf(&quot;\\&quot;));
-                    }
-                    //2创建文件夹
-                    File dir = new File(destDirName);
-                    if (!dir.exists() || !dir.isDirectory()) {
-                        dir.mkdirs();
-                    }
-                    //3解压缩文件
-                    fos = new FileOutputStream(new File(destFileName));
-                    a.extractFile(fh, fos);
-                    fos.close();
-                    fos = null;
-                }
-                fh = a.nextFileHeader();
-            }
-            a.close();
-            a = null;
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                    fos = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            if (a != null) {
-                try {
-                    a.close();
-                    a = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
-     * 解压缩
-     */
-    public static void deCompress(String sourceFile, String destDir, String temp) throws Exception {
-        //保证文件夹路径最后是&quot;/&quot;或者&quot;\&quot;
-        char lastChar = destDir.charAt(destDir.length() - 1);
-        if (lastChar != '/' &amp;amp;&amp;amp; lastChar != '\\') {
-            destDir += File.separator;
-        }
-        //根据类型，进行相应的解压缩
-        String type = sourceFile.substring(sourceFile.lastIndexOf(&quot;.&quot;) + 1);
-        if (!&quot;.zip&quot;.equals(type.toLowerCase())) {
-            DeCompressUtil.unzip(sourceFile, destDir, temp);
-        } else if (type.equals(&quot;rar&quot;)) {
-            DeCompressUtil.unrar(sourceFile, destDir, temp);
-        } else {
-
-        }
-    }
-} 
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;删除文件夹下面的所有内容&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
-	 * 删除文件夹所有的文件和文件夹
-	 *
-	 * @param file
-     */
-	public static void deleteFile(File file){
-		if(file.isFile()){
-			file.delete();
-			return;
-		}
-		if(file.isDirectory()){
-			File[] childFile = file.listFiles();
-			if(childFile == null || childFile.length == 0){
-				file.delete();
-				return;
-			}
-			for(File f : childFile){
-				RecursionDeleteFile(f);
-			}
-			file.delete();
-		}
-	}
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;之前有找过一个&lt;a href=&quot;http://download.csdn.net/detail/clyao_123456/7624815&quot;&gt;Demo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/MyUpload.zip&quot;&gt;下载链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;希望对你有帮助 😂😂😂。&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 27 Nov 2016 19:40:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/H5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E5%8C%85,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%A7%A3%E5%8E%8B%E4%B8%8A%E4%BC%A0/</guid>
-        
-        <category>java</category>
         
         
         <category>jekyll</category>
