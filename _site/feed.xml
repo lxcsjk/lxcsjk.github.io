@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Feb 2017 15:55:26 +0800</pubDate>
-    <lastBuildDate>Thu, 09 Feb 2017 15:55:26 +0800</lastBuildDate>
+    <pubDate>Thu, 09 Feb 2017 16:02:33 +0800</pubDate>
+    <lastBuildDate>Thu, 09 Feb 2017 16:02:33 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -189,7 +189,7 @@
 &lt;h3 id=&quot;http&quot;&gt;HTTP&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;http-caching &lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Http-Caching &lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -205,37 +205,40 @@
 &lt;h3 id=&quot;mybatis&quot;&gt;MyBatis&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;对Mybatis的学习非常有帮助 (非常详细有分析源码)&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;http://www.mybatis.tk&lt;/strong&gt;	&lt;a href=&quot;http://www.mybatis.tk&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;对Mybatis的学习非常有帮助 (非常详细有分析源码)&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;**http://www.mybatis.tk**	[链接](http://www.mybatis.tk)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;spring-boot&quot;&gt;Spring-Boot&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;官方文档&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;https://github.com/spring-projects/spring-boot&lt;/strong&gt;	&lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;大牛翻译&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;https://github.com/qibaoguang&lt;/strong&gt;		&lt;a href=&quot;https://github.com/qibaoguang/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;官方文档PDF(2.0.0.BUILD-SNAPSHOT) &lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;翻译后中文PDF(1.4.1.RELEASE) &lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference-guide-zh.pdf&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;插件集成博客 &lt;a href=&quot;http://blog.csdn.net/column/details/spring-boot.html&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;配置filter,listener,servlet &lt;a href=&quot;http://blog.csdn.net/yxsimple/article/details/46771123&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;官方文档&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;**https://github.com/spring-projects/spring-boot**	[链接](https://github.com/spring-projects/spring-boot)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;大牛翻译&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;**https://github.com/qibaoguang**		[链接](https://github.com/qibaoguang/)
+
+官方文档PDF(2.0.0.BUILD-SNAPSHOT) [链接](http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf)
+
+翻译后中文PDF(1.4.1.RELEASE) [链接](http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference-guide-zh.pdf)
+
+插件集成博客 [链接](http://blog.csdn.net/column/details/spring-boot.html)
+
+配置filter,listener,servlet [链接](http://blog.csdn.net/yxsimple/article/details/46771123)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;hr /&gt;
 
@@ -275,6 +278,8 @@
 
 &lt;p&gt;赵鑫 &lt;a href=&quot;http://zhaox.github.io/archive&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h3 id=&quot;ios&quot;&gt;iOS&lt;/h3&gt;
 
 &lt;p&gt;插件库 &lt;a href=&quot;http://github.ibireme.com/github/list/ios/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
@@ -283,6 +288,7 @@
 
 &lt;p&gt;刘坤的技术博客 &lt;a href=&quot;https://blog.cnbluebox.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
 
+&lt;hr /&gt;
 </description>
         <pubDate>Wed, 08 Feb 2017 02:00:03 +0800</pubDate>
         <link>http://localhost:4000/2017/02/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</link>
