@@ -5,14 +5,267 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 07 Feb 2017 12:14:08 +0800</pubDate>
-    <lastBuildDate>Tue, 07 Feb 2017 12:14:08 +0800</lastBuildDate>
+    <pubDate>Thu, 09 Feb 2017 13:01:02 +0800</pubDate>
+    <lastBuildDate>Thu, 09 Feb 2017 13:01:02 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
+        <title>iOS - 打ipa包和提交AppStore等事宜</title>
+        <description>&lt;p&gt;整理一下关于打ipa包和提交AppStore一些琐碎简单又可能会有点烦人的流程吧…就是这样 = =&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;准备工作&lt;/h3&gt;
+
+&lt;p&gt;首先你需要有一个苹果的开发者帐号，一个Mac系统。&lt;/p&gt;
+
+&lt;p&gt;如果没有帐号可以在打开&lt;a href=&quot;http://developer.apple.com/&quot;&gt;http://developer.apple.com/&lt;/a&gt;申请加入苹果的开发者计划。支付99美元每年，怎么申请网上有详细的介绍，在此不多做介绍。&lt;/p&gt;
+
+&lt;p&gt;如果你已经有了一个开发者账号，打开 &lt;a href=&quot;http://developer.apple.com/&quot;&gt;http://developer.apple.com/&lt;/a&gt; 并登录到苹果Account，见下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-104236@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-104815@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;点击右边的那个。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-105231@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;appid&quot;&gt;申请AppId&lt;/h3&gt;
+
+&lt;p&gt;点击➕号如图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-110648@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-110715@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-110853@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后点击 &lt;strong&gt;continue&lt;/strong&gt; 即可&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;申请发布证书&lt;/h3&gt;
+
+&lt;p&gt;打开 &lt;strong&gt;钥匙串访问&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在下图所示的界面，你的电子邮件地址：填你开发者账号的电子邮件地址，常用名称，默认就好，CA空，选择保存到磁盘，点击”继续”：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-112002@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-112328@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;查看一下桌面，会发现多了一个 &lt;strong&gt;CertificateSigningRequest.certSigningRequest&lt;/strong&gt; 的证书请求文件。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;wwdr&quot;&gt;安装WWDR证书&lt;/h3&gt;
+
+&lt;p&gt;点击左边 Certificates 中的 Production ，再点击右边的➕号&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-113013@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-113155@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-113201@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点击 Choose File 选择我们前面生成在桌面的证书请求文件&lt;/p&gt;
+
+&lt;p&gt;然后点击 &lt;strong&gt;Generate&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;然后 点击 &lt;strong&gt;Download&lt;/strong&gt; 下载后双击 即可添加到钥匙串&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;provisioning&quot;&gt;生成Provisioning文件&lt;/h3&gt;
+
+&lt;p&gt;左边选择 Provisioning Profiles 选项下的 Distribution，来生成一个发布的准备文件：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-120215@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-120301@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-120331@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点击下面的 &lt;strong&gt;Continue&lt;/strong&gt; 就可以了&lt;/p&gt;
+
+&lt;p&gt;等待几秒钟，Provisioning就可以下载了.&lt;/p&gt;
+
+&lt;p&gt;下载后双击添加到本地开发者账号中。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-121009@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ipa&quot;&gt;打ipa包&lt;/h3&gt;
+
+&lt;p&gt;打开 Xcode 选择对应的 &lt;strong&gt;Provisioning&lt;/strong&gt; 如下图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122612@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;确定这个地方不是模拟器和真机&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122650@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;确定是发布版本不是debug不然包体积会很大&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122736@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122756@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最后 点击 &lt;strong&gt;Product -&amp;gt; Archive&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;编译成功后，会弹出这个界面。如果失败请查看之前的哪一步出现了错误。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123606@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123615@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;选择一个开发者账号&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123634@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;点击导出&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123701@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123713@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;保存到硬盘。&lt;/p&gt;
+
+&lt;h3 id=&quot;itunes-connect&quot;&gt;上传到 iTunes Connect&lt;/h3&gt;
+
+&lt;p&gt;打开 &lt;strong&gt;Application Loader&lt;/strong&gt; (如果没安装去iTunes Connect寻找链接)&lt;/p&gt;
+
+&lt;h4 id=&quot;itunes-connectapp-bundle-identifier&quot;&gt;注意 上传之前在iTunes Connect必须已经创建好你的app 标识就是Bundle Identifier&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;选取ipa包&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124618@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124653@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这里需要等待一些时间&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124710@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124808@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;更改一些build的版本号重新打包就可以了&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;ipa包检测通过后就能在iTunes Connect中相应的app清单中选择。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 09 Feb 2017 10:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/</guid>
+        
+        <category>AppStore</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>学习资源整理</title>
+        <description>&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;张开涛的博客 &lt;a href=&quot;http://jinnianshilongnian.iteye.com/&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mybatis&quot;&gt;MyBatis&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;对Mybatis的学习非常有帮助 (非常详细有分析源码)&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;http://www.mybatis.tk&lt;/strong&gt;	&lt;a href=&quot;http://www.mybatis.tk&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;spring-boot&quot;&gt;Spring-Boot&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;官方文档&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;https://github.com/spring-projects/spring-boot&lt;/strong&gt;	&lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;大牛翻译&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;https://github.com/qibaoguang&lt;/strong&gt;		&lt;a href=&quot;https://github.com/qibaoguang/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;官方文档PDF(2.0.0.BUILD-SNAPSHOT) &lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;翻译后中文PDF(1.4.1.RELEASE) &lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference-guide-zh.pdf&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;插件集成博客 &lt;a href=&quot;http://blog.csdn.net/column/details/spring-boot.html&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;配置filter,listener,servlet &lt;a href=&quot;http://blog.csdn.net/yxsimple/article/details/46771123&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;小工具&lt;/h3&gt;
+
+&lt;p&gt;内网映射 &lt;a href=&quot;https://natapp.cn/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;极客学院wiki &lt;a href=&quot;http://wiki.jikexueyuan.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;汉语言处理包 &lt;a href=&quot;https://github.com/hankcs/HanLP&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;docker&quot;&gt;Docker&lt;/h3&gt;
+
+&lt;p&gt;螃蟹的博客 &lt;a href=&quot;http://www.pangxie.space&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;大桥下的蜗牛 &lt;a href=&quot;https://blog.lab99.org&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;镜像库 &lt;a href=&quot;https://hub.docker.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker — 从入门到实践 &lt;a href=&quot;https://yeasy.gitbooks.io/docker_practice/content/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;网易蜂巢 &lt;a href=&quot;https://c.163.com/hub#/m/home/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker问答录 &lt;a href=&quot;https://blog.lab99.org/post/docker-2016-07-14-faq.html#docker-push-dao-si-you-registry-zong-shi-bu-cheng-gong-zen-me-ban&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;swift&quot;&gt;Swift&lt;/h3&gt;
+
+&lt;p&gt;翻译组 &lt;a href=&quot;http://swift.gg/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;ios&quot;&gt;iOS&lt;/h3&gt;
+
+&lt;p&gt;插件库 &lt;a href=&quot;http://github.ibireme.com/github/list/ios/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;唐巧的技术博客 &lt;a href=&quot;http://blog.devtang.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;刘坤的技术博客 &lt;a href=&quot;https://blog.cnbluebox.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 08 Feb 2017 02:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/02/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
+        
+        <category>学习</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
         <title>POI导入Excel数据常用API</title>
-        <description>&lt;!--因为2003只支持65535行，2007支持1048576行
---&gt;
+        <description>&lt;p&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_91c0fdb50101kfd4.html&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;poi&quot;&gt;POI简介&lt;/h3&gt;
 
@@ -1572,368 +1825,6 @@ success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dict
         <guid isPermaLink="true">http://localhost:4000/2016/12/FMDB%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/</guid>
         
         <category>FMDB</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Doesn't include the currently selected device </title>
-        <description>&lt;p&gt;昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。&lt;/p&gt;
-
-&lt;p&gt;本来一天都在弄文件下载，断点下载进度条多线程之类的事情，老大说把我们app RUN 到iPad上看看。R了一下bulid失败了。错误信息&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Provisioning profile “match Development com.XXX.YYY” doesn’t include the currently selected device “XXX”.
-Code signing is required for product type ‘Application’ in SDK ‘iOS 10.0’&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Xcode已经是最新的了，iPad是10.0.1绝对是没问题的应该。于是Google了一下。找到了这个解答&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/39426287/xcode-8-cannot-run-on-device-provisioning-profile-problems-mentioning-apple-wat&quot;&gt;Xcode 8 cannot run on device, provisioning profile problems mentioning Apple Watch&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Answer&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I had the same issue today - XCode Version 8.0 (8A218a) - and fixed it with two simple steps (instead of the more complicated approach above:&lt;/p&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;add the Apple Watch to member center (did not find a copy&amp;amp;paste option either)&lt;/li&gt;
-    &lt;li&gt;edit the development provisioning profile and add the watch to devices, save&lt;/li&gt;
-    &lt;li&gt;go to XCode prefs, move the old provisioning profile to trash (right click on the name) and download the new version&lt;/li&gt;
-    &lt;li&gt;set the new provisioning profile in project editor
-No restart, clean or anything else needed. Worked like a charm&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;需要在描述文件添加设备的UDID&lt;/p&gt;
-
-&lt;p&gt;UDID可以通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;iTunes&lt;/code&gt; 拿到。
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-0@2x.png&quot; alt=&quot;&quot; /&gt;
-&lt;strong&gt;如果看不到UDID多点几下我抹红的地方就行了&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;拿到这个UDID 登录到 &lt;a href=&quot;https://developer.apple.com&quot;&gt;苹果开发者中心&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;登录账号后 找到&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-2@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-3@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-4@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最好在描述文件添加这个设备&lt;/p&gt;
-
-&lt;p&gt;点 &lt;strong&gt;edit&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-1@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Select All&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161130-5@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Generate&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;再去xcode 重新下载一下描述文件 clean 一下就OK了&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 30 Nov 2016 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/Doesn't-include-the-currently-selected-devic/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/Doesn't-include-the-currently-selected-devic/</guid>
-        
-        <category>iPad</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>我的博客是如何搭建的</title>
-        <description>&lt;p&gt;拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;首先你需要了解 &lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt; 仓库托管 和 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; 的相关内容&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;不需要买服务器部署搭建环境等等&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;不需要购买域名和备案&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;很快的上手&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;原理&lt;/h3&gt;
-
-&lt;p&gt;Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Pages 上。接下在自己的电脑搭建一个测试环境吧 😎😎😎&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;jekyll&quot;&gt;安装 jekyll&lt;/h3&gt;
-
-&lt;p&gt;需要本机的环境 Git 环境（用于部署到远端）、Ruby 环境（Jekyll 是基于 Ruby 开发的）、包管理器 &lt;a href=&quot;https://gems.ruby-china.org/&quot;&gt;RubyGems&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;由于我是MacOS系统所以就不需要了 需要安装Xcode 和 命令行工具就行了&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xcode-select --install 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.ruby-lang.org/zh_cn/documentation/installation/#building-from-source&quot;&gt;安装Ruby&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;推荐一个git管理项目的工具 可能需要登录账户注册 所以 翻出去吧  = =&lt;/p&gt;
-
-&lt;p&gt;不用翻墙访问&lt;a href=&quot;https://www.google.com.hk/&quot;&gt;Google&lt;/a&gt;等等 修改&lt;a href=&quot;https://github.com/racaljk/hosts&quot;&gt;hosts&lt;/a&gt;的方法&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/SourceTree_2.3.1.zip&quot;&gt;SourceTree&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;环境都已经具备后安装&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;创建你的博客所在文件夹&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll new myBlog    
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;进入博客文件夹的目录&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd yourBlogFolder
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;启动jekyll服务&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll server
-或者
-jekyll serve
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在 Chrome 浏览器 输入 &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;http://127.0.0.1:4000&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;安装完成了。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;jekyll-1&quot;&gt;配置jekyll&lt;/h3&gt;
-
-&lt;p&gt;jekyll是通过目录下面的 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;配置的&lt;/p&gt;
-
-&lt;p&gt;jekyll &lt;a href=&quot;http://jekyll.com.cn/&quot;&gt;文档&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;我博客&lt;a href=&quot;https://github.com/lxcsjk/lxcsjk.github.io&quot;&gt;主题&lt;/a&gt; fork 是 这位大神&lt;a href=&quot;http://baixin.io/&quot;&gt;潘柏信&lt;/a&gt;的 &lt;a href=&quot;https://github.com/leopardpan/leopardpan.github.io&quot;&gt;仓库&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;你下载主题后 进入到文件夹 先安装一下 &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt;  命令&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install bundler&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Fetching: bundler-1.13.5.gem (100%)
-Successfully installed bundler-1.13.5
-Parsing documentation for bundler-1.13.5
-Installing ri documentation for bundler-1.13.5
-Done installing documentation for bundler after 5 seconds
-1 gem installed
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;不然会报错&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/Users/lxc/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- bundler (LoadError)
-	from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in `require_from_bundler'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in `&amp;lt;top (required)&amp;gt;'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `load'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&amp;lt;main&amp;gt;'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&amp;lt;main&amp;gt;'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然后执行 之前记得修改 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 的镜像源&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;更新 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem update --system # 这里请翻墙一下
-$ gem -v
-2.6.3
-
-$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-$ gem sources -l
-https://gems.ruby-china.org
-# 确保只有 gems.ruby-china.org
-
-$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然后如果报错 缺少什么安装什么包就行了&lt;/p&gt;
-
-&lt;p&gt;例如&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll-paginate
-gem install jekyll-sitemap
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;最后&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Configuration file: /data/static/img/yourBlog/_config.yml
-Configuration file: /data/static/img/yourBlog/_config.yml
-            Source: /data/static/img/yourBlog
-       Destination: /data/static/img/yourBlog/_site
- Incremental build: disabled. Enable with --incremental
-      Generating... 
-                    done in 0.475 seconds.
- Auto-regeneration: enabled for '/data/static/img/yourBlog'
-Configuration file: /data/static/img/yourBlog/_config.yml
-    Server address: http://127.0.0.1:4000/
-  Server running... press ctrl-c to stop.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;打开浏览器输入 &lt;a href=&quot;http://127.0.0.1:4000/&quot;&gt;http://127.0.0.1:4000/&lt;/a&gt; 就OK啦&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;加入第三方的社会化工具&lt;/h3&gt;
-
-&lt;p&gt;Disqus 已经被墙了 So 用国内的吧 &lt;a href=&quot;http://duoshuo.com/&quot;&gt;多说&lt;/a&gt;就挺好的 
-把多说代码片段复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;post.html&lt;/code&gt;文件内的&lt;code class=&quot;highlighter-rouge&quot;&gt; &amp;lt;/article&amp;gt;&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签之间即可&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;加入统计之类的代码&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://analytics.google.com/&quot;&gt;Google Analytics&lt;/a&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;用google的需要改hosts 上面有提到方法&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tongji.baidu.com/&quot;&gt;百度统计&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;选择一个&lt;/p&gt;
-
-&lt;p&gt;复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; 文件夹下 &lt;code class=&quot;highlighter-rouge&quot;&gt;default.html&lt;/code&gt; 文件内的 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;标签之上即可。 当然也可以在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;配置&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;申请自己的域名&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;这一步之前得将你本地博客所以文件通过 GitHub Desktop 提交到你的GITHub Pages仓库&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;由于  &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub Pages&lt;/code&gt; 时常不能访问 原因是 TC的大炮攻击&lt;a href=&quot;https://github.com&quot;&gt;Github&lt;/a&gt;所致 所以最好自己添加一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;CNAME&lt;/code&gt;  那么问题来了域名从哪里来呢。 So…  Come on!&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://my.freenom.com&quot;&gt;戳这里&lt;/a&gt;
-可以申请 免费域名只有  &lt;code class=&quot;highlighter-rouge&quot;&gt;[.tk .ml .ga .cf .gq]&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://my.freenom.com/domains.php&quot;&gt;查询一个你想要的域名&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;点击 选择一个 第一个已经有人用了 那就是我 = =&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后 checkout&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;选择时间&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;填写信息&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;点击 My Domains&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;看你的域名列表&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;成功了~&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;cname&quot;&gt;添加CNAME文件&lt;/h3&gt;
-
-&lt;p&gt;在你的github pages项目根目录上新建一个CNAME文件，在CNAME文件上编辑刚才申请到的域名，比如 yoruo.tk ，那么我就写上 yoruo.tk (推荐)，当然你也可以写 www.yoruo.tk ，两种写法处理方式不同：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如果你写的是 yoruo.tk ，那么 www.yoruo.tk 就会指向 yoruo.tk&lt;/li&gt;
-  &lt;li&gt;如果你写的是 www.yoruo.tk k ,那么 yoruo.tk 就会指向 www.yoruo.tk&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;注意，两种写法都不需要在前面加 http 。&lt;/p&gt;
-
-&lt;p&gt;引用这篇 &lt;a href=&quot;http://www.tuicool.com/articles/NrUrY33&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;dnspoda&quot;&gt;在DNSPod添加A记录&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;然后进入管理中心，选择添加域名。&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;为域名添加记录，这里的NS记录是自动生成，不用修改，因为我们需要我们的网站可以通过 yoruo.tk 和 www.yoruo.tk 都能访问，所以需要添加两组A记录。&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;为什么  &lt;code class=&quot;highlighter-rouge&quot;&gt; 192.30.252.153&lt;/code&gt;  和  &lt;code class=&quot;highlighter-rouge&quot;&gt; 192.30.252.154 &lt;/code&gt; ，因为这是github pages官网说的咯。网上有些人说A记录是 ping xxx.github.io 之后的IP地址，这些都是不可信的。&lt;/p&gt;
-
-&lt;p&gt;但是你可能会奇怪，每个人都是这两个IP地址的话，那么Github怎么知道我的域名 yoruo.tk 和 www.yoruo.tk 对应的是 lxcsjk.github.io 而不是其他人的github pages呢？答案就在上一步操作中的CNAME文件，这里指定了其所对应的域名，github会自动处理，将两者对应起来。&lt;/p&gt;
-
-&lt;p&gt;另外，如果你添加CNAME记录把域名指向 xxx.github.io 的话，也会成功(网上某些教程就是这么做的)。但是官方是不推荐最终做法的，因为可能会”导致其他服务出现问题”。&lt;/p&gt;
-
-&lt;p&gt;引用这篇 &lt;a href=&quot;http://www.tuicool.com/articles/NrUrY33&quot;&gt;文章&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;dns&quot;&gt;修改域名的DNS&lt;/h3&gt;
-
-&lt;p&gt;到&lt;a href=&quot;https://my.freenom.com/clientarea.php?action=domains&quot;&gt;域名注册网站&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后 
-&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;填上 DNSPod 的DNS地址 等待DNS服务器刷新 应该很快 我当时几分钟就好了&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20161127-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后打开你的博客 开始书写所见所想吧。&lt;/p&gt;
-</description>
-        <pubDate>Sun, 27 Nov 2016 20:40:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/</guid>
-        
-        <category>博客</category>
         
         
         <category>jekyll</category>
