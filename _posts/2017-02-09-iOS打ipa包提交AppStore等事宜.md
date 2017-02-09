@@ -152,6 +152,9 @@ tags: AppStore
 
 **更改一些build的版本号重新打包就可以了**
 
-ipa包检测通过后就能在iTunes Connect中相应的app清单中选择。
+**ipa包检测通过后就能在iTunes Connect中相应的app清单中选择。**
+
+**这仅仅是发布到App Store的流程肯定是不够，还有 关于推送证书的一些小坑 and 打测试ipa包到蒲公英或者PRE这一类分发平台的流程稍后继续。**
+
 
 ---
