@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Feb 2017 13:01:02 +0800</pubDate>
-    <lastBuildDate>Thu, 09 Feb 2017 13:01:02 +0800</lastBuildDate>
+    <pubDate>Thu, 09 Feb 2017 15:55:26 +0800</pubDate>
+    <lastBuildDate>Thu, 09 Feb 2017 15:55:26 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -97,6 +97,8 @@
 
 &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170209-121009@2x.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h3 id=&quot;ipa&quot;&gt;打ipa包&lt;/h3&gt;
 
 &lt;p&gt;打开 Xcode 选择对应的 &lt;strong&gt;Provisioning&lt;/strong&gt; 如下图&lt;/p&gt;
@@ -133,6 +135,8 @@
 
 &lt;p&gt;保存到硬盘。&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;h3 id=&quot;itunes-connect&quot;&gt;上传到 iTunes Connect&lt;/h3&gt;
 
 &lt;p&gt;打开 &lt;strong&gt;Application Loader&lt;/strong&gt; (如果没安装去iTunes Connect寻找链接)&lt;/p&gt;
@@ -153,7 +157,11 @@
 
 &lt;p&gt;&lt;strong&gt;更改一些build的版本号重新打包就可以了&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;ipa包检测通过后就能在iTunes Connect中相应的app清单中选择。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ipa包检测通过后就能在iTunes Connect中相应的app清单中选择。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这仅仅是发布到App Store的流程肯定是不够，还有 关于推送证书的一些小坑 and 打测试ipa包到蒲公英或者PRE这一类分发平台的流程稍后继续。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
 </description>
         <pubDate>Thu, 09 Feb 2017 10:00:03 +0800</pubDate>
         <link>http://localhost:4000/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/</link>
@@ -170,11 +178,29 @@
     
       <item>
         <title>学习资源整理</title>
-        <description>&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;jdk&quot;&gt;JDK&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JDK1.7中文注解 &lt;a href=&quot;https://github.com/ZhaoX/jdk-1.7-annotated&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;http&quot;&gt;HTTP&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;http-caching &lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;张开涛的博客 &lt;a href=&quot;http://jinnianshilongnian.iteye.com/&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;mybatis&quot;&gt;MyBatis&lt;/h3&gt;
 
@@ -185,6 +211,8 @@
     &lt;p&gt;&lt;strong&gt;http://www.mybatis.tk&lt;/strong&gt;	&lt;a href=&quot;http://www.mybatis.tk&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;spring-boot&quot;&gt;Spring-Boot&lt;/h3&gt;
 
@@ -208,6 +236,8 @@
     &lt;p&gt;配置filter,listener,servlet &lt;a href=&quot;http://blog.csdn.net/yxsimple/article/details/46771123&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;小工具&lt;/h3&gt;
 
@@ -240,6 +270,10 @@
 &lt;p&gt;翻译组 &lt;a href=&quot;http://swift.gg/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
+
+&lt;h3 id=&quot;java&quot;&gt;Java&lt;/h3&gt;
+
+&lt;p&gt;赵鑫 &lt;a href=&quot;http://zhaox.github.io/archive&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;ios&quot;&gt;iOS&lt;/h3&gt;
 
