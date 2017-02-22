@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Feb 2017 11:56:16 +0800</pubDate>
-    <lastBuildDate>Tue, 21 Feb 2017 11:56:16 +0800</lastBuildDate>
+    <pubDate>Wed, 22 Feb 2017 22:43:24 +0800</pubDate>
+    <lastBuildDate>Wed, 22 Feb 2017 22:43:24 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -35,9 +35,9 @@
 
 &lt;p&gt;今天（2.18）二面的就是彩贝壳，感觉不错，去年拿到的A轮，现在已经收支平衡了。这点实在是太赞了。而且产品方向和市场也很大很有机会，感觉B轮不会远。我也在等着通知电话，咋还不打来😂😂😂。如果通过了就这家了。上班1小时到吧，气氛和技术老大（很多来自阿里巴巴，腾讯，携程，美团，大众点评）都不错。希望能加入。&lt;/p&gt;
 
-&lt;p&gt;今天（2.20）电话面试堆糖之前就安排好了，感觉面试官懂得很多，声音听起来很年轻，对Java JDK的理解非常透彻，哪个文件夹下面的哪个文件用来干嘛都去理解了，我都没办法说出有哪些文件夹，感觉差距好大，需要学习太多了。他说我的东西 &lt;strong&gt;杂而不精&lt;/strong&gt;，这点自己早就感觉到了。总是拖延纵容自己往后退。这个毛病真的得改 = = 继续加油吧。&lt;/p&gt;
+&lt;p&gt;今天（2.20）电话面试堆糖之前就安排好了，感觉面试官懂得很多，声音听起来很年轻，对Java JDK的理解非常透彻，哪个文件夹下面的哪个文件用来干嘛都去理解了，我都没办法说出有哪些文件夹，感觉差距好大，需要学习太多了。他说我的东西 &lt;strong&gt;杂而不精&lt;/strong&gt;，这点自己早就感觉到了。总是拖延纵容自己往后退。这个毛病真的得改 = = 继续加油吧。后来来电话说上次电话面试通过了让去进一步了解一下，但是已经准备入职就婉言拒绝了&lt;/p&gt;
 
-&lt;p&gt;今天（2.21）最后选择不是&lt;strong&gt;彩贝壳&lt;/strong&gt;是另一家，从薪资待遇上还不错吧，周末也有点时间看看女朋友。技术感觉很不错的一家公司，阿里合作伙伴。也能和之前的伙伴在一块。&lt;/p&gt;
+&lt;p&gt;今天（2.21）最后选择不是&lt;strong&gt;彩贝壳&lt;/strong&gt;是另一家，从薪资待遇上还不错吧，周末也有点时间看看女朋友。技术感觉很不错的一家公司，阿里合作伙伴。也能和之前的伙伴在一块。不过真的很感谢彩贝壳…. So Sorry…&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -53,13 +53,14 @@
   &lt;li&gt;&lt;strong&gt;算法…………….这个 = = 先从排序开始&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Java8 RxJava函数式编程&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Python 脚本语言&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Groovy&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;section-3&quot;&gt;期望&lt;/h3&gt;
 
-&lt;p&gt;如果加入了这家公司，和公司一起成长吧，从各方面提升自己，毕竟周围的伙伴都是那么优秀。&lt;/p&gt;
+&lt;p&gt;和公司一起成长吧，从各方面提升自己，毕竟周围的伙伴都是那么优秀。&lt;/p&gt;
 
 &lt;hr /&gt;
 </description>
@@ -68,32 +69,6 @@
         <guid isPermaLink="true">http://localhost:4000/2017/02/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/</guid>
         
         <category>面试</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>书</title>
-        <description>&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;人丑就要多读书。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;框架&lt;/h3&gt;
-
-&lt;p&gt;http://oh6uhie7j.bkt.clouddn.com/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_%E5%AE%8C%E6%95%B4%E7%89%88%20PDF%E7%94%B5%E5%AD%90%E4%B9%A6%E4%B8%8B%E8%BD%BD%20%E5%B8%A6%E4%B9%A6%E7%AD%BE%E7%9B%AE%E5%BD%95.pdf&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 18 Feb 2017 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2017/02/%E4%B9%A6/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/02/%E4%B9%A6/</guid>
-        
-        <category>书</category>
         
         
         <category>jekyll</category>
@@ -1554,6 +1529,228 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
         <guid isPermaLink="true">http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</guid>
         
         <category>iOS</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>录音文件lame转换MP3相关配置</title>
+        <description>&lt;p&gt;文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;业务需求是录制音频然后上传到七牛并且Android可以读。&lt;/p&gt;
+
+&lt;p&gt;与安卓沟通了一下统一了mp3格式，大小质量都不错。由于&lt;code class=&quot;highlighter-rouge&quot;&gt;AVAudioRecorder&lt;/code&gt;录音的格式为.caf或者.wav而且很大需要进行转换压缩为MP3格式。这里需要用到三方库 &lt;code class=&quot;highlighter-rouge&quot;&gt;lame&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;使用lame转换后音频的质量和&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; _recorder = [[AVAudioRecorder alloc] initWithURL:_recordFilePath settings:setting error:NULL];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;里的 &lt;strong&gt;&lt;em&gt;setting&lt;/em&gt;&lt;/strong&gt; 息息相关。 所以整理了两个配置。&lt;/p&gt;
+
+&lt;p&gt;我把这两种的配置写在了工具类所以直接贴代码了~要用的话直接CV大法就可以。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/lame.zip&quot;&gt;lame三方库的资源&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;获取转换文件所在文件夹&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getRecPathUrl{
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *recordDir = [str stringByAppendingPathComponent:@&quot;RecordCourse&quot;];
+    
+    return recordDir;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;获取时间戳用于文件的命名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getTimestamp{
+    NSDate *nowDate = [NSDate date];
+    double timestamp = (double)[nowDate timeIntervalSince1970]*1000;
+    long nowTimestamp = [[NSNumber numberWithDouble:timestamp] longValue];
+    NSString *timestampStr = [NSString stringWithFormat:@&quot;%ld&quot;,nowTimestamp];
+    return timestampStr;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PCM转换MP3配置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithPCM {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    //设置录音格式
+    [dic setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
+    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
+    [dic setObject:@(44100.0) forKey:AVSampleRateKey];
+    //设置通道,这里采用双声道
+    [dic setObject:@(1) forKey:AVNumberOfChannelsKey];
+    //每个采样点位数,分为8、16、24、32
+    [dic setObject:@(16) forKey:AVLinearPCMBitDepthKey];
+    //是否使用浮点数采样
+    [dic setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
+    //....其他设置等
+    return dic;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CAF转换MP3配置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithCAF {
+    NSDictionary *setting = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithInt:AVAudioQualityMin],
+                             AVEncoderAudioQualityKey,
+                             [NSNumber numberWithInt:16],
+                             AVEncoderBitRateKey,
+                             [NSNumber numberWithInt:2],
+                             AVNumberOfChannelsKey,
+                             [NSNumber numberWithFloat:44100.0],
+                             AVSampleRateKey,
+                             nil];
+
+    return setting;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PCM转换MP3的lame方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioPCMtoMP3:(NSString *)wavPath {
+    NSString *cafFilePath = wavPath;
+    
+    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if([fileManager removeItemAtPath:mp3FilePath error:nil]){
+        NSLog(@&quot;删除原MP3文件&quot;);
+    }
+    @try {
+        int read, write;
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_in_samplerate(lame, 22050.0);
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@&quot;%@&quot;,[exception description]);
+    }
+    @finally {
+        return mp3FilePath;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CAF转换MP3的lame方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioCAFtoMP3:(NSString *)wavPath {
+    
+    NSString *cafFilePath = wavPath;
+    
+    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
+    
+    @try {
+        int read, write;
+        
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
+        
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_num_channels(lame,1);//设置1为单通道，默认为2双通道
+        lame_set_in_samplerate(lame, 44100.0);
+        lame_set_VBR(lame, vbr_default);
+        
+        lame_set_brate(lame,8);
+        
+        lame_set_mode(lame,3);
+        
+        lame_set_quality(lame,2);
+        
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@&quot;%@&quot;,[exception description]);
+    }
+    @finally {
+        return mp3FilePath;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;两种质量大小不错都可以使用😁😁&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Dec 2016 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</guid>
+        
+        <category>lame</category>
         
         
         <category>jekyll</category>
