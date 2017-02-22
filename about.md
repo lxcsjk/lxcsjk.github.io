@@ -5,7 +5,7 @@ title: 关于我
 
 ### 一些朋友
 
-- [何宗苡 - (iOS)](http://ripperhe.tk)
+- [何宗苡 - (iOS)](http://ripperhe.com)
 - [潘柏信 - (看了这位大神的Blog才知道如何搭建)](http://baixin.io)
 
 ---
