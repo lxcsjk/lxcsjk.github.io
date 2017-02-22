@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>iOS - 打ipa包和提交AppStore等事宜</title>
-  <meta name="description" content="整理一下关于打ipa包和提交AppStore一些琐碎简单又可能会有点烦人的流程吧…就是这样 = =">
+  <title>书</title>
+  <meta name="description" content="">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="iOS - 打ipa包和提交AppStore等事宜">
-  <meta name="twitter:description" content="整理一下关于打ipa包和提交AppStore一些琐碎简单又可能会有点烦人的流程吧…就是这样 = =">
+  <meta name="twitter:title" content="书">
+  <meta name="twitter:description" content="">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="iOS - 打ipa包和提交AppStore等事宜">
-  <meta property="og:description" content="整理一下关于打ipa包和提交AppStore一些琐碎简单又可能会有点烦人的流程吧…就是这样 = =">
+  <meta property="og:title" content="书">
+  <meta property="og:description" content="">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/">
+  <link rel="canonical" href="http://localhost:4000/2017/02/%E4%B9%A6/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -157,10 +157,10 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">iOS - 打ipa包和提交AppStore等事宜</h1>
+    <h1 class="post-title">书</h1>
     <div class="post-meta">
       <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2017-02-09 10:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-02-09</time>  
+      <time datetime="2017-02-18 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-02-18</time>  
          
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
@@ -169,157 +169,16 @@
 
 
   <section class="post">
-    <p>整理一下关于打ipa包和提交AppStore一些琐碎简单又可能会有点烦人的流程吧…就是这样 = =</p>
+    <hr />
+
+<p><strong>人丑就要多读书。</strong></p>
 
 <hr />
 
-<h3 id="section">准备工作</h3>
+<h3 id="section">框架</h3>
 
-<p>首先你需要有一个苹果的开发者帐号，一个Mac系统。</p>
+<p>http://oh6uhie7j.bkt.clouddn.com/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_%E5%AE%8C%E6%95%B4%E7%89%88%20PDF%E7%94%B5%E5%AD%90%E4%B9%A6%E4%B8%8B%E8%BD%BD%20%E5%B8%A6%E4%B9%A6%E7%AD%BE%E7%9B%AE%E5%BD%95.pdf</p>
 
-<p>如果没有帐号可以在打开<a href="http://developer.apple.com/">http://developer.apple.com/</a>申请加入苹果的开发者计划。支付99美元每年，怎么申请网上有详细的介绍，在此不多做介绍。</p>
-
-<p>如果你已经有了一个开发者账号，打开 <a href="http://developer.apple.com/">http://developer.apple.com/</a> 并登录到苹果Account，见下：</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-104236@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-104815@2x.png" alt="" /></p>
-
-<p><strong>点击右边的那个。</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-105231@2x.png" alt="" /></p>
-
-<hr />
-
-<h3 id="appid">申请AppId</h3>
-
-<p>点击➕号如图</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-110648@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-110715@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-110853@2x.png" alt="" /></p>
-
-<p>然后点击 <strong>continue</strong> 即可</p>
-
-<hr />
-
-<h3 id="section-1">申请发布证书</h3>
-
-<p>打开 <strong>钥匙串访问</strong></p>
-
-<p>在下图所示的界面，你的电子邮件地址：填你开发者账号的电子邮件地址，常用名称，默认就好，CA空，选择保存到磁盘，点击”继续”：</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-112002@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-112328@2x.png" alt="" /></p>
-
-<p>查看一下桌面，会发现多了一个 <strong>CertificateSigningRequest.certSigningRequest</strong> 的证书请求文件。</p>
-
-<hr />
-
-<h3 id="wwdr">安装WWDR证书</h3>
-
-<p>点击左边 Certificates 中的 Production ，再点击右边的➕号</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-113013@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-113155@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-113201@2x.png" alt="" /></p>
-
-<p>点击 Choose File 选择我们前面生成在桌面的证书请求文件</p>
-
-<p>然后点击 <strong>Generate</strong></p>
-
-<p>然后 点击 <strong>Download</strong> 下载后双击 即可添加到钥匙串</p>
-
-<hr />
-
-<h3 id="provisioning">生成Provisioning文件</h3>
-
-<p>左边选择 Provisioning Profiles 选项下的 Distribution，来生成一个发布的准备文件：</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-120215@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-120301@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-120331@2x.png" alt="" /></p>
-
-<p>点击下面的 <strong>Continue</strong> 就可以了</p>
-
-<p>等待几秒钟，Provisioning就可以下载了.</p>
-
-<p>下载后双击添加到本地开发者账号中。</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-121009@2x.png" alt="" /></p>
-
-<hr />
-
-<h3 id="ipa">打ipa包</h3>
-
-<p>打开 Xcode 选择对应的 <strong>Provisioning</strong> 如下图</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122612@2x.png" alt="" /></p>
-
-<p><strong>确定这个地方不是模拟器和真机</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122650@2x.png" alt="" /></p>
-
-<p><strong>确定是发布版本不是debug不然包体积会很大</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122736@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-122756@2x.png" alt="" /></p>
-
-<p>最后 点击 <strong>Product -&gt; Archive</strong></p>
-
-<p>编译成功后，会弹出这个界面。如果失败请查看之前的哪一步出现了错误。</p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123606@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123615@2x.png" alt="" /></p>
-
-<p><strong>选择一个开发者账号</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123634@2x.png" alt="" /></p>
-
-<p><strong>点击导出</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123701@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-123713@2x.png" alt="" /></p>
-
-<p>保存到硬盘。</p>
-
-<hr />
-
-<h3 id="itunes-connect">上传到 iTunes Connect</h3>
-
-<p>打开 <strong>Application Loader</strong> (如果没安装去iTunes Connect寻找链接)</p>
-
-<h4 id="itunes-connectapp-bundle-identifier">注意 上传之前在iTunes Connect必须已经创建好你的app 标识就是Bundle Identifier</h4>
-
-<p><strong>选取ipa包</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124618@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124653@2x.png" alt="" /></p>
-
-<p><strong>这里需要等待一些时间</strong></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124710@2x.png" alt="" /></p>
-
-<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170209-124808@2x.png" alt="" /></p>
-
-<p><strong>更改一些build的版本号重新打包就可以了</strong></p>
-
-<p><strong>ipa包检测通过后就能在iTunes Connect中相应的app清单中选择。</strong></p>
-
-<p><strong>这仅仅是发布到App Store的流程肯定是不够，还有 关于推送证书的一些小坑 and 打测试ipa包到蒲公英或者PRE这一类分发平台的流程稍后继续。</strong></p>
-
-<hr />
 
 
   </section>
@@ -346,13 +205,13 @@
        <ul class="pager">
         
         <li class="previous">
-            <a href="/2017/02/Spring-Boot%E5%85%A5%E9%97%A8/" data-toggle="tooltip" data-placement="top" title="Spring-Boot入门">上一篇：  <span>Spring-Boot入门</span>
+            <a href="/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/" data-toggle="tooltip" data-placement="top" title="iOS - 打ipa包和提交AppStore等事宜">上一篇：  <span>iOS - 打ipa包和提交AppStore等事宜</span>
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2017/02/%E4%B9%A6/" data-toggle="tooltip" data-placement="top" title="书">下一篇：  <span>书</span>
+            <a href="/2017/02/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/" data-toggle="tooltip" data-placement="top" title="面试有感">下一篇：  <span>面试有感</span>
             </a>
         </li>
         
@@ -362,7 +221,7 @@
 <section class="post-comments">
 
   
-    <div class="ds-thread" data-thread-key="/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/" data-title="iOS - 打ipa包和提交AppStore等事宜" data-url="http://localhost:4000/2017/02/iOS%E6%89%93ipa%E5%8C%85%E6%8F%90%E4%BA%A4AppStore%E7%AD%89%E4%BA%8B%E5%AE%9C/"></div>
+    <div class="ds-thread" data-thread-key="/2017/02/%E4%B9%A6/" data-title="书" data-url="http://localhost:4000/2017/02/%E4%B9%A6/"></div>
 
     <script type="text/javascript">
         var duoshuoQuery = {short_name:"yoruo"};

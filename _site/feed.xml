@@ -5,9 +5,102 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Feb 2017 20:15:32 +0800</pubDate>
-    <lastBuildDate>Thu, 09 Feb 2017 20:15:32 +0800</lastBuildDate>
+    <pubDate>Tue, 21 Feb 2017 11:56:16 +0800</pubDate>
+    <lastBuildDate>Tue, 21 Feb 2017 11:56:16 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>面试有感</title>
+        <description>&lt;hr /&gt;
+
+&lt;p&gt;最近公司因为一些事情几个人打算分道扬镳了，于是开始了面试的经历。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;找人内推&lt;/h3&gt;
+
+&lt;p&gt;找了之前的同事，分别是链家和泛微。&lt;/p&gt;
+
+&lt;p&gt;链家，HR那关就过不了，学校不是211，985。哎，这个确实让人很无奈，只好不再考虑。&lt;/p&gt;
+
+&lt;p&gt;泛微，朋友给我内推后几个小时就给我打来了预约面试的电话，这个处理速度杠杠的。然后我就去面试了，到了大厅询问前台，前台妹子娴熟的拿出了笔试题，当时一种很烦的情绪油然而生…… 没有任何理由的就产生了。打算转身走的，想想是同学内推的直接走太不礼貌了。硬着头皮去写了笔试。题目很简单，jsp的内置对象，servlet启动，处理请求要调用的方法之类的。后面还有js的题目，让写js获取字符串的字节长度，&lt;strong&gt;字节…&lt;/strong&gt; 有点迷。我就搜了一些抄上去了。还有手写正则表达式之类的。越写越烦最后就懒得写了直接面，面试照着笔试题看了说写的不好，我就说实在很久没动笔了写不来字了。然后就问了一堆前端js的东西。问的我很烦，要那么重前端为啥不招个前端呢还要招服务端，后台框架一个没问，基础的多线程集合也没问。最后也就不了了之。我也懒得去，感觉技术很老很落后。以上只是我自己的个人感觉，就是这样吧。但是对人都是很客气的，就是笔试和面试的过程不愉快吧，感觉技术栈不同，而且偏离的很大。&lt;/p&gt;
+
+&lt;p&gt;趣医网，也找了朋友内推，昨天下午才递过去吧。但是不一定去了，感觉已经找到了合适的，此刻在焦急的等待着电话… 今天早上去了二面，感觉谈的不错，薪资谈了，公司未来的方向也了解了，现状也了解不少。感觉非常不错。静静等着通知电话…… 感觉应该会过吧 = = 😭😢&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;拉钩上投&lt;/h3&gt;
+
+&lt;p&gt;这两天投了不少公司，接到了一些电话，也去面试了。有的只是匆匆带过，真的瞄准了的只要那么几家，彩贝壳，堆糖，名传。&lt;/p&gt;
+
+&lt;p&gt;今天（2.18）二面的就是彩贝壳，感觉不错，去年拿到的A轮，现在已经收支平衡了。这点实在是太赞了。而且产品方向和市场也很大很有机会，感觉B轮不会远。我也在等着通知电话，咋还不打来😂😂😂。如果通过了就这家了。上班1小时到吧，气氛和技术老大（很多来自阿里巴巴，腾讯，携程，美团，大众点评）都不错。希望能加入。&lt;/p&gt;
+
+&lt;p&gt;今天（2.20）电话面试堆糖之前就安排好了，感觉面试官懂得很多，声音听起来很年轻，对Java JDK的理解非常透彻，哪个文件夹下面的哪个文件用来干嘛都去理解了，我都没办法说出有哪些文件夹，感觉差距好大，需要学习太多了。他说我的东西 &lt;strong&gt;杂而不精&lt;/strong&gt;，这点自己早就感觉到了。总是拖延纵容自己往后退。这个毛病真的得改 = = 继续加油吧。&lt;/p&gt;
+
+&lt;p&gt;今天（2.21）最后选择不是&lt;strong&gt;彩贝壳&lt;/strong&gt;是另一家，从薪资待遇上还不错吧，周末也有点时间看看女朋友。技术感觉很不错的一家公司，阿里合作伙伴。也能和之前的伙伴在一块。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;所感&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;基础，Java的集合类，IO，多线程，都是需要去深入了解的，写的代码是否优美很大程度取决于这方面。&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;主流的框架，Spring,SpringMVC,Mybatis这是基本的，对里面的加载的流程需要有一个了解，怎么使用，该怎么用，为啥这么用，有自己的理解。还有一些常用的API需要牢记，我觉得常常写的话应该不难吧。&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SQL，对一些主流数据库的优化有一定的了解，比如MySQL。还有NoSQL，例如Redis，MongoDB。理解他们的工作机制才知道什么场景用最好。&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;分布式和并发编程，对这个的理解可能是中级到高级的跨度吧。dubbo框架，MQ消息队列常常会出现在这里。所以这是必须要去学习的。&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;底层原理和JVM，这个非常重要，也是最近一段时间我自身要去完善的。&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;学习能力，多看书，多动手，多尝试。还想学习一下Python，掌握一门脚本语言。&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;算法…………….这个 = = 先从排序开始&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Java8 RxJava函数式编程&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Python 脚本语言&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;期望&lt;/h3&gt;
+
+&lt;p&gt;如果加入了这家公司，和公司一起成长吧，从各方面提升自己，毕竟周围的伙伴都是那么优秀。&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Sat, 18 Feb 2017 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/02/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/</guid>
+        
+        <category>面试</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>书</title>
+        <description>&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;人丑就要多读书。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;框架&lt;/h3&gt;
+
+&lt;p&gt;http://oh6uhie7j.bkt.clouddn.com/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_%E5%AE%8C%E6%95%B4%E7%89%88%20PDF%E7%94%B5%E5%AD%90%E4%B9%A6%E4%B8%8B%E8%BD%BD%20%E5%B8%A6%E4%B9%A6%E7%AD%BE%E7%9B%AE%E5%BD%95.pdf&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 18 Feb 2017 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/02/%E4%B9%A6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/%E4%B9%A6/</guid>
+        
+        <category>书</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>iOS - 打ipa包和提交AppStore等事宜</title>
@@ -1461,293 +1554,6 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
         <guid isPermaLink="true">http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</guid>
         
         <category>iOS</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>录音文件lame转换MP3相关配置</title>
-        <description>&lt;p&gt;文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;业务需求是录制音频然后上传到七牛并且Android可以读。&lt;/p&gt;
-
-&lt;p&gt;与安卓沟通了一下统一了mp3格式，大小质量都不错。由于&lt;code class=&quot;highlighter-rouge&quot;&gt;AVAudioRecorder&lt;/code&gt;录音的格式为.caf或者.wav而且很大需要进行转换压缩为MP3格式。这里需要用到三方库 &lt;code class=&quot;highlighter-rouge&quot;&gt;lame&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;使用lame转换后音频的质量和&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; _recorder = [[AVAudioRecorder alloc] initWithURL:_recordFilePath settings:setting error:NULL];
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;里的 &lt;strong&gt;&lt;em&gt;setting&lt;/em&gt;&lt;/strong&gt; 息息相关。 所以整理了两个配置。&lt;/p&gt;
-
-&lt;p&gt;我把这两种的配置写在了工具类所以直接贴代码了~要用的话直接CV大法就可以。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/lame.zip&quot;&gt;lame三方库的资源&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;获取转换文件所在文件夹&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getRecPathUrl{
-    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    NSString *recordDir = [str stringByAppendingPathComponent:@&quot;RecordCourse&quot;];
-    
-    return recordDir;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;获取时间戳用于文件的命名&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getTimestamp{
-    NSDate *nowDate = [NSDate date];
-    double timestamp = (double)[nowDate timeIntervalSince1970]*1000;
-    long nowTimestamp = [[NSNumber numberWithDouble:timestamp] longValue];
-    NSString *timestampStr = [NSString stringWithFormat:@&quot;%ld&quot;,nowTimestamp];
-    return timestampStr;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PCM转换MP3配置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithPCM {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    //设置录音格式
-    [dic setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
-    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
-    [dic setObject:@(44100.0) forKey:AVSampleRateKey];
-    //设置通道,这里采用双声道
-    [dic setObject:@(1) forKey:AVNumberOfChannelsKey];
-    //每个采样点位数,分为8、16、24、32
-    [dic setObject:@(16) forKey:AVLinearPCMBitDepthKey];
-    //是否使用浮点数采样
-    [dic setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
-    //....其他设置等
-    return dic;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CAF转换MP3配置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithCAF {
-    NSDictionary *setting = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithInt:AVAudioQualityMin],
-                             AVEncoderAudioQualityKey,
-                             [NSNumber numberWithInt:16],
-                             AVEncoderBitRateKey,
-                             [NSNumber numberWithInt:2],
-                             AVNumberOfChannelsKey,
-                             [NSNumber numberWithFloat:44100.0],
-                             AVSampleRateKey,
-                             nil];
-
-    return setting;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PCM转换MP3的lame方法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioPCMtoMP3:(NSString *)wavPath {
-    NSString *cafFilePath = wavPath;
-    
-    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
-    
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    if([fileManager removeItemAtPath:mp3FilePath error:nil]){
-        NSLog(@&quot;删除原MP3文件&quot;);
-    }
-    @try {
-        int read, write;
-        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        lame_set_in_samplerate(lame, 22050.0);
-        lame_set_VBR(lame, vbr_default);
-        lame_init_params(lame);
-        
-        do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-            
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@&quot;%@&quot;,[exception description]);
-    }
-    @finally {
-        return mp3FilePath;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CAF转换MP3的lame方法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioCAFtoMP3:(NSString *)wavPath {
-    
-    NSString *cafFilePath = wavPath;
-    
-    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
-    
-    @try {
-        int read, write;
-        
-        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
-        
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        lame_set_num_channels(lame,1);//设置1为单通道，默认为2双通道
-        lame_set_in_samplerate(lame, 44100.0);
-        lame_set_VBR(lame, vbr_default);
-        
-        lame_set_brate(lame,8);
-        
-        lame_set_mode(lame,3);
-        
-        lame_set_quality(lame,2);
-        
-        lame_init_params(lame);
-        
-        do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-            
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@&quot;%@&quot;,[exception description]);
-    }
-    @finally {
-        return mp3FilePath;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;两种质量大小不错都可以使用😁😁&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Dec 2016 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</guid>
-        
-        <category>lame</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Mac更新10.12后关机很慢的问题</title>
-        <description>&lt;p&gt;之前电脑升级了MacOS Sierra，然后关机都特别慢，起码要20分钟。问了周围朋友有的出现有的没有。今天才知道是因为本地MySQL服务的问题。So那就重新装一个吧。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;macmysql-&quot;&gt;下载最新mac版本的mysql 地址&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://dev.mysql.com/downloads/file/?id=466265&quot;&gt;mysql-5.7.16-osx10.11-x86_64.dmg&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;mysql&quot;&gt;卸载MySQL&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo rm /usr/local/mysql
-sudo rm -rf /usr/local/mysql*
-sudo rm -rf /Library/StartupItems/MySQLCOM
-sudo rm -rf /Library/PreferencePanes/My*
-vim /etc/hostconfig  (and removed the line MYSQLCOM=-YES-)
-rm -rf ~/Library/PreferencePanes/My*
-sudo rm -rf /Library/Receipts/mysql*
-sudo rm -rf /Library/Receipts/MySQL*
-sudo rm -rf /var/db/receipts/com.mysql.*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这么多rm -rf 不敢写个脚本直接跑。。。 😂😂😂 虽然机器比我靠谱&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;mysql-1&quot;&gt;安装MySQL&lt;/h3&gt;
-
-&lt;p&gt;直接安装dmg文件就OK了。&lt;/p&gt;
-
-&lt;p&gt;会出一个提示，root的密码。这之后需要改一下。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;2016-12-03T05:27:15.648601Z 1 [Note] A temporary password is generated for root@localhost: 
-pju%C!a?t4ek
-If you lose this password, please consult the section How to Reset the Root Password in the MySQL reference manual.
-You must reset your password using ALTER USER statement before executing this statement.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;电脑上有 &lt;code class=&quot;highlighter-rouge&quot;&gt;MySQL Workbench&lt;/code&gt; 所以就直接改了 没用命令行了。&lt;/p&gt;
-
-&lt;p&gt;最后Navicat连上了 就OK了。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;记得卸载之前保存一下sql脚本来恢复数据&lt;/strong&gt; 😂😂😂&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 05 Dec 2016 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/Mac%E6%9B%B4%E6%96%B010.12%E5%90%8E%E5%85%B3%E6%9C%BA%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/Mac%E6%9B%B4%E6%96%B010.12%E5%90%8E%E5%85%B3%E6%9C%BA%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
-        
-        <category>Mac</category>
         
         
         <category>jekyll</category>
