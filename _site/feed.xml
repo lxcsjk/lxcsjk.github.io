@@ -5,9 +5,99 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 22 Feb 2017 22:43:24 +0800</pubDate>
-    <lastBuildDate>Wed, 22 Feb 2017 22:43:24 +0800</lastBuildDate>
+    <pubDate>Fri, 24 Feb 2017 23:19:34 +0800</pubDate>
+    <lastBuildDate>Fri, 24 Feb 2017 23:19:34 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>一些书</title>
+        <description>&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;人丑就要多读书。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;没来得及分类 日后再分&lt;/h4&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Docker.pdf&quot;&gt;Docker.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Gradle.in.Action文字版.pdf&quot;&gt;Gradle.in.Action文字版.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Groovy入门经典.pdf&quot;&gt;Groovy入门经典.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java 8实战.pdf&quot;&gt;Java 8实战.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java8函数式编程.pdf&quot;&gt;Java8函数式编程.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java经典问题算法大全.pdf&quot;&gt;Java经典问题算法大全.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java多线程编程核心技术.pdf&quot;&gt;Java多线程编程核心技术.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java多线程编程核心技术_完整版 PDF电子书下载 带书签目录.pdf&quot;&gt;Java多线程编程核心技术.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Lucene 原理与代码分析完整版.pdf&quot;&gt;Lucene 原理与代码分析完整版.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/MongoDB权威指南中文版.pdf&quot;&gt;MongoDB权威指南中文版.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/ProGit-zh-v2.1.1.pdf&quot;&gt;ProGit-zh-v2.1.1.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/RxJavaDocs.pdf&quot;&gt;RxJavaDocs.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/SpringMVC.pdf&quot;&gt;SpringMVC.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/gradle-in-action-cn.pdf&quot;&gt;gradle-in-action-cn.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/hibernate杂谈.pdf&quot;&gt;hibernate杂谈.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/iOS开发进阶(唐巧).pdf&quot;&gt;iOS开发进阶(唐巧).pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/nginx高性能web服务器详解.pdf&quot;&gt;nginx高性能web服务器详解.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf&quot;&gt;spring-boot-reference.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-zh.pdf&quot;&gt;spring-boot-zh.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring杂谈[原创].pdf&quot;&gt;spring杂谈[原创].pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/群体(大小为N的数组)中随机抽取一定数量(M个)的样本.pdf&quot;&gt;群体(大小为N的数组)中随机抽取一定数量(M个)的样本.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/剑指offer 名企面试官精讲典型编程题.pdf&quot;&gt;剑指offer 名企面试官精讲典型编程题.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/跟我学SpringMVC.pdf&quot;&gt;跟我学SpringMVC.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/跟我学spring3(1-7).pdf&quot;&gt;跟我学spring3(1-7).pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/跟我学spring3(8-13).pdf&quot;&gt;跟我学spring3(8-13).pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/跟开涛学 SpringMVC.pdf&quot;&gt;跟开涛学 SpringMVC.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/排序算法.pdf&quot;&gt;排序算法.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/深入学习MongoDB.pdf&quot;&gt;深入学习MongoDB.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/写给大忙人看的Java SE8.pdf&quot;&gt;写给大忙人看的Java SE8.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大话数据结构（高清版）.pdf&quot;&gt;大话数据结构（高清版）.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大型分布式网站架构设计与实践.pdf&quot;&gt;大型分布式网站架构设计与实践.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大型网站技术架构：核心原理与案例分析.pdf&quot;&gt;大型网站技术架构：核心原理与案例分析.pdf&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 24 Feb 2017 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6/</guid>
+        
+        <category>书</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>面试有感</title>
@@ -1529,228 +1619,6 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
         <guid isPermaLink="true">http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</guid>
         
         <category>iOS</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>录音文件lame转换MP3相关配置</title>
-        <description>&lt;p&gt;文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;业务需求是录制音频然后上传到七牛并且Android可以读。&lt;/p&gt;
-
-&lt;p&gt;与安卓沟通了一下统一了mp3格式，大小质量都不错。由于&lt;code class=&quot;highlighter-rouge&quot;&gt;AVAudioRecorder&lt;/code&gt;录音的格式为.caf或者.wav而且很大需要进行转换压缩为MP3格式。这里需要用到三方库 &lt;code class=&quot;highlighter-rouge&quot;&gt;lame&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;使用lame转换后音频的质量和&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; _recorder = [[AVAudioRecorder alloc] initWithURL:_recordFilePath settings:setting error:NULL];
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;里的 &lt;strong&gt;&lt;em&gt;setting&lt;/em&gt;&lt;/strong&gt; 息息相关。 所以整理了两个配置。&lt;/p&gt;
-
-&lt;p&gt;我把这两种的配置写在了工具类所以直接贴代码了~要用的话直接CV大法就可以。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/lame.zip&quot;&gt;lame三方库的资源&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;获取转换文件所在文件夹&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getRecPathUrl{
-    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    NSString *recordDir = [str stringByAppendingPathComponent:@&quot;RecordCourse&quot;];
-    
-    return recordDir;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;获取时间戳用于文件的命名&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)getTimestamp{
-    NSDate *nowDate = [NSDate date];
-    double timestamp = (double)[nowDate timeIntervalSince1970]*1000;
-    long nowTimestamp = [[NSNumber numberWithDouble:timestamp] longValue];
-    NSString *timestampStr = [NSString stringWithFormat:@&quot;%ld&quot;,nowTimestamp];
-    return timestampStr;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PCM转换MP3配置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithPCM {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    //设置录音格式
-    [dic setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
-    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
-    [dic setObject:@(44100.0) forKey:AVSampleRateKey];
-    //设置通道,这里采用双声道
-    [dic setObject:@(1) forKey:AVNumberOfChannelsKey];
-    //每个采样点位数,分为8、16、24、32
-    [dic setObject:@(16) forKey:AVLinearPCMBitDepthKey];
-    //是否使用浮点数采样
-    [dic setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
-    //....其他设置等
-    return dic;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CAF转换MP3配置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSDictionary *)getAudioSettingWithCAF {
-    NSDictionary *setting = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithInt:AVAudioQualityMin],
-                             AVEncoderAudioQualityKey,
-                             [NSNumber numberWithInt:16],
-                             AVEncoderBitRateKey,
-                             [NSNumber numberWithInt:2],
-                             AVNumberOfChannelsKey,
-                             [NSNumber numberWithFloat:44100.0],
-                             AVSampleRateKey,
-                             nil];
-
-    return setting;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PCM转换MP3的lame方法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioPCMtoMP3:(NSString *)wavPath {
-    NSString *cafFilePath = wavPath;
-    
-    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
-    
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    if([fileManager removeItemAtPath:mp3FilePath error:nil]){
-        NSLog(@&quot;删除原MP3文件&quot;);
-    }
-    @try {
-        int read, write;
-        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        lame_set_in_samplerate(lame, 22050.0);
-        lame_set_VBR(lame, vbr_default);
-        lame_init_params(lame);
-        
-        do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-            
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@&quot;%@&quot;,[exception description]);
-    }
-    @finally {
-        return mp3FilePath;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CAF转换MP3的lame方法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ (NSString *)audioCAFtoMP3:(NSString *)wavPath {
-    
-    NSString *cafFilePath = wavPath;
-    
-    NSString *mp3FilePath = [NSString stringWithFormat:@&quot;%@.mp3&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
-    
-    @try {
-        int read, write;
-        
-        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], &quot;rb&quot;);  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], &quot;wb&quot;);  //output 输出生成的Mp3文件位置
-        
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        lame_set_num_channels(lame,1);//设置1为单通道，默认为2双通道
-        lame_set_in_samplerate(lame, 44100.0);
-        lame_set_VBR(lame, vbr_default);
-        
-        lame_set_brate(lame,8);
-        
-        lame_set_mode(lame,3);
-        
-        lame_set_quality(lame,2);
-        
-        lame_init_params(lame);
-        
-        do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-            
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@&quot;%@&quot;,[exception description]);
-    }
-    @finally {
-        return mp3FilePath;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;两种质量大小不错都可以使用😁😁&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Dec 2016 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/%E5%BD%95%E9%9F%B3%E6%96%87%E4%BB%B6lame%E8%BD%AC%E6%8D%A2MP3%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</guid>
-        
-        <category>lame</category>
         
         
         <category>jekyll</category>
