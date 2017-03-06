@@ -7,6 +7,7 @@ title: 关于我
 
 - [何宗苡 - (iOS)](http://ripperhe.com)
 - [潘柏信 - (看了这位大神的Blog才知道如何搭建)](http://baixin.io)
+- [杜嘉希 - 刚到公司帮我很多的同事](http://codeyouth.net)
 
 ---
 
