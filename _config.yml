@@ -28,7 +28,7 @@ social:
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
 ga:
-    id: UA-87669753-1
+    id: UA-87669753-2
     host: auto
 
 
