@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>数据库迁移Flyway</title>
+  <meta name="description" content="为什么需要Flyway">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="数据库迁移Flyway">
+  <meta name="twitter:description" content="为什么需要Flyway">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="数据库迁移Flyway">
+  <meta property="og:description" content="为什么需要Flyway">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/">
+  <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 站点统计 -->
+  <script 
+  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
+
+<!-- 百度统计 -->
+  
+
+<!-- google 统计 -->
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-87669753-2', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('http://oh6uhie7j.bkt.clouddn.com/b1ackground-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">
+            <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2>
+                            
+                                YoRuo
+                            
+                        </h2>
+                        <p>
+                           
+                                Java & iOS
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for YoRuo:想变得更好" class="blog-button">YoRuo:想变得更好</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">爱折腾 - 乐于折腾 - 享受折腾</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的Blog~</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        
+
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="panel-cover--overlay cover-disabled"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">数据库迁移Flyway</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2017-03-10 00:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-03-10</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+
+  <section class="post">
+    <h3 id="flyway">为什么需要Flyway</h3>
+
+<p>日常开发常常会遇到一些这样的场景</p>
+
+<ol>
+  <li>小红开发一个模块在本地数据库增加了两个字段，并且改动了dao层的代码提交到git。这时候小黄拉取了代码Run很可能报错。</li>
+  <li>如果在上线正式环境的时候，忘记在正式数据库执行sql脚本可能造成严重的问题。</li>
+  <li>传统的解决方式是在一个固定的地方添加sql脚本，开发人员相互沟通执行哪个sql脚本</li>
+</ol>
+
+<p>Flyway可以将这一类问题解决，在项目编译期就将改动写入数据库。只要启动成功就没有问题。</p>
+
+<hr />
+
+<h3 id="flyway-">Flyway 导入</h3>
+
+<p>如果是Gradle，在<code class="highlighter-rouge">build.gradle</code>添加依赖</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s2">"org.flywaydb:flyway-core:4.1.2"</span>
+</code></pre>
+</div>
+
+<p>Maven  在<code class="highlighter-rouge">pom.xml</code>添加依赖</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+　　<span class="nt">&lt;groupId&gt;</span>org.flywaydb<span class="nt">&lt;/groupId&gt;</span>
+　　<span class="nt">&lt;artifactId&gt;</span>flyway-core<span class="nt">&lt;/artifactId&gt;</span>
+　　<span class="nt">&lt;version&gt;</span>4.0.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="section">实际使用</h3>
+
+<p>使用Spring Boot，Gradle 构建项目，添加依赖。</p>
+
+<p>如果是已经开发一段时间的项目需要开启 <strong><em>baselineOnMigrate</em></strong> 否则抛出异常</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Found</span> <span class="n">non</span><span class="o">-</span><span class="n">empty</span> <span class="nf">schema</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="err">`</span><span class="n">reshelf2</span><span class="err">`</span> <span class="n">without</span> <span class="n">metadata</span> <span class="n">table</span><span class="o">!</span> <span class="n">Use</span> <span class="nf">baseline</span><span class="o">()</span> <span class="n">or</span> <span class="n">set</span> <span class="n">baselineOnMigrate</span> <span class="n">to</span> <span class="kc">true</span> <span class="n">to</span> <span class="n">initialize</span> <span class="n">the</span> <span class="n">metadata</span> <span class="n">table</span><span class="o">.</span> 
+</code></pre>
+</div>
+
+<p>在   <strong><em>application.properties</em></strong>  添加配置</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>flyway.baselineOnMigrate=true
+</code></pre>
+</div>
+
+<p>当然也可以实现接口</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaselineOnMigrateMigrationStrategy</span> <span class="kd">implements</span> <span class="n">FlywayMigrationStrategy</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">migrate</span><span class="o">(</span><span class="n">Flyway</span> <span class="n">flyway</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">flyway</span><span class="o">.</span><span class="na">setBaselineOnMigrate</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">flyway</span><span class="o">.</span><span class="na">migrate</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>数据库中的<code class="highlighter-rouge">schema_version</code>为存储对比脚本版本的表</p>
+
+<p>sql脚本默认放置在  <code class="highlighter-rouge">classpath:db/migration</code></p>
+
+<p>文件以.sql结尾，命名V字开头，后面数字为版本号 例如 V1__init.sql</p>
+
+<p>摘自 <code class="highlighter-rouge">org.flywaydb.core.Flyway</code></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code> <span class="cm">/**
+     * The locations to scan recursively for migrations.
+     * &lt;p/&gt;
+     * &lt;p&gt;The location type is determined by its prefix.
+     * Unprefixed locations or locations starting with {@code classpath:} point to a package on the classpath and may
+     * contain both sql and java-based migrations.
+     * Locations starting with {@code filesystem:} point to a directory on the filesystem and may only contain sql
+     * migrations.&lt;/p&gt;
+     * &lt;p/&gt;
+     * (default: db/migration)
+     */</span>
+    <span class="kd">private</span> <span class="n">Locations</span> <span class="n">locations</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Locations</span><span class="o">(</span><span class="s">"db/migration"</span><span class="o">);</span>
+
+    <span class="cm">/**
+     * The encoding of Sql migrations. (default: UTF-8)
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s">"UTF-8"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The schemas managed by Flyway.  These schema names are case-sensitive. (default: The default schema for the datasource connection)
+     * &lt;p&gt;Consequences:&lt;/p&gt;
+     * &lt;ul&gt;
+     * &lt;li&gt;The first schema in the list will be automatically set as the default one during the migration.&lt;/li&gt;
+     * &lt;li&gt;The first schema in the list will also be the one containing the metadata table.&lt;/li&gt;
+     * &lt;li&gt;The schemas will be cleaned in the order of this list.&lt;/li&gt;
+     * &lt;/ul&gt;
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">schemaNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+
+    <span class="cm">/**
+     * &lt;p&gt;The name of the schema metadata table that will be used by Flyway. (default: schema_version)&lt;/p&gt;&lt;p&gt; By default
+     * (single-schema mode) the metadata table is placed in the default schema for the connection provided by the
+     * datasource. &lt;/p&gt; &lt;p&gt; When the &lt;i&gt;flyway.schemas&lt;/i&gt; property is set (multi-schema mode), the metadata table is
+     * placed in the first schema of the list. &lt;/p&gt;
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">table</span> <span class="o">=</span> <span class="s">"schema_version"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The target version up to which Flyway should consider migrations. Migrations with a higher version number will
+     * be ignored. The special value {@code current} designates the current version of the schema (default: the latest version)
+     */</span>
+    <span class="kd">private</span> <span class="n">MigrationVersion</span> <span class="n">target</span> <span class="o">=</span> <span class="n">MigrationVersion</span><span class="o">.</span><span class="na">LATEST</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Whether placeholders should be replaced. (default: true)
+     */</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">placeholderReplacement</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The map of &amp;lt;placeholder, replacementValue&amp;gt; to apply to sql migration scripts.
+     */</span>
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">placeholders</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="cm">/**
+     * The prefix of every placeholder. (default: ${ )
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">placeholderPrefix</span> <span class="o">=</span> <span class="s">"${"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The suffix of every placeholder. (default: } )
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">placeholderSuffix</span> <span class="o">=</span> <span class="s">"}"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The file name prefix for sql migrations. (default: V)
+     * &lt;p/&gt;
+     * &lt;p&gt;Sql migrations have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to V1_1__My_description.sql&lt;/p&gt;
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">sqlMigrationPrefix</span> <span class="o">=</span> <span class="s">"V"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The file name prefix for repeatable sql migrations. (default: R)
+     * &lt;p/&gt;
+     * &lt;p&gt;Repeatable sql migrations have the following file name structure: prefixSeparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to R__My_description.sql&lt;/p&gt;
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">repeatableSqlMigrationPrefix</span> <span class="o">=</span> <span class="s">"R"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The file name separator for sql migrations. (default: __)
+     * &lt;p/&gt;
+     * &lt;p&gt;Sql migrations have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to V1_1__My_description.sql&lt;/p&gt;
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">sqlMigrationSeparator</span> <span class="o">=</span> <span class="s">"__"</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * The file name suffix for sql migrations. (default: .sql)
+     * &lt;p/&gt;
+     * &lt;p&gt;Sql migrations have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to V1_1__My_description.sql&lt;/p&gt;
+     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">sqlMigrationSuffix</span> <span class="o">=</span> <span class="s">".sql"</span><span class="o">;</span>
+
+</code></pre>
+</div>
+
+<p>可以自定义配置，但是建议不要。</p>
+
+<p>注意：sql脚本需要有相应的版本号，例如如果想让 <code class="highlighter-rouge">V2__init.sql</code>执行 需要有<code class="highlighter-rouge">V1__init.sql</code>作为一个基准对比，然后flyway才会执行相应的sql脚本。</p>
+
+<hr />
+
+<p>一些链接</p>
+
+<p><a href="https://flywaydb.org/documentation/gradle/">https://flywaydb.org/documentation/gradle/</a></p>
+
+<p><a href="http://stackoverflow.com/questions/33029311/setting-flyway-baselineonmigrate-and-baselineversion-using-spring-boot-prope">http://stackoverflow.com/questions/33029311/setting-flyway-baselineonmigrate-and-baselineversion-using-spring-boot-prope</a></p>
+
+<p><a href="http://stackoverflow.com/questions/30013953/how-to-use-jdbc-authentication-of-spring-boot-spring-security-with-flyway">http://stackoverflow.com/questions/30013953/how-to-use-jdbc-authentication-of-spring-boot-spring-security-with-flyway</a></p>
+
+<p><a href="https://github.com/spark-jobserver/spark-jobserver/issues/503">https://github.com/spark-jobserver/spark-jobserver/issues/503</a></p>
+
+<hr />
+
+
+
+  </section>
+
+<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+</article>
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6/" data-toggle="tooltip" data-placement="top" title="一些书">上一篇：  <span>一些书</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+  
+    <div class="ds-thread" data-thread-key="/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/" data-title="数据库迁移Flyway" data-url="http://localhost:4000/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/"></div>
+
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"yoruo"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <i class='social fa fa-weibo fa-2x'></i>
+              <span class="label">Weibo</span>
+            </a>
+          </li>
+          
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
+              <i class='social fa fa-github fa-2x'></i>
+              <span class="label">Github</span>
+            </a>
+          </li>
+          
+          
+          
+
+          
+
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <i class='social fa fa-rss fa-2x'></i>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:yoruolxc@outlook.com" title="Contact me">
+              <i class='social fa fa-envelope fa-2x'></i>
+              <span class="label">Email</span>
+            </a>
+          </li>
+          
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87669753-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87669753-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    
+
+  </body>
+
+</html>

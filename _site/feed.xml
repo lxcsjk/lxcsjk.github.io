@@ -5,9 +5,212 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 24 Feb 2017 23:19:34 +0800</pubDate>
-    <lastBuildDate>Fri, 24 Feb 2017 23:19:34 +0800</lastBuildDate>
+    <pubDate>Sat, 11 Mar 2017 01:19:08 +0800</pubDate>
+    <lastBuildDate>Sat, 11 Mar 2017 01:19:08 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>数据库迁移Flyway</title>
+        <description>&lt;h3 id=&quot;flyway&quot;&gt;为什么需要Flyway&lt;/h3&gt;
+
+&lt;p&gt;日常开发常常会遇到一些这样的场景&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;小红开发一个模块在本地数据库增加了两个字段，并且改动了dao层的代码提交到git。这时候小黄拉取了代码Run很可能报错。&lt;/li&gt;
+  &lt;li&gt;如果在上线正式环境的时候，忘记在正式数据库执行sql脚本可能造成严重的问题。&lt;/li&gt;
+  &lt;li&gt;传统的解决方式是在一个固定的地方添加sql脚本，开发人员相互沟通执行哪个sql脚本&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Flyway可以将这一类问题解决，在项目编译期就将改动写入数据库。只要启动成功就没有问题。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;flyway-&quot;&gt;Flyway 导入&lt;/h3&gt;
+
+&lt;p&gt;如果是Gradle，在&lt;code class=&quot;highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt;添加依赖&lt;/p&gt;
+
+&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;org.flywaydb:flyway-core:4.1.2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Maven  在&lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;添加依赖&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+　　&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.flywaydb&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+　　&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;flyway-core&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+　　&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.0.3&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;实际使用&lt;/h3&gt;
+
+&lt;p&gt;使用Spring Boot，Gradle 构建项目，添加依赖。&lt;/p&gt;
+
+&lt;p&gt;如果是已经开发一段时间的项目需要开启 &lt;strong&gt;&lt;em&gt;baselineOnMigrate&lt;/em&gt;&lt;/strong&gt; 否则抛出异常&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Found&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;non&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;schema&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshelf2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;without&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Use&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;baseline&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baselineOnMigrate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initialize&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在   &lt;strong&gt;&lt;em&gt;application.properties&lt;/em&gt;&lt;/strong&gt;  添加配置&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;flyway.baselineOnMigrate=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;当然也可以实现接口&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BaselineOnMigrateMigrationStrategy&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FlywayMigrationStrategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;migrate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Flyway&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flyway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flyway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setBaselineOnMigrate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flyway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;migrate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;数据库中的&lt;code class=&quot;highlighter-rouge&quot;&gt;schema_version&lt;/code&gt;为存储对比脚本版本的表&lt;/p&gt;
+
+&lt;p&gt;sql脚本默认放置在  &lt;code class=&quot;highlighter-rouge&quot;&gt;classpath:db/migration&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;文件以.sql结尾，命名V字开头，后面数字为版本号 例如 V1__init.sql&lt;/p&gt;
+
+&lt;p&gt;摘自 &lt;code class=&quot;highlighter-rouge&quot;&gt;org.flywaydb.core.Flyway&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;cm&quot;&gt;/**
+     * The locations to scan recursively for migrations.
+     * &amp;lt;p/&amp;gt;
+     * &amp;lt;p&amp;gt;The location type is determined by its prefix.
+     * Unprefixed locations or locations starting with {@code classpath:} point to a package on the classpath and may
+     * contain both sql and java-based migrations.
+     * Locations starting with {@code filesystem:} point to a directory on the filesystem and may only contain sql
+     * migrations.&amp;lt;/p&amp;gt;
+     * &amp;lt;p/&amp;gt;
+     * (default: db/migration)
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Locations&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Locations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;db/migration&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The encoding of Sql migrations. (default: UTF-8)
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The schemas managed by Flyway.  These schema names are case-sensitive. (default: The default schema for the datasource connection)
+     * &amp;lt;p&amp;gt;Consequences:&amp;lt;/p&amp;gt;
+     * &amp;lt;ul&amp;gt;
+     * &amp;lt;li&amp;gt;The first schema in the list will be automatically set as the default one during the migration.&amp;lt;/li&amp;gt;
+     * &amp;lt;li&amp;gt;The first schema in the list will also be the one containing the metadata table.&amp;lt;/li&amp;gt;
+     * &amp;lt;li&amp;gt;The schemas will be cleaned in the order of this list.&amp;lt;/li&amp;gt;
+     * &amp;lt;/ul&amp;gt;
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;schemaNames&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * &amp;lt;p&amp;gt;The name of the schema metadata table that will be used by Flyway. (default: schema_version)&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt; By default
+     * (single-schema mode) the metadata table is placed in the default schema for the connection provided by the
+     * datasource. &amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; When the &amp;lt;i&amp;gt;flyway.schemas&amp;lt;/i&amp;gt; property is set (multi-schema mode), the metadata table is
+     * placed in the first schema of the list. &amp;lt;/p&amp;gt;
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;schema_version&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The target version up to which Flyway should consider migrations. Migrations with a higher version number will
+     * be ignored. The special value {@code current} designates the current version of the schema (default: the latest version)
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MigrationVersion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MigrationVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LATEST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * Whether placeholders should be replaced. (default: true)
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;placeholderReplacement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The map of &amp;amp;lt;placeholder, replacementValue&amp;amp;gt; to apply to sql migration scripts.
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;placeholders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The prefix of every placeholder. (default: ${ )
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;placeholderPrefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;${&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The suffix of every placeholder. (default: } )
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;placeholderSuffix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The file name prefix for sql migrations. (default: V)
+     * &amp;lt;p/&amp;gt;
+     * &amp;lt;p&amp;gt;Sql migrations have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to V1_1__My_description.sql&amp;lt;/p&amp;gt;
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlMigrationPrefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;V&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The file name prefix for repeatable sql migrations. (default: R)
+     * &amp;lt;p/&amp;gt;
+     * &amp;lt;p&amp;gt;Repeatable sql migrations have the following file name structure: prefixSeparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to R__My_description.sql&amp;lt;/p&amp;gt;
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repeatableSqlMigrationPrefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;R&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The file name separator for sql migrations. (default: __)
+     * &amp;lt;p/&amp;gt;
+     * &amp;lt;p&amp;gt;Sql migrations have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to V1_1__My_description.sql&amp;lt;/p&amp;gt;
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlMigrationSeparator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * The file name suffix for sql migrations. (default: .sql)
+     * &amp;lt;p/&amp;gt;
+     * &amp;lt;p&amp;gt;Sql migrations have the following file name structure: prefixVERSIONseparatorDESCRIPTIONsuffix ,
+     * which using the defaults translates to V1_1__My_description.sql&amp;lt;/p&amp;gt;
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqlMigrationSuffix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.sql&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;可以自定义配置，但是建议不要。&lt;/p&gt;
+
+&lt;p&gt;注意：sql脚本需要有相应的版本号，例如如果想让 &lt;code class=&quot;highlighter-rouge&quot;&gt;V2__init.sql&lt;/code&gt;执行 需要有&lt;code class=&quot;highlighter-rouge&quot;&gt;V1__init.sql&lt;/code&gt;作为一个基准对比，然后flyway才会执行相应的sql脚本。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;一些链接&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://flywaydb.org/documentation/gradle/&quot;&gt;https://flywaydb.org/documentation/gradle/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/33029311/setting-flyway-baselineonmigrate-and-baselineversion-using-spring-boot-prope&quot;&gt;http://stackoverflow.com/questions/33029311/setting-flyway-baselineonmigrate-and-baselineversion-using-spring-boot-prope&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/30013953/how-to-use-jdbc-authentication-of-spring-boot-spring-security-with-flyway&quot;&gt;http://stackoverflow.com/questions/30013953/how-to-use-jdbc-authentication-of-spring-boot-spring-security-with-flyway&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/spark-jobserver/spark-jobserver/issues/503&quot;&gt;https://github.com/spark-jobserver/spark-jobserver/issues/503&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Fri, 10 Mar 2017 00:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/</guid>
+        
+        <category>数据库迁移</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>一些书</title>
@@ -21,49 +224,19 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Docker.pdf&quot;&gt;Docker.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Gradle.in.Action文字版.pdf&quot;&gt;Gradle.in.Action文字版.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Groovy入门经典.pdf&quot;&gt;Groovy入门经典.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;java-8&quot;&gt;Java 8&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java 8实战.pdf&quot;&gt;Java 8实战.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java8函数式编程.pdf&quot;&gt;Java8函数式编程.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java经典问题算法大全.pdf&quot;&gt;Java经典问题算法大全.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/写给大忙人看的Java SE8.pdf&quot;&gt;写给大忙人看的Java SE8.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java多线程编程核心技术.pdf&quot;&gt;Java多线程编程核心技术.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java多线程编程核心技术_完整版 PDF电子书下载 带书签目录.pdf&quot;&gt;Java多线程编程核心技术.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Lucene 原理与代码分析完整版.pdf&quot;&gt;Lucene 原理与代码分析完整版.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/MongoDB权威指南中文版.pdf&quot;&gt;MongoDB权威指南中文版.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/ProGit-zh-v2.1.1.pdf&quot;&gt;ProGit-zh-v2.1.1.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/RxJavaDocs.pdf&quot;&gt;RxJavaDocs.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/SpringMVC.pdf&quot;&gt;SpringMVC.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/gradle-in-action-cn.pdf&quot;&gt;gradle-in-action-cn.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/hibernate杂谈.pdf&quot;&gt;hibernate杂谈.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/iOS开发进阶(唐巧).pdf&quot;&gt;iOS开发进阶(唐巧).pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/nginx高性能web服务器详解.pdf&quot;&gt;nginx高性能web服务器详解.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf&quot;&gt;spring-boot-reference.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-zh.pdf&quot;&gt;spring-boot-zh.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring杂谈[原创].pdf&quot;&gt;spring杂谈[原创].pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/群体(大小为N的数组)中随机抽取一定数量(M个)的样本.pdf&quot;&gt;群体(大小为N的数组)中随机抽取一定数量(M个)的样本.pdf&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/剑指offer 名企面试官精讲典型编程题.pdf&quot;&gt;剑指offer 名企面试官精讲典型编程题.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/跟我学SpringMVC.pdf&quot;&gt;跟我学SpringMVC.pdf&lt;/a&gt;&lt;/p&gt;
 
@@ -73,18 +246,99 @@
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/跟开涛学 SpringMVC.pdf&quot;&gt;跟开涛学 SpringMVC.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/排序算法.pdf&quot;&gt;排序算法.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf&quot;&gt;spring-boot-reference.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-zh.pdf&quot;&gt;spring-boot-zh.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring杂谈[原创].pdf&quot;&gt;spring杂谈[原创].pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;java&quot;&gt;Java多线程&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java多线程编程核心技术.pdf&quot;&gt;Java多线程编程核心技术.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;rxjava&quot;&gt;RxJava&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/RxJavaDocs.pdf&quot;&gt;RxJavaDocs.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;gradle&quot;&gt;Gradle&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Gradle.in.Action文字版.pdf&quot;&gt;Gradle.in.Action文字版.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/gradle-in-action-cn.pdf&quot;&gt;gradle-in-action-cn.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;git&quot;&gt;Git&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/ProGit-zh-v2.1.1.pdf&quot;&gt;ProGit-zh-v2.1.1.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;groovy&quot;&gt;Groovy&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Groovy入门经典.pdf&quot;&gt;Groovy入门经典.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;docker&quot;&gt;Docker&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Docker.pdf&quot;&gt;Docker.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;lucene&quot;&gt;Lucene&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Lucene 原理与代码分析完整版.pdf&quot;&gt;Lucene 原理与代码分析完整版.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;mongodb&quot;&gt;MongoDB&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/MongoDB权威指南中文版.pdf&quot;&gt;MongoDB权威指南中文版.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/深入学习MongoDB.pdf&quot;&gt;深入学习MongoDB.pdf&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/写给大忙人看的Java SE8.pdf&quot;&gt;写给大忙人看的Java SE8.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;Nginx&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/nginx高性能web服务器详解.pdf&quot;&gt;nginx高性能web服务器详解.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;算法&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java经典问题算法大全.pdf&quot;&gt;Java经典问题算法大全.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/群体(大小为N的数组)中随机抽取一定数量(M个)的样本.pdf&quot;&gt;群体(大小为N的数组)中随机抽取一定数量(M个)的样本.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/剑指offer 名企面试官精讲典型编程题.pdf&quot;&gt;剑指offer 名企面试官精讲典型编程题.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/排序算法.pdf&quot;&gt;排序算法.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大话数据结构（高清版）.pdf&quot;&gt;大话数据结构（高清版）.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;ios&quot;&gt;iOS&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/iOS开发进阶(唐巧).pdf&quot;&gt;iOS开发进阶(唐巧).pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;架构&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大型分布式网站架构设计与实践.pdf&quot;&gt;大型分布式网站架构设计与实践.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大型网站技术架构：核心原理与案例分析.pdf&quot;&gt;大型网站技术架构：核心原理与案例分析.pdf&lt;/a&gt;&lt;/p&gt;
 
+&lt;hr /&gt;
 </description>
         <pubDate>Fri, 24 Feb 2017 20:00:03 +0800</pubDate>
         <link>http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6/</link>
@@ -1557,66 +1811,6 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
         <pubDate>Thu, 22 Dec 2016 20:00:03 +0800</pubDate>
         <link>http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</link>
         <guid isPermaLink="true">http://localhost:4000/2016/12/Invalid-Bundle.-iPad-Multitasking-support-requires-these-orientations/</guid>
-        
-        <category>iOS</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>PresentViewController 在 iPad 上执行失败</title>
-        <description>&lt;p&gt;在选择头像图片的时候 使用  &lt;code class=&quot;highlighter-rouge&quot;&gt;imagePickerController&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  [self presentViewController:imagePickerController animated:YES completion:^{
-            
-  }];
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;异常信息&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;2016-12-20 13:50:23.096416 Training[1963:904966] Warning: Attempt to present &amp;lt;UIImagePickerController: 0x14a9d0c00&amp;gt;  on &amp;lt;MySelfViewController: 0x149d2d480&amp;gt; which is already presenting (null)&lt;/p&gt;
-
-  &lt;p&gt;2016-12-20 13:50:23.106841 Training[1963:904966] [Warning] &amp;lt;_UIPopoverBackgroundVisualEffectView 0x149dcbd40&amp;gt; is being asked to animate its opacity. This will cause the effect to appear broken until opacity returns to 1.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;google了一下 找到了解决方法 &lt;a href=&quot;http://stackoverflow.com/questions/32380967/presentviewcontroller-animated-not-displaying-on-ipad&quot;&gt;presentviewcontroller-animated-not-displaying-on-ipad&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    dispatch_async(dispatch_get_main_queue(), ^ {
-        [self presentViewController:imagePickerController animated:YES completion:^{
-            
-        }];
-    });
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;但是这是为啥呢 在iPhone上没问题 歪果仁是这样说的 &lt;a href=&quot;http://stackoverflow.com/questions/24854802/presenting-a-view-controller-modally-from-an-action-sheets-delegate-in-ios8-i/24854803#24854803&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The problem seems to come from Apple’s switch to using UIAlertController internally to implement the functionality of alert views and action sheets. The issue is seen mostly on iPad and action sheets, because on iPad, action sheets are presented as a popover within a specified view, and what Apple does is travel the responder chain until it finds a view controller and calls presentViewController:animated:completion: with the internal UIAlertController. The problem is less obvious on iPhone and with alert views, because there Apple actually creates a separate window, an empty view controller and presents the internal UIAlertController on top of that, so it seems to not interfere with other presentation.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;大概意思是这样的&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;presentViewController 需要找到一个视图控制器然后执行，在iPhone上，Apple实际上创建了一个单独的窗口，一个空视图控制器，并在其上显示，因此不会干扰其他显示。而iPad上面没有这样做。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-</description>
-        <pubDate>Tue, 20 Dec 2016 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/PresentViewController-%E5%9C%A8-iPad-%E4%B8%8A%E6%89%A7%E8%A1%8C%E5%A4%B1%E8%B4%A5/</guid>
         
         <category>iOS</category>
         
