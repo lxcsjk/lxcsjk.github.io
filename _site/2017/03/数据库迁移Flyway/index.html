@@ -342,6 +342,8 @@
 
 <p>注意：sql脚本需要有相应的版本号，例如如果想让 <code class="highlighter-rouge">V2__init.sql</code>执行 需要有<code class="highlighter-rouge">V1__init.sql</code>作为一个基准对比，然后flyway才会执行相应的sql脚本。</p>
 
+<p>还有 文件夹的命名 是 db/migration , 但是编辑器可能会新建一个 db.migration   这样也会在日志打印出 找不到 <code class="highlighter-rouge">classpath: db/migration</code></p>
+
 <hr />
 
 <p>一些链接</p>
@@ -360,21 +362,26 @@
 
   </section>
 
-<div class="ds-share flat" data-thread-key="此处请替换为当前文章的thread-key" data-title="此处请替换为分享时显示的标题" data-images="此处请替换为分享时显示的图片的链接地址" data-content="此处请替换为分享时显示的内容" data-url="此处请替换为分享时显示的链接地址">
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-        
-        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-        
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
- </div>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://yoruo.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </article>
 
@@ -393,18 +400,25 @@
 <section class="post-comments">
 
   
-    <div class="ds-thread" data-thread-key="/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/" data-title="数据库迁移Flyway" data-url="http://localhost:4000/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/"></div>
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/";
+        this.page.identifier = "/2017/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BBFlyway/";
+    };
 
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"yoruo"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    var disqus_shortname = 'YoRuo';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
         })();
     </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
   
   
   

@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 11 Mar 2017 01:19:08 +0800</pubDate>
-    <lastBuildDate>Sat, 11 Mar 2017 01:19:08 +0800</lastBuildDate>
+    <pubDate>Wed, 22 Mar 2017 20:37:35 +0800</pubDate>
+    <lastBuildDate>Wed, 22 Mar 2017 20:37:35 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -184,6 +184,8 @@
 
 &lt;p&gt;注意：sql脚本需要有相应的版本号，例如如果想让 &lt;code class=&quot;highlighter-rouge&quot;&gt;V2__init.sql&lt;/code&gt;执行 需要有&lt;code class=&quot;highlighter-rouge&quot;&gt;V1__init.sql&lt;/code&gt;作为一个基准对比，然后flyway才会执行相应的sql脚本。&lt;/p&gt;
 
+&lt;p&gt;还有 文件夹的命名 是 db/migration , 但是编辑器可能会新建一个 db.migration   这样也会在日志打印出 找不到 &lt;code class=&quot;highlighter-rouge&quot;&gt;classpath: db/migration&lt;/code&gt;&lt;/p&gt;
+
 &lt;hr /&gt;
 
 &lt;p&gt;一些链接&lt;/p&gt;
@@ -288,7 +290,7 @@
 
 &lt;h3 id=&quot;docker&quot;&gt;Docker&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Docker.pdf&quot;&gt;Docker.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/docker_practice.pdf&quot;&gt;Docker.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1054,6 +1056,8 @@ public class Application {
 &lt;h3 id=&quot;java&quot;&gt;Java&lt;/h3&gt;
 
 &lt;p&gt;赵鑫 &lt;a href=&quot;http://zhaox.github.io/archive&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;极客wiki &lt;a href=&quot;http://wiki.jikexueyuan.com/list/java/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
