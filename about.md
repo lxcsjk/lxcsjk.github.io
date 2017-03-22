@@ -5,6 +5,7 @@ title: 关于我
 
 ### 一些朋友
 
+- [呆呆 - 被我gay过得男人](https://xiaocblog.com/)
 - [何宗苡 - 小鲜肉](http://ripperhe.com)
 - [潘柏信 - 看了这位大神的Blog才知道如何搭建](http://baixin.io)
 - [杜嘉希 - 刚到公司帮我很多的同事](https://coderjack666.github.io)
