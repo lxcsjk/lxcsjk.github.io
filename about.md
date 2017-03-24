@@ -35,7 +35,7 @@ title: 关于我
 一个喜欢折腾的程序员，喜欢研究一些新技术。
 <p>
 
-目前在一家数据服务公司[名传](http://www.chachazhan.com/)就职。
+目前在一家数据服务公司 <a target="_blank" href="http://www.chachazhan.com/">名传</a> 就职。
 
 <p>
 
