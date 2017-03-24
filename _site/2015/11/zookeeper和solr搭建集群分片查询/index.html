@@ -159,9 +159,9 @@
   <header class="post-header">
     <h1 class="post-title">zookeeper和solr搭建集群分片查询</h1>
     <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2015-11-15 19:02:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-15</time>  
-         
+      <img src="/images/calendar.png" width="20px"/>
+      <time datetime="2015-11-15 19:02:03 +0800" itemprop="datePublished" class="post-meta__date date">2015-11-15</time>
+
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
@@ -414,28 +414,22 @@ vim solrconfig.xml
 
   </section>
 
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://yoruo.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <section class="post-comments">
+    <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href,
+      productKey: "673e3a654fa741b5a57a102ca11ef35c",
+      target: "cloud-tie-wrapper"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+  </section>
 
 </article>
+
 
 <section>
        <ul class="pager">
@@ -454,34 +448,10 @@ s.setAttribute('data-timestamp', +new Date());
     </ul>
 </section>
 
-<section class="post-comments">
+<!-- <section class="post-comments">
 
-  
-    <div id="disqus_thread"></div>
-    <script>
-    
-    var disqus_config = function () {
-        this.page.url = "http://localhost:4000/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/";
-        this.page.identifier = "/2015/11/zookeeper%E5%92%8Csolr%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4%E5%88%86%E7%89%87%E6%9F%A5%E8%AF%A2/";
-    };
-
-    var disqus_shortname = 'YoRuo';
-    
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
-    
-  
-  
-  
-  
 </section>
-
+ -->
 
             <section class="footer">
     <footer>
