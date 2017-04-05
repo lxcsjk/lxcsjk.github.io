@@ -1,0 +1,29 @@
+<p>之前在使用Maven构建的项目中打包总是报错。
+本机是  <code class="highlighter-rouge">jdk1.7.0_79</code></p>
+
+<p>打包确是1.5</p>
+
+<p>那么要在 <code class="highlighter-rouge">setting.xml</code>  的  <code class="highlighter-rouge">profiles</code>  节点中加这么一段配置</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;profile&gt; 
+  &lt;id&gt;jdk17&lt;/id&gt;  
+  &lt;activation&gt; 
+    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;  
+    &lt;jdk&gt;1.7&lt;/jdk&gt; 
+  &lt;/activation&gt;  
+  &lt;properties&gt; 
+    &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;  
+    &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;  
+    &lt;maven.compiler.compilerVersion&gt;1.7&lt;/maven.compiler.compilerVersion&gt; 
+  &lt;/properties&gt; 
+&lt;/profile&gt;
+
+</code></pre>
+</div>
+
+<p>在IDEA 勾选上这个</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161125-0.png" alt="勾选" /></p>
+
+<p>再执行编译即可</p>
+

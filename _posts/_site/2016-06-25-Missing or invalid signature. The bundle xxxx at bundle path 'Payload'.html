@@ -1,0 +1,34 @@
+<p>第一次提交AppStore，遇到很多坑 = =。</p>
+
+<p>一直很迷 = =</p>
+
+<p>等结束整理一下。</p>
+
+<hr />
+
+<p>提交AppStore时候报了这个</p>
+
+<blockquote>
+  <p>Missing or invalid signature. The bundle xxxx at bundle path ‘Payload’</p>
+</blockquote>
+
+<p>查了查 发现是 <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer">AppleWWDRCA.cer</a> 证书过期，需要重新下载</p>
+
+<hr />
+
+<ul>
+  <li>
+    <p>先从链接下载证书，然后在 钥匙串 <strong>Apple Worldwide Developer Relations Certification Authority</strong> 过期证书删了</p>
+  </li>
+  <li>
+    <p>再把你的其他相关开发的证书删除 推送什么的。</p>
+  </li>
+  <li>
+    <p>重新导入下载的 <strong>AppleWWDRCA.cer 和 其他相关的证书</strong></p>
+  </li>
+  <li>
+    <p>重新打包提交就好了。</p>
+  </li>
+</ul>
+
+<hr />

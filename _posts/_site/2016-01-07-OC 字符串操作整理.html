@@ -1,0 +1,176 @@
+<div class="highlighter-rouge"><pre class="highlight"><code>//
+//  main.m
+//  StringMK
+//
+//  Created by LXC on 16/1/7.
+//  Copyright © 2016年 LXC. All rights reserved.
+//  2016年01月07日23:51:29
+//
+
+#import &lt;Foundation/Foundation.h&gt;
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        NSLog(@"Hello, World!");
+        
+        //C
+        char *s = "Hello C";
+        //OC
+        NSString *str = @"Hello";
+        //C --&gt; OC
+        NSString *str1 = [NSString stringWithUTF8String:s];
+        NSLog(@"str1 = %@",str1);
+        //OC --&gt; C
+        NSLog(@"str2 = %s",[str UTF8String]);
+        
+        //创建字符串
+        NSString *str3 = @"IOS";//不需要自己释放内存
+        NSString *str4 = [[NSString alloc] init];//先分配内存 在初始化
+        str4 = @"IOS";
+        
+        //格式化字符串
+        int a = 10;
+        int b = 20;
+        
+        NSString *str5 = [NSString stringWithFormat:@"a = %d,b = %d",a,b];
+        NSLog(@"str5 = %@",str5);
+        
+        //拼接字符串
+        NSString *str6 = [str5 stringByAppendingString:str3];
+        NSLog(@"str6 = %@",str6);
+        
+        //大小写转换
+        NSString *str7 = @"ASDASDA";
+        NSString *str8 =  [str7 lowercaseString];
+        NSLog(@"str8 = %@",str8);
+        NSString *str9 = [str7 uppercaseString];
+        NSLog(@"str9 = %@",str9);
+        
+        //前缀和后缀的判断
+        NSString *str10 = @"www.liuxincheng.win";
+        BOOL hasPrFix  = [str10 hasPrefix:@"www."];
+        if (hasPrFix) {
+            NSLog(@"YES");
+        }else{
+            NSLog(@"NO");
+        }
+        BOOL hasSuffix  = [str10 hasSuffix:@".win"];
+        if (hasSuffix) {
+            NSLog(@"YES");
+        }else{
+            NSLog(@"NO");
+        }
+
+        //判断两个字符川是否相同
+        
+        NSString *str11 = @"LXC";
+        NSString *str12 = @" LXC";
+        if ([str11 isEqualToString:str12]) {
+            NSLog(@"SAME");
+        }else{
+            NSLog(@"diff");
+        }
+        
+        //比较字符串 NSComparisonResult
+        
+        //分割字符串
+        //按照指定字符分割字符串
+        NSString *str13 = @"a,b,c,d,e,f";
+        NSArray *strarray = [str13 componentsSeparatedByString:@","];
+        for (NSString *str in strarray) {
+            NSLog(@"STR = %@",str);
+        }
+        
+        //按照范围切割字符串
+        NSRange range = NSMakeRange(1,5);
+        NSString *str14 = [str13 substringWithRange:range];
+        NSLog(@"STR14 = %@",str14);
+        
+        //从某一位开始截取
+        NSString *str15 = [str13 substringFromIndex:2];
+        NSLog(@"STR15 = %@",str15);
+        //截取到某一位
+        NSString *str16 = [str13 substringToIndex:2];
+        NSLog(@"STR16 = %@",str16);
+        //拆分到每一个字符
+        for(int i=0;i&lt;[str13 length];i++){
+            NSLog(@"STRCHAR =  %c",[str13 characterAtIndex:i]);
+        }
+        
+        
+        //查找
+        NSString *str17 = @"ad ad fe ef cv gh";
+        NSRange range1 = [str17 rangeOfString:@"cv"];
+        NSLog(@"range.location : %ld range1.length : %ld",range1.location,range1.length);
+        
+        //替换
+        NSString *str18 = @"Hello ios ,hello lxc";
+        //替换某一个范围的内容
+        NSString *str19 = [str18 stringByReplacingCharactersInRange:NSMakeRange(0, 5) withString:@"LXC"];
+        NSLog(@"%@",str19);
+        
+        //用指定字符串替换原字符串中的字串
+        /*
+         第一个参数是被替换的内容
+         第二个参数是要替换的内容
+         */
+        NSString *str20 = [str18 stringByReplacingOccurrencesOfString:@"Hello" withString:@"ni hao"];
+        NSLog(@"%@",str20);
+        
+        //读取文件 文件来源
+        //本地文件 网络文件
+        
+        NSString *str21 = @"www.liuxincheng.win";
+        //网络路径
+        NSURL *httpURL = [NSURL URLWithString:str21];
+        //本地路径
+        NSString *str22 = @"/Users/lxc/Desktop/test.txt";
+        NSURL *fileURL = [NSURL fileURLWithPath:str22];
+        //读取网络文件
+        NSString *httpstr = [NSString stringWithContentsOfURL:httpURL encoding:NSUTF8StringEncoding error:nil];
+        //读取本地文件
+        NSString *filestr = [NSString stringWithContentsOfFile:str22 encoding:NSUTF8StringEncoding error:nil];
+        
+        NSLog(@"HTTP %@ FILE %@",httpstr,filestr);
+        
+        //写入文件
+        NSString *str23 = @"jinzhuanch";
+        BOOL isok =  [str23 writeToFile:@"/Users/lxc/Desktop/demo.txt" atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        
+        if (isok) {
+            NSLog(@"OK");
+        }else{
+            NSLog(@"NO");
+        }
+        //可变字符串是字符串的子类
+        NSMutableString *str24 = [[NSMutableString alloc] initWithCapacity:10];
+        [str24 setString:@"kun"];
+        
+        //追加字符串
+        [str24 appendFormat:@" siwole"];
+        NSLog(@"str24 = %@",str24);
+        int c = 10;
+        [str24 appendFormat:@" ---%i",c];
+        NSLog(@"str25 ---- %@",str24);
+        
+        //替换字符串
+        NSRange ranges = [str24 rangeOfString:@"siwole"];
+        [str24 replaceCharactersInRange:ranges withString:@"sleep"];
+        NSLog(@"str26 --- %@",str24);
+        
+        //插入字符串
+        [str24 insertString:@"OMG" atIndex:2];
+        NSLog(@"str27 == %@",str24);
+        
+        //删除字符串
+        NSRange rangess = [str24 rangeOfString:@"OMG"];
+        [str24 deleteCharactersInRange:rangess];
+        NSLog(@"str28 ==== %@",str24);
+        
+    }
+    return 0;
+}
+
+</code></pre>
+</div>

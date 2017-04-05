@@ -1,0 +1,267 @@
+<p>拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。</p>
+
+<p><strong>首先你需要了解 <a href="https://github.com">GitHub</a> 仓库托管 和 <a href="https://pages.github.com/">GitHub Pages</a> 的相关内容</strong></p>
+
+<ol>
+  <li><strong>不需要买服务器部署搭建环境等等</strong></li>
+  <li><strong>不需要购买域名和备案</strong></li>
+  <li><strong>很快的上手</strong></li>
+</ol>
+
+<h3 id="section">原理</h3>
+
+<p>Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Pages 上。接下在自己的电脑搭建一个测试环境吧 😎😎😎</p>
+
+<hr />
+
+<h3 id="jekyll">安装 jekyll</h3>
+
+<p>需要本机的环境 Git 环境（用于部署到远端）、Ruby 环境（Jekyll 是基于 Ruby 开发的）、包管理器 <a href="https://gems.ruby-china.org/">RubyGems</a></p>
+
+<p>由于我是MacOS系统所以就不需要了 需要安装Xcode 和 命令行工具就行了</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install 
+</code></pre>
+</div>
+
+<p><a href="http://www.ruby-lang.org/zh_cn/documentation/installation/#building-from-source">安装Ruby</a></p>
+
+<p>推荐一个git管理项目的工具 可能需要登录账户注册 所以 翻出去吧  = =</p>
+
+<p>不用翻墙访问<a href="https://www.google.com.hk/">Google</a>等等 修改<a href="https://github.com/racaljk/hosts">hosts</a>的方法</p>
+
+<p><a href="http://oh6uhie7j.bkt.clouddn.com/SourceTree_2.3.1.zip">SourceTree</a></p>
+
+<p>环境都已经具备后安装</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gem install jekyll 
+</code></pre>
+</div>
+
+<p>创建你的博客所在文件夹</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll new myBlog    
+</code></pre>
+</div>
+
+<p>进入博客文件夹的目录</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd yourBlogFolder
+</code></pre>
+</div>
+
+<p>启动jekyll服务</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll server
+或者
+jekyll serve
+</code></pre>
+</div>
+
+<p>在 Chrome 浏览器 输入 <a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-0.png" alt="" /></p>
+
+<p>安装完成了。</p>
+
+<hr />
+
+<h3 id="jekyll-1">配置jekyll</h3>
+
+<p>jekyll是通过目录下面的 <code class="highlighter-rouge">_config.yml</code>配置的</p>
+
+<p>jekyll <a href="http://jekyll.com.cn/">文档</a></p>
+
+<p>我博客<a href="https://github.com/lxcsjk/lxcsjk.github.io">主题</a> fork 是 这位大神<a href="http://baixin.io/">潘柏信</a>的 <a href="https://github.com/leopardpan/leopardpan.github.io">仓库</a></p>
+
+<p>你下载主题后 进入到文件夹 先安装一下 <code class="highlighter-rouge">bundler</code>  命令</p>
+
+<p><code class="highlighter-rouge">gem install bundler</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Fetching: bundler-1.13.5.gem (100%)
+Successfully installed bundler-1.13.5
+Parsing documentation for bundler-1.13.5
+Installing ri documentation for bundler-1.13.5
+Done installing documentation for bundler after 5 seconds
+1 gem installed
+</code></pre>
+</div>
+
+<p>不然会报错</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/Users/lxc/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- bundler (LoadError)
+	from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in `require_from_bundler'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in `&lt;top (required)&gt;'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `load'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&lt;main&gt;'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
+	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&lt;main&gt;'
+</code></pre>
+</div>
+
+<p>然后执行 之前记得修改 <code class="highlighter-rouge">gem</code> 的镜像源</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bundle install
+</code></pre>
+</div>
+
+<p>更新 <code class="highlighter-rouge">gem</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ gem update --system # 这里请翻墙一下
+$ gem -v
+2.6.3
+
+$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+$ gem sources -l
+https://gems.ruby-china.org
+# 确保只有 gems.ruby-china.org
+
+$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+</code></pre>
+</div>
+
+<p>然后如果报错 缺少什么安装什么包就行了</p>
+
+<p>例如</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gem install jekyll-paginate
+gem install jekyll-sitemap
+</code></pre>
+</div>
+
+<p>最后</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Configuration file: /data/static/img/yourBlog/_config.yml
+Configuration file: /data/static/img/yourBlog/_config.yml
+            Source: /data/static/img/yourBlog
+       Destination: /data/static/img/yourBlog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.475 seconds.
+ Auto-regeneration: enabled for '/data/static/img/yourBlog'
+Configuration file: /data/static/img/yourBlog/_config.yml
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
+</code></pre>
+</div>
+
+<p>打开浏览器输入 <a href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a> 就OK啦</p>
+
+<hr />
+
+<h3 id="section-1">加入第三方的社会化工具</h3>
+
+<p>Disqus 已经被墙了 So 用国内的吧 <a href="http://duoshuo.com/">多说</a>就挺好的 
+把多说代码片段复制到 <code class="highlighter-rouge">_layouts</code>文件夹下 <code class="highlighter-rouge">post.html</code>文件内的<code class="highlighter-rouge"> &lt;/article&gt;</code> 和 <code class="highlighter-rouge">&lt;/div&gt;</code>标签之间即可</p>
+
+<hr />
+
+<h3 id="section-2">加入统计之类的代码</h3>
+
+<p><a href="https://analytics.google.com/">Google Analytics</a>
+<code class="highlighter-rouge">用google的需要改hosts 上面有提到方法</code></p>
+
+<p><a href="http://tongji.baidu.com/">百度统计</a></p>
+
+<p>选择一个</p>
+
+<p>复制到 <code class="highlighter-rouge">_layouts</code> 文件夹下 <code class="highlighter-rouge">default.html</code> 文件内的 <code class="highlighter-rouge">&lt;/body&gt;</code>标签之上即可。 当然也可以在 <code class="highlighter-rouge">_config.yml</code>配置</p>
+
+<hr />
+
+<h3 id="section-3">申请自己的域名</h3>
+
+<p><strong>这一步之前得将你本地博客所以文件通过 GitHub Desktop 提交到你的GITHub Pages仓库</strong></p>
+
+<p>由于  <code class="highlighter-rouge">GitHub Pages</code> 时常不能访问 原因是 TC的大炮攻击<a href="https://github.com">Github</a>所致 所以最好自己添加一个 <code class="highlighter-rouge">CNAME</code>  那么问题来了域名从哪里来呢。 So…  Come on!</p>
+
+<p><a href="https://my.freenom.com">戳这里</a>
+可以申请 免费域名只有  <code class="highlighter-rouge">[.tk .ml .ga .cf .gq]</code></p>
+
+<p><a href="https://my.freenom.com/domains.php">查询一个你想要的域名</a></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-1.png" alt="" /></p>
+
+<p>点击 选择一个 第一个已经有人用了 那就是我 = =</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-2.png" alt="" /></p>
+
+<p>然后 checkout</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-4.png" alt="" /></p>
+
+<p>选择时间</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-5.png" alt="" /></p>
+
+<p>填写信息</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-6.png" alt="" /></p>
+
+<p>点击 My Domains</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-7.png" alt="" /></p>
+
+<p>看你的域名列表</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-8.png" alt="" /></p>
+
+<p>成功了~</p>
+
+<hr />
+
+<h3 id="cname">添加CNAME文件</h3>
+
+<p>在你的github pages项目根目录上新建一个CNAME文件，在CNAME文件上编辑刚才申请到的域名，比如 yoruo.tk ，那么我就写上 yoruo.tk (推荐)，当然你也可以写 www.yoruo.tk ，两种写法处理方式不同：</p>
+
+<ul>
+  <li>如果你写的是 yoruo.tk ，那么 www.yoruo.tk 就会指向 yoruo.tk</li>
+  <li>如果你写的是 www.yoruo.tk k ,那么 yoruo.tk 就会指向 www.yoruo.tk</li>
+</ul>
+
+<p>注意，两种写法都不需要在前面加 http 。</p>
+
+<p>引用这篇 <a href="http://www.tuicool.com/articles/NrUrY33">文章</a></p>
+
+<hr />
+
+<h3 id="dnspoda">在DNSPod添加A记录</h3>
+
+<ul>
+  <li>
+    <p>然后进入管理中心，选择添加域名。</p>
+
+    <p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-9.png" alt="" /></p>
+  </li>
+  <li>
+    <p>为域名添加记录，这里的NS记录是自动生成，不用修改，因为我们需要我们的网站可以通过 yoruo.tk 和 www.yoruo.tk 都能访问，所以需要添加两组A记录。</p>
+
+    <p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-10.png" alt="" /></p>
+  </li>
+</ul>
+
+<p>为什么  <code class="highlighter-rouge"> 192.30.252.153</code>  和  <code class="highlighter-rouge"> 192.30.252.154 </code> ，因为这是github pages官网说的咯。网上有些人说A记录是 ping xxx.github.io 之后的IP地址，这些都是不可信的。</p>
+
+<p>但是你可能会奇怪，每个人都是这两个IP地址的话，那么Github怎么知道我的域名 yoruo.tk 和 www.yoruo.tk 对应的是 lxcsjk.github.io 而不是其他人的github pages呢？答案就在上一步操作中的CNAME文件，这里指定了其所对应的域名，github会自动处理，将两者对应起来。</p>
+
+<p>另外，如果你添加CNAME记录把域名指向 xxx.github.io 的话，也会成功(网上某些教程就是这么做的)。但是官方是不推荐最终做法的，因为可能会”导致其他服务出现问题”。</p>
+
+<p>引用这篇 <a href="http://www.tuicool.com/articles/NrUrY33">文章</a></p>
+
+<hr />
+
+<h3 id="dns">修改域名的DNS</h3>
+
+<p>到<a href="https://my.freenom.com/clientarea.php?action=domains">域名注册网站</a></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-11.png" alt="" /></p>
+
+<p>然后 
+<img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-13.png" alt="" /></p>
+
+<p>填上 DNSPod 的DNS地址 等待DNS服务器刷新 应该很快 我当时几分钟就好了</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161127-14.png" alt="" /></p>
+
+<p>然后打开你的博客 开始书写所见所想吧。</p>

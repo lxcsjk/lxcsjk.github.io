@@ -1,0 +1,44 @@
+<p>在选择头像图片的时候 使用  <code class="highlighter-rouge">imagePickerController</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  [self presentViewController:imagePickerController animated:YES completion:^{
+            
+  }];
+</code></pre>
+</div>
+
+<hr />
+
+<p>异常信息</p>
+
+<blockquote>
+  <p>2016-12-20 13:50:23.096416 Training[1963:904966] Warning: Attempt to present &lt;UIImagePickerController: 0x14a9d0c00&gt;  on &lt;MySelfViewController: 0x149d2d480&gt; which is already presenting (null)</p>
+
+  <p>2016-12-20 13:50:23.106841 Training[1963:904966] [Warning] &lt;_UIPopoverBackgroundVisualEffectView 0x149dcbd40&gt; is being asked to animate its opacity. This will cause the effect to appear broken until opacity returns to 1.</p>
+</blockquote>
+
+<hr />
+
+<p>google了一下 找到了解决方法 <a href="http://stackoverflow.com/questions/32380967/presentviewcontroller-animated-not-displaying-on-ipad">presentviewcontroller-animated-not-displaying-on-ipad</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    });
+</code></pre>
+</div>
+
+<hr />
+
+<p>但是这是为啥呢 在iPhone上没问题 歪果仁是这样说的 <a href="http://stackoverflow.com/questions/24854802/presenting-a-view-controller-modally-from-an-action-sheets-delegate-in-ios8-i/24854803#24854803">here</a></p>
+
+<blockquote>
+  <p>The problem seems to come from Apple’s switch to using UIAlertController internally to implement the functionality of alert views and action sheets. The issue is seen mostly on iPad and action sheets, because on iPad, action sheets are presented as a popover within a specified view, and what Apple does is travel the responder chain until it finds a view controller and calls presentViewController:animated:completion: with the internal UIAlertController. The problem is less obvious on iPhone and with alert views, because there Apple actually creates a separate window, an empty view controller and presents the internal UIAlertController on top of that, so it seems to not interfere with other presentation.</p>
+</blockquote>
+
+<p>大概意思是这样的</p>
+
+<p><strong>presentViewController 需要找到一个视图控制器然后执行，在iPhone上，Apple实际上创建了一个单独的窗口，一个空视图控制器，并在其上显示，因此不会干扰其他显示。而iPad上面没有这样做。</strong></p>
+
+<hr />
+

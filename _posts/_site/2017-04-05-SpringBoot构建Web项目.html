@@ -1,0 +1,132 @@
+<h3 id="section">写在前面</h3>
+
+<p>最近需要重构一个项目，所以就去研究了关于SpringBoot搭建web的东西。基本的技术栈</p>
+
+<ul>
+  <li>
+    <p>基础的服务框架 ：<code class="highlighter-rouge">SpringBoot 1.5.2</code></p>
+  </li>
+  <li>
+    <p>持久层的框架：<code class="highlighter-rouge">MyBatis 3.4+</code>   本来使用的是<code class="highlighter-rouge">Jpa</code>，写了一会发现会有很多关联查询和分组就改成了MyBatis，之前写了一个 <code class="highlighter-rouge">Mybatis Geneator</code>代码生成器所以写起来也很快。</p>
+  </li>
+  <li>
+    <p>构建工具  <code class="highlighter-rouge">Gradle 3.0</code></p>
+  </li>
+  <li>
+    <p>前端框架  <code class="highlighter-rouge">Angular.js</code></p>
+
+    <p>​</p>
+  </li>
+</ul>
+
+<h3 id="section-1">开始搭建环境</h3>
+
+<p><code class="highlighter-rouge">build.gradle</code> 添加相关依赖</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span>
+    <span class="n">ext</span> <span class="o">{</span>
+        <span class="n">springBootVersion</span> <span class="o">=</span> <span class="s1">'1.5.2.RELEASE'</span>
+    <span class="o">}</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">mavenLocal</span><span class="o">()</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"http://nexus.chachazhan.com/content/groups/public/"</span> <span class="o">}</span>
+        <span class="n">mavenCentral</span><span class="o">()</span>
+    <span class="o">}</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">classpath</span><span class="o">(</span><span class="s2">"org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">'java'</span>
+<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">'spring-boot'</span>
+<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">'idea'</span>
+
+<span class="n">jar</span> <span class="o">{</span>
+    <span class="n">baseName</span> <span class="o">=</span> <span class="s1">'springboot-web-jsp'</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
+<span class="o">}</span>
+
+<span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="mf">1.8</span>
+<span class="n">targetCompatibility</span> <span class="o">=</span> <span class="mf">1.8</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">mavenLocal</span><span class="o">()</span>
+    <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"http://maven.aliyun.com/nexus/content/groups/public/"</span> <span class="o">}</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">compile</span><span class="o">(</span><span class="s1">'org.springframework.boot:spring-boot-starter-web'</span><span class="o">)</span>
+    <span class="n">testCompile</span><span class="o">(</span><span class="s1">'org.springframework.boot:spring-boot-starter-test'</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>添加相关的类 ，项目结构如下</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20170405-2.png" alt="" /></p>
+
+<p>添加  <code class="highlighter-rouge">WebMvcConfig</code>  配置外部静态资源</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">demo</span><span class="o">.</span><span class="na">conf</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Created by LXC on 2017/3/28.
+ */</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebMvcConfig</span> <span class="kd">extends</span> <span class="n">WebMvcConfigurerAdapter</span> <span class="o">{</span>
+
+  <span class="cm">/**
+   * spring-boot配置外部静态资源的方法
+   *
+   * @param registry
+   */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addResourceHandlers</span><span class="o">(</span><span class="n">ResourceHandlerRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">registry</span><span class="o">.</span><span class="na">addResourceHandler</span><span class="o">(</span><span class="s">"/static/**"</span><span class="o">).</span><span class="na">addResourceLocations</span><span class="o">(</span><span class="s">"classpath:/static/"</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+</div>
+
+<p>启动后访问  <a href="http://localhost:8080/">http://localhost:8080/</a></p>
+
+<p>报错 信息如下</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">javax</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">ServletException</span><span class="o">:</span> <span class="n">Could</span> <span class="n">not</span> <span class="n">resolve</span> <span class="n">view</span> <span class="n">with</span> <span class="n">name</span> <span class="err">'</span><span class="n">index</span><span class="err">'</span> <span class="n">in</span> <span class="n">servlet</span> <span class="n">with</span> <span class="n">name</span> <span class="err">'</span><span class="n">dispatcherServlet</span><span class="err">'</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">DispatcherServlet</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">DispatcherServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1262</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">DispatcherServlet</span><span class="o">.</span><span class="na">processDispatchResult</span><span class="o">(</span><span class="n">DispatcherServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1037</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">DispatcherServlet</span><span class="o">.</span><span class="na">doDispatch</span><span class="o">(</span><span class="n">DispatcherServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">980</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">DispatcherServlet</span><span class="o">.</span><span class="na">doService</span><span class="o">(</span><span class="n">DispatcherServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">897</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">FrameworkServlet</span><span class="o">.</span><span class="na">processRequest</span><span class="o">(</span><span class="n">FrameworkServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">970</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">FrameworkServlet</span><span class="o">.</span><span class="na">doGet</span><span class="o">(</span><span class="n">FrameworkServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">861</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">javax</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">http</span><span class="o">.</span><span class="na">HttpServlet</span><span class="o">.</span><span class="na">service</span><span class="o">(</span><span class="n">HttpServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">622</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">FrameworkServlet</span><span class="o">.</span><span class="na">service</span><span class="o">(</span><span class="n">FrameworkServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">846</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">javax</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">http</span><span class="o">.</span><span class="na">HttpServlet</span><span class="o">.</span><span class="na">service</span><span class="o">(</span><span class="n">HttpServlet</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">729</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">ApplicationFilterChain</span><span class="o">.</span><span class="na">internalDoFilter</span><span class="o">(</span><span class="n">ApplicationFilterChain</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">230</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">ApplicationFilterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">ApplicationFilterChain</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">165</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">tomcat</span><span class="o">.</span><span class="na">websocket</span><span class="o">.</span><span class="na">server</span><span class="o">.</span><span class="na">WsFilter</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">WsFilter</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">52</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">websocket</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">ApplicationFilterChain</span><span class="o">.</span><span class="na">internalDoFilter</span><span class="o">(</span><span class="n">ApplicationFilterChain</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">192</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">ApplicationFilterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">ApplicationFilterChain</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">165</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">filter</span><span class="o">.</span><span class="na">CharacterEncodingFilter</span><span class="o">.</span><span class="na">doFilterInternal</span><span class="o">(</span><span class="n">CharacterEncodingFilter</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">197</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">filter</span><span class="o">.</span><span class="na">OncePerRequestFilter</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">OncePerRequestFilter</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">107</span><span class="o">)</span> <span class="o">~[</span><span class="n">spring</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">ApplicationFilterChain</span><span class="o">.</span><span class="na">internalDoFilter</span><span class="o">(</span><span class="n">ApplicationFilterChain</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">192</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">ApplicationFilterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">ApplicationFilterChain</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">165</span><span class="o">)</span> <span class="o">~[</span><span class="n">tomcat</span><span class="o">-</span><span class="n">embed</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">.</span><span class="na">jar</span><span class="o">:</span><span class="mf">8.5</span><span class="o">.</span><span class="mi">11</span><span class="o">]</span>
+<span class="o">...</span>
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">application.properties</code>里已经配置</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="py">server.port</span><span class="p">=</span><span class="s">8080</span>
+
+<span class="py">spring.mvc.view.prefix</span><span class="p">=</span><span class="s">/static/</span>
+<span class="py">spring.mvc.view.suffix</span><span class="p">=</span><span class="s">.jsp</span>
+</code></pre>
+</div>
+

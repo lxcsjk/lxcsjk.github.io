@@ -1,0 +1,646 @@
+<p>消息队列对于处理高并发还是非常不错的选择。所以电商必然会采取这种方式。废话不多说。贴代码先。</p>
+
+<p>1 .搭建环境</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> Mac OS X 10.10.5   
+ VMware Fusion8  
+ Centos 6.7 
+ rabbitmq-server-3.5.6-1.noarch.rpm 
+ erlang-17.4-1.el6.x86_64.rpm
+</code></pre>
+</div>
+
+<ol>
+  <li>rabbitmq的搭建</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.rabbitmq.com/releases/erlang/erlang-17.4-1.el6.x86_64.rpm
+yum install erlang-17.4-1.el6.x86_64.rpm
+</code></pre>
+</div>
+<ol>
+  <li>安装rabbitmq</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
+rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+yum install rabbitmq-server-3.5.6-1.noarch.rpm
+</code></pre>
+</div>
+<ol>
+  <li>安装rabbitmq插件
+安装RabbitMQ WebUI管理插件</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rabbitmq-plugins enable rabbitmq_management
+service abbitmq-server restart
+</code></pre>
+</div>
+
+<p>打开浏览器登录http://127.0.0.1: 15672</p>
+
+<p>启动RabbitMQ Server</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>service rabbitmq-server start
+</code></pre>
+</div>
+
+<ol>
+  <li>集群搭建</li>
+</ol>
+
+<p>太啰嗦的就不说了。需要注意的我会在这里提出：</p>
+
+<ol>
+  <li>你的host需要修改 在node1代码块可以看到。如果不改变，重启 shutdown -r  now</li>
+  <li>你的.erlang.cookie 也是需要修改并都保持一样。</li>
+  <li>修改配置文件的时候要注意括号。</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    stop [&lt;pid_file&gt;] 停止服务根据进程号
+    stop_app
+    start_app
+    wait &lt;pid_file&gt;   暂停
+    reset             重置
+    force_reset       强制重置
+    rotate_logs &lt;suffix&gt; 日志文件 后缀
+
+    join_cluster &lt;clusternode&gt; [—ram]  加入集群
+    cluster_status                     集群状态
+    change_cluster_node_type disc | ram  改变集群节点类型
+    forget_cluster_node [--offline]      取消节点
+    rename_cluster_node oldnode1 newnode1 [oldnode2] [newnode2 …]  重命名节点
+    update_cluster_nodes clusternode  更新节点
+    force_boot                        重置引导
+    sync_queue queue                  同步队列
+    cancel_sync_queue queue           取消同步队列
+    purge_queue queue                 清除队列
+    set_cluster_name name             设置集群名称
+
+    add_user &lt;username&gt; &lt;password&gt;    添加用户
+    delete_user &lt;username&gt;            删除用户
+    change_password &lt;username&gt; &lt;newpassword&gt;  修改密码
+    clear_password &lt;username&gt;         清除密码
+    set_user_tags &lt;username&gt; &lt;tag&gt; ...设置角色权限
+    list_users                        查看所有的用户
+
+    add_vhost &lt;vhostpath&gt;             添加主机
+    delete_vhost &lt;vhostpath&gt;          删除主机
+    list_vhosts [&lt;vhostinfoitem&gt; …]   所有主机
+    set_permissions [-p &lt;vhostpath&gt;] &lt;user&gt; &lt;conf&gt; &lt;write&gt; &lt;read&gt;  给主机指定用户
+    clear_permissions [-p &lt;vhostpath&gt;] &lt;username&gt;     清除一个主机的用户
+    list_permissions [-p &lt;vhostpath&gt;]                 一个主机下面的绑定的用户
+    list_user_permissions &lt;username&gt;                  用户的权限
+</code></pre>
+</div>
+
+<p>node1：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sjk@192.168.10.73's password: 
+
+Last login: Tue Nov  3 00:16:23 2015 from 192.168.10.14
+
+[sjk@rabbitmq-node1 ~]$ ls
+
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+
+[sjk@rabbitmq-node1 ~]$ cd /usr/local/
+
+[sjk@rabbitmq-node1 local]$ ls
+
+bin  games    jdk1.7.0_80  lib64    nginx    sbin   src     usr
+
+etc  include  lib          libexec  openssl  share  tomcat
+
+[sjk@rabbitmq-node1 local]$ ls
+
+bin  games    jdk1.7.0_80  lib64    nginx    sbin   src     usr
+
+etc  include  lib          libexec  openssl  share  tomcat
+
+[sjk@rabbitmq-node1 local]$ cd /usr/programmer/
+
+[sjk@rabbitmq-node1 programmer]$ ls
+
+apache-tomcat-8.0.26.tar.gz     nginx-1.9.4.tar.gz
+
+erlang-17.4-1.el6.x86_64.rpm    openssl-1.0.2c.tar.gz
+
+go1.4.2.linux-amd64.tar.gz      rabbitmq-server-3.5.6-1.noarch.rpm
+
+jdk-7u80-linux-x64.tar.gz       redis-3.0.3.tar
+
+mongodb-linux-x86_64-3.0.6.tgz  solr-5.2.1.tgz
+
+mongodb-osx-x86_64-3.0.6.tgz    zookeeper-3.4.6.tar.gz
+
+nginx-1.8.0.tar.gz
+
+[sjk@rabbitmq-node1 programmer]$ cat /etc/hosts
+
+192.168.10.73   rabbitmq-node1.com rabbitmq-node1
+
+192.168.10.74   rabbitmq-node2.com rabbitmq-node2
+
+192.168.10.75   rabbitmq-node3.com rabbitmq-node3
+
+[sjk@rabbitmq-node1 programmer]$ vim /etc/hosts
+
+[sjk@rabbitmq-node1 programmer]$ sudo -i
+
+[sudo] password for sjk: 
+
+[root@rabbitmq-node1 ~]# vim /etc/hosts
+
+[root@rabbitmq-node1 ~]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node1 ~]# cd /etc/rabbitmq/
+
+[root@rabbitmq-node1 rabbitmq]# ls
+
+enabled_plugins
+
+[root@rabbitmq-node1 rabbitmq]# mv /usr/rabbitmq.config /etc/rabbitmq/
+
+[root@rabbitmq-node1 rabbitmq]# cat /var/lib/rabbitmq/.erlang.cookie 
+
+ATDTSAHIFSBKTQDSYKMA
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server stop
+
+Stopping rabbitmq-server: rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# vim rabbitmq.config 
+
+[root@rabbitmq-node1 rabbitmq]# vim /etc/rabbitmq/rabbitmq-env.conf
+
+[root@rabbitmq-node1 rabbitmq]# vim /etc/rabbitmq/rabbitmq-env.conf
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server stop
+
+Stopping rabbitmq-server: rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# ls
+
+enabled_plugins  rabbitmq.config  rabbitmq-env.conf
+
+[root@rabbitmq-node1 rabbitmq]# cat rabbitmq-env.conf 
+
+RABBITMQ_MNESIA_BASE=/var/lib/rabbitmq/
+
+#需要使用的MNESIA数据库的路径
+
+RABBITMQ_LOG_BASE=/var/log/rabbitmq/
+
+#log的路径
+
+RABBITMQ_PLUGINS_DIR=/usr/lib/rabbitmq/lib/rabbitmq_server-3.5.6/plugins/
+
+#插件的路径
+
+[root@rabbitmq-node1 rabbitmq]# vim rabbitmq.config 
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
+
+Starting rabbitmq-server: FAILED - check /var/log/rabbitmq/startup_{log, _err}
+
+rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# cat /var/log/rabbitmq/startup_err 
+
+Crash dump was written to: erl_crash.dump
+
+could not start kernel pid (application_controller) (error in config file "/etc/rabbitmq/rabbitmq.config" (253): syntax error before: ']')
+
+[root@rabbitmq-node1 rabbitmq]# vim rabbitmq.config 
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server stop
+
+Stopping rabbitmq-server: rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl cluster_status
+
+Cluster status of node 'rabbit@rabbitmq-node1' ...
+
+[{nodes,[{disc,['rabbit@rabbitmq-node1']}]},
+
+ {running_nodes,['rabbit@rabbitmq-node1']},
+
+ {cluster_name,&lt;&lt;"rabbit@rabbitmq-node1.com"&gt;&gt;},
+
+ {partitions,[]}]
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl stop_app
+
+Stopping node 'rabbit@rabbitmq-node1' ...
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl reset
+
+Resetting node 'rabbit@rabbitmq-node1' ...
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
+
+Clustering node 'rabbit@rabbitmq-node1' with 'rabbit@rabbitmq-node1' ...
+
+Error: cannot_cluster_node_with_itself
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl start_app
+
+Starting node 'rabbit@rabbitmq-node1' ...
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl cluster_status
+
+Cluster status of node 'rabbit@rabbitmq-node1' ...
+
+[{nodes,[{disc,['rabbit@rabbitmq-node1','rabbit@rabbitmq-node2',
+
+                'rabbit@rabbitmq-node3']}]},
+
+ {running_nodes,['rabbit@rabbitmq-node1']},
+
+ {cluster_name,&lt;&lt;"rabbit@rabbitmq-node1.com"&gt;&gt;},
+
+ {partitions,[]}]
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl add_user lxc root
+
+Creating user "lxc" ...
+
+[root@rabbitmq-node1 rabbitmq]# rabbitmqctl set_user_tags lxc  administrator
+
+Setting tags for user "lxc" to [administrator] ...
+
+[root@rabbitmq-node1 rabbitmq]# 
+</code></pre>
+</div>
+
+<p>node2：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sjk@192.168.10.74's password: 
+
+Last login: Tue Nov  3 12:52:44 2015 from 192.168.10.14
+
+[sjk@rabbitmq-node2 ~]$ cd /usr/local/
+
+[sjk@rabbitmq-node2 local]$ ls
+
+bin  games    jdk1.7.0_80  lib64    sbin   src
+
+etc  include  lib          libexec  share  tomcat
+
+[sjk@rabbitmq-node2 local]$ cd /usr/programmer/
+
+[sjk@rabbitmq-node2 programmer]$ l;s
+
+-bash: l: command not found
+
+-bash: s: command not found
+
+[sjk@rabbitmq-node2 programmer]$ ls
+
+apache-tomcat-8.0.26.tar.gz     nginx-1.8.0.tar.gz
+
+erlang-17.4-1.el6.x86_64.rpm    nginx-1.9.4.tar.gz
+
+go1.4.2.linux-amd64.tar.gz      rabbitmq-server-3.5.6-1.noarch.rpm
+
+jdk-7u80-linux-x64.tar.gz       redis-3.0.3.tar
+
+mongodb-linux-x86_64-3.0.6.tgz  solr-5.2.1.tgz
+
+mongodb-osx-x86_64-3.0.6.tgz    zookeeper-3.4.6.tar.gz
+
+[sjk@rabbitmq-node2 programmer]$ sudo -i
+
+[sudo] password for sjk: 
+
+[root@rabbitmq-node2 ~]# vim /etc/hosts
+
+[root@rabbitmq-node2 ~]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node2 ~]# cd /etc/rabbitmq/
+
+[root@rabbitmq-node2 rabbitmq]# ls
+
+enabled_plugins
+
+[root@rabbitmq-node2 rabbitmq]# mv /usr/rabbitmq.config /etc/rabbitmq/
+
+[root@rabbitmq-node2 rabbitmq]# cat /var/lib/rabbitmq/.erlang.cookie 
+
+ATDTSAHIFSBKTQDSYKMA
+
+[root@rabbitmq-node2 rabbitmq]# service rabbitmq-server stop
+
+Stopping rabbitmq-server: rabbitmq-server.
+
+[root@rabbitmq-node2 rabbitmq]# ls
+
+enabled_plugins  rabbitmq.config
+
+[root@rabbitmq-node2 rabbitmq]# vim rabbitmq-env.conf 
+
+[root@rabbitmq-node2 rabbitmq]# vim rabbitmq-env.conf 
+
+[root@rabbitmq-node2 rabbitmq]# vim rabbitmq.config 
+
+[root@rabbitmq-node2 rabbitmq]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node2 rabbitmq]# rabbitmqctl cluster_status
+
+Cluster status of node 'rabbit@rabbitmq-node2' ...
+
+[{nodes,[{disc,['rabbit@rabbitmq-node2']}]},
+
+ {running_nodes,['rabbit@rabbitmq-node2']},
+
+ {cluster_name,&lt;&lt;"rabbit@rabbitmq-node2.com"&gt;&gt;},
+
+ {partitions,[]}]
+
+[root@rabbitmq-node2 rabbitmq]# rabbitmqctl stop_app
+
+Stopping node 'rabbit@rabbitmq-node2' ...
+
+[root@rabbitmq-node2 rabbitmq]# rabbitmqctl reset
+
+Resetting node 'rabbit@rabbitmq-node2' ...
+
+[root@rabbitmq-node2 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
+
+Clustering node 'rabbit@rabbitmq-node2' with 'rabbit@rabbitmq-node1' ...
+
+[root@rabbitmq-node2 rabbitmq]# 
+
+[root@rabbitmq-node2 rabbitmq]# rabbitmqctl start_app
+
+Starting node 'rabbit@rabbitmq-node2' ...
+
+[root@rabbitmq-node2 rabbitmq]# 
+</code></pre>
+</div>
+
+<p>node3：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sjk@192.168.10.75's password: 
+
+Last login: Tue Nov  3 12:59:37 2015 from 192.168.10.14
+
+[sjk@rabbitmq-node3 ~]$ cat /etc/rabbitmq/
+
+cat: /etc/rabbitmq/: 是一个目录
+
+[sjk@rabbitmq-node3 ~]$ ls
+
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+
+[sjk@rabbitmq-node3 ~]$ sudo -i
+
+[sudo] password for sjk: 
+
+[root@rabbitmq-node3 ~]# vim /etc/hosts
+
+[root@rabbitmq-node3 ~]# 
+
+[root@rabbitmq-node3 ~]# 
+
+[root@rabbitmq-node3 ~]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node3 ~]# cd /etc/rabbitmq/
+
+[root@rabbitmq-node3 rabbitmq]# ls
+
+enabled_plugins  rabbitmq.config  rabbitmq.config.example
+
+[root@rabbitmq-node3 rabbitmq]# scp rabbitmq.config root@192.168.10.73:/usr/
+
+The authenticity of host '192.168.10.73 (192.168.10.73)' can't be established.
+
+RSA key fingerprint is ba:e1:f0:bd:2f:67:15:cd:50:e2:cf:df:87:01:b9:13.
+
+Are you sure you want to continue connecting (yes/no)? yes
+
+Warning: Permanently added '192.168.10.73' (RSA) to the list of known hosts.
+
+root@192.168.10.73's password: 
+
+rabbitmq.config                               100%   19KB  19.1KB/s   00:00    
+
+[root@rabbitmq-node3 rabbitmq]# scp rabbitmq.config root@192.168.10.74:/usr/
+
+The authenticity of host '192.168.10.74 (192.168.10.74)' can't be established.
+
+RSA key fingerprint is ba:e1:f0:bd:2f:67:15:cd:50:e2:cf:df:87:01:b9:13.
+
+Are you sure you want to continue connecting (yes/no)? yes
+
+Warning: Permanently added '192.168.10.74' (RSA) to the list of known hosts.
+
+root@192.168.10.74's password: 
+
+rabbitmq.config                               100%   19KB  19.1KB/s   00:00    
+
+[root@rabbitmq-node3 rabbitmq]# cat /var/lib/rabbitmq/.erlang.cookie 
+
+ATDTSAHIFSBKTQDSYKMA
+
+[root@rabbitmq-node3 rabbitmq]# service rabbitmq-server stop
+
+Stopping rabbitmq-server: rabbitmq-server.
+
+[root@rabbitmq-node3 rabbitmq]# ls
+
+enabled_plugins  rabbitmq.config  rabbitmq.config.example
+
+[root@rabbitmq-node3 rabbitmq]# vim rabbitmq-env.conf 
+
+[root@rabbitmq-node3 rabbitmq]# vim rabbitmq-env.conf 
+
+[root@rabbitmq-node3 rabbitmq]# vim rabbitmq.config
+
+[root@rabbitmq-node3 rabbitmq]# service rabbitmq-server start
+
+Starting rabbitmq-server: SUCCESS
+
+rabbitmq-server.
+
+[root@rabbitmq-node3 rabbitmq]# rabbitmqctl cluster_status
+
+Cluster status of node 'rabbit@rabbitmq-node3' ...
+
+[{nodes,[{disc,['rabbit@rabbitmq-node3']}]},
+
+ {running_nodes,['rabbit@rabbitmq-node3']},
+
+ {cluster_name,&lt;&lt;"rabbit@rabbitmq-node3.com"&gt;&gt;},
+
+ {partitions,[]}]
+
+[root@rabbitmq-node3 rabbitmq]# rabbitmqctl stop_app
+
+Stopping node 'rabbit@rabbitmq-node3' ...
+
+[root@rabbitmq-node3 rabbitmq]# rabbitmqctl reset
+
+Resetting node 'rabbit@rabbitmq-node3' ...
+
+[root@rabbitmq-node3 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
+
+Clustering node 'rabbit@rabbitmq-node3' with 'rabbit@rabbitmq-node1' ...
+
+Error: mnesia_not_running
+
+[root@rabbitmq-node3 rabbitmq]# rabbitmqctl join_cluster rabbit@rabbitmq-node1
+
+Clustering node 'rabbit@rabbitmq-node3' with 'rabbit@rabbitmq-node1' ...
+
+[root@rabbitmq-node3 rabbitmq]# rabbitmqctl start_app
+
+Starting node 'rabbit@rabbitmq-node3' ...
+
+[root@rabbitmq-node3 rabbitmq]# 
+</code></pre>
+</div>
+
+<p>rabbitmq.config 的内容：我删除了一些注释。因为So Long~</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">%% -*- mode: erlang -*-
+%% ----------------------------------------------------------------------------
+%% RabbitMQ Sample Configuration File.
+%%
+%% See http://www.rabbitmq.com/configure.html for details.
+%% ----------------------------------------------------------------------------
+</span><span class="p">[</span>
+ <span class="p">{</span><span class="n">rabbit</span><span class="p">,</span>
+  <span class="p">[</span>
+   <span class="p">{</span><span class="n">cluster_nodes</span><span class="p">,</span> <span class="p">{[</span><span class="n">' rabbit@rabbitmq-node1'</span><span class="p">,</span> <span class="n">' rabbit@rabbitmq-node2'</span><span class="p">,</span> <span class="n">' rabbit@rabbitmq-node3'</span><span class="p">],</span> <span class="n">disc</span><span class="p">}}</span>
+  <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% Advanced Erlang Networking/Clustering Options.
+</span> <span class="c">%%
+</span> <span class="c">%% See http://www.rabbitmq.com/clustering.html for details
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="p">{</span><span class="n">kernel</span><span class="p">,</span>
+  <span class="p">[</span><span class="c">%% Sets the net_kernel tick time.
+</span>   <span class="c">%% Please see http://erlang.org/doc/man/kernel_app.html and
+</span>   <span class="c">%% http://www.rabbitmq.com/nettick.html for further details.
+</span>   <span class="c">%%
+</span>   <span class="c">%% {net_ticktime, 60}
+</span>  <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% RabbitMQ Management Plugin
+</span> <span class="c">%%
+</span> <span class="c">%% See http://www.rabbitmq.com/management.html for details
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span>
+ <span class="p">{</span><span class="n">rabbitmq_management</span><span class="p">,</span>
+  <span class="p">[</span>
+<span class="p">{</span><span class="n">listener</span><span class="p">,</span> <span class="p">[{</span><span class="n">port</span><span class="p">,</span>     <span class="mi">8080</span><span class="p">},</span>
+             <span class="p">{</span><span class="n">ip</span><span class="p">,</span>       <span class="s">"0.0.0.0"</span><span class="p">},</span>
+             <span class="p">{</span><span class="n">ssl</span><span class="p">,</span>     <span class="n">false</span><span class="p">}]}</span> 
+ <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% RabbitMQ Shovel Plugin
+</span> <span class="c">%%
+</span> <span class="c">%% See http://www.rabbitmq.com/shovel.html for details
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span>
+ <span class="p">{</span><span class="n">rabbitmq_shovel</span><span class="p">,</span>
+  <span class="p">[{</span><span class="n">shovels</span><span class="p">,</span>
+    <span class="p">[</span>
+    <span class="p">]}</span>
+   <span class="c">%% Rather than specifying some values per-shovel, you can specify
+</span>   <span class="c">%% them for all shovels here.
+</span>   <span class="c">%%
+</span>   <span class="c">%% {defaults, [{prefetch_count,     0},
+</span>   <span class="c">%%             {ack_mode,           on_confirm},
+</span>   <span class="c">%%             {publish_fields,     []},
+</span>   <span class="c">%%             {publish_properties, [{delivery_mode, 2}]},
+</span>   <span class="c">%%             {reconnect_delay,    2.5}]}
+</span>  <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% RabbitMQ Stomp Adapter
+</span> <span class="c">%%
+</span> <span class="c">%% See http://www.rabbitmq.com/stomp.html for details
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span>
+ <span class="p">{</span><span class="n">rabbitmq_stomp</span><span class="p">,</span>
+  <span class="p">[</span>
+  <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% RabbitMQ MQTT Adapter
+</span> <span class="c">%%
+</span> <span class="c">%% See https://github.com/rabbitmq/rabbitmq-mqtt/blob/stable/README.md
+</span> <span class="c">%% for details
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span>
+ <span class="p">{</span><span class="n">rabbitmq_mqtt</span><span class="p">,</span>
+  <span class="p">[</span>
+  <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% RabbitMQ AMQP 1.0 Support
+</span> <span class="c">%%
+</span> <span class="c">%% See https://github.com/rabbitmq/rabbitmq-amqp1.0/blob/stable/README.md
+</span> <span class="c">%% for details
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span>
+ <span class="p">{</span><span class="n">rabbitmq_amqp1_0</span><span class="p">,</span>
+  <span class="p">[</span>
+  <span class="p">]},</span>
+
+ <span class="c">%% ----------------------------------------------------------------------------
+</span> <span class="c">%% RabbitMQ LDAP Plugin
+</span> <span class="c">%%
+</span> <span class="c">%% See http://www.rabbitmq.com/ldap.html for details.
+</span> <span class="c">%%
+</span> <span class="c">%% ----------------------------------------------------------------------------
+</span>
+ <span class="p">{</span><span class="n">rabbitmq_auth_backend_ldap</span><span class="p">,</span>
+  <span class="p">[</span>
+  <span class="p">]}</span>
+<span class="p">].</span>
+</code></pre>
+</div>
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/20151104165318320" alt="这里写图片描述" /></p>
+
+<p>我也借鉴了一些大神的博客。也看了官方文档。还在继续提高中~~~</p>

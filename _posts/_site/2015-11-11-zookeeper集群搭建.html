@@ -1,0 +1,444 @@
+<p>今天是双十一，这个写的比较水。没啥实在东西。在工厂里面。没办法 虽然是java组的，临时支援到其他组，帮助解决一些问题。 现在很困，但是随便写点东西。打发打发时间吧。好困呐。怎么写代码到4点无所谓。。
+双十一，你们买的爽，但是我们累到炸了。
+扯了好多犊子 = = 开始。</p>
+
+<p>zookeeper其实对于服务器集群确实是一个不错的中间件，可以将各种中间件相互链接起来。有点类似nginx对http请求的负载均衡。它将一个服务的状态保存在各个单机中，当某一个单机状态发生了改变了，它会通知所有的单机发生的变化。也就是watch机制。并且无论访问其他哪一个单机，状态都是一样的。
+而最近遇到一个乐观锁的例子，解决同一个定时器的主备问题。类似抢位子。这个之后我会贴出代码。</p>
+
+<p>zookeeper中的角色， 有三种，借用其他的博客的一个图片<img src="http://oh6uhie7j.bkt.clouddn.com/20151111033156766" alt="这里写图片描述" />
+ 原文地址</p>
+
+<p><a href="http://cailin.iteye.com/blog/2014486/">http://cailin.iteye.com/blog/2014486/</a></p>
+
+<p>1 .  搭建环境</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>MacBook pro 15款840 
+VMWare Fusion8 
+Centos 6.7 
+zookeeper-3.4.6.tar.gz
+</code></pre>
+</div>
+
+<p>开始贴代码了。</p>
+
+<p>node1:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sjk@192.148.1.104's password: 
+
+Last login: Mon Nov  9 16:46:49 2015 from 192.148.1.102
+
+[sjk@rabbitmq-node1 ~]$ sudo -i
+
+[sudo] password for sjk: 
+
+[root@rabbitmq-node1 ~]# cd /usr/local/
+
+[root@rabbitmq-node1 local]# ls
+
+bin  games    jdk1.7.0_80  lib64    mongodb  share  tomcat
+
+etc  include  lib          libexec  sbin     src    zookeeper
+
+[root@rabbitmq-node1 local]# cd zookeeper/
+
+[root@rabbitmq-node1 zookeeper]# ls
+
+bin          dist-maven       LICENSE.txt           src
+
+build.xml    docs             NOTICE.txt            zookeeper-3.4.6.jar
+
+CHANGES.txt  ivysettings.xml  README_packaging.txt  zookeeper-3.4.6.jar.asc
+
+conf         ivy.xml          README.txt            zookeeper-3.4.6.jar.md5
+
+contrib      lib              recipes               zookeeper-3.4.6.jar.sha1
+
+[root@rabbitmq-node1 zookeeper]# cd conf/
+
+[root@rabbitmq-node1 conf]# ls
+
+configuration.xsl  log4j.properties  zoo.cfg  zoo_sample.cfg
+
+[root@rabbitmq-node1 conf]# vim zoo.cfg 
+
+[root@rabbitmq-node1 conf]# cat zoo.cfg 
+
+# The number of milliseconds of each tick
+
+tickTime=2000
+
+# The number of ticks that the initial 
+
+# synchronization phase can take
+
+initLimit=10
+
+# The number of ticks that can pass between 
+
+# sending a request and getting an acknowledgement
+
+syncLimit=5
+
+# the directory where the snapshot is stored.
+
+# do not use /tmp for storage, /tmp here is just 
+
+# example sakes.
+
+dataDir=/zookeeper/data
+
+# the port at which the clients will connect
+
+clientPort=2181
+
+# the maximum number of client connections.
+
+# increase this if you need to handle more clients
+
+#maxClientCnxns=60
+
+dataLogDir=/zookeeper/log
+
+# Be sure to read the maintenance section of the 
+
+# administrator guide before turning on autopurge.
+
+server.1=192.148.1.104:2888:3888
+
+server.2=192.148.1.105:2888:3888
+
+server.3=192.148.1.106:2888:3888
+
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+
+# The number of snapshots to retain in dataDir
+
+#autopurge.snapRetainCount=3
+
+# Purge task interval in hours
+
+# Set to "0" to disable auto purge feature
+
+#autopurge.purgeInterval=1
+
+[root@rabbitmq-node1 conf]# vim /etc/profile
+
+[root@rabbitmq-node1 conf]# source /etc/profile
+
+[root@rabbitmq-node1 conf]# mkdir -p /zookeeper/log
+
+[root@rabbitmq-node1 conf]# mkdir -p /zookeeper/data
+
+[root@rabbitmq-node1 conf]# cd /zookeeper/
+
+[root@rabbitmq-node1 zookeeper]# ls
+
+data  log
+
+[root@rabbitmq-node1 zookeeper]# echo $ZOOKEEPER_HOME
+
+/usr/local/zookeeper
+
+[root@rabbitmq-node1 zookeeper]# cd /usr/local/zookeeper/
+
+[root@rabbitmq-node1 zookeeper]# ls
+
+bin          dist-maven       LICENSE.txt           src
+
+build.xml    docs             NOTICE.txt            zookeeper-3.4.6.jar
+
+CHANGES.txt  ivysettings.xml  README_packaging.txt  zookeeper-3.4.6.jar.asc
+
+conf         ivy.xml          README.txt            zookeeper-3.4.6.jar.md5
+
+contrib      lib              recipes               zookeeper-3.4.6.jar.sha1
+//dataDir下告诉本机的id
+[root@rabbitmq-node1 zookeeper]# cd /zookeeper/data/
+
+[root@rabbitmq-node1 data]# ls
+
+[root@rabbitmq-node1 data]# vim myid
+
+[root@rabbitmq-node1 data]# cat myid 
+
+1
+
+[root@rabbitmq-node1 data]# scp -r /usr/local/zookeeper root@192.148.1.105:/usr/local/
+
+[root@rabbitmq-node1 data]# scp -r /usr/local/zookeeper  root@192.148.1.106:/usr/local/
+
+[root@rabbitmq-node1 data]# cd /usr/local/zookeeper/bin/
+
+[root@rabbitmq-node1 bin]# ls
+
+README.txt    zkCli.cmd  zkEnv.cmd  zkServer.cmd
+
+zkCleanup.sh  zkCli.sh   zkEnv.sh   zkServer.sh
+//三个启动很快。如果很慢 你将会在日志看到报错。 但是重启一下就行了
+[root@rabbitmq-node1 bin]# ./zkServer.sh start
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Starting zookeeper ... STARTED
+
+[root@rabbitmq-node1 bin]# ./zkServer.sh status
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Mode: follower
+
+[root@rabbitmq-node1 bin]# jps
+
+2344 QuorumPeerMain
+
+2398 Jps
+
+[root@rabbitmq-node1 bin]# 
+
+[root@rabbitmq-node1 bin]# ./zkServer.sh start
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Starting zookeeper … STARTED
+
+[root@rabbitmq-node1 bin]# ./zkServer.sh status
+
+JMX enabled by default
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+Mode: follower
+
+[root@rabbitmq-node1 bin]# jps
+2344 QuorumPeerMain
+2398 Jps
+
+//查看集群状态  为跟随者
+[root@rabbitmq-node1 bin]# ./zkServer.sh status
+JMX enabled by default
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+Mode: follower
+//这是我关掉了其他两个服务后只剩下一个时候
+[root@rabbitmq-node1 bin]# ./zkServer.sh status
+JMX enabled by default
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+Error contacting service. It is probably not running.
+
+[root@rabbitmq-node1 bin]# ./zkServer.sh stop
+JMX enabled by default
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+Stopping zookeeper ... STOPPED
+[root@rabbitmq-node1 bin]# 
+
+</code></pre>
+</div>
+
+<p>node2:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sjk@192.148.1.105's password: 
+
+Last login: Mon Nov  9 04:15:34 2015 from 192.148.1.102
+
+[sjk@rabbitmq-node2 ~]$ sudo -i
+
+[sudo] password for sjk: 
+
+[root@rabbitmq-node2 ~]# cd /usr/local/
+
+[root@rabbitmq-node2 local]# ls
+
+bin  games    jdk1.7.0_80  lib64    mongodb  openssl  share  tomcat  zookeeper
+
+etc  include  lib          libexec  nginx    sbin     src    usr
+
+[root@rabbitmq-node2 local]# mkdir -p /zookeeper/log
+
+[root@rabbitmq-node2 local]# mkdir -p /zookeeper/data
+
+[root@rabbitmq-node2 local]# cd /zookeeper/data/
+
+[root@rabbitmq-node2 data]# vim myid
+
+[root@rabbitmq-node2 data]# cat myid 
+
+2
+
+[root@rabbitmq-node2 data]# vim /etc/profile
+
+[root@rabbitmq-node2 data]# source /etc/profile
+
+[root@rabbitmq-node2 data]# ls
+
+myid
+
+[root@rabbitmq-node2 data]# cd /usr/local/zookeeper/
+
+[root@rabbitmq-node2 zookeeper]# cd b
+
+-bash: cd: b: 没有那个文件或目录
+
+[root@rabbitmq-node2 zookeeper]# cd bin/
+
+[root@rabbitmq-node2 bin]# ls
+
+README.txt    zkCli.cmd  zkEnv.cmd  zkServer.cmd
+
+zkCleanup.sh  zkCli.sh   zkEnv.sh   zkServer.sh
+
+[root@rabbitmq-node2 bin]# ./zkServer.sh start
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Starting zookeeper ... STARTED
+
+[root@rabbitmq-node2 bin]# ./zkServer.sh status
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Mode: leader
+
+[root@rabbitmq-node2 bin]# jps
+
+2369 QuorumPeerMain
+
+2429 Jps
+
+[root@rabbitmq-node2 bin]# 
+
+[root@rabbitmq-node2 bin]# ./zkServer.sh start
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Starting zookeeper ... STARTED
+//为领导者
+[root@rabbitmq-node2 bin]# ./zkServer.sh status
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Mode: leader
+
+[root@rabbitmq-node2 bin]# jps
+
+2369 QuorumPeerMain
+
+2429 Jps
+
+[root@rabbitmq-node2 bin]# ./zkServer.sh stop
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Stopping zookeeper ... STOPPED
+</code></pre>
+</div>
+<p>node3：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sjk@192.148.1.106's password: 
+
+Last login: Mon Nov  9 16:47:06 2015 from 192.148.1.102
+
+[sjk@rabbitmq-node3 ~]$ sudo -i
+
+[sudo] password for sjk: 
+
+[root@rabbitmq-node3 ~]# cd /usr/local/zookeeper/
+
+[root@rabbitmq-node3 zookeeper]# ls
+
+bin          dist-maven       LICENSE.txt           src
+
+build.xml    docs             NOTICE.txt            zookeeper-3.4.6.jar
+
+CHANGES.txt  ivysettings.xml  README_packaging.txt  zookeeper-3.4.6.jar.asc
+
+conf         ivy.xml          README.txt            zookeeper-3.4.6.jar.md5
+
+contrib      lib              recipes               zookeeper-3.4.6.jar.sha1
+
+[root@rabbitmq-node3 zookeeper]# cd ..
+
+[root@rabbitmq-node3 local]# ls
+
+bin  games    jdk1.7.0_80  lib64    mongodb   sbin   src
+etc  include  lib          libexec  python27  share  zookeeper
+
+[root@rabbitmq-node3 local]# mkdir -p /zookeeper/log
+
+[root@rabbitmq-node3 local]# mkdir -p /zookeeper/data
+
+[root@rabbitmq-node3 local]# cd /zookeeper/data/
+
+[root@rabbitmq-node3 data]# vim myid
+
+[root@rabbitmq-node3 data]# cat myid 
+
+3
+//设置zookeeperhome的环境变量
+[root@rabbitmq-node3 data]# vim /etc/profile
+
+[root@rabbitmq-node3 data]# source /etc/profile
+
+[root@rabbitmq-node3 data]# cd /usr/local/zookeeper/bin/
+
+[root@rabbitmq-node3 bin]# ls
+
+README.txt    zkCli.cmd  zkEnv.cmd  zkServer.cmd
+
+zkCleanup.sh  zkCli.sh   zkEnv.sh   zkServer.sh
+
+[root@rabbitmq-node3 bin]# ./zkServer.sh start
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Starting zookeeper ... STARTED
+
+[root@rabbitmq-node3 bin]# ./zkServer.sh status
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Mode: follower
+
+[root@rabbitmq-node3 bin]# jps
+
+2344 QuorumPeerMain
+
+2399 Jps
+
+//将其中一个节点关闭掉
+[root@rabbitmq-node3 bin]# ./zkServer.sh status
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Mode: leader
+
+[root@rabbitmq-node3 bin]# ./zkServer.sh stop
+
+JMX enabled by default
+
+Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
+
+Stopping zookeeper ... STOPPED
+
+[root@rabbitmq-node3 bin]# 
+</code></pre>
+</div>
+<p>真水。 等之后和solr的整合吧。 好累 = = 困。。。</p>

@@ -1,0 +1,206 @@
+<p>文件下载整个功能完成了，那么对应的文件上传也跑不了。So~ Look here~</p>
+
+<hr />
+
+<p>业务需求是录制音频然后上传到七牛并且Android可以读。</p>
+
+<p>与安卓沟通了一下统一了mp3格式，大小质量都不错。由于<code class="highlighter-rouge">AVAudioRecorder</code>录音的格式为.caf或者.wav而且很大需要进行转换压缩为MP3格式。这里需要用到三方库 <code class="highlighter-rouge">lame</code>。</p>
+
+<p>使用lame转换后音频的质量和</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> _recorder = [[AVAudioRecorder alloc] initWithURL:_recordFilePath settings:setting error:NULL];
+</code></pre>
+</div>
+<p>里的 <strong><em>setting</em></strong> 息息相关。 所以整理了两个配置。</p>
+
+<p>我把这两种的配置写在了工具类所以直接贴代码了~要用的话直接CV大法就可以。</p>
+
+<p><a href="http://oh6uhie7j.bkt.clouddn.com/lame.zip">lame三方库的资源</a></p>
+
+<hr />
+
+<ul>
+  <li>获取转换文件所在文件夹</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)getRecPathUrl{
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *recordDir = [str stringByAppendingPathComponent:@"RecordCourse"];
+    
+    return recordDir;
+}
+</code></pre>
+</div>
+
+<ul>
+  <li>获取时间戳用于文件的命名</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)getTimestamp{
+    NSDate *nowDate = [NSDate date];
+    double timestamp = (double)[nowDate timeIntervalSince1970]*1000;
+    long nowTimestamp = [[NSNumber numberWithDouble:timestamp] longValue];
+    NSString *timestampStr = [NSString stringWithFormat:@"%ld",nowTimestamp];
+    return timestampStr;
+}
+</code></pre>
+</div>
+
+<ul>
+  <li>PCM转换MP3配置</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSDictionary *)getAudioSettingWithPCM {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    //设置录音格式
+    [dic setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
+    //设置录音采样率，8000是电话采样率，对于一般录音已经够了
+    [dic setObject:@(44100.0) forKey:AVSampleRateKey];
+    //设置通道,这里采用双声道
+    [dic setObject:@(1) forKey:AVNumberOfChannelsKey];
+    //每个采样点位数,分为8、16、24、32
+    [dic setObject:@(16) forKey:AVLinearPCMBitDepthKey];
+    //是否使用浮点数采样
+    [dic setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
+    //....其他设置等
+    return dic;
+}
+</code></pre>
+</div>
+
+<ul>
+  <li>CAF转换MP3配置</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSDictionary *)getAudioSettingWithCAF {
+    NSDictionary *setting = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithInt:AVAudioQualityMin],
+                             AVEncoderAudioQualityKey,
+                             [NSNumber numberWithInt:16],
+                             AVEncoderBitRateKey,
+                             [NSNumber numberWithInt:2],
+                             AVNumberOfChannelsKey,
+                             [NSNumber numberWithFloat:44100.0],
+                             AVSampleRateKey,
+                             nil];
+
+    return setting;
+}
+</code></pre>
+</div>
+
+<ul>
+  <li>PCM转换MP3的lame方法</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)audioPCMtoMP3:(NSString *)wavPath {
+    NSString *cafFilePath = wavPath;
+    
+    NSString *mp3FilePath = [NSString stringWithFormat:@"%@.mp3",[NSString stringWithFormat:@"%@%@",[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if([fileManager removeItemAtPath:mp3FilePath error:nil]){
+        NSLog(@"删除原MP3文件");
+    }
+    @try {
+        int read, write;
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_in_samplerate(lame, 22050.0);
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception description]);
+    }
+    @finally {
+        return mp3FilePath;
+    }
+}
+</code></pre>
+</div>
+
+<ul>
+  <li>CAF转换MP3的lame方法</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (NSString *)audioCAFtoMP3:(NSString *)wavPath {
+    
+    NSString *cafFilePath = wavPath;
+    
+    NSString *mp3FilePath = [NSString stringWithFormat:@"%@.mp3",[NSString stringWithFormat:@"%@%@",[cafFilePath substringToIndex:cafFilePath.length - 4],[self getTimestamp]]];
+    
+    @try {
+        int read, write;
+        
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
+        
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_num_channels(lame,1);//设置1为单通道，默认为2双通道
+        lame_set_in_samplerate(lame, 44100.0);
+        lame_set_VBR(lame, vbr_default);
+        
+        lame_set_brate(lame,8);
+        
+        lame_set_mode(lame,3);
+        
+        lame_set_quality(lame,2);
+        
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception description]);
+    }
+    @finally {
+        return mp3FilePath;
+    }
+}
+</code></pre>
+</div>
+
+<p>两种质量大小不错都可以使用😁😁</p>

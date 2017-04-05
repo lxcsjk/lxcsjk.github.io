@@ -1,0 +1,457 @@
+<p><a href="http://blog.sina.com.cn/s/blog_91c0fdb50101kfd4.html">原文链接</a></p>
+
+<h3 id="poi">POI简介</h3>
+
+<ul>
+  <li>Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。</li>
+</ul>
+
+<hr />
+
+<h3 id="hssf">HSSF概况</h3>
+
+<ul>
+  <li>HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel和eventusermodel，即“用户模型”和“事件-用户模型”。</li>
+</ul>
+
+<hr />
+
+<h3 id="poi-excel">POI EXCEL文档结构类</h3>
+
+<ul>
+  <li>HSSFWorkbook excel文档对象</li>
+  <li>HSSFSheet excel的sheet HSSFRow excel的行</li>
+  <li>HSSFCell excel的单元格 HSSFFont excel字体</li>
+  <li>HSSFName 名称 HSSFDataFormat 日期格式</li>
+  <li>HSSFHeader sheet头</li>
+  <li>HSSFFooter sheet尾</li>
+  <li>HSSFCellStyle cell样式</li>
+  <li>HSSFDateUtil 日期</li>
+  <li>HSSFPrintSetup 打印</li>
+  <li>HSSFErrorConstants 错误信息表</li>
+</ul>
+
+<h3 id="excel">EXCEL常用操作方法</h3>
+
+<ul>
+  <li>建立Excel常用对象</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>POIFSFileSystem fs = newPOIFSFileSystem(new FileInputStream("d:/test.xls"));
+	
+//得到Excel工作簿对象
+HSSFWorkbook wb = new HSSFWorkbook(fs);
+	
+//得到Excel工作表对象
+HSSFSheet sheet = wb.getSheetAt(0);
+	
+//得到Excel工作表的行
+HSSFRow row = sheet.getRow(i);
+
+//得到Excel工作表指定行的单元格
+HSSFCell cell = row.getCell((short) j);
+
+//得到单元格样式
+cellStyle = cell.getCellStyle();
+</code></pre>
+</div>
+
+<ul>
+  <li>建立Excel常用对象</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//创建Excel工作簿对象
+HSSFWorkbook wb = new HSSFWorkbook();
+
+//创建Excel工作表对象
+HSSFSheet sheet = wb.createSheet("new sheet");
+
+//创建Excel工作表的行
+HSSFRow row = sheet.createRow((short)0);
+
+//创建单元格样式
+cellStyle = wb.createCellStyle();
+
+//创建Excel工作表指定行的单元格
+row.createCell((short)0).setCellStyle(cellStyle);
+
+//设置Excel工作表的值
+row.createCell((short)0).setCellValue(1);
+</code></pre>
+</div>
+
+<ul>
+  <li>设置sheet名称和单元格内容</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wb.setSheetName(1, "第一张工作表",HSSFCell.ENCODING_UTF_16);
+            
+cell.setEncoding((short) 1);   
+   
+cell.setCellValue("单元格内容");  
+</code></pre>
+</div>
+
+<ul>
+  <li>取得sheet的数目</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wb.getNumberOfSheets();
+</code></pre>
+</div>
+
+<ul>
+  <li>根据index取得sheet对象</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.getSheetAt(0);
+</code></pre>
+</div>
+
+<ul>
+  <li>取得有效的行数</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>int rowcount = sheet.getLastRowNum();   
+</code></pre>
+</div>
+
+<ul>
+  <li>取得一行的有效单元格个数</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>row.getLastCellNum();
+</code></pre>
+</div>
+
+<ul>
+  <li>单元格值类型读写</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//设置单元格为STRING类型
+cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+	
+//读取为数值类型的单元格内容
+cell.getNumericCellValue();
+</code></pre>
+</div>
+
+<ul>
+  <li>设置列宽、行高</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setColumnWidth((short)column,(short)width);
+
+row.setHeight((short)height);
+</code></pre>
+</div>
+
+<ul>
+  <li>添加区域，合并单元格</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//合并从第rowFrom行columnFrom列
+Region region = new Region((short)rowFrom,(short)columnFrom,(short)rowTo  
+(short)columnTo);
+
+//到rowTo行columnTo的区域
+sheet.addMergedRegion(region);
+
+//得到所有区域       
+sheet.getNumMergedRegions()
+</code></pre>
+</div>
+
+<ul>
+  <li>保存Excel文件</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>FileOutputStream fileOut = new FileOutputStream(path); 
+wb.write(fileOut); 
+</code></pre>
+</div>
+
+<ul>
+  <li>根据单元格不同属性返回字符串数值</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    public String getCellStringValue(HSSFCell cell) {
+        String cellValue = "";
+        switch (cell.getCellType()) {
+            case HSSFCell.CELL_TYPE_STRING://字符串类型 
+                cellValue = cell.getStringCellValue();
+                if (cellValue.trim().equals("") || cellValue.trim().length() &lt;= 0)
+                    cellValue = "";
+                break;
+            case HSSFCell.CELL_TYPE_NUMERIC://数值类型 
+                cellValue = String.valueOf(cell.getNumericCellValue());
+                break;
+            case HSSFCell.CELL_TYPE_FORMULA://公式 
+                cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+                cellValue = String.valueOf(cell.getNumericCellValue());
+                break;
+            case HSSFCell.CELL_TYPE_BLANK:
+                cellValue = "";
+                break;
+            case HSSFCell.CELL_TYPE_BOOLEAN:
+                break;
+            case HSSFCell.CELL_TYPE_ERROR:
+                break;
+            default:
+                break;
+        }
+        return cellValue;
+    }
+</code></pre>
+</div>
+
+<ul>
+  <li>保存Excel文件</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFCellStyle style = wb.createCellStyle();
+//下边框
+style.setBorderBottom(HSSFCellStyle.BORDER_DOTTED);
+//左边框  
+style.setBorderLeft(HSSFCellStyle.BORDER_DOTTED);
+//右边框
+style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+//上边框
+style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+</code></pre>
+</div>
+
+<ul>
+  <li>设置字体和内容位置</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFFont f  = wb.createFont();
+//字号
+f.setFontHeightInPoints((short) 11);
+//加粗
+f.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
+style.setFont(f);
+//左右居中
+style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+//上下居中
+style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+//单元格内容的旋转的角度
+style.setRotation(short rotation);
+
+HSSFDataFormat df = wb.createDataFormat();
+//设置单元格数据格式
+style1.setDataFormat(df.getFormat("0.00%"));
+//给单元格设公式    
+cell.setCellFormula(string);
+//单元格内容的旋转的角度     
+style.setRotation(short rotation);  
+</code></pre>
+</div>
+
+<ul>
+  <li>插入图片</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray       
+ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();      
+BufferedImage bufferImg = ImageIO.read(new File("ok.jpg"));      
+ImageIO.write(bufferImg,"jpg",byteArrayOut);      
+//读进一个excel模版       
+FileInputStream fos = new FileInputStream(filePathName+"/stencil.xlt");       
+fs = new POIFSFileSystem(fos);      
+//创建一个工作薄       
+HSSFWorkbook wb = new HSSFWorkbook(fs);      
+HSSFSheet sheet = wb.getSheetAt(0);      
+HSSFPatriarch patriarch = sheet.createDrawingPatriarch();      
+HSSFClientAnchor anchor = new HSSFClientAnchor(0,0,1023,255,(short) 0,0,(short)10,10);           
+patriarch.createPicture(anchor , wb.addPicture(byteArrayOut.toByteArray(),HSSFWorkbook.PICTURE_TYPE_JPEG));
+</code></pre>
+</div>
+
+<ul>
+  <li>调整工作表位置</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet("format sheet");     
+HSSFPrintSetup ps = sheet.getPrintSetup();     
+sheet.setAutobreaks(true);     
+ps.setFitHeight((short)1);     
+ps.setFitWidth((short)1);   
+</code></pre>
+</div>
+
+<ul>
+  <li>设置打印区域</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("Sheet1");     
+wb.setPrintArea(0, "$A$1:$C$2");   
+</code></pre>
+</div>
+
+<ul>
+  <li>标注脚注</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("format sheet");     
+HSSFFooter footer = sheet.getFooter()     
+footer.setRight( "Page " + HSSFFooter.page() + " of " + HSSFFooter.numPages() );  
+</code></pre>
+</div>
+
+<ul>
+  <li>在工作单中清空行数据，调整行位置</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();     
+HSSFSheet sheet = wb.createSheet("row sheet");     
+// Create various cells and rows for spreadsheet.      
+// Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)      
+sheet.shiftRows(5, 10, -5); 
+</code></pre>
+</div>
+
+<ul>
+  <li>选中指定的工作表</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("row sheet");     
+heet.setSelected(true); 
+</code></pre>
+</div>
+
+<ul>
+  <li>工作表的放大缩小</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet1 = wb.createSheet("new sheet");     
+sheet1.setZoom(1,2);   // 50 percent magnification   
+</code></pre>
+</div>
+
+<ul>
+  <li>头注和脚注</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("new sheet");     
+HSSFHeader header = sheet.getHeader();     
+header.setCenter("Center Header");     
+header.setLeft("Left Header");     
+header.setRight(HSSFHeader.font("Stencil-Normal", "Italic") +     
+HSSFHeader.fontSize((short) 16) + "Right w/ Stencil-Normal Italic font and size 16");    
+</code></pre>
+</div>
+
+<ul>
+  <li>自定义颜色</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFCellStyle style = wb.createCellStyle();     
+style.setFillForegroundColor(HSSFColor.LIME.index);     
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
+HSSFFont font = wb.createFont();     
+font.setColor(HSSFColor.RED.index);     
+style.setFont(font);     
+cell.setCellStyle(style);    
+</code></pre>
+</div>
+
+<h3 id="section">小结</h3>
+
+<ul>
+  <li>设置不显示excel网格线 </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setDisplayGridlines(false);
+其中sheet是Sheet对象 
+</code></pre>
+</div>
+
+<ul>
+  <li>设置excel单元格中的内容换行 </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cellStyle.setWrapText(true);
+
+其中cellStyle是WorkBook创建的CellStyle对象,然后将cellStyle设置到要换行的Cell对象,最后在要换行的对象(一般为字符串)加入"/r/n"。如  topTile.append("/r/n" +"cellContent");
+</code></pre>
+</div>
+
+<ul>
+  <li>单元格的合并 </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sheet.addMergedRegion(new CellRangeAddress(0, 4, 0, 2));
+
+本示例为合并4行2列
+</code></pre>
+</div>
+
+<ul>
+  <li>设置页眉和页脚的页数 </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFHeader header = sheet.getHeader(); 
+ header.setCenter("Center Header");
+ header.setLeft("Left Header");
+ header.setRight(HSSFHeader.font("Stencil-Normal", "Italic") + HSSFHeader.fontSize((short) 16) + "Right w/ Stencil-Normal Italic font and size 16");
+ HSSFFooter footer = (HSSFFooter )sheet.getFooter()  footer.setRight( "Page " + HSSFFooter.page() + " of " + HSSFFooter.numPages() );
+</code></pre>
+</div>
+
+<ul>
+  <li>使得一个Sheet适合一页 </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setAutobreaks(true); 
+</code></pre>
+</div>
+
+<ul>
+  <li>设置放大属性 </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setZoom(3,4);
+Zoom被明确为一个分数，例如下面的75%使用3作为分子，4作为分母
+</code></pre>
+</div>
+
+<ul>
+  <li>设置打印</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFPrintSetup print = (HSSFPrintSetup) sheet.getPrintSetup();
+ print.setLandscape(true);//设置横向打印
+ print.setScale((short) 70);//设置打印缩放70%
+ print.setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);//设置为A4纸张 
+ print.setLeftToRight(true);//設置打印顺序先行后列,默认为先列行
+             print.setFitHeight((short) 10);设置缩放调整为10页高 
+ print.setFitWidth((short) 10);设置缩放调整为宽高 
+ sheet.setAutobreaks(false); 
+ if (i != 0 &amp;&amp; i % 30 == 0) {
+     sheet.setRowBreak(i);//设置每30行分页打印
+}
+</code></pre>
+</div>
+
+<ul>
+  <li>反复的行和列</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();  wb.setRepeatingRowsAndColumns(0, 0, 12, 1, 6);
+//设置1到12列,行1到6每一页重复打印 
+</code></pre>
+</div>
+
+<ul>
+  <li>调整单元格宽度</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setAutobreaks(true);
+sheet.setColumnWidth((short)i,colsWidth[i]);
+//设定单元格长度
+ sheet.autoSizeColumn((short) i);
+//自动根据长度调整单元格长度 
+</code></pre>
+</div>

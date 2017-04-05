@@ -1,0 +1,466 @@
+<p>这几天在写文件下载，断点续传，需要用到FMDB进行数据的管理，等写完也总结一下。</p>
+
+<p>其实也是这两天才学习 <code class="highlighter-rouge">FMDB</code>，google了一下资料有很多，就去 github 上面先 <a href="https://github.com/ccgus/fmdb">Star</a> 一下<code class="highlighter-rouge">FMDB</code>，发现他<code class="highlighter-rouge">README.markdown</code>写的很详细。然后也看了唐巧大牛的<a href="http://blog.devtang.com/2012/04/22/use-fmdb/">技术博客</a>，写了<a href="https://github.com/lxcsjk/FMDBDemo">FMDBDemo</a>玩玩。</p>
+
+<hr />
+
+<h3 id="section">集成到项目</h3>
+
+<p>通过 <a href="https://cocoapods.org">CocoaPods</a> 添加 <code class="highlighter-rouge">pod 'FMDB'</code> 然后 <code class="highlighter-rouge">pod update --verbose --no-repo-update</code> OK~</p>
+
+<hr />
+
+<h3 id="section-1">创建数据库</h3>
+
+<p>导入 <code class="highlighter-rouge">libsqlite3.tbd</code>  (<code class="highlighter-rouge">libsqlite3.0.tbd</code> 也可以)
+<img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161203-223307@2x.png" alt="" /></p>
+
+<p>引入 <code class="highlighter-rouge">#import "FMDB.h"</code></p>
+
+<h5 id="section-2">创建数据库</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    NSString *doc =[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) lastObject];
+    
+    fileName = [doc stringByAppendingPathComponent:@"downCourse.sqlite"];
+    
+    DLog(@"sql文件路径 ： %@",fileName);
+</code></pre>
+</div>
+
+<p>我创建在<code class="highlighter-rouge">Documents</code>目录下</p>
+
+<p>关于创建数据库：</p>
+
+<blockquote>
+  <p>An <code class="highlighter-rouge">FMDatabase</code> is created with a path to a SQLite database file. This path can be one of these three:</p>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>A file system path. The file does not have to exist on disk. If it does not exist, it is created for you.</li>
+  </ol>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>An empty string (@””). An empty database is created at a temporary location. This database is deleted with the <code class="highlighter-rouge">FMDatabase</code> connection is closed.</li>
+  </ol>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li><code class="highlighter-rouge">NULL</code>. An in-memory database is created. This database will be destroyed with the FMDatabase connection is closed.</li>
+  </ol>
+</blockquote>
+
+<p>意思就是</p>
+
+<blockquote>
+  <p>建立数据库只需要如下一行即可 , 当该文件不存在时，fmdb 会自己创建一个。如果你传入的参数是空串：@”” ，则 fmdb 会在临时文件目录下创建这个数据库，如果你传入的参数是 NULL，则它会建立一个在内存中的数据库。</p>
+</blockquote>
+
+<hr />
+
+<h3 id="section-3">打开数据库</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+    	// sql
+    }
+    [db close];
+</code></pre>
+</div>
+
+<p>就可以了 执行完 注意一定要 <code class="highlighter-rouge">[db close]</code> 关闭数据库</p>
+
+<hr />
+
+<h3 id="section-4">创建表</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)createTable{
+    //    NSFileManager * fileManager = [NSFileManager defaultManager];
+    //    if ([fileManager fileExistsAtPath:fileName] == NO) {
+    if (!isTableExist) {
+        FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+        if ([db open]){
+            //  创建表
+            BOOL result = [db executeUpdate:@"CREATE TABLE 't_down_course' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL , 'courseId' INTEGER, 'downPath' VARCHAR(255),'courseInfo' text)"];
+            if (result){
+                DLog(@"创建表成功");
+                isTableExist = YES;
+                [self showAlertWithMessage:@"创建表 --- 成功" completion:nil];
+            }else{
+                [self showAlertWithMessage:@"创建表 --- 失败" completion:nil];
+            }
+            [db close];
+        }else{
+            [self showAlertWithMessage:@"打开数据库 --- 失败" completion:nil];
+        }
+    }
+    //    }
+}
+</code></pre>
+</div>
+
+<p>创建名称为 <code class="highlighter-rouge">t_down_course</code> 的表</p>
+
+<h5 id="section-5">对表的属性怎删改</h5>
+
+<p>语法:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BOOL result = [db executeUpdate:sql]
+</code></pre>
+</div>
+
+<ol>
+  <li>
+    <p>如需在表中添加列，请使用下列语法:</p>
+
+    <p><code class="highlighter-rouge">
+ ALTER TABLE table_name ADD column_name datatype
+</code></p>
+  </li>
+  <li>
+    <p>要删除表中的列，请使用下列语法:</p>
+
+    <p><code class="highlighter-rouge">
+ ALTER TABLE table_name DROP COLUMN column_name
+</code></p>
+  </li>
+  <li>
+    <p>更新表中列的属性，请使用下列语法:</p>
+
+    <p><code class="highlighter-rouge">
+ ALTER TABLE table_name MODIFY COLUMN column_name datatype
+</code></p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="section-6">插入数据</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)addData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    
+    NSDictionary *dic = @{
+                          @"code": @0,
+                          @"msg": @"success",
+                          @"data": @{
+                              @"course": @{
+                                  @"id": @24,
+                                  @"crowdId": @4,
+                                  @"ccode": @"KIa8nNpVmc",
+                                  @"cname": @"健健康康",
+                                  @"coverImg": @"http://ocd2lp9uj.bkt.clouddn.com/FaceQ1445612150222.jpg",
+                                  @"description": @"淋漓尽致",
+                                  @"speaker": @2,
+                                  @"speakerName": @"刘欣成",
+                                  @"speakerHeadIcon": @"http://ocd2lp9uj.bkt.clouddn.com/FaceQ1445612150222.jpg",
+                                  @"startTime": @"2016-10-15 11:21:44",
+                                  @"endTime": @"2016-10-15 11:26:50",
+                                  @"liveStatus": @"2",
+                                  @"saveStatus": @"2"
+                              }
+                          }
+                    };
+    NSString *json = [self dictionaryToJson:dic];
+    
+    if ([db open]){
+        NSString *insertSql = @"insert into 't_down_course'(courseId,downPath,courseInfo) values(?,?,?)";
+        BOOL result = [db executeUpdate:insertSql,[NSString stringWithFormat:@"%d",count],fileName,json];
+        if (result){
+            DLog(@"添加数据成功");
+            [self showAlertWithMessage:@"添加数据 --- 成功" completion:nil];
+        }else{
+            DLog(@"添加数据失败");
+            [self showAlertWithMessage:@"添加数据 --- 失败" completion:nil];
+        }
+        count++;
+        [db close];
+    }else{
+        [self showAlertWithMessage:@"打开数据库 --- 失败" completion:nil];
+    }
+}
+</code></pre>
+</div>
+
+<p><strong>插入数据类型必须为<code class="highlighter-rouge">NSObject</code> 的子类</strong></p>
+
+<p><strong>基本类型需要封装为对应的包装类</strong></p>
+
+<p><strong>支持占位符，后添加再数据</strong></p>
+
+<h5 id="section-7">插入也支持以字典的方式</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>NSDictionary *arguments = @{@"identifier": @(identifier), @"name": name, @"date": date, @"comment": comment ?: [NSNull null]};
+BOOL success = [db executeUpdate:@"INSERT INTO authors (identifier, name, date, comment) VALUES (:identifier, :name, :date, :comment)" withParameterDictionary:arguments];
+if (!success) {
+    NSLog(@"error = %@", [db lastErrorMessage]);
+}
+</code></pre>
+</div>
+
+<h5 id="section-8">支持对事务的控制</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>[db open]
+
+[db beginDeferredTransaction];//开启事务
+
+BOOL result = [db executeUpdate:insertSql,[NSString stringWithFormat:@"%d",count],fileName,json];
+
+if(result){
+	[db commit];// 提交事务
+}else{
+	[db rollback];// 回滚事务
+}
+
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="section-9">查询数据</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)selectData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        NSString *selectSql = @"select * from t_down_course";
+        FMResultSet * rs = [db executeQuery:selectSql];
+        while ([rs next]) {
+            int course = [rs intForColumn:@"id"];
+            NSString * courseId = [rs stringForColumn:@"courseId"];
+            NSString * downPath = [rs stringForColumn:@"downPath"];
+            NSString * courseInfo = [rs stringForColumn:@"courseInfo"];
+
+            DLog(@"course id = %d, courseId = %@, downPath = %@  courseInfo = %@", course, courseId, downPath,courseInfo);
+            
+            NSMutableDictionary *dic = [self dictionaryWithJsonString:courseInfo];
+            DLog(@"%@",dic);
+        }
+        [db close];
+    }else{
+        [self showAlertWithMessage:@"打开数据库 --- 失败" completion:nil];
+    }
+}
+</code></pre>
+</div>
+
+<p><strong>注意：即使操作结果只有一行，也需要先调用 FMResultSet 的 next 方法。</strong></p>
+
+<p>FMDB提供了多个方法获取不同类型的数据</p>
+
+<ul>
+  <li>intForColumn:</li>
+  <li>longForColumn:</li>
+  <li>longLongIntForColumn:</li>
+  <li>boolForColumn:</li>
+  <li>doubleForColumn:</li>
+  <li>stringForColumn:</li>
+  <li>dateForColumn:</li>
+  <li>dataForColumn:</li>
+  <li>dataNoCopyForColumn:</li>
+  <li>UTF8StringForColumnIndex:</li>
+  <li>objectForColumn:</li>
+</ul>
+
+<p><strong>这些方法也都有一个{类型} ForColumnIndex:,用于检索数据基于列的位置的结果,而不是列的名称。</strong></p>
+
+<p>比如  <code class="highlighter-rouge">[rs intForColumnIndex:0]</code></p>
+
+<p>支持多个语句批处理</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>NSString *sql = @"create table bulktest1 (id integer primary key autoincrement, x text);"
+                 "create table bulktest2 (id integer primary key autoincrement, y text);"
+                 "create table bulktest3 (id integer primary key autoincrement, z text);"
+                 "insert into bulktest1 (x) values ('XXX');"
+                 "insert into bulktest2 (y) values ('YYY');"
+                 "insert into bulktest3 (z) values ('ZZZ');";
+
+success = [db executeStatements:sql];
+
+sql = @"select count(*) as count from bulktest1;"
+       "select count(*) as count from bulktest2;"
+       "select count(*) as count from bulktest3;";
+
+success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary *dictionary) {
+    NSInteger count = [dictionary[@"count"] integerValue];
+    XCTAssertEqual(count, 1, @"expected one record for dictionary %@", dictionary);
+    return 0;
+}];
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="section-10">更新数据</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)updateData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        BOOL result = [db executeUpdate:@"update t_down_course set downPath = '更新的数据' where id = 3"];
+        if (result){
+            DLog(@"更新数据成功");
+            [self showAlertWithMessage:@"更新数据 --- 成功" completion:nil];
+        }else{
+            DLog(@"更新数据失败");
+            [self showAlertWithMessage:@"更新数据 --- 失败" completion:nil];
+        }
+        
+        [db close];
+    }else{
+        [self showAlertWithMessage:@"打开数据库 --- 失败" completion:nil];
+    }
+}
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="section-11">删除数据</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)deleteData{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        BOOL result = [db executeUpdate:@"delete from t_down_course where id = 2"];
+        if (result){
+            DLog(@"删除数据成功");
+            [self showAlertWithMessage:@"删除数据 --- 成功" completion:nil];
+        }else{
+            DLog(@"删除数据失败");
+            [self showAlertWithMessage:@"删除数据 --- 失败" completion:nil];
+        }
+        
+        [db close];
+    }else{
+        [self showAlertWithMessage:@"打开数据库 --- 失败" completion:nil];
+    }
+}
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="section-12">删除表</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dropTable{
+    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
+    if ([db open]){
+        BOOL result = [db executeUpdate:@"drop table t_down_course"];
+        if (result){
+            DLog(@"删除表成功");
+            isTableExist = NO;
+            [self showAlertWithMessage:@"删除表 --- 成功" completion:nil];
+        }else{
+            DLog(@"删除表失败");
+            [self showAlertWithMessage:@"删除表 --- 失败" completion:nil];
+        }
+        
+        [db close];
+    }else{
+        [self showAlertWithMessage:@"打开数据库 --- 失败" completion:nil];
+    }
+}
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="section-13">多线程操作</h3>
+
+<blockquote>
+  <p>如果应用中使用了多线程操作数据库，那么就需要使用FMDatabaseQueue来保证线程安全了。 应用中不可在多个线程中共同使用一个FMDatabase对象操作数据库，这样会引起数据库数据混乱。 为了多线程操作数据库安全，FMDB使用了FMDatabaseQueue，使用FMDatabaseQueue很简单，首先用一个数据库文件地址来初使化FMDatabaseQueue，然后就可以将一个闭包(block)传入inDatabase方法中。 在闭包中操作数据库，而不直接参与FMDatabase的管理。</p>
+</blockquote>
+
+<h5 id="section-14">创建单例</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//
+//  XCDatabaseHelper.h
+//  Training
+//
+//  Created by LXC on 2016/12/3.
+//  Copyright © 2016年 LXC. All rights reserved.
+//
+</span>
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;
+#import "FMDB.h"
+</span>
+<span class="k">@interface</span> <span class="nc">XCDatabaseHelper</span> <span class="p">:</span> <span class="nc">NSObject</span>
+
+<span class="k">+</span> <span class="p">(</span><span class="n">XCDatabaseHelper</span> <span class="o">*</span><span class="p">)</span> <span class="n">sharedInstance</span><span class="p">;</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">inDatabase</span><span class="p">:(</span><span class="kt">void</span><span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">FMDatabase</span> <span class="o">*</span><span class="p">))</span><span class="nv">block</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//
+//  XCDatabaseHelper.m
+//  Training
+//
+//  Created by LXC on 2016/12/3.
+//  Copyright © 2016年 LXC. All rights reserved.
+//
+</span>
+<span class="cp">#import "XCDatabaseHelper.h"
+</span>
+
+<span class="k">@implementation</span> <span class="nc">XCDatabaseHelper</span>
+<span class="p">{</span>
+    <span class="n">FMDatabaseQueue</span><span class="o">*</span> <span class="n">queue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="n">init</span><span class="p">{</span>
+    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">self</span><span class="p">){</span>
+        <span class="n">NSString</span> <span class="o">*</span><span class="n">doc</span> <span class="o">=</span><span class="p">[</span><span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span><span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="nb">YES</span><span class="p">)</span> <span class="nf">lastObject</span><span class="p">];</span>
+        <span class="n">NSString</span> <span class="o">*</span><span class="n">dbFilePath</span> <span class="o">=</span> <span class="p">[</span><span class="n">doc</span> <span class="nf">stringByAppendingPathComponent</span><span class="p">:</span><span class="s">@"downCourse.sqlite"</span><span class="p">];</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">FMDatabaseQueue</span> <span class="nf">databaseQueueWithPath</span><span class="p">:</span><span class="n">dbFilePath</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">+</span> <span class="p">(</span><span class="n">XCDatabaseHelper</span> <span class="o">*</span><span class="p">)</span> <span class="n">sharedInstance</span><span class="p">{</span>
+    <span class="k">static</span> <span class="n">dispatch_once_t</span> <span class="n">pred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">__strong</span> <span class="k">static</span> <span class="n">id</span> <span class="n">_sharedObject</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
+        <span class="n">_sharedObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="n">_sharedObject</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">inDatabase</span><span class="o">:</span><span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">FMDatabase</span><span class="o">*</span><span class="p">))</span><span class="n">block</span><span class="p">{</span>
+    <span class="p">[</span><span class="n">queue</span> <span class="nf">inDatabase</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">FMDatabase</span> <span class="o">*</span><span class="n">db</span><span class="p">){</span>
+        <span class="n">block</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+    <span class="p">}];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre>
+</div>
+
+<h5 id="section-15">调用</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>        [[XCDatabaseHelper sharedInstance] inDatabase:^(FMDatabase *db) {
+            BOOL result = [db executeUpdate:@"update t_down_course set downloadStatus = '1' where courseId = ?",_course.ids];
+            if (result){
+
+            }
+        }];
+</code></pre>
+</div>
+
+<p>这里就不需要 <code class="highlighter-rouge">close</code></p>
+
+<h5 id="section-16">注意</h5>
+
+<blockquote>
+  <p>FMDatabaseQueue虽然看似一个队列，实际上它本身并不是，它通过内部创建一个Serial的dispatch_queue_t来处理通过inDatabase和inTransaction传入的Blocks，所以当我们在主线程（或者后台）调用inDatabase或者inTransaction时，代码实际上是同步的。FMDatabaseQueue这么设计的目的是让我们避免发生并发访问数据库的问题，因为对数据库的访问可能是随机的（在任何时候）、不同线程间（不同的网络回调等）的请求。内置一个Serial队列后，FMDatabaseQueue就变成线程安全了，所有的数据库访问都是同步执行，而且这比使用@synchronized或NSLock要高效得多。</p>
+</blockquote>
+
+<blockquote>
+  <p>但是这么一来就有了一个问题：如果后台在执行大量的更新，而主线程也需要访问数据库，虽然要访问的数据量很少，但是在后台执行完之前，还是会阻塞主线程。</p>
+</blockquote>
+
+<p>引用这篇<a href="http://blog.csdn.net/zhangao0086/article/details/44223007">文章</a></p>
+
+<p>Over~~ 洗澡睡觉😴😴😴</p>

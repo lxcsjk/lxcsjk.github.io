@@ -1,0 +1,63 @@
+<p>昨晚把一直想买的iPad mini4给拿下了，晚上11.34下的单 第二天的3.30就拿到了，京东真是快。</p>
+
+<p>本来一天都在弄文件下载，断点下载进度条多线程之类的事情，老大说把我们app RUN 到iPad上看看。R了一下bulid失败了。错误信息</p>
+
+<blockquote>
+  <p>Provisioning profile “match Development com.XXX.YYY” doesn’t include the currently selected device “XXX”.
+Code signing is required for product type ‘Application’ in SDK ‘iOS 10.0’</p>
+</blockquote>
+
+<p>Xcode已经是最新的了，iPad是10.0.1绝对是没问题的应该。于是Google了一下。找到了这个解答</p>
+
+<blockquote>
+  <p><a href="http://stackoverflow.com/questions/39426287/xcode-8-cannot-run-on-device-provisioning-profile-problems-mentioning-apple-wat">Xcode 8 cannot run on device, provisioning profile problems mentioning Apple Watch</a></p>
+</blockquote>
+
+<hr />
+
+<p><strong>Answer</strong></p>
+
+<blockquote>
+  <p>I had the same issue today - XCode Version 8.0 (8A218a) - and fixed it with two simple steps (instead of the more complicated approach above:</p>
+
+  <ol>
+    <li>add the Apple Watch to member center (did not find a copy&amp;paste option either)</li>
+    <li>edit the development provisioning profile and add the watch to devices, save</li>
+    <li>go to XCode prefs, move the old provisioning profile to trash (right click on the name) and download the new version</li>
+    <li>set the new provisioning profile in project editor
+No restart, clean or anything else needed. Worked like a charm</li>
+  </ol>
+</blockquote>
+
+<p>需要在描述文件添加设备的UDID</p>
+
+<p>UDID可以通过 <code class="highlighter-rouge">iTunes</code> 拿到。
+<img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-0@2x.png" alt="" />
+<strong>如果看不到UDID多点几下我抹红的地方就行了</strong></p>
+
+<p>拿到这个UDID 登录到 <a href="https://developer.apple.com">苹果开发者中心</a></p>
+
+<p>登录账号后 找到</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-2@2x.png" alt="" /></p>
+
+<p>然后</p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-3@2x.png" alt="" /></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-4@2x.png" alt="" /></p>
+
+<p>最好在描述文件添加这个设备</p>
+
+<p>点 <strong>edit</strong></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-1@2x.png" alt="" /></p>
+
+<p><strong>Select All</strong></p>
+
+<p><img src="http://oh6uhie7j.bkt.clouddn.com/QQ20161130-5@2x.png" alt="" /></p>
+
+<p><strong>Generate</strong></p>
+
+<p>再去xcode 重新下载一下描述文件 clean 一下就OK了</p>
+
