@@ -309,6 +309,184 @@
 
 <hr />
 
+<h3 id="mysql">MySQL插入的数据量大小</h3>
+
+<p>这两天在写一个迁移任务，600w条数据需要迁移。</p>
+
+<p>花了一天写完测试了两遍算是结束了。</p>
+
+<p>在读出数据解析处理后，插入的报了一个异常。这个异常之前也见过。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nl">Cause:</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">PacketTooBigException</span><span class="o">:</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.</span>
+<span class="o">;</span> <span class="n">SQL</span> <span class="o">[];</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.;</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">PacketTooBigException</span><span class="o">:</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">SQLStateSQLExceptionTranslator</span><span class="o">.</span><span class="na">doTranslate</span><span class="o">(</span><span class="n">SQLStateSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">108</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="n">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">73</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="n">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">81</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="n">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">81</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">mybatis</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">MyBatisExceptionTranslator</span><span class="o">.</span><span class="na">translateExceptionIfPossible</span><span class="o">(</span><span class="n">MyBatisExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">73</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">mybatis</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">SqlSessionTemplate</span><span class="n">$SqlSessionInterceptor</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">SqlSessionTemplate</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">446</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">sun</span><span class="o">.</span><span class="na">proxy</span><span class="o">.</span><span class="n">$Proxy75</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">mybatis</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">SqlSessionTemplate</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">SqlSessionTemplate</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">278</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">ibatis</span><span class="o">.</span><span class="na">binding</span><span class="o">.</span><span class="na">MapperMethod</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">MapperMethod</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">57</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">ibatis</span><span class="o">.</span><span class="na">binding</span><span class="o">.</span><span class="na">MapperProxy</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">MapperProxy</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">59</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">sun</span><span class="o">.</span><span class="na">proxy</span><span class="o">.</span><span class="n">$Proxy91</span><span class="o">.</span><span class="na">insertBatchs</span><span class="o">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">service</span><span class="o">.</span><span class="na">SyncHistoryService</span><span class="o">.</span><span class="na">syncHandle</span><span class="o">(</span><span class="n">SyncHistoryService</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">67</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">service</span><span class="o">.</span><span class="na">SyncHistoryService</span><span class="err">$</span><span class="n">$FastClassBySpringCGLIB</span><span class="err">$</span><span class="n">$da69c9f7</span><span class="o">.</span><span class="na">invoke</span><span class="o">(&lt;</span><span class="n">generated</span><span class="o">&gt;)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cglib</span><span class="o">.</span><span class="na">proxy</span><span class="o">.</span><span class="na">MethodProxy</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">MethodProxy</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">204</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">aop</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">CglibAopProxy</span><span class="n">$CglibMethodInvocation</span><span class="o">.</span><span class="na">invokeJoinpoint</span><span class="o">(</span><span class="n">CglibAopProxy</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">738</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">aop</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">ReflectiveMethodInvocation</span><span class="o">.</span><span class="na">proceed</span><span class="o">(</span><span class="n">ReflectiveMethodInvocation</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">157</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">transaction</span><span class="o">.</span><span class="na">interceptor</span><span class="o">.</span><span class="na">TransactionInterceptor</span><span class="err">$</span><span class="mi">1</span><span class="o">.</span><span class="na">proceedWithInvocation</span><span class="o">(</span><span class="n">TransactionInterceptor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">99</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">transaction</span><span class="o">.</span><span class="na">interceptor</span><span class="o">.</span><span class="na">TransactionAspectSupport</span><span class="o">.</span><span class="na">invokeWithinTransaction</span><span class="o">(</span><span class="n">TransactionAspectSupport</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">282</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">transaction</span><span class="o">.</span><span class="na">interceptor</span><span class="o">.</span><span class="na">TransactionInterceptor</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">TransactionInterceptor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">96</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">aop</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">ReflectiveMethodInvocation</span><span class="o">.</span><span class="na">proceed</span><span class="o">(</span><span class="n">ReflectiveMethodInvocation</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">179</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">aop</span><span class="o">.</span><span class="na">interceptor</span><span class="o">.</span><span class="na">ExposeInvocationInterceptor</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">ExposeInvocationInterceptor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">92</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">aop</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">ReflectiveMethodInvocation</span><span class="o">.</span><span class="na">proceed</span><span class="o">(</span><span class="n">ReflectiveMethodInvocation</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">179</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">aop</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">CglibAopProxy</span><span class="n">$DynamicAdvisedInterceptor</span><span class="o">.</span><span class="na">intercept</span><span class="o">(</span><span class="n">CglibAopProxy</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">673</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">service</span><span class="o">.</span><span class="na">SyncHistoryService</span><span class="err">$</span><span class="n">$EnhancerBySpringCGLIB</span><span class="err">$$</span><span class="mi">911</span><span class="n">bc562</span><span class="o">.</span><span class="na">syncHandle</span><span class="o">(&lt;</span><span class="n">generated</span><span class="o">&gt;)</span>
+	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">ArrayList</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1249</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">task</span><span class="o">.</span><span class="na">taskhandler</span><span class="o">.</span><span class="na">TaskExecutor</span><span class="o">.</span><span class="na">syncHistory</span><span class="o">(</span><span class="n">TaskExecutor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">83</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>插入的数据大小太大了。</p>
+
+<ol>
+  <li>
+    <p>更改数据库<code class="highlighter-rouge">max_allowed_packet</code>的配置大小 <a href="https://dev.mysql.com/doc/refman/5.7/en/packet-too-large.html">https://dev.mysql.com/doc/refman/5.7/en/packet-too-large.html</a></p>
+
+    <blockquote>
+      <p>max_allowed_packet 默认为 16MB</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>对数据进行切分。</p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="listt">对List<T>均匀拆分</T></h3>
+
+<p>以前写过一个拆分List的Util。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>     <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="nf">splitList</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">list</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">len</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+       <span class="o">}</span>
+
+       <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+       <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+       <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">len</span><span class="o">;</span>
+       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+         <span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">subList</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">subList</span><span class="o">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">len</span><span class="o">,</span> <span class="o">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">len</span> <span class="o">&gt;</span> <span class="n">size</span> <span class="o">?</span> <span class="n">size</span> <span class="o">:</span> <span class="n">len</span> <span class="o">*</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)));</span>
+         <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">subList</span><span class="o">);</span>
+       <span class="o">}</span>
+       <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+     <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>并不是很好。</p>
+
+<p>在Guava中Lists有拆分的方法</p>
+
+<p><code class="highlighter-rouge">Lists.partition(list, size);</code></p>
+
+<p>附源码</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>     <span class="cm">/**
+      * Returns consecutive {@linkplain List#subList(int, int) sublists} of a list,
+      * each of the same size (the final list may be smaller). For example,
+      * partitioning a list containing {@code [a, b, c, d, e]} with a partition
+      * size of 3 yields {@code [[a, b, c], [d, e]]} -- an outer list containing
+      * two inner lists of three and two elements, all in the original order.
+      *
+      * &lt;p&gt;The outer list is unmodifiable, but reflects the latest state of the
+      * source list. The inner lists are sublist views of the original list,
+      * produced on demand using {@link List#subList(int, int)}, and are subject
+      * to all the usual caveats about modification as explained in that API.
+      *
+      * @param list the list to return consecutive sublists of
+      * @param size the desired size of each sublist (the last may be
+      *     smaller)
+      * @return a list of consecutive sublists
+      * @throws IllegalArgumentException if {@code partitionSize} is nonpositive
+      */</span>
+     <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">checkNotNull</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+       <span class="n">checkArgument</span><span class="o">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span>
+       <span class="k">return</span> <span class="o">(</span><span class="n">list</span> <span class="k">instanceof</span> <span class="n">RandomAccess</span><span class="o">)</span>
+           <span class="o">?</span> <span class="k">new</span> <span class="n">RandomAccessPartition</span><span class="o">&lt;&gt;(</span><span class="n">list</span><span class="o">,</span> <span class="n">size</span><span class="o">)</span>
+           <span class="o">:</span> <span class="k">new</span> <span class="n">Partition</span><span class="o">&lt;&gt;(</span><span class="n">list</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Partition</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="o">{</span>
+       <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">;</span>
+       <span class="kd">final</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+
+       <span class="n">Partition</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+       <span class="o">}</span>
+
+       <span class="nd">@Override</span>
+       <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">checkElementIndex</span><span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">size</span><span class="o">());</span>
+         <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="n">index</span> <span class="o">*</span> <span class="n">size</span><span class="o">;</span>
+         <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">size</span><span class="o">,</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+         <span class="k">return</span> <span class="n">list</span><span class="o">.</span><span class="na">subList</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+       <span class="o">}</span>
+
+       <span class="nd">@Override</span>
+       <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">IntMath</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">size</span><span class="o">,</span> <span class="n">RoundingMode</span><span class="o">.</span><span class="na">CEILING</span><span class="o">);</span>
+       <span class="o">}</span>
+
+       <span class="nd">@Override</span>
+       <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">list</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">();</span>
+       <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">RandomAccessPartition</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Partition</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">RandomAccess</span> <span class="o">{</span>
+       <span class="n">RandomAccessPartition</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+         <span class="kd">super</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+       <span class="o">}</span>
+     <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>对原有的list 根据下标进行拆分。最后返回的List中的 List中的 对象地址 还是 和传入的List相同。如果你对拆分前的List  <code class="highlighter-rouge">.clear()</code>拆分拿到的List也会为空。</p>
+
+<p>​</p>
+
+<hr />
+
+<h3 id="order-by-">查询order by 后返回的数据</h3>
+
+<p>一开始很随意的用了这个语句 = = 还没有 使用 <code class="highlighter-rouge">MAX()</code></p>
+
+<p>这样会返回 <strong>date_created</strong> 相同时 找到的第一条数据。</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">select</span>
+<span class="n">last_id</span>
+<span class="k">from</span> <span class="n">sync_info</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">date_created</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">1</span>
+</code></pre>
+</div>
+
+<p>然后我改成了 这个  当然也可以使用 <code class="highlighter-rouge">MAX()</code></p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">select</span>
+<span class="n">last_id</span>
+<span class="k">from</span> <span class="n">sync_info</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">id</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">1</span>
+</code></pre>
+</div>
+
+<hr />
+
 
 
   </section>
