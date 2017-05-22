@@ -89,7 +89,7 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed" style="background-image: url('http://oh6uhie7j.bkt.clouddn.com/b1ackground-cover.jpg')">
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('http://oh6uhie7j.bkt.clouddn.com/%E6%9C%80%E7%BB%88%E5%B9%BB%E6%83%B315_20170503225020.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
@@ -486,6 +486,60 @@
 </div>
 
 <hr />
+
+<h3 id="map">对象转Map</h3>
+
+<p>调用淘宝开发平台接口，有个接口请求参数很多很多，<code class="highlighter-rouge">Content-Type</code>为<code class="highlighter-rouge">application/x-www-form-urlencoded</code></p>
+
+<p>一个一个的 <code class="highlighter-rouge">@Field</code>塞好蠢也好麻烦就用了<code class="highlighter-rouge">@FieldMap</code>，前端传过来的是一个<code class="highlighter-rouge">json</code>，那么<code class="highlighter-rouge">@RequestBody</code>转为对象后需要再转为<code class="highlighter-rouge">Map</code>就写了一个Util类。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">util</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.common.base.CaseFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.common.base.Preconditions</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.common.collect.Maps</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.beans.BeanInfo</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.Introspector</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyDescriptor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.format.DateTimeFormatter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+
+<span class="cm">/**
+ * Created by LXC on 2017/5/10.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MapUtils</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DateTimeFormatter</span> <span class="n">DATE_TIME_FORMATTER</span> <span class="o">=</span> <span class="n">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="o">);</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">objTransformMap</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">skipStrs</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="n">Preconditions</span><span class="o">.</span><span class="na">checkNotNull</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="s">"object must not be null !"</span><span class="o">);</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">Maps</span><span class="o">.</span><span class="na">newHashMap</span><span class="o">();</span>
+
+    <span class="n">BeanInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">Introspector</span><span class="o">.</span><span class="na">getBeanInfo</span><span class="o">(</span><span class="n">object</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">PropertyDescriptor</span> <span class="n">pd</span> <span class="o">:</span> <span class="n">info</span><span class="o">.</span><span class="na">getPropertyDescriptors</span><span class="o">())</span> <span class="o">{</span>
+      <span class="n">Method</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="na">getReadMethod</span><span class="o">();</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">reader</span> <span class="o">!=</span> <span class="kc">null</span>
+          <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">skipStrs</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">skipStrs</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">pd</span><span class="o">.</span><span class="na">getName</span><span class="o">()))</span>
+          <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">pd</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"class"</span><span class="o">))</span> <span class="o">{</span>
+
+        <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="k">instanceof</span> <span class="n">LocalDateTime</span> <span class="o">?</span> <span class="o">((</span><span class="n">LocalDateTime</span><span class="o">)</span> <span class="n">value</span><span class="o">).</span><span class="na">format</span><span class="o">(</span><span class="n">DATE_TIME_FORMATTER</span><span class="o">)</span> <span class="o">:</span> <span class="n">value</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CaseFormat</span><span class="o">.</span><span class="na">UPPER_CAMEL</span><span class="o">.</span><span class="na">to</span><span class="o">(</span><span class="n">CaseFormat</span><span class="o">.</span><span class="na">LOWER_UNDERSCORE</span><span class="o">,</span> <span class="n">pd</span><span class="o">.</span><span class="na">getName</span><span class="o">()),</span> <span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">map</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
 
 
 
