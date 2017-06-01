@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/2017/05/Excel%E4%B8%8A%E4%BC%A0%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7%E7%B1%BB/</loc>
+<lastmod>2017-05-31T20:00:03+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/2017/05/%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
 <lastmod>2017-05-07T20:00:03+08:00</lastmod>
 </url>
