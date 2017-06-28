@@ -914,8 +914,8 @@
     <span class="n">List</span><span class="o">&lt;</span><span class="n">BufferedImage</span><span class="o">&gt;</span> <span class="n">imageList</span> <span class="o">=</span> <span class="n">resizeToHeight</span><span class="o">(</span><span class="n">imageNew</span><span class="o">);</span>
 
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">imageList</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-      <span class="n">File</span> <span class="n">outFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/Users/lxc/Desktop/temp/"</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">".jpg"</span><span class="o">);</span>
-      <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">imageList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="s">"jpg"</span><span class="o">,</span> <span class="n">outFile</span><span class="o">);</span>
+      <span class="n">File</span> <span class="n">outFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/Users/lxc/Desktop/temp/"</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">".png"</span><span class="o">);</span>
+      <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">imageList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="s">"png"</span><span class="o">,</span> <span class="n">outFile</span><span class="o">);</span>
     <span class="o">}</span>
   <span class="o">}</span>
 </code></pre>
@@ -948,6 +948,62 @@
 </code></pre>
 </div>
 
+<p>还有一个通过url拼接图片的方法：</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="nf">mergeAndCutPic</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">picList</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">picList</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="n">files</span> <span class="o">=</span> <span class="n">Lists</span><span class="o">.</span><span class="na">newArrayList</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">{</span>
+      <span class="n">BufferedImage</span><span class="o">[]</span> <span class="n">images</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedImage</span><span class="o">[</span><span class="n">length</span><span class="o">];</span>
+      <span class="kt">int</span><span class="o">[][]</span> <span class="n">imageArr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">][];</span>
+
+      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">images</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">ImageIO</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">picList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)).</span><span class="na">openStream</span><span class="o">());</span>
+        <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">images</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getWidth</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">images</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getHeight</span><span class="o">();</span>
+        <span class="n">imageArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="o">];</span>
+        <span class="n">imageArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">images</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getRGB</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">imageArr</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="mi">0</span><span class="o">,</span> <span class="n">width</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="kt">int</span> <span class="n">tempHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+      <span class="kt">int</span> <span class="n">tempWidth</span> <span class="o">=</span> <span class="n">images</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">getWidth</span><span class="o">();</span>
+
+      <span class="k">for</span> <span class="o">(</span><span class="n">BufferedImage</span> <span class="n">image</span> <span class="o">:</span> <span class="n">images</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">tempWidth</span> <span class="o">=</span> <span class="n">tempWidth</span> <span class="o">&gt;</span> <span class="n">image</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">?</span> <span class="n">tempWidth</span> <span class="o">:</span> <span class="n">image</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+        <span class="n">tempHeight</span> <span class="o">+=</span> <span class="n">image</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+      <span class="o">}</span>
+
+      <span class="k">if</span> <span class="o">(</span><span class="n">tempHeight</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="n">BufferedImage</span> <span class="n">imageNew</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedImage</span><span class="o">(</span><span class="n">tempWidth</span><span class="o">,</span> <span class="n">tempHeight</span><span class="o">,</span>
+          <span class="n">BufferedImage</span><span class="o">.</span><span class="na">TYPE_INT_RGB</span><span class="o">);</span>
+      <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">images</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">imageNew</span><span class="o">.</span><span class="na">setRGB</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">tempWidth</span><span class="o">,</span> <span class="n">images</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getHeight</span><span class="o">(),</span> <span class="n">imageArr</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tempWidth</span><span class="o">);</span>
+        <span class="n">height</span> <span class="o">+=</span> <span class="n">images</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getHeight</span><span class="o">();</span>
+      <span class="o">}</span>
+
+      <span class="n">List</span><span class="o">&lt;</span><span class="n">BufferedImage</span><span class="o">&gt;</span> <span class="n">imageList</span> <span class="o">=</span> <span class="n">resizeToHeight</span><span class="o">(</span><span class="n">imageNew</span><span class="o">);</span>
+
+      <span class="k">for</span> <span class="o">(</span><span class="n">BufferedImage</span> <span class="n">image</span> <span class="o">:</span> <span class="n">imageList</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">File</span> <span class="n">outFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/Users/lxc/Desktop/temp/"</span>
+            <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">()</span> <span class="o">+</span> <span class="s">".png"</span><span class="o">);</span>
+        <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">image</span><span class="o">,</span> <span class="s">"png"</span><span class="o">,</span> <span class="n">outFile</span><span class="o">);</span>
+        <span class="n">files</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">outFile</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">files</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
 
 
   </section>
@@ -977,6 +1033,11 @@
             </a>
         </li>
         
+        
+        <li class="next">
+            <a href="/2017/06/Html%E8%BD%AC%E5%9B%BE%E7%89%87%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/" data-toggle="tooltip" data-placement="top" title="Html转图片的那些事">下一篇：  <span>Html转图片的那些事</span>
+            </a>
+        </li>
         
     </ul>
 </section>
