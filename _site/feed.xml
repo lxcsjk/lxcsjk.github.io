@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Jul 2017 15:36:30 +0800</pubDate>
-    <lastBuildDate>Tue, 18 Jul 2017 15:36:30 +0800</lastBuildDate>
+    <pubDate>Wed, 02 Aug 2017 23:56:42 +0800</pubDate>
+    <lastBuildDate>Wed, 02 Aug 2017 23:56:42 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -1949,14 +1949,26 @@ There is a JSP sample so you can see how to set things up.&lt;/p&gt;
       </item>
     
       <item>
-        <title>一些书</title>
+        <title>一些书（不断更新）</title>
         <description>&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;人丑就要多读书。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h4 id=&quot;section&quot;&gt;没来得及分类 日后再分&lt;/h4&gt;
+&lt;h3 id=&quot;gitbookstar&quot;&gt;GitBook的Star&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/huanglizhuo/kotlin-in-chinese/details&quot;&gt;Kotlin-in-Chinese&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/mcxiaoke/rxdocs/details&quot;&gt;ReactiveX文档中文翻译&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/qbgbook/spring-boot-reference-guide-zh/details&quot;&gt;Spring Boot参考指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details&quot;&gt;Elasticsearch权威指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/siddontang/leetcode-solution/details&quot;&gt;LeetCode题解&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/yeasy/docker_practice/details&quot;&gt;Docker — 从入门到实践&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1969,6 +1981,12 @@ There is a JSP sample so you can see how to set things up.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/RichardWarburton/java-8-lambdas-exercises&quot;&gt;源码&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/写给大忙人看的Java SE8.pdf&quot;&gt;写给大忙人看的Java SE8.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;mysql&quot;&gt;MySQL&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/高性能mysql第三版.pdf&quot;&gt;高性能mysql第三版.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1997,6 +2015,12 @@ There is a JSP sample so you can see how to set things up.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java多线程编程核心技术.pdf&quot;&gt;Java多线程编程核心技术.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/%E7%BA%BF%E7%A8%8B%E4%B9%A6%E6%BA%90%E7%A0%81.zip&quot;&gt;源码&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;http&quot;&gt;HTTP&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/图解HTTP.pdf&quot;&gt;图解HTTP.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2052,7 +2076,9 @@ There is a JSP sample so you can see how to set things up.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;算法&lt;/h3&gt;
+&lt;h3 id=&quot;section&quot;&gt;算法&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/leetcode-solution.pdf&quot;&gt;leetcode-solution.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/Java经典问题算法大全.pdf&quot;&gt;Java经典问题算法大全.pdf&lt;/a&gt;&lt;/p&gt;
 
@@ -2072,7 +2098,7 @@ There is a JSP sample so you can see how to set things up.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;架构&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;架构&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/大型分布式网站架构设计与实践.pdf&quot;&gt;大型分布式网站架构设计与实践.pdf&lt;/a&gt;&lt;/p&gt;
 
@@ -2081,8 +2107,8 @@ There is a JSP sample so you can see how to set things up.&lt;/p&gt;
 &lt;hr /&gt;
 </description>
         <pubDate>Fri, 24 Feb 2017 20:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6/</guid>
+        <link>http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6-%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/02/%E4%B8%80%E4%BA%9B%E4%B9%A6-%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0/</guid>
         
         <category>书</category>
         
