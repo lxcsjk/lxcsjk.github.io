@@ -17,9 +17,11 @@ tags: SpringBoot
 
 为了快速开发，就自己弄了一种子项目，需要的时候拿来用。
 
+
+
+先上个种子链接 [项目地址](https://github.com/lxcsjk/spring-boot-seed-project)
+
 So，开始吧。
-
-
 
 ---
 

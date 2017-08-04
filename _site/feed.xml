@@ -5,8 +5,8 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 04 Aug 2017 10:57:05 +0800</pubDate>
-    <lastBuildDate>Fri, 04 Aug 2017 10:57:05 +0800</lastBuildDate>
+    <pubDate>Fri, 04 Aug 2017 11:00:04 +0800</pubDate>
+    <lastBuildDate>Fri, 04 Aug 2017 11:00:04 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -21,6 +21,8 @@
 &lt;p&gt;所以每次新添加一个功能都是一个新的微服务模块&lt;/p&gt;
 
 &lt;p&gt;为了快速开发，就自己弄了一种子项目，需要的时候拿来用。&lt;/p&gt;
+
+&lt;p&gt;先上个种子链接 &lt;a href=&quot;https://github.com/lxcsjk/spring-boot-seed-project&quot;&gt;项目地址&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;So，开始吧。&lt;/p&gt;
 
