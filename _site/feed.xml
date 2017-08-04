@@ -5,9 +5,201 @@
     <description>欢迎来到我的Blog~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Aug 2017 23:56:42 +0800</pubDate>
-    <lastBuildDate>Wed, 02 Aug 2017 23:56:42 +0800</lastBuildDate>
+    <pubDate>Fri, 04 Aug 2017 10:57:05 +0800</pubDate>
+    <lastBuildDate>Fri, 04 Aug 2017 10:57:05 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>SpringBoot微服务种子项目搭建</title>
+        <description>&lt;p&gt;公司系统架构目前是纯微服务调用， 相关技术栈：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;前端：React + Webpack&lt;/li&gt;
+  &lt;li&gt;后端：SpringBoot + Gradle + Docker&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以每次新添加一个功能都是一个新的微服务模块&lt;/p&gt;
+
+&lt;p&gt;为了快速开发，就自己弄了一种子项目，需要的时候拿来用。&lt;/p&gt;
+
+&lt;p&gt;So，开始吧。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;开发环境&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;系统：macOS Sierra 10.12.5&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;IDE  ：IntelliJ IDEA 2017.2.1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;JDK  ：Java(TM) SE Runtime Environment (build 1.8.0_141-b15)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gradle ： Gradle 4.0.1&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;新建项目&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;新建一个Gradle项目&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170803-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170803-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;我一般选择自动导入 = =&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170803-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;在读取索引和创建空文件夹&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170803-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;由于是一个单独的模块 就删除了 &lt;strong&gt;setting.gradle&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170803-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;添加依赖的jar到 &lt;strong&gt;build.gradle&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;buildscript&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;springBootVersion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1.5.6.RELEASE'&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;repositories&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mavenLocal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//daoCloud的私服 下载jar更快&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;maven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://nexus.daocloud.io/repository/maven-public/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mavenCentral&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;classpath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;plugin:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'java'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;plugin:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'spring-boot'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;plugin:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'idea'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;jar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;baseName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'seed-service'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.0.1-SNAPSHOT'&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;sourceCompatibility&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.8&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;targetCompatibility&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.8&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;repositories&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mavenLocal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;maven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://nexus.daocloud.io/repository/maven-public/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mavenCentral&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;dependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 处理java8新的时间类型&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.fasterxml.jackson.datatype'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'jackson-datatype-jsr310'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2.9.0'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 用来查看服务运行的信息 生产环境可以在配置文件关闭&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'org.springframework.boot:spring-boot-starter-actuator'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 就是SpringMVC&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'org.springframework.boot:spring-boot-starter-web'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 打印日志框架&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'org.springframework.boot:spring-boot-starter-logging'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 消息重试&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'org.springframework.retry:spring-retry'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 工具类&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.apache.commons'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'commons-lang3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'3.6'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Guava google出的非常棒的工具类&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.google.guava'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'guava'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'22.0'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 注解生成get set方法等 需要项目打开 Annotation Processors&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.projectlombok'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'lombok'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1.16.18'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 数据库驱动&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mysql'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mysql-connector-java'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'6.0.6'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 数据库连接池&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.zaxxer'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'HikariCP'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2.6.3'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// mybatis&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.mybatis.spring.boot'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mybatis-spring-boot-starter'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1.3.0'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// mybatis 类型转换器&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.mybatis'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mybatis-typehandlers-jsr310'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1.0.2'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// mybatis 分页插件&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.github.pagehelper'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'pagehelper-spring-boot-starter'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1.1.2'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// mybatis 通用Mapper 像jpa一样好用&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'tk.mybatis'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mapper-spring-boot-starter'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1.1.2'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 数据库结构同步&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.flywaydb'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'flyway-core'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'4.2.0'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// HttpClient retrofit2&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.retrofit2'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'retrofit'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2.3.0'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.retrofit2'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'converter-gson'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2.3.0'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.okhttp3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'okhttp'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'3.8.1'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.okhttp3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'logging-interceptor'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'3.8.1'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// RxJava&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'io.reactivex.rxjava2'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'rxjava'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;version:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'2.1.2'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 测试&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;testCompile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'org.springframework.boot:spring-boot-starter-test'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;添加这些jar也是根据自己的喜好，当然你也可以选择去掉一些你用不到的jar。&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;IDEA&lt;/strong&gt; 打开 &lt;strong&gt;Annotation Processors&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://oh6uhie7j.bkt.clouddn.com/QQ20170803-7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;新建一个项目差不多完成了。然后开始配置一些Bean。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;相关配置&lt;/h3&gt;
+
+</description>
+        <pubDate>Thu, 20 Jul 2017 20:00:03 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%8D%E5%AD%90%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%8D%E5%AD%90%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/</guid>
+        
+        <category>SpringBoot</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>Html转图片的那些事</title>
@@ -2714,142 +2906,6 @@ public class Application {
         <guid isPermaLink="true">http://localhost:4000/2017/02/Spring-Boot%E5%85%A5%E9%97%A8/</guid>
         
         <category>Spring</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>学习资源整理</title>
-        <description>&lt;h3 id=&quot;jdk&quot;&gt;JDK&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JDK1.7中文注解 &lt;a href=&quot;https://github.com/ZhaoX/jdk-1.7-annotated&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;http&quot;&gt;HTTP&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Http-Caching &lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Retrofit (功能极其强大而请求工具类) &lt;a href=&quot;http://square.github.io/retrofit/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;​&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;张开涛的博客 &lt;a href=&quot;http://jinnianshilongnian.iteye.com/&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;mybatis&quot;&gt;MyBatis&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;对Mybatis的学习非常有帮助 (非常详细有分析源码)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;http://www.mybatis.tk&lt;/strong&gt;	&lt;a href=&quot;http://www.mybatis.tk&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;文档&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;http://www.mybatis.org&lt;/strong&gt; &lt;a href=&quot;http://www.mybatis.org/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;spring-boot&quot;&gt;Spring-Boot&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;官方文档&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;https://github.com/spring-projects/spring-boot&lt;/strong&gt;	&lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;大牛翻译&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;https://github.com/qibaoguang&lt;/strong&gt;		&lt;a href=&quot;https://github.com/qibaoguang/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;官方文档PDF(2.0.0.BUILD-SNAPSHOT) &lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference.pdf&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;翻译后中文PDF(1.4.1.RELEASE) &lt;a href=&quot;http://oh6uhie7j.bkt.clouddn.com/spring-boot-reference-guide-zh.pdf&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;插件集成博客 &lt;a href=&quot;http://blog.csdn.net/column/details/spring-boot.html&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;配置filter,listener,servlet &lt;a href=&quot;http://blog.csdn.net/yxsimple/article/details/46771123&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;小工具&lt;/h3&gt;
-
-&lt;p&gt;内网映射 &lt;a href=&quot;https://natapp.cn/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;极客学院wiki &lt;a href=&quot;http://wiki.jikexueyuan.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;汉语言处理包 &lt;a href=&quot;https://github.com/hankcs/HanLP&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;docker&quot;&gt;Docker&lt;/h3&gt;
-
-&lt;p&gt;螃蟹的博客 &lt;a href=&quot;http://www.pangxie.space&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;大桥下的蜗牛 &lt;a href=&quot;https://blog.lab99.org&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;镜像库 &lt;a href=&quot;https://hub.docker.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Docker — 从入门到实践 &lt;a href=&quot;https://yeasy.gitbooks.io/docker_practice/content/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;网易蜂巢 &lt;a href=&quot;https://c.163.com/hub#/m/home/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Docker问答录 &lt;a href=&quot;https://blog.lab99.org/post/docker-2016-07-14-faq.html#docker-push-dao-si-you-registry-zong-shi-bu-cheng-gong-zen-me-ban&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;swift&quot;&gt;Swift&lt;/h3&gt;
-
-&lt;p&gt;翻译组 &lt;a href=&quot;http://swift.gg/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;java&quot;&gt;Java&lt;/h3&gt;
-
-&lt;p&gt;赵鑫 &lt;a href=&quot;http://zhaox.github.io/archive&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;极客wiki &lt;a href=&quot;http://wiki.jikexueyuan.com/list/java/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;ios&quot;&gt;iOS&lt;/h3&gt;
-
-&lt;p&gt;插件库 &lt;a href=&quot;http://github.ibireme.com/github/list/ios/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;唐巧的技术博客 &lt;a href=&quot;http://blog.devtang.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;刘坤的技术博客 &lt;a href=&quot;https://blog.cnbluebox.com/&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-</description>
-        <pubDate>Wed, 08 Feb 2017 02:00:03 +0800</pubDate>
-        <link>http://localhost:4000/2017/02/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/02/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
-        
-        <category>学习</category>
         
         
         <category>jekyll</category>
