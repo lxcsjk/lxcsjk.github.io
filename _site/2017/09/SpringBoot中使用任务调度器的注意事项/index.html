@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>SpringBoot中使用任务调度器的注意事项</title>
+  <meta name="description" content="">
+  <meta name="author" content="lxc">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SpringBoot中使用任务调度器的注意事项">
+  <meta name="twitter:description" content="">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SpringBoot中使用任务调度器的注意事项">
+  <meta property="og:description" content="">
+
+  <meta name="baidu-site-verification" content="3Qj8KIsSik" />
+
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2017/09/SpringBoot%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+  <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
+
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 站点统计 -->
+  <script
+  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+<!-- 百度统计 -->
+  
+
+<!-- google 统计 -->
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-87669753-2', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">
+            <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2>
+                            
+                                YoRuo
+                            
+                        </h2>
+                        <p>
+                           
+                                Java & iOS
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for YoRuo:想变得更好" class="blog-button">YoRuo:想变得更好</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">爱折腾 - 乐于折腾 - 享受折腾</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的Blog~</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        
+
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="panel-cover--overlay cover-disabled"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">SpringBoot中使用任务调度器的注意事项</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/>
+      <time datetime="2017-09-29 19:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-09-29</time>
+
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+
+  <section class="post">
+    <hr />
+
+<p>很久没用写过blog，在忙一些事情，丢下了很多需要学习的时间。</p>
+
+<p>正好十一提前回来了，就捡起来重新开始，毕竟，目标还是那么的遥不可及。</p>
+
+<hr />
+
+<p>前段时间遇到了一个问题，一个服务的Task任务时间久了会整个服务休眠，也并没有发生异常，但是有<strong>OOM</strong>(具体原因也会在之后的blog总结)。只能重启解决问题了，然后开始一点点的Review代码。</p>
+
+<p>最后找到了，对Spring的<strong>@Schedule</strong>的理解不够透彻，故把文档刷了一遍。</p>
+
+<hr />
+
+<h3 id="schedulevalue">@Schedule的value</h3>
+
+<p>@Schedule() 内的参数类型有好几种，分别代表的作用和意思有所不同，运用在不同的场景效果也会不一样。</p>
+
+<p>见属性上的注释</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">scheduling</span><span class="o">.</span><span class="na">annotation</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Documented</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.ElementType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Repeatable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Retention</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.RetentionPolicy</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Target</span><span class="o">;</span>
+
+<span class="cm">/**
+ * An annotation that marks a method to be scheduled. Exactly one of
+ * the {@link #cron()}, {@link #fixedDelay()}, or {@link #fixedRate()}
+ * attributes must be specified.
+ * 
+ 在scheduled内，key只能填这三种 cron fixedDelay fixedRate
+ *
+ * &lt;p&gt;The annotated method must expect no arguments. It will typically have
+ * a {@code void} return type; if not, the returned value will be ignored
+ * when called through the scheduler.
+ *
+ 所修饰的方法体上必须没有参数  通常返回的类型为 关键字void 
+ 如果不是 当调用这个任务调度器时返回值将被忽略
+ *
+ * &lt;p&gt;Processing of {@code @Scheduled} annotations is performed by
+ * registering a {@link ScheduledAnnotationBeanPostProcessor}. This can be
+ * done manually or, more conveniently, through the {@code &lt;task:annotation-driven/&gt;}
+ * element or @{@link EnableScheduling} annotation.
+ *
+ @Scheduled 处理这个注解是在 ScheduledAnnotationBeanPostProcessor 这个类中进行注册 
+ 需要手动的去完成这个动作，在配置文件中添加 &lt;task:annotation-driven/&gt; 或者 添加 @EnableScheduling注解
+ *
+ * &lt;p&gt;This annotation may be used as a &lt;em&gt;meta-annotation&lt;/em&gt; to create custom
+ * &lt;em&gt;composed annotations&lt;/em&gt; with attribute overrides.
+ *
+ 这个注解可以作为元注解进行自由的扩展 对其它annotation类型作说明
+ *
+ * @author Mark Fisher
+ * @author Dave Syer
+ * @author Chris Beams
+ * @since 3.0
+ * @see EnableScheduling
+ * @see ScheduledAnnotationBeanPostProcessor
+ * @see Schedules
+ */</span>
+<span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">ANNOTATION_TYPE</span><span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Repeatable</span><span class="o">(</span><span class="n">Schedules</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Scheduled</span> <span class="o">{</span>
+  <span class="cm">/**
+   * A cron-like expression, extending the usual UN*X definition to include
+   * triggers on the second as well as minute, hour, day of month, month
+   * and day of week.  e.g. {@code "0 * * * * MON-FRI"} means once per minute on
+   * weekdays (at the top of the minute - the 0th second).
+   * @return an expression that can be parsed to a cron schedule
+   * @see org.springframework.scheduling.support.CronSequenceGenerator
+   */</span>
+
+
+  <span class="err">继承于</span><span class="n">Unix</span><span class="err">的</span><span class="n">cron</span><span class="err">触发器</span>
+  
+  <span class="n">String</span> <span class="nf">cron</span><span class="o">()</span> <span class="k">default</span> <span class="s">""</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * A time zone for which the cron expression will be resolved. By default, this
+   * attribute is the empty String (i.e. the server's local time zone will be used).
+   *
+   * @return a zone id accepted by {@link java.util.TimeZone#getTimeZone(String)},
+   * or an empty String to indicate the server's default time zone
+   * @see org.springframework.scheduling.support.CronTrigger#CronTrigger(String, java.util.TimeZone)
+   * @see java.util.TimeZone
+   * @since 4.0
+   */</span>
+
+ 
+  <span class="err">指定一个</span><span class="n">cron</span><span class="err">触发器的时区</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">TimeZone</span>
+    
+  <span class="n">String</span> <span class="nf">zone</span><span class="o">()</span> <span class="k">default</span> <span class="s">""</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * Execute the annotated method with a fixed period in milliseconds between the
+   * end of the last invocation and the start of the next.
+   *
+   * @return the delay in milliseconds
+   */</span>
+
+  
+   <span class="err">在最后一次调用的结束和下一个调用的开始之间以毫秒为单位执行带注释的方法。</span>
+   <span class="err">就好比</span> <span class="err">任务是</span><span class="mi">1</span><span class="err">秒执行一次</span> <span class="err">但是任务执行了</span><span class="mi">10</span><span class="err">秒</span> <span class="err">那么下一次任务的执行是在这个</span><span class="mi">10</span><span class="err">秒结束后的</span><span class="mi">1</span><span class="err">秒后</span>
+  
+  <span class="kt">long</span> <span class="nf">fixedDelay</span><span class="o">()</span> <span class="k">default</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * Execute the annotated method with a fixed period in milliseconds between the
+   * end of the last invocation and the start of the next.
+   *
+   * @return the delay in milliseconds as a String value, e.g. a placeholder
+   * @since 3.2.2
+   */</span>
+
+  
+  <span class="err">同上</span> <span class="err">参数为字符串的方式</span>
+  
+  <span class="n">String</span> <span class="nf">fixedDelayString</span><span class="o">()</span> <span class="k">default</span> <span class="s">""</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * Execute the annotated method with a fixed period in milliseconds between
+   * invocations.
+   *
+   * @return the period in milliseconds
+   */</span>
+
+  
+   <span class="err">在调用之间以毫秒为单位执行带注释的方法。</span>
+   <span class="err">就好比</span> <span class="err">任务为</span><span class="mi">1</span><span class="err">秒一次</span> <span class="err">但是</span><span class="mi">1</span><span class="err">秒执行不完这个调度</span> <span class="err">但是下次任务依然会在</span><span class="mi">1</span><span class="err">秒后调用</span>
+     
+  <span class="kt">long</span> <span class="nf">fixedRate</span><span class="o">()</span> <span class="k">default</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * Execute the annotated method with a fixed period in milliseconds between
+   * invocations.
+   *
+   * @return the period in milliseconds as a String value, e.g. a placeholder
+   * @since 3.2.2
+   */</span>
+
+ 
+  <span class="err">同上</span> <span class="err">参数为字符串的方式</span>
+  
+  <span class="n">String</span> <span class="nf">fixedRateString</span><span class="o">()</span> <span class="k">default</span> <span class="s">""</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * Number of milliseconds to delay before the first execution of a
+   * {@link #fixedRate()} or {@link #fixedDelay()} task.
+   *
+   * @return the initial delay in milliseconds
+   * @since 3.2
+   */</span>
+
+  
+  <span class="n">fixedRate</span> <span class="n">fixedDelay</span> <span class="err">的任务开始时</span> <span class="err">延迟多少毫秒执行</span>
+  
+  <span class="kt">long</span> <span class="nf">initialDelay</span><span class="o">()</span> <span class="k">default</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+  <span class="cm">/**
+   * Number of milliseconds to delay before the first execution of a
+   * {@link #fixedRate()} or {@link #fixedDelay()} task.
+   *
+   * @return the initial delay in milliseconds as a String value, e.g. a placeholder
+   * @since 3.2.2
+   */</span>
+
+  
+   <span class="err">同上</span> <span class="err">参数为字符串的方式</span>
+     
+  <span class="n">String</span> <span class="nf">initialDelayString</span><span class="o">()</span> <span class="k">default</span> <span class="s">""</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>所以在选择任务执行方式的选择需要慎重避免多次执行或者不执行</strong></p>
+
+<hr />
+
+<h3 id="springschedule">Spring的Schedule调度执行方式</h3>
+
+<p>查阅了一下 <strong>@EnableScheduling</strong> 开启任务调度器注解的文档</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">scheduling</span><span class="o">.</span><span class="na">annotation</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Documented</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.ElementType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Retention</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.RetentionPolicy</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Target</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executor</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Import</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.scheduling.Trigger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.scheduling.config.ScheduledTaskRegistrar</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Enables Spring's scheduled task execution capability, similar to
+ * functionality found in Spring's {@code &lt;task:*&gt;} XML namespace. To be used
+ * on @{@link Configuration} classes as follows:
+ *
+ * &lt;pre class="code"&gt;
+ * &amp;#064;Configuration
+ * &amp;#064;EnableScheduling
+ * public class AppConfig {
+ *
+ *     // various &amp;#064;Bean definitions
+ * }&lt;/pre&gt;
+ *
+ * This enables detection of @{@link Scheduled} annotations on any Spring-managed
+ * bean in the container. For example, given a class {@code MyTask}
+ *
+ * &lt;pre class="code"&gt;
+ * package com.myco.tasks;
+ *
+ * public class MyTask {
+ *
+ *     &amp;#064;Scheduled(fixedRate=1000)
+ *     public void work() {
+ *         // task execution logic
+ *     }
+ * }&lt;/pre&gt;
+ *
+ * the following configuration would ensure that {@code MyTask.work()} is called
+ * once every 1000 ms:
+ *
+ * &lt;pre class="code"&gt;
+ * &amp;#064;Configuration
+ * &amp;#064;EnableScheduling
+ * public class AppConfig {
+ *
+ *     &amp;#064;Bean
+ *     public MyTask task() {
+ *         return new MyTask();
+ *     }
+ * }&lt;/pre&gt;
+ *
+ * Alternatively, if {@code MyTask} were annotated with {@code @Component}, the
+ * following configuration would ensure that its {@code @Scheduled} method is
+ * invoked at the desired interval:
+ *
+ * &lt;pre class="code"&gt;
+ * &amp;#064;Configuration
+ * &amp;#064;EnableScheduling
+ * &amp;#064;ComponentScan(basePackages="com.myco.tasks")
+ * public class AppConfig {
+ * }&lt;/pre&gt;
+ *
+ * Methods annotated with {@code @Scheduled} may even be declared directly within
+ * {@code @Configuration} classes:
+ *
+ * &lt;pre class="code"&gt;
+ * &amp;#064;Configuration
+ * &amp;#064;EnableScheduling
+ * public class AppConfig {
+ *
+ *     &amp;#064;Scheduled(fixedRate=1000)
+ *     public void work() {
+ *         // task execution logic
+ *     }
+ * }&lt;/pre&gt;
+ *
+ * &lt;p&gt;By default, will be searching for an associated scheduler definition: either
+ * a unique {@link org.springframework.scheduling.TaskScheduler} bean in the context,
+ * or a {@code TaskScheduler} bean named "taskScheduler" otherwise; the same lookup
+ * will also be performed for a {@link java.util.concurrent.ScheduledExecutorService}
+ * bean. If neither of the two is resolvable, a local single-threaded default
+ * scheduler will be created and used within the registrar.
+ *
+ * &lt;p&gt;When more control is desired, a {@code @Configuration} class may implement
+ * {@link SchedulingConfigurer}. This allows access to the underlying
+ * {@link ScheduledTaskRegistrar} instance. For example, the following example
+ * demonstrates how to customize the {@link Executor} used to execute scheduled
+ * tasks:
+ *
+ * &lt;pre class="code"&gt;
+ * &amp;#064;Configuration
+ * &amp;#064;EnableScheduling
+ * public class AppConfig implements SchedulingConfigurer {
+ *
+ *     &amp;#064;Override
+ *     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+ *         taskRegistrar.setScheduler(taskExecutor());
+ *     }
+ *
+ *     &amp;#064;Bean(destroyMethod="shutdown")
+ *     public Executor taskExecutor() {
+ *         return Executors.newScheduledThreadPool(100);
+ *     }
+ * }&lt;/pre&gt;
+ *
+ * &lt;p&gt;Note in the example above the use of {@code @Bean(destroyMethod="shutdown")}.
+ * This ensures that the task executor is properly shut down when the Spring
+ * application context itself is closed.
+ *
+ * &lt;p&gt;Implementing {@code SchedulingConfigurer} also allows for fine-grained
+ * control over task registration via the {@code ScheduledTaskRegistrar}.
+ * For example, the following configures the execution of a particular bean
+ * method per a custom {@code Trigger} implementation:
+ *
+ * &lt;pre class="code"&gt;
+ * &amp;#064;Configuration
+ * &amp;#064;EnableScheduling
+ * public class AppConfig implements SchedulingConfigurer {
+ *
+ *     &amp;#064;Override
+ *     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+ *         taskRegistrar.setScheduler(taskScheduler());
+ *         taskRegistrar.addTriggerTask(
+ *             new Runnable() {
+ *                 public void run() {
+ *                     myTask().work();
+ *                 }
+ *             },
+ *             new CustomTrigger()
+ *         );
+ *     }
+ *
+ *     &amp;#064;Bean(destroyMethod="shutdown")
+ *     public Executor taskScheduler() {
+ *         return Executors.newScheduledThreadPool(42);
+ *     }
+ *
+ *     &amp;#064;Bean
+ *     public MyTask myTask() {
+ *         return new MyTask();
+ *     }
+ * }&lt;/pre&gt;
+ *
+ * &lt;p&gt;For reference, the example above can be compared to the following Spring XML
+ * configuration:
+ *
+ * &lt;pre class="code"&gt;
+ * {@code
+ * &lt;beans&gt;
+ *
+ *     &lt;task:annotation-driven scheduler="taskScheduler"/&gt;
+ *
+ *     &lt;task:scheduler id="taskScheduler" pool-size="42"/&gt;
+ *
+ *     &lt;task:scheduled-tasks scheduler="taskScheduler"&gt;
+ *         &lt;task:scheduled ref="myTask" method="work" fixed-rate="1000"/&gt;
+ *     &lt;/task:scheduled-tasks&gt;
+ *
+ *     &lt;bean id="myTask" class="com.foo.MyTask"/&gt;
+ *
+ * &lt;/beans&gt;
+ * }&lt;/pre&gt;
+ *
+ * The examples are equivalent save that in XML a &lt;em&gt;fixed-rate&lt;/em&gt; period is used
+ * instead of a custom &lt;em&gt;{@code Trigger}&lt;/em&gt; implementation; this is because the
+ * {@code task:} namespace {@code scheduled} cannot easily expose such support. This is
+ * but one demonstration how the code-based approach allows for maximum configurability
+ * through direct access to actual componentry.&lt;p&gt;
+ *
+ * @author Chris Beams
+ * @author Juergen Hoeller
+ * @since 3.1
+ * @see Scheduled
+ * @see SchedulingConfiguration
+ * @see SchedulingConfigurer
+ * @see ScheduledTaskRegistrar
+ * @see Trigger
+ * @see ScheduledAnnotationBeanPostProcessor
+ */</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">)</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Import</span><span class="o">(</span><span class="n">SchedulingConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">EnableScheduling</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>注释中说明了调度器的使用和执行的方式。</p>
+
+<blockquote>
+  <p>a local single-threaded default scheduler will be created and used within the registrar</p>
+</blockquote>
+
+<p>​</p>
+
+<p><strong>无论有多少task，都是一个线程串行执行</strong></p>
+
+<p>如果需要多线程去执行需要注入一个 <strong>Executor</strong></p>
+
+<p>正如文档中写的那样</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code> <span class="n">Bean</span><span class="o">(</span><span class="n">destroyMethod</span><span class="o">=</span><span class="s">"shutdown"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="n">Executor</span> <span class="nf">taskScheduler</span><span class="o">()</span> <span class="o">{</span>
+   <span class="k">return</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newScheduledThreadPool</span><span class="o">(</span><span class="mi">42</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>更改任务调度线程池中线程的数量</p>
+
+<p>方式有很多种</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">ThreadFactory</span> <span class="n">THREAD_FACTORY</span> <span class="o">=</span>
+      <span class="k">new</span> <span class="nf">ThreadFactoryBuilder</span><span class="o">().</span><span class="na">setNameFormat</span><span class="o">(</span><span class="s">"manage-thread-%s"</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+      
+  <span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="n">ScheduledExecutorService</span> <span class="nf">taskScheduler</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"ScheduledExecutorService init poolSize"</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newScheduledThreadPool</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">THREAD_FACTORY</span><span class="o">);</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">configuration</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.scheduling.annotation.SchedulingConfigurer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.scheduling.config.ScheduledTaskRegistrar</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Created by LXC on 2017/5/10.
+ */</span>
+<span class="nd">@Slf4j</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScheduleConfiguration</span> <span class="kd">implements</span> <span class="n">SchedulingConfigurer</span> <span class="o">{</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configureTasks</span><span class="o">(</span><span class="n">ScheduledTaskRegistrar</span> <span class="n">scheduledTaskRegistrar</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ThreadPoolTaskScheduler</span> <span class="n">taskScheduler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadPoolTaskScheduler</span><span class="o">();</span>
+    <span class="n">taskScheduler</span><span class="o">.</span><span class="na">setPoolSize</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="n">taskScheduler</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"ThreadPoolTaskScheduler init poolSize"</span><span class="o">);</span>
+    <span class="n">scheduledTaskRegistrar</span><span class="o">.</span><span class="na">setTaskScheduler</span><span class="o">(</span><span class="n">taskScheduler</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+
+
+  </section>
+</article>
+
+
+<section>
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2017/07/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%8D%E5%AD%90%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/" data-toggle="tooltip" data-placement="top" title="SpringBoot微服务种子项目搭建">上一篇：  <span>SpringBoot微服务种子项目搭建</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  */
+  (function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://yoruo.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <i class='social fa fa-weibo fa-2x'></i>
+              <span class="label">Weibo</span>
+            </a>
+          </li>
+          
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
+              <i class='social fa fa-github fa-2x'></i>
+              <span class="label">Github</span>
+            </a>
+          </li>
+          
+          
+          
+
+          
+
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <i class='social fa fa-rss fa-2x'></i>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:yoruolxc@outlook.com" title="Contact me">
+              <i class='social fa fa-envelope fa-2x'></i>
+              <span class="label">Email</span>
+            </a>
+          </li>
+          
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87669753-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87669753-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    
+
+  </body>
+
+</html>
