@@ -21,7 +21,7 @@ tags: SpringBoot
 
 先上个种子链接 [项目地址](https://github.com/lxcsjk/spring-boot-seed-project)
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170804-1.png)
+![](http://lxc.xiaocblog.com/QQ20170804-1.png)
 
 So，开始吧。
 
@@ -55,29 +55,29 @@ So，开始吧。
 
 ​
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170803-1.png)
+![](http://lxc.xiaocblog.com/QQ20170803-1.png)
 
 ​
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170803-2.png)
+![](http://lxc.xiaocblog.com/QQ20170803-2.png)
 
 ​
 
 我一般选择自动导入 = = 
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170803-3.png)
+![](http://lxc.xiaocblog.com/QQ20170803-3.png)
 
 ​
 
 在读取索引和创建空文件夹
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170803-4.png)
+![](http://lxc.xiaocblog.com/QQ20170803-4.png)
 
 ​
 
 由于是一个单独的模块 就删除了 **setting.gradle**
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170803-6.png)
+![](http://lxc.xiaocblog.com/QQ20170803-6.png)
 
 ​
 
@@ -177,7 +177,7 @@ dependencies {
 
 **IDEA** 打开 **Annotation Processors**
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170803-7.png)
+![](http://lxc.xiaocblog.com/QQ20170803-7.png)
 
 新建一个项目差不多完成了。然后开始配置一些Bean。
 
@@ -526,7 +526,7 @@ public class DefaultConfiguration {
 
 
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170804-3.png)
+![](http://lxc.xiaocblog.com/QQ20170804-3.png)
 
 
 

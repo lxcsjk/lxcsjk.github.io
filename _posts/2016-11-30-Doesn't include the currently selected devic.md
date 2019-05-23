@@ -33,30 +33,30 @@ No restart, clean or anything else needed. Worked like a charm
 需要在描述文件添加设备的UDID
 
 UDID可以通过 ```iTunes``` 拿到。
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161130-0@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161130-0@2x.png)
 **如果看不到UDID多点几下我抹红的地方就行了**
 
 拿到这个UDID 登录到 [苹果开发者中心](https://developer.apple.com)
 
 登录账号后 找到
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161130-2@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161130-2@2x.png)
 
 然后
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161130-3@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161130-3@2x.png)
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161130-4@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161130-4@2x.png)
 
 最好在描述文件添加这个设备
 
 点 **edit**
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161130-1@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161130-1@2x.png)
 
 **Select All**
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161130-5@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161130-5@2x.png)
 
 **Generate**
 

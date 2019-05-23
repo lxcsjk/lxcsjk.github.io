@@ -105,7 +105,7 @@ Started Solr server on port 8983 (pid=3201). Happy searching!
 
 这时候通过浏览器访问以下 ip:8983.
 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115161225934)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115161225934)
 
 会出现这个 如果报错。看log日志。
 
@@ -173,19 +173,19 @@ create -e /temp sss  创建临时节点
 集群状态的查看：./zkServer.sh status
 ```
 打开浏览器。
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115162540354)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115162540354)
 
 一些参数信息
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115162620511)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115162620511)
 
 这里是虚拟机运行的参数
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115162712016)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115162712016)
 
 log日志 以及打印的等级
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115162809408)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115162809408)
 
 分片的信息
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115162902672)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115162902672)
 
 
 之后的分词，还有数据连接和之前写的都是一样的。在solr_home里面操作。加入3个jar，加入/dataimport data-config.xml 还有managed-schema。
@@ -212,7 +212,7 @@ vim solrconfig.xml
      </lst>
 </requestHandler>
 ```
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115163159992)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115163159992)
 3、新建data-config.xml
 新建一个data-config.xml文件，与solrconfig.xml同一个目录下,内容如下，数据库驱动/链接地址/sql语句请修改。
 
@@ -245,4 +245,4 @@ vim solrconfig.xml
     <field name="date_created" type="date" indexed="true" stored="true" />
     <field name="last_updated" type="date" indexed="true" stored="true" />
 ```
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151115165729329)
+![这里写图片描述](http://lxc.xiaocblog.com/20151115165729329)

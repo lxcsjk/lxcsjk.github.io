@@ -15,7 +15,7 @@ tags: iOS
 ---
 
 So~
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20161224-132228@2x.png)
+![](http://lxc.xiaocblog.com/QQ20161224-132228@2x.png)
 
 再次提交一下 OK啦
 

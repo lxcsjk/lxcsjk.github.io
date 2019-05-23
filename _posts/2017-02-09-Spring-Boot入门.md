@@ -18,11 +18,11 @@ Demo只是对 这个[例子](https://github.com/abel533/MyBatis-Spring-Boot) 重
 
 > archetypeCatalog表示插件使用的archetype元数据，不加这个参数时默认为remote，local，即中央仓库archetype元数据，由于中央仓库的archetype太多了，所以导致很慢，指定internal来表示仅使用内部元数据
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170209-191321@2x.png)
+![](http://lxc.xiaocblog.com/QQ20170209-191321@2x.png)
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170209-191419@2x.png)
+![](http://lxc.xiaocblog.com/QQ20170209-191419@2x.png)
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170209-191425@2x.png)
+![](http://lxc.xiaocblog.com/QQ20170209-191425@2x.png)
 
 ---
 

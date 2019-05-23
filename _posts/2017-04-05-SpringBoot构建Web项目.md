@@ -69,7 +69,7 @@ dependencies {
 
 添加相关的类 ，项目结构如下
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170405-2.png)
+![](http://lxc.xiaocblog.com/QQ20170405-2.png)
 
 
 
@@ -344,7 +344,7 @@ public class WebApplication extends SpringBootServletInitializer {
 
 使用 war的插件后 目录结构会发生一些变化
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170405-3.png)
+![](http://lxc.xiaocblog.com/QQ20170405-3.png)
 
 
 
@@ -352,7 +352,7 @@ public class WebApplication extends SpringBootServletInitializer {
 
 
 
-![](http://oh6uhie7j.bkt.clouddn.com/QQ20170405-4.png)
+![](http://lxc.xiaocblog.com/QQ20170405-4.png)
 
 
 

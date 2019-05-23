@@ -37,11 +37,11 @@ tar -zxf  solr-5.2.1.tgz
 
 ### 移动war包
 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111053404840)
+![这里写图片描述](http://lxc.xiaocblog.com/20151111053404840)
      
 **将这个war包，移动到 tomcat的webapps，然后启动或者解压war。**
 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111053535622)
+![这里写图片描述](http://lxc.xiaocblog.com/20151111053535622)
 
 启动命令： 进入tomcat的bin下 
             
@@ -411,26 +411,26 @@ tar -zxf  solr-5.2.1.tgz
 ### 测试
 
  - 测试一下  ```localhost:8080/solr```
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com/20151111060058755)
+![这里写图片描述](http://lxc.xiaocblog.com/20151111060058755)
 
  - 然后点击
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060516777)
+![这里写图片描述](http://lxc.xiaocblog.com//20151111060516777)
 
  - 这个名字不能取成其他的 需要和你在```solr_home```下新建文件夹名相同。
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060707483)
+![这里写图片描述](http://lxc.xiaocblog.com//20151111060707483)
 
 然后
 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060818274)
+![这里写图片描述](http://lxc.xiaocblog.com//20151111060818274)
 
 因为我之前新建过所以是test1
 
 点击DataImport 引入数据 生成索引，
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111060957295) 
+![这里写图片描述](http://lxc.xiaocblog.com//20151111060957295) 
 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111061155512)
+![这里写图片描述](http://lxc.xiaocblog.com//20151111061155512)
 
 查询一个 试试 
-![这里写图片描述](http://oh6uhie7j.bkt.clouddn.com//20151111061436373)
+![这里写图片描述](http://lxc.xiaocblog.com//20151111061436373)
 
 完毕。 肚子疼。等会回去休息了。  下午还是要回来。 双十一电商工作人员真是累成狗了。
