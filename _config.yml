@@ -6,25 +6,29 @@ description: 欢迎来到我的Blog~
 avatarTitle: YoRuo
 # 头像里面的描述
 avatarDesc: Java & iOS
-url: "http://lxcsjk.github.io"
+url: "http://betterlxc.com/"
 
 # Comment
 comment:
     disqus: YoRuo
-    # wangyi: YoRuo
-    # duoshuo: yoruo
+    # gitment: xxx // 需要修改 comments.html中的client_id和client_secret
+    # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
 social:
-    weibo: GrazyLXC
+    weibo: GrazyLXC 
     github: lxcsjk
-    # twitter:
+    zhihu: YoRuo_
+    juejin: 582c38c6d203090067f1800a
+    jianshu: da2a8508169c
+    # twitter: 
     mail: yoruolxc@outlook.com
 
- # 百度统计
- # 使用博客模板请去掉或者更换 id
-# baidu:
- #    id: 41e6519316b78acb0f86b69b1ca93bc2
+
+# 百度统计 
+# 使用博客模板请去掉或者更换 id 
+baidu:
+    id: 41e6519316b78acb0f86b69b1ca93bc2  
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
@@ -46,13 +50,11 @@ ga:
 permalink: /:year/:month/:title/
 # Format
 highlighter: rouge
-markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+
+textColor: #FF0000
 
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-# cover_color: clear
+cover_color: clear
 
 # The blog button should not be removed.
 blog_button:
@@ -60,12 +62,14 @@ blog_button:
 
 # Navigation buttons in the front page.s
 nav:
-    - {title: 所有文章, description: archive, url: '/archive'}
-    - {title: 标签, description: tags, url: '/tags'}
-    - {title: 关于我, description: about, url: '/about'}
-
+    - {title: 所有文章, description: archive, url: '/archive'}   
+    - {title: 标签, description: tags, url: '/tags'}      
+    - {title: 关于我, description: about, url: '/about'}      
+    
 
 # Pagination
 gems: [jekyll-paginate,jekyll-sitemap]
 paginate: 20
 paginate_path: "page/:num/"
+
+

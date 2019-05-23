@@ -8,35 +8,43 @@
 
   <title>SpringBoot微服务种子项目搭建</title>
   <meta name="description" content="公司系统架构目前是纯微服务调用， 相关技术栈：">
-  <meta name="author" content="lxc">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="SpringBoot微服务种子项目搭建">
   <meta name="twitter:description" content="公司系统架构目前是纯微服务调用， 相关技术栈：">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="SpringBoot微服务种子项目搭建">
   <meta property="og:description" content="公司系统架构目前是纯微服务调用， 相关技术栈：">
-
-  <meta name="baidu-site-verification" content="3Qj8KIsSik" />
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2017/07/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%8D%E5%AD%90%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
 
 <!-- 站点统计 -->
-  <script
-  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
+  
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
   
 
 <!-- google 统计 -->
@@ -50,6 +58,14 @@
       ga('send', 'pageview');
   </script>
   
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
 
 </head>
 
@@ -89,18 +105,18 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed">
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
     <div class="panel-main__content">
         <!-- 头像效果-start -->
-        <div class="ih-item circle effect right_to_left">
+        <div class="ih-item circle effect right_to_left">            
             <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
                 <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
                 <div class="info">
                     <div class="info-back">
-                        <h2>
+                        <h2> 
                             
                                 YoRuo
                             
@@ -122,9 +138,9 @@
         <hr class="panel-cover__divider" />
         <p class="panel-cover__description">欢迎来到我的Blog~</p>
         <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
         
-
+        
+        
 
         <div class="navigation-wrapper">
           <div>
@@ -140,16 +156,16 @@
                 
               </ul>
             </nav>
-          </div>
+          </div>          
         </div>
 
 
         </div>
       </div>
     </div>
-
     
-    <div class="panel-cover--overlay cover-disabled"></div>
+    
+    <div class="panel-cover--overlay cover-clear"></div>
     
   </div>
 </header>
@@ -161,14 +177,13 @@
   <header class="post-header">
     <h1 class="post-title">SpringBoot微服务种子项目搭建</h1>
     <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/>
-      <time datetime="2017-07-20 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-07-20</time>
-
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2017-07-20 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-07-20</time>  
+         
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
-
 
   <section class="post">
     <p>公司系统架构目前是纯微服务调用， 相关技术栈：</p>
@@ -190,7 +205,7 @@
 
 <hr />
 
-<h3 id="section">开发环境</h3>
+<h3 id="开发环境">开发环境</h3>
 
 <ul>
   <li>
@@ -211,7 +226,7 @@
 
 <hr />
 
-<h3 id="section-1">新建项目</h3>
+<h3 id="新建项目">新建项目</h3>
 
 <p>新建一个Gradle项目</p>
 
@@ -245,7 +260,7 @@
 
 <p>添加依赖的jar到 <strong>build.gradle</strong></p>
 
-<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span>
     <span class="n">ext</span> <span class="o">{</span>
         <span class="n">springBootVersion</span> <span class="o">=</span> <span class="s1">'1.5.6.RELEASE'</span>
     <span class="o">}</span>
@@ -328,8 +343,7 @@
     <span class="n">testCompile</span><span class="o">(</span><span class="s1">'org.springframework.boot:spring-boot-starter-test'</span><span class="o">)</span>
 <span class="o">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>​</p>
 
@@ -345,47 +359,46 @@
 
 <hr />
 
-<h3 id="section-2">配置多数据源</h3>
+<h3 id="配置多数据源">配置多数据源</h3>
 
 <ol>
   <li>
     <p><strong>yml</strong> 文件</p>
 
-    <div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">spring</span><span class="pi">:</span>
-  <span class="s">application</span><span class="pi">:</span>
-    <span class="s">name</span><span class="pi">:</span> <span class="s">seed-service</span>
-  <span class="s">datasource</span><span class="pi">:</span>
-    <span class="s">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="s">type</span><span class="pi">:</span> <span class="s">com.zaxxer.hikari.HikariDataSource</span>
-    <span class="s">hikari</span><span class="pi">:</span>
-      <span class="s">connection-test-query</span><span class="pi">:</span> <span class="s">SELECT 1</span>
-      <span class="s">maximum-pool-size</span><span class="pi">:</span> <span class="s">20</span>
-      <span class="s">minimum-idle</span><span class="pi">:</span> <span class="s">2</span>
-      <span class="s">max-lifetime</span><span class="pi">:</span> <span class="s">60000</span>
-    <span class="s">primary</span><span class="pi">:</span>
-      <span class="s">jdbc-url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/test1?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;allowMultiQueries=true</span>
-      <span class="s">username</span><span class="pi">:</span> <span class="s">root</span>
-      <span class="s">password</span><span class="pi">:</span> <span class="s">root</span>
-    <span class="s">second</span><span class="pi">:</span>
-      <span class="s">jdbc-url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/test2?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;allowMultiQueries=true</span>
-      <span class="s">username</span><span class="pi">:</span> <span class="s">root</span>
-      <span class="s">password</span><span class="pi">:</span> <span class="s">root</span>
-  <span class="s">profiles</span><span class="pi">:</span>
-    <span class="s">active</span><span class="pi">:</span> <span class="s">dev</span>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">application</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">seed-service</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">com.zaxxer.hikari.HikariDataSource</span>
+    <span class="na">hikari</span><span class="pi">:</span>
+      <span class="na">connection-test-query</span><span class="pi">:</span> <span class="s">SELECT 1</span>
+      <span class="na">maximum-pool-size</span><span class="pi">:</span> <span class="s">20</span>
+      <span class="na">minimum-idle</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="na">max-lifetime</span><span class="pi">:</span> <span class="s">60000</span>
+    <span class="na">primary</span><span class="pi">:</span>
+      <span class="na">jdbc-url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/test1?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;allowMultiQueries=true</span>
+      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">password</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">second</span><span class="pi">:</span>
+      <span class="na">jdbc-url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/test2?characterEncoding=UTF-8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;allowMultiQueries=true</span>
+      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">password</span><span class="pi">:</span> <span class="s">root</span>
+  <span class="na">profiles</span><span class="pi">:</span>
+    <span class="na">active</span><span class="pi">:</span> <span class="s">dev</span>
 
-<span class="s">logging</span><span class="pi">:</span>
-  <span class="s">config</span><span class="pi">:</span> <span class="s">classpath:logback.xml</span>
+<span class="na">logging</span><span class="pi">:</span>
+  <span class="na">config</span><span class="pi">:</span> <span class="s">classpath:logback.xml</span>
 
-<span class="s">mybatis</span><span class="pi">:</span>
-  <span class="s">type-aliases-package</span><span class="pi">:</span> <span class="s">com.betterlxc.mvc.domain</span>
-  <span class="s">mapper-locations</span><span class="pi">:</span> <span class="s">classpath:mapper/*.xml</span>
+<span class="na">mybatis</span><span class="pi">:</span>
+  <span class="na">type-aliases-package</span><span class="pi">:</span> <span class="s">com.betterlxc.mvc.domain</span>
+  <span class="na">mapper-locations</span><span class="pi">:</span> <span class="s">classpath:mapper/*.xml</span>
 
-<span class="s">mapper</span><span class="pi">:</span>
-  <span class="s">mappers</span><span class="pi">:</span> <span class="s">com.betterlxc.utils.BaseMapper</span>
-  <span class="s">not-empty</span><span class="pi">:</span> <span class="s">false</span>
-  <span class="s">identity</span><span class="pi">:</span> <span class="s">MYSQL</span>
-</code></pre>
-    </div>
+<span class="na">mapper</span><span class="pi">:</span>
+  <span class="na">mappers</span><span class="pi">:</span> <span class="s">com.betterlxc.utils.BaseMapper</span>
+  <span class="na">not-empty</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">identity</span><span class="pi">:</span> <span class="s">MYSQL</span>
+</code></pre></div>    </div>
 
     <p>配置了两个数据 一个为主 一个为辅 ，这种配置方式适合数据源不多的情况，如果很多可以使用<strong>@注解</strong> 基于<strong>AOP</strong>，需在 <strong>bulid.gradle</strong> 中添加 aop的依赖，以后另起一篇详细描述关于多数据源配置的问题。</p>
 
@@ -393,7 +406,7 @@
 
     <p><strong>DataSourcePrimaryConfig</strong></p>
 
-    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">datasource</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">datasource</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.zaxxer.hikari.HikariDataSource</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.ibatis.session.SqlSessionFactory</span><span class="o">;</span>
@@ -446,14 +459,13 @@
     <span class="k">return</span> <span class="k">new</span> <span class="nf">SqlSessionTemplate</span><span class="o">(</span><span class="n">sqlSessionFactory</span><span class="o">);</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>​</p>
 
     <p><strong>DataSourceSecondConfig</strong></p>
 
-    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">datasource</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">datasource</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.zaxxer.hikari.HikariDataSource</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.ibatis.session.SqlSessionFactory</span><span class="o">;</span>
@@ -501,8 +513,7 @@
     <span class="k">return</span> <span class="k">new</span> <span class="nf">SqlSessionTemplate</span><span class="o">(</span><span class="n">sqlSessionFactory</span><span class="o">);</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>注意<strong>Mybatis</strong>文件的路径 如果是<strong>Jpa</strong>或者<strong>Groovy</strong>就不要指定MapperLocations啦</p>
   </li>
@@ -510,9 +521,9 @@
 
 <hr />
 
-<h3 id="section-3">统一异常处理</h3>
+<h3 id="统一异常处理">统一异常处理</h3>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.google.common.base.Throwables</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.google.common.collect.ImmutableMap</span><span class="o">;</span>
@@ -542,12 +553,11 @@
         <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Throwables</span><span class="o">.</span><span class="na">getRootCause</span><span class="o">(</span><span class="n">e</span><span class="o">).</span><span class="na">getMessage</span><span class="o">()));</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="section-4">注入常用实体</h3>
+<h3 id="注入常用实体">注入常用实体</h3>
 
 <p><strong>DefaultConfiguration</strong></p>
 
@@ -558,7 +568,7 @@
   <li>添加过滤器</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">config</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">betterlxc</span><span class="o">.</span><span class="na">config</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.betterlxc.client.Interceptors</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.annotation.JsonInclude</span><span class="o">;</span>
@@ -660,12 +670,11 @@
     <span class="k">return</span> <span class="n">secondFlyway</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="section-5">启动项目</h3>
+<h3 id="启动项目">启动项目</h3>
 
 <p><strong>Main</strong>方法启动看日志。</p>
 
@@ -684,8 +693,67 @@
   </section>
 </article>
 
-
 <section>
+
+            <div class="content-play">
+              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
+              <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
        <ul class="pager">
         
         <li class="previous">
@@ -703,26 +771,29 @@
 </section>
 
 <section class="post-comments">
-  <div id="disqus_thread"></div>
-  <script>
 
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://yoruo.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2017/07/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%8D%E5%AD%90%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/";
+        this.page.identifier = "/2017/07/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%8D%E5%AD%90%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/";
+    };
+    var disqus_shortname = 'YoRuo';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+
+  
+
 </section>
 
 
@@ -733,46 +804,73 @@
           <ul class="navigation">
 
           
-          <!-- Weibo -->
-          <li class="navigation__item_social">
-            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
-              <i class='social fa fa-weibo fa-2x'></i>
-              <span class="label">Weibo</span>
-            </a>
-          </li>
-          
-
-          
           <!-- Github -->
           <li class="navigation__item_social">
             <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
-              <i class='social fa fa-github fa-2x'></i>
-              <span class="label">Github</span>
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
             </a>
           </li>
           
-          
-          
 
           
-
-          <!-- RSS -->
+          <!-- Zhihu -->
           <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <i class='social fa fa-rss fa-2x'></i>
-              <span class="label">RSS</span>
+            <a href="https://www.zhihu.com/people/YoRuo_" title="@YoRuo_" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/zhihu.png);"></div>
             </a>
           </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://juejin.im/user/582c38c6d203090067f1800a" title="@582c38c6d203090067f1800a" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/juejin.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://www.jianshu.com/u/da2a8508169c" title="@da2a8508169c" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/jianshu.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/weibo.png);"></div>
+            </a>
+          </li>
+          
+
+          
+          
+
 
           
           <!-- Email -->
           <li class="navigation__item_social">
             <a href="mailto:yoruolxc@outlook.com" title="Contact me">
-              <i class='social fa fa-envelope fa-2x'></i>
-              <span class="label">Email</span>
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
             </a>
           </li>
           
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
 
           </ul>
         </nav>
@@ -781,7 +879,7 @@
 
         <div class = "footer_div">  
            <p class="copyright text-muted">
-            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            Copyright &copy; YoRuo:想变得更好 2019 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"
@@ -807,70 +905,13 @@
     
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+
 <script type="text/javascript" src="/js/highlight.pack.js"></script>
-<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
 <script>hljs.initHighlightingOnLoad();</script>
 
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
     
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https'){
-   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else{
-  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    
-
   </body>
 
 </html>

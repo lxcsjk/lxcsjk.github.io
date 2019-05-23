@@ -8,35 +8,43 @@
 
   <title>我的博客是如何搭建的</title>
   <meta name="description" content="拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。">
-  <meta name="author" content="lxc">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="我的博客是如何搭建的">
   <meta name="twitter:description" content="拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="我的博客是如何搭建的">
   <meta property="og:description" content="拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。">
-
-  <meta name="baidu-site-verification" content="3Qj8KIsSik" />
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
 
 <!-- 站点统计 -->
-  <script
-  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
+  
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
   
 
 <!-- google 统计 -->
@@ -50,6 +58,14 @@
       ga('send', 'pageview');
   </script>
   
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
 
 </head>
 
@@ -89,18 +105,18 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed">
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
     <div class="panel-main__content">
         <!-- 头像效果-start -->
-        <div class="ih-item circle effect right_to_left">
+        <div class="ih-item circle effect right_to_left">            
             <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
                 <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
                 <div class="info">
                     <div class="info-back">
-                        <h2>
+                        <h2> 
                             
                                 YoRuo
                             
@@ -122,9 +138,9 @@
         <hr class="panel-cover__divider" />
         <p class="panel-cover__description">欢迎来到我的Blog~</p>
         <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
         
-
+        
+        
 
         <div class="navigation-wrapper">
           <div>
@@ -140,16 +156,16 @@
                 
               </ul>
             </nav>
-          </div>
+          </div>          
         </div>
 
 
         </div>
       </div>
     </div>
-
     
-    <div class="panel-cover--overlay cover-disabled"></div>
+    
+    <div class="panel-cover--overlay cover-clear"></div>
     
   </div>
 </header>
@@ -161,14 +177,13 @@
   <header class="post-header">
     <h1 class="post-title">我的博客是如何搭建的</h1>
     <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/>
-      <time datetime="2016-11-27 20:40:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-27</time>
-
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2016-11-27 20:40:03 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-27</time>  
+         
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
-
 
   <section class="post">
     <p>拥有自己的博客还是一件很开心的事情，哪怕没有什么人来看。也是对自己成长的记录。来说说如何搭建吧。</p>
@@ -181,21 +196,20 @@
   <li><strong>很快的上手</strong></li>
 </ol>
 
-<h3 id="section">原理</h3>
+<h3 id="原理">原理</h3>
 
 <p>Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Pages 上。接下在自己的电脑搭建一个测试环境吧 😎😎😎</p>
 
 <hr />
 
-<h3 id="jekyll">安装 jekyll</h3>
+<h3 id="安装-jekyll">安装 jekyll</h3>
 
 <p>需要本机的环境 Git 环境（用于部署到远端）、Ruby 环境（Jekyll 是基于 Ruby 开发的）、包管理器 <a href="https://gems.ruby-china.org/">RubyGems</a></p>
 
 <p>由于我是MacOS系统所以就不需要了 需要安装Xcode 和 命令行工具就行了</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install 
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select --install 
+</code></pre></div></div>
 
 <p><a href="http://www.ruby-lang.org/zh_cn/documentation/installation/#building-from-source">安装Ruby</a></p>
 
@@ -207,29 +221,25 @@
 
 <p>环境都已经具备后安装</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>gem install jekyll 
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install jekyll 
+</code></pre></div></div>
 
 <p>创建你的博客所在文件夹</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>jekyll new myBlog    
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new myBlog    
+</code></pre></div></div>
 
 <p>进入博客文件夹的目录</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd yourBlogFolder
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd yourBlogFolder
+</code></pre></div></div>
 
 <p>启动jekyll服务</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>jekyll server
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll server
 或者
 jekyll serve
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>在 Chrome 浏览器 输入 <a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a></p>
 
@@ -239,7 +249,7 @@ jekyll serve
 
 <hr />
 
-<h3 id="jekyll-1">配置jekyll</h3>
+<h3 id="配置jekyll">配置jekyll</h3>
 
 <p>jekyll是通过目录下面的 <code class="highlighter-rouge">_config.yml</code>配置的</p>
 
@@ -251,18 +261,17 @@ jekyll serve
 
 <p><code class="highlighter-rouge">gem install bundler</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Fetching: bundler-1.13.5.gem (100%)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Fetching: bundler-1.13.5.gem (100%)
 Successfully installed bundler-1.13.5
 Parsing documentation for bundler-1.13.5
 Installing ri documentation for bundler-1.13.5
 Done installing documentation for bundler after 5 seconds
 1 gem installed
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>不然会报错</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/Users/lxc/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- bundler (LoadError)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/lxc/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- bundler (LoadError)
 	from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in `require_from_bundler'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in `&lt;top (required)&gt;'
@@ -270,18 +279,16 @@ Done installing documentation for bundler after 5 seconds
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&lt;main&gt;'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
 	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&lt;main&gt;'
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>然后执行 之前记得修改 <code class="highlighter-rouge">gem</code> 的镜像源</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>bundle install
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle install
+</code></pre></div></div>
 
 <p>更新 <code class="highlighter-rouge">gem</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gem update --system # 这里请翻墙一下
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem update --system # 这里请翻墙一下
 $ gem -v
 2.6.3
 
@@ -291,21 +298,19 @@ https://gems.ruby-china.org
 # 确保只有 gems.ruby-china.org
 
 $ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>然后如果报错 缺少什么安装什么包就行了</p>
 
 <p>例如</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>gem install jekyll-paginate
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install jekyll-paginate
 gem install jekyll-sitemap
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>最后</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Configuration file: /data/static/img/yourBlog/_config.yml
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration file: /data/static/img/yourBlog/_config.yml
 Configuration file: /data/static/img/yourBlog/_config.yml
             Source: /data/static/img/yourBlog
        Destination: /data/static/img/yourBlog/_site
@@ -316,21 +321,20 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 Configuration file: /data/static/img/yourBlog/_config.yml
     Server address: http://127.0.0.1:4000/
   Server running... press ctrl-c to stop.
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>打开浏览器输入 <a href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a> 就OK啦</p>
 
 <hr />
 
-<h3 id="section-1">加入第三方的社会化工具</h3>
+<h3 id="加入第三方的社会化工具">加入第三方的社会化工具</h3>
 
 <p>Disqus 已经被墙了 So 用国内的吧 <a href="http://duoshuo.com/">多说</a>就挺好的 
 把多说代码片段复制到 <code class="highlighter-rouge">_layouts</code>文件夹下 <code class="highlighter-rouge">post.html</code>文件内的<code class="highlighter-rouge"> &lt;/article&gt;</code> 和 <code class="highlighter-rouge">&lt;/div&gt;</code>标签之间即可</p>
 
 <hr />
 
-<h3 id="section-2">加入统计之类的代码</h3>
+<h3 id="加入统计之类的代码">加入统计之类的代码</h3>
 
 <p><a href="https://analytics.google.com/">Google Analytics</a>
 <code class="highlighter-rouge">用google的需要改hosts 上面有提到方法</code></p>
@@ -343,7 +347,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 <hr />
 
-<h3 id="section-3">申请自己的域名</h3>
+<h3 id="申请自己的域名">申请自己的域名</h3>
 
 <p><strong>这一步之前得将你本地博客所以文件通过 GitHub Desktop 提交到你的GITHub Pages仓库</strong></p>
 
@@ -384,7 +388,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 <hr />
 
-<h3 id="cname">添加CNAME文件</h3>
+<h3 id="添加cname文件">添加CNAME文件</h3>
 
 <p>在你的github pages项目根目录上新建一个CNAME文件，在CNAME文件上编辑刚才申请到的域名，比如 yoruo.tk ，那么我就写上 yoruo.tk (推荐)，当然你也可以写 www.yoruo.tk ，两种写法处理方式不同：</p>
 
@@ -399,7 +403,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 <hr />
 
-<h3 id="dnspoda">在DNSPod添加A记录</h3>
+<h3 id="在dnspod添加a记录">在DNSPod添加A记录</h3>
 
 <ul>
   <li>
@@ -424,7 +428,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
 <hr />
 
-<h3 id="dns">修改域名的DNS</h3>
+<h3 id="修改域名的dns">修改域名的DNS</h3>
 
 <p>到<a href="https://my.freenom.com/clientarea.php?action=domains">域名注册网站</a></p>
 
@@ -443,8 +447,67 @@ Configuration file: /data/static/img/yourBlog/_config.yml
   </section>
 </article>
 
-
 <section>
+
+            <div class="content-play">
+              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
+              <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
        <ul class="pager">
         
         <li class="previous">
@@ -462,26 +525,29 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 </section>
 
 <section class="post-comments">
-  <div id="disqus_thread"></div>
-  <script>
 
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://yoruo.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/";
+        this.page.identifier = "/2016/11/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84/";
+    };
+    var disqus_shortname = 'YoRuo';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+
+  
+
 </section>
 
 
@@ -492,46 +558,73 @@ Configuration file: /data/static/img/yourBlog/_config.yml
           <ul class="navigation">
 
           
-          <!-- Weibo -->
-          <li class="navigation__item_social">
-            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
-              <i class='social fa fa-weibo fa-2x'></i>
-              <span class="label">Weibo</span>
-            </a>
-          </li>
-          
-
-          
           <!-- Github -->
           <li class="navigation__item_social">
             <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
-              <i class='social fa fa-github fa-2x'></i>
-              <span class="label">Github</span>
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
             </a>
           </li>
           
-          
-          
 
           
-
-          <!-- RSS -->
+          <!-- Zhihu -->
           <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <i class='social fa fa-rss fa-2x'></i>
-              <span class="label">RSS</span>
+            <a href="https://www.zhihu.com/people/YoRuo_" title="@YoRuo_" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/zhihu.png);"></div>
             </a>
           </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://juejin.im/user/582c38c6d203090067f1800a" title="@582c38c6d203090067f1800a" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/juejin.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://www.jianshu.com/u/da2a8508169c" title="@da2a8508169c" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/jianshu.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/weibo.png);"></div>
+            </a>
+          </li>
+          
+
+          
+          
+
 
           
           <!-- Email -->
           <li class="navigation__item_social">
             <a href="mailto:yoruolxc@outlook.com" title="Contact me">
-              <i class='social fa fa-envelope fa-2x'></i>
-              <span class="label">Email</span>
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
             </a>
           </li>
           
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
 
           </ul>
         </nav>
@@ -540,7 +633,7 @@ Configuration file: /data/static/img/yourBlog/_config.yml
 
         <div class = "footer_div">  
            <p class="copyright text-muted">
-            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            Copyright &copy; YoRuo:想变得更好 2019 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"
@@ -566,70 +659,13 @@ Configuration file: /data/static/img/yourBlog/_config.yml
     
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+
 <script type="text/javascript" src="/js/highlight.pack.js"></script>
-<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
 <script>hljs.initHighlightingOnLoad();</script>
 
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
     
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https'){
-   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else{
-  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    
-
   </body>
 
 </html>

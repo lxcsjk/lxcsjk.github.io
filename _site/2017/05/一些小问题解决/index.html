@@ -8,35 +8,43 @@
 
   <title>一些小问题解决</title>
   <meta name="description" content="最近一段时间堕落了。 = =">
-  <meta name="author" content="lxc">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="一些小问题解决">
   <meta name="twitter:description" content="最近一段时间堕落了。 = =">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="一些小问题解决">
   <meta property="og:description" content="最近一段时间堕落了。 = =">
-
-  <meta name="baidu-site-verification" content="3Qj8KIsSik" />
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2017/05/%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
 
 <!-- 站点统计 -->
-  <script
-  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
+  
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
   
 
 <!-- google 统计 -->
@@ -50,6 +58,14 @@
       ga('send', 'pageview');
   </script>
   
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
 
 </head>
 
@@ -89,18 +105,18 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed">
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
     <div class="panel-main__content">
         <!-- 头像效果-start -->
-        <div class="ih-item circle effect right_to_left">
+        <div class="ih-item circle effect right_to_left">            
             <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
                 <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
                 <div class="info">
                     <div class="info-back">
-                        <h2>
+                        <h2> 
                             
                                 YoRuo
                             
@@ -122,9 +138,9 @@
         <hr class="panel-cover__divider" />
         <p class="panel-cover__description">欢迎来到我的Blog~</p>
         <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
         
-
+        
+        
 
         <div class="navigation-wrapper">
           <div>
@@ -140,16 +156,16 @@
                 
               </ul>
             </nav>
-          </div>
+          </div>          
         </div>
 
 
         </div>
       </div>
     </div>
-
     
-    <div class="panel-cover--overlay cover-disabled"></div>
+    
+    <div class="panel-cover--overlay cover-clear"></div>
     
   </div>
 </header>
@@ -161,14 +177,13 @@
   <header class="post-header">
     <h1 class="post-title">一些小问题解决</h1>
     <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/>
-      <time datetime="2017-05-07 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-05-07</time>
-
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2017-05-07 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-05-07</time>  
+         
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
-
 
   <section class="post">
     <p>最近一段时间堕落了。 = =</p>
@@ -179,9 +194,9 @@
 
 <hr />
 
-<h3 id="mysql--bit">MySQL 驱动版本不对 导致数据库bit类型字段异常</h3>
+<h3 id="mysql-驱动版本不对-导致数据库bit类型字段异常">MySQL 驱动版本不对 导致数据库bit类型字段异常</h3>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">:</span> <span class="mi">3</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">:</span> <span class="mi">3</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">mysqla</span><span class="o">.</span><span class="na">MysqlaUtils</span><span class="o">.</span><span class="na">bitToLong</span><span class="o">(</span><span class="n">MysqlaUtils</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">68</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">MysqlTextValueDecoder</span><span class="o">.</span><span class="na">decodeBit</span><span class="o">(</span><span class="n">MysqlTextValueDecoder</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">231</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">ResultSetRow</span><span class="o">.</span><span class="na">decodeAndCreateReturnValue</span><span class="o">(</span><span class="n">ResultSetRow</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">170</span><span class="o">)</span>
@@ -190,18 +205,17 @@
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">ResultSetImpl</span><span class="o">.</span><span class="na">getNonStringValueFromRow</span><span class="o">(</span><span class="n">ResultSetImpl</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">813</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">ResultSetImpl</span><span class="o">.</span><span class="na">getBoolean</span><span class="o">(</span><span class="n">ResultSetImpl</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">904</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">ResultSetImpl</span><span class="o">.</span><span class="na">getBoolean</span><span class="o">(</span><span class="n">ResultSetImpl</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">908</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><a href="https://bugs.mysql.com/bug.php?id=81755">https://bugs.mysql.com/bug.php?id=81755</a></p>
 
 <hr />
 
-<h3 id="mybatis-">MyBatis 查询返回插入后主键的值</h3>
+<h3 id="mybatis-查询返回插入后主键的值">MyBatis 查询返回插入后主键的值</h3>
 
 <p>单个的insert语句 加个selectkey标签</p>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">"insert"</span> <span class="na">parameterType=</span><span class="s">"mbxc.task.domain.TaskGroup"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">"insert"</span> <span class="na">parameterType=</span><span class="s">"mbxc.task.domain.TaskGroup"</span><span class="nt">&gt;</span>
         insert into task_group
         <span class="nt">&lt;trim</span> <span class="na">prefix=</span><span class="s">"("</span> <span class="na">suffix=</span><span class="s">")"</span> <span class="na">suffixOverrides=</span><span class="s">","</span><span class="nt">&gt;</span>
             `id`,
@@ -219,14 +233,13 @@
             SELECT @@IDENTITY AS id
         <span class="nt">&lt;/selectKey&gt;</span>
     <span class="nt">&lt;/insert&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>批量插入返回主键值 在 <code class="highlighter-rouge">mybatis3.3.1</code> 就已经支持了</p>
 
 <p><a href="https://github.com/mybatis/mybatis-3/pull/547">https://github.com/mybatis/mybatis-3/pull/547</a></p>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">"insertBatch"</span> <span class="na">useGeneratedKeys=</span><span class="s">"true"</span> <span class="na">keyProperty=</span><span class="s">"id"</span> <span class="na">keyColumn=</span><span class="s">"id"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">"insertBatch"</span> <span class="na">useGeneratedKeys=</span><span class="s">"true"</span> <span class="na">keyProperty=</span><span class="s">"id"</span> <span class="na">keyColumn=</span><span class="s">"id"</span><span class="nt">&gt;</span>
         insert into task
         (
         `params`,
@@ -248,18 +261,17 @@
             #{item.lastUpdated,jdbcType=TIMESTAMP})
         <span class="nt">&lt;/foreach&gt;</span>
     <span class="nt">&lt;/insert&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="broken-pipe-">服务报出Broken pipe 异常奔溃</h3>
+<h3 id="服务报出broken-pipe-异常奔溃">服务报出Broken pipe 异常奔溃</h3>
 
 <p>有天凌晨一个重要的服务突然宕机了。</p>
 
 <p>看<strong>gray2log</strong>日志打印的是<code class="highlighter-rouge">java-io-ioexception-broken-pipe</code>。</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">connector</span><span class="o">.</span><span class="na">ClientAbortException</span><span class="o">:</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">:</span> <span class="n">Broken</span> <span class="n">pipe</span>	
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">connector</span><span class="o">.</span><span class="na">ClientAbortException</span><span class="o">:</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">:</span> <span class="n">Broken</span> <span class="n">pipe</span>	
 	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">connector</span><span class="o">.</span><span class="na">OutputBuffer</span><span class="o">.</span><span class="na">realWriteBytes</span><span class="o">(</span><span class="n">OutputBuffer</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">389</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">tomcat</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">buf</span><span class="o">.</span><span class="na">ByteChunk</span><span class="o">.</span><span class="na">flushBuffer</span><span class="o">(</span><span class="n">ByteChunk</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">426</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">connector</span><span class="o">.</span><span class="na">OutputBuffer</span><span class="o">.</span><span class="na">doFlush</span><span class="o">(</span><span class="n">OutputBuffer</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">338</span><span class="o">)</span>
@@ -276,8 +288,7 @@
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">opensymphony</span><span class="o">.</span><span class="na">xwork2</span><span class="o">.</span><span class="na">interceptor</span><span class="o">.</span><span class="na">DefaultWorkflowInterceptor</span><span class="o">.</span><span class="na">doIntercept</span><span class="o">(</span><span class="n">DefaultWorkflowInterceptor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">167</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">opensymphony</span><span class="o">.</span><span class="na">xwork2</span><span class="o">.</span><span class="na">interceptor</span><span class="o">.</span><span class="na">MethodFilterInterceptor</span><span class="o">.</span><span class="na">intercept</span><span class="o">(</span><span class="n">MethodFilterInterceptor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">98</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="na">opensymphony</span><span class="o">.</span><span class="na">xwork2</span><span class="o">.</span><span class="na">DefaultActionInvocation</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">DefaultActionInvocation</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">246</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>测试的时候都很正常，最近的更新也确定不会引发这个问题。</p>
 
@@ -287,17 +298,16 @@
 
 <hr />
 
-<h3 id="shutdown">启动项目成功后又shutdown</h3>
+<h3 id="启动项目成功后又shutdown">启动项目成功后又shutdown</h3>
 
 <p>接手同事一个项目，要进行功能上的迭代</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="mi">2017</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.696</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">ShowcaseScheduleApplication</span>         <span class="o">:</span> <span class="n">Started</span> <span class="n">ShowcaseScheduleApplication</span> <span class="n">in</span> <span class="mf">27.189</span> <span class="n">seconds</span> <span class="o">(</span><span class="n">JVM</span> <span class="n">running</span> <span class="k">for</span> <span class="mf">27.977</span><span class="o">)</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.697</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">s</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">AnnotationConfigApplicationContext</span> <span class="o">:</span> <span class="n">Closing</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">context</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">AnnotationConfigApplicationContext</span><span class="err">@</span><span class="mi">7</span><span class="nl">dfd3c81:</span> <span class="n">startup</span> <span class="n">date</span> <span class="o">[</span><span class="n">Sun</span> <span class="n">May</span> <span class="mi">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mi">46</span> <span class="n">CST</span> <span class="mi">2017</span><span class="o">];</span> <span class="n">root</span> <span class="n">of</span> <span class="n">context</span> <span class="n">hierarchy</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.700</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">DefaultLifecycleProcessor</span>  <span class="o">:</span> <span class="n">Stopping</span> <span class="n">beans</span> <span class="n">in</span> <span class="n">phase</span> <span class="mi">0</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.702</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">j</span><span class="o">.</span><span class="na">e</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">AnnotationMBeanExporter</span>        <span class="o">:</span> <span class="n">Unregistering</span> <span class="n">JMX</span><span class="o">-</span><span class="n">exposed</span> <span class="n">beans</span> <span class="n">on</span> <span class="n">shutdown</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.703</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">j</span><span class="o">.</span><span class="na">LocalContainerEntityManagerFactoryBean</span> <span class="o">:</span> <span class="n">Closing</span> <span class="n">JPA</span> <span class="n">EntityManagerFactory</span> <span class="k">for</span> <span class="n">persistence</span> <span class="n">unit</span> <span class="err">'</span><span class="k">default</span><span class="err">'</span>
-</code></pre>
-</div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2017</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.696</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">ShowcaseScheduleApplication</span>         <span class="o">:</span> <span class="n">Started</span> <span class="n">ShowcaseScheduleApplication</span> <span class="n">in</span> <span class="mf">27.189</span> <span class="n">seconds</span> <span class="o">(</span><span class="n">JVM</span> <span class="n">running</span> <span class="k">for</span> <span class="mf">27.977</span><span class="o">)</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.697</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">s</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">AnnotationConfigApplicationContext</span> <span class="o">:</span> <span class="n">Closing</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">context</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">AnnotationConfigApplicationContext</span><span class="err">@</span><span class="mi">7</span><span class="nl">dfd3c81:</span> <span class="n">startup</span> <span class="n">date</span> <span class="o">[</span><span class="n">Sun</span> <span class="n">May</span> <span class="mo">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mi">46</span> <span class="n">CST</span> <span class="mi">2017</span><span class="o">];</span> <span class="n">root</span> <span class="n">of</span> <span class="n">context</span> <span class="n">hierarchy</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.700</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">DefaultLifecycleProcessor</span>  <span class="o">:</span> <span class="n">Stopping</span> <span class="n">beans</span> <span class="n">in</span> <span class="n">phase</span> <span class="mi">0</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.702</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">j</span><span class="o">.</span><span class="na">e</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">AnnotationMBeanExporter</span>        <span class="o">:</span> <span class="n">Unregistering</span> <span class="n">JMX</span><span class="o">-</span><span class="n">exposed</span> <span class="n">beans</span> <span class="n">on</span> <span class="n">shutdown</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">07</span> <span class="mi">21</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="mf">52.703</span>  <span class="n">INFO</span> <span class="mi">17475</span> <span class="o">---</span> <span class="o">[</span>       <span class="n">Thread</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="n">j</span><span class="o">.</span><span class="na">LocalContainerEntityManagerFactoryBean</span> <span class="o">:</span> <span class="n">Closing</span> <span class="n">JPA</span> <span class="n">EntityManagerFactory</span> <span class="k">for</span> <span class="n">persistence</span> <span class="n">unit</span> <span class="err">'</span><span class="k">default</span><span class="err">'</span>
+</code></pre></div></div>
 
 <p>然后报了这个异常。。  查来查去没发现啥毛病。 Google也没有确切的答案。</p>
 
@@ -309,7 +319,7 @@
 
 <hr />
 
-<h3 id="mysql">MySQL插入的数据量大小</h3>
+<h3 id="mysql插入的数据量大小">MySQL插入的数据量大小</h3>
 
 <p>这两天在写一个迁移任务，600w条数据需要迁移。</p>
 
@@ -317,7 +327,7 @@
 
 <p>在读出数据解析处理后，插入的报了一个异常。这个异常之前也见过。</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nl">Cause:</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">PacketTooBigException</span><span class="o">:</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">Cause:</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">PacketTooBigException</span><span class="o">:</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.</span>
 <span class="o">;</span> <span class="n">SQL</span> <span class="o">[];</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.;</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">cj</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">PacketTooBigException</span><span class="o">:</span> <span class="n">Packet</span> <span class="k">for</span> <span class="n">query</span> <span class="n">is</span> <span class="n">too</span> <span class="nf">large</span> <span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">425</span><span class="o">,</span><span class="mi">663</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">,</span><span class="mi">194</span><span class="o">,</span><span class="mi">304</span><span class="o">).</span> <span class="n">You</span> <span class="n">can</span> <span class="n">change</span> <span class="k">this</span> <span class="n">value</span> <span class="n">on</span> <span class="n">the</span> <span class="n">server</span> <span class="n">by</span> <span class="n">setting</span> <span class="n">the</span> <span class="err">'</span><span class="n">max_allowed_packet</span><span class="err">'</span> <span class="n">variable</span><span class="o">.</span>
 	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">SQLStateSQLExceptionTranslator</span><span class="o">.</span><span class="na">doTranslate</span><span class="o">(</span><span class="n">SQLStateSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">108</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="n">AbstractFallbackSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">73</span><span class="o">)</span>
@@ -345,8 +355,7 @@
 	<span class="n">at</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">service</span><span class="o">.</span><span class="na">SyncHistoryService</span><span class="err">$</span><span class="n">$EnhancerBySpringCGLIB</span><span class="err">$$</span><span class="mi">911</span><span class="n">bc562</span><span class="o">.</span><span class="na">syncHandle</span><span class="o">(&lt;</span><span class="n">generated</span><span class="o">&gt;)</span>
 	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">ArrayList</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1249</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">task</span><span class="o">.</span><span class="na">taskhandler</span><span class="o">.</span><span class="na">TaskExecutor</span><span class="o">.</span><span class="na">syncHistory</span><span class="o">(</span><span class="n">TaskExecutor</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">83</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>插入的数据大小太大了。</p>
 
@@ -365,11 +374,11 @@
 
 <hr />
 
-<h3 id="listt">对List<T>均匀拆分</T></h3>
+<h3 id="对list均匀拆分">对List<T>均匀拆分</T></h3>
 
 <p>以前写过一个拆分List的Util。</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>     <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="nf">splitList</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="nf">splitList</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
        <span class="k">if</span> <span class="o">(</span><span class="n">list</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">len</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
          <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
        <span class="o">}</span>
@@ -384,8 +393,7 @@
        <span class="o">}</span>
        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
      <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>并不是很好。</p>
 
@@ -395,7 +403,7 @@
 
 <p>附源码</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>     <span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="cm">/**
       * Returns consecutive {@linkplain List#subList(int, int) sublists} of a list,
       * each of the same size (the final list may be smaller). For example,
       * partitioning a list containing {@code [a, b, c, d, e]} with a partition
@@ -454,8 +462,7 @@
          <span class="kd">super</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
        <span class="o">}</span>
      <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>对原有的list 根据下标进行拆分。最后返回的List中的 List中的 对象地址 还是 和传入的List相同。如果你对拆分前的List  <code class="highlighter-rouge">.clear()</code>拆分拿到的List也会为空。</p>
 
@@ -463,37 +470,35 @@
 
 <hr />
 
-<h3 id="order-by-">查询order by 后返回的数据</h3>
+<h3 id="查询order-by-后返回的数据">查询order by 后返回的数据</h3>
 
 <p>一开始很随意的用了这个语句 = = 还没有 使用 <code class="highlighter-rouge">MAX()</code></p>
 
 <p>这样会返回 <strong>date_created</strong> 相同时 找到的第一条数据。</p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">select</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>
 <span class="n">last_id</span>
 <span class="k">from</span> <span class="n">sync_info</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">date_created</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">1</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>然后我改成了 这个  当然也可以使用 <code class="highlighter-rouge">MAX()</code></p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">select</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>
 <span class="n">last_id</span>
 <span class="k">from</span> <span class="n">sync_info</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">id</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">1</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="map">对象转Map</h3>
+<h3 id="对象转map">对象转Map</h3>
 
 <p>调用淘宝开发平台接口，有个接口请求参数很多很多，<code class="highlighter-rouge">Content-Type</code>为<code class="highlighter-rouge">application/x-www-form-urlencoded</code></p>
 
 <p>一个一个的 <code class="highlighter-rouge">@Field</code>塞好蠢也好麻烦就用了<code class="highlighter-rouge">@FieldMap</code>，前端传过来的是一个<code class="highlighter-rouge">json</code>，那么<code class="highlighter-rouge">@RequestBody</code>转为对象后需要再转为<code class="highlighter-rouge">Map</code>就写了一个Util类。</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">util</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">util</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.google.common.base.CaseFormat</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.google.common.base.Preconditions</span><span class="o">;</span>
@@ -538,16 +543,15 @@
     <span class="k">return</span> <span class="n">map</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="string--replace--replaceall">String 的 replace 和 replaceAll</h3>
+<h3 id="string-的-replace-和-replaceall">String 的 replace 和 replaceAll</h3>
 
 <p>字符串替换的时候报错了一个错。</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">regex</span><span class="o">.</span><span class="na">PatternSyntaxException</span><span class="o">:</span> <span class="n">Unclosed</span> <span class="n">character</span> <span class="kd">class</span> <span class="nc">near</span> <span class="n">index</span> <span class="mi">0</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">regex</span><span class="o">.</span><span class="na">PatternSyntaxException</span><span class="o">:</span> <span class="n">Unclosed</span> <span class="n">character</span> <span class="kd">class</span> <span class="nc">near</span> <span class="n">index</span> <span class="mi">0</span>
 <span class="o">[</span>
 <span class="o">^</span>
 	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">regex</span><span class="o">.</span><span class="na">Pattern</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">Pattern</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1955</span><span class="o">)</span>
@@ -558,8 +562,7 @@
 	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">regex</span><span class="o">.</span><span class="na">Pattern</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">Pattern</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1351</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">regex</span><span class="o">.</span><span class="na">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">Pattern</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">1028</span><span class="o">)</span>
 	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">2223</span><span class="o">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>很奇怪 = = 简单替换个字符串而已</p>
 
@@ -567,7 +570,7 @@
 
 <p>如下。</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>    <span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
      * Replaces each substring of this string that matches the given &lt;a
      * href="../util/regex/Pattern.html#sum"&gt;regular expression&lt;/a&gt; with the
      * given replacement.
@@ -628,8 +631,7 @@
         <span class="k">return</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">target</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">LITERAL</span><span class="o">).</span><span class="na">matcher</span><span class="o">(</span>
                 <span class="k">this</span><span class="o">).</span><span class="na">replaceAll</span><span class="o">(</span><span class="n">Matcher</span><span class="o">.</span><span class="na">quoteReplacement</span><span class="o">(</span><span class="n">replacement</span><span class="o">.</span><span class="na">toString</span><span class="o">()));</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>replace :  是直接是纯字符替换。</p>
 
@@ -637,15 +639,14 @@
 
 <hr />
 
-<h3 id="excel">Excel解析工具类</h3>
+<h3 id="excel解析工具类">Excel解析工具类</h3>
 
 <p>依赖jar</p>
 
-<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="nl">group:</span> <span class="s1">'org.apache.poi'</span><span class="o">,</span> <span class="nl">name:</span> <span class="s1">'poi-ooxml'</span><span class="o">,</span> <span class="nl">version:</span> <span class="s1">'3.16'</span>
-</code></pre>
-</div>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compile</span> <span class="nl">group:</span> <span class="s1">'org.apache.poi'</span><span class="o">,</span> <span class="nl">name:</span> <span class="s1">'poi-ooxml'</span><span class="o">,</span> <span class="nl">version:</span> <span class="s1">'3.16'</span>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">util</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">mbxc</span><span class="o">.</span><span class="na">mvc</span><span class="o">.</span><span class="na">util</span><span class="o">;</span>
 
 
 <span class="kn">import</span> <span class="nn">com.google.common.collect.Lists</span><span class="o">;</span>
@@ -760,14 +761,13 @@
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="section">求小于当前数字的斐波那契数列</h3>
+<h3 id="求小于当前数字的斐波那契数列">求小于当前数字的斐波那契数列</h3>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>  <span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@Test</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fibonacci</span><span class="o">()</span> <span class="o">{</span>
     <span class="c1">//1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，10946，17711，28657，46368</span>
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"0 --- &gt; "</span> <span class="o">+</span> <span class="n">fibonacciForLessThanNumber</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
@@ -849,12 +849,11 @@
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="html">Html代码转图片并裁剪</h3>
+<h3 id="html代码转图片并裁剪">Html代码转图片并裁剪</h3>
 
 <p>突然遇到这个需求，找了很多jar都不尽如意。</p>
 
@@ -868,7 +867,7 @@
 
 <p>方法调用：</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>  <span class="kd">private</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">BufferedImage</span><span class="o">&gt;</span> <span class="nf">resizeToHeight</span><span class="o">(</span><span class="n">BufferedImage</span> <span class="n">image</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">BufferedImage</span><span class="o">&gt;</span> <span class="nf">resizeToHeight</span><span class="o">(</span><span class="n">BufferedImage</span> <span class="n">image</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
     <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="mi">20</span><span class="o">;</span>
 
@@ -918,12 +917,11 @@
       <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">imageList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="s">"png"</span><span class="o">,</span> <span class="n">outFile</span><span class="o">);</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>第一个方法为裁剪图片，并未对原来的图片进行修改。而是重新创建了一个 <strong>BufferedImage</strong> 对象</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>    <span class="cm">/**
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
      * Returns a subimage defined by a specified rectangular region.
      * The returned &lt;code&gt;BufferedImage&lt;/code&gt; shares the same
      * data array as the original image.
@@ -945,12 +943,11 @@
                                   <span class="n">colorModel</span><span class="o">.</span><span class="na">isAlphaPremultiplied</span><span class="o">(),</span>
                                   <span class="n">properties</span><span class="o">);</span>
     <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>还有一个通过url拼接图片的方法：</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="nf">mergeAndCutPic</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">picList</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span> <span class="nf">mergeAndCutPic</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">picList</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">picList</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
@@ -1001,16 +998,74 @@
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">files</span><span class="o">;</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
 
   </section>
 </article>
 
-
 <section>
+
+            <div class="content-play">
+              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
+              <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
        <ul class="pager">
         
         <li class="previous">
@@ -1028,26 +1083,29 @@
 </section>
 
 <section class="post-comments">
-  <div id="disqus_thread"></div>
-  <script>
 
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://yoruo.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2017/05/%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/";
+        this.page.identifier = "/2017/05/%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/";
+    };
+    var disqus_shortname = 'YoRuo';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+
+  
+
 </section>
 
 
@@ -1058,46 +1116,73 @@
           <ul class="navigation">
 
           
-          <!-- Weibo -->
-          <li class="navigation__item_social">
-            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
-              <i class='social fa fa-weibo fa-2x'></i>
-              <span class="label">Weibo</span>
-            </a>
-          </li>
-          
-
-          
           <!-- Github -->
           <li class="navigation__item_social">
             <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
-              <i class='social fa fa-github fa-2x'></i>
-              <span class="label">Github</span>
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
             </a>
           </li>
           
-          
-          
 
           
-
-          <!-- RSS -->
+          <!-- Zhihu -->
           <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <i class='social fa fa-rss fa-2x'></i>
-              <span class="label">RSS</span>
+            <a href="https://www.zhihu.com/people/YoRuo_" title="@YoRuo_" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/zhihu.png);"></div>
             </a>
           </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://juejin.im/user/582c38c6d203090067f1800a" title="@582c38c6d203090067f1800a" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/juejin.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://www.jianshu.com/u/da2a8508169c" title="@da2a8508169c" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/jianshu.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/weibo.png);"></div>
+            </a>
+          </li>
+          
+
+          
+          
+
 
           
           <!-- Email -->
           <li class="navigation__item_social">
             <a href="mailto:yoruolxc@outlook.com" title="Contact me">
-              <i class='social fa fa-envelope fa-2x'></i>
-              <span class="label">Email</span>
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
             </a>
           </li>
           
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
 
           </ul>
         </nav>
@@ -1106,7 +1191,7 @@
 
         <div class = "footer_div">  
            <p class="copyright text-muted">
-            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            Copyright &copy; YoRuo:想变得更好 2019 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"
@@ -1132,70 +1217,13 @@
     
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+
 <script type="text/javascript" src="/js/highlight.pack.js"></script>
-<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
 <script>hljs.initHighlightingOnLoad();</script>
 
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
     
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https'){
-   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else{
-  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    
-
   </body>
 
 </html>

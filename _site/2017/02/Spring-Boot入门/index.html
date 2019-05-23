@@ -8,35 +8,43 @@
 
   <title>Spring-Boot入门</title>
   <meta name="description" content="之前项目中有个服务需要独立出来，同事用springboot改成了微服务，这两天没啥忙的就给拿出瞅瞅学习一下~">
-  <meta name="author" content="lxc">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Spring-Boot入门">
   <meta name="twitter:description" content="之前项目中有个服务需要独立出来，同事用springboot改成了微服务，这两天没啥忙的就给拿出瞅瞅学习一下~">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="Spring-Boot入门">
   <meta property="og:description" content="之前项目中有个服务需要独立出来，同事用springboot改成了微服务，这两天没啥忙的就给拿出瞅瞅学习一下~">
-
-  <meta name="baidu-site-verification" content="3Qj8KIsSik" />
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2017/02/Spring-Boot%E5%85%A5%E9%97%A8/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
 
 <!-- 站点统计 -->
-  <script
-  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
+  
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
   
 
 <!-- google 统计 -->
@@ -50,6 +58,14 @@
       ga('send', 'pageview');
   </script>
   
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
 
 </head>
 
@@ -89,18 +105,18 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed">
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
     <div class="panel-main__content">
         <!-- 头像效果-start -->
-        <div class="ih-item circle effect right_to_left">
+        <div class="ih-item circle effect right_to_left">            
             <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
                 <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
                 <div class="info">
                     <div class="info-back">
-                        <h2>
+                        <h2> 
                             
                                 YoRuo
                             
@@ -122,9 +138,9 @@
         <hr class="panel-cover__divider" />
         <p class="panel-cover__description">欢迎来到我的Blog~</p>
         <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
         
-
+        
+        
 
         <div class="navigation-wrapper">
           <div>
@@ -140,16 +156,16 @@
                 
               </ul>
             </nav>
-          </div>
+          </div>          
         </div>
 
 
         </div>
       </div>
     </div>
-
     
-    <div class="panel-cover--overlay cover-disabled"></div>
+    
+    <div class="panel-cover--overlay cover-clear"></div>
     
   </div>
 </header>
@@ -161,14 +177,13 @@
   <header class="post-header">
     <h1 class="post-title">Spring-Boot入门</h1>
     <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/>
-      <time datetime="2017-02-09 10:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-02-09</time>
-
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2017-02-09 10:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-02-09</time>  
+         
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
-
 
   <section class="post">
     <p>之前项目中有个服务需要独立出来，同事用springboot改成了微服务，这两天没啥忙的就给拿出瞅瞅学习一下~</p>
@@ -177,7 +192,7 @@
 
 <hr />
 
-<h3 id="maven">新建一个maven项目</h3>
+<h3 id="新建一个maven项目">新建一个maven项目</h3>
 
 <p>我用的是IDEA，新建maven项目时，记得添加一个属性 <strong>archetypeCatalog=internal</strong></p>
 
@@ -193,11 +208,11 @@
 
 <hr />
 
-<h3 id="section">添加配置</h3>
+<h3 id="添加配置">添加配置</h3>
 
 <p>在<strong>pom.xml</strong>文件添加响应的配置</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
 	<span class="nt">&lt;parent&gt;</span>
@@ -247,12 +262,11 @@
 		<span class="nt">&lt;/plugins&gt;</span>
 	<span class="nt">&lt;/build&gt;</span>
 <span class="nt">&lt;/project&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>在application.properties中写入相关配置</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>server.port=9000
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server.port=9000
 
 druid.url=jdbc:mysql://127.0.0.1:3306/test
 druid.username=root
@@ -286,45 +300,43 @@ pagehelper.reasonable=true
 pagehelper.support-methods-arguments=true
 pagehelper.params=count=countSql
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="section-1">静态资源的路径</h3>
+<h3 id="静态资源的路径">静态资源的路径</h3>
 
 <p><strong>用了freemarker模版引擎 配置一些静态资源文件路径</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package tk.yoruo.springboot.conf;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">tk</span><span class="p">.</span><span class="n">yoruo</span><span class="p">.</span><span class="n">springboot</span><span class="p">.</span><span class="n">conf</span><span class="p">;</span>
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">Configuration</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">ResourceHandlerRegistry</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">WebMvcConfigurerAdapter</span><span class="p">;</span>
 
-/**
- * Created by LXC on 2017/2/9.
- */
-@Configuration
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+<span class="p">/**</span>
+ <span class="p">*</span> <span class="n">Created</span> <span class="n">by</span> <span class="n">LXC</span> <span class="n">on</span> <span class="m">2017</span><span class="p">/</span><span class="m">2</span><span class="p">/</span><span class="m">9.</span>
+ <span class="p">*/</span>
+<span class="p">@</span><span class="n">Configuration</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">WebMvcConfig</span> <span class="n">extends</span> <span class="n">WebMvcConfigurerAdapter</span> <span class="p">{</span>
 
-    /**
-     * spring-boot配置外部静态资源的方法
-     *
-     * @param registry
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-    }
-}
-</code></pre>
-</div>
+    <span class="p">/**</span>
+     <span class="p">*</span> <span class="n">spring</span><span class="p">-</span><span class="n">boot</span><span class="err">配置外部静态资源的方法</span>
+     <span class="p">*</span>
+     <span class="p">*</span> <span class="p">@</span><span class="n">param</span> <span class="n">registry</span>
+     <span class="p">*/</span>
+    <span class="p">@</span><span class="n">Override</span>
+    <span class="k">public</span> <span class="n">void</span> <span class="n">addResourceHandlers</span><span class="p">(</span><span class="n">ResourceHandlerRegistry</span> <span class="n">registry</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">registry</span><span class="p">.</span><span class="n">addResourceHandler</span><span class="p">(</span><span class="s2">"/static/**"</span><span class="p">).</span><span class="n">addResourceLocations</span><span class="p">(</span><span class="s2">"classpath:/static/"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>其他的service层，实体，controller就不阐述了。</p>
 
 <hr />
 
-<h3 id="section-2">添加数据库配置</h3>
+<h3 id="添加数据库配置">添加数据库配置</h3>
 
 <p>创建一个<strong>DruidProperties</strong>的类</p>
 
@@ -334,171 +346,166 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 <p>注入DruidProperties 并加入<strong>@Bean</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package tk.yoruo.springboot.druid;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">tk</span><span class="p">.</span><span class="n">yoruo</span><span class="p">.</span><span class="n">springboot</span><span class="p">.</span><span class="n">druid</span><span class="p">;</span>
 
-import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">alibaba</span><span class="p">.</span><span class="n">druid</span><span class="p">.</span><span class="n">pool</span><span class="p">.</span><span class="n">DruidDataSource</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">beans</span><span class="p">.</span><span class="n">factory</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">Autowired</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">boot</span><span class="p">.</span><span class="n">autoconfigure</span><span class="p">.</span><span class="n">condition</span><span class="p">.</span><span class="n">ConditionalOnClass</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">boot</span><span class="p">.</span><span class="n">autoconfigure</span><span class="p">.</span><span class="n">condition</span><span class="p">.</span><span class="n">ConditionalOnProperty</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">boot</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">properties</span><span class="p">.</span><span class="n">EnableConfigurationProperties</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">Bean</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">Configuration</span><span class="p">;</span>
 
-import java.sql.SQLException;
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">SQLException</span><span class="p">;</span>
 
-/**
- * Created by LXC on 2017/2/9.
- */
+<span class="p">/**</span>
+ <span class="p">*</span> <span class="n">Created</span> <span class="n">by</span> <span class="n">LXC</span> <span class="n">on</span> <span class="m">2017</span><span class="p">/</span><span class="m">2</span><span class="p">/</span><span class="m">9.</span>
+ <span class="p">*/</span>
 
-@Configuration
-@EnableConfigurationProperties(DruidProperties.class)
-// 对应的类在classpath中有存在时才会注入
-@ConditionalOnClass(DruidDataSource.class)
+<span class="p">@</span><span class="n">Configuration</span>
+<span class="p">@</span><span class="n">EnableConfigurationProperties</span><span class="p">(</span><span class="n">DruidProperties</span><span class="p">.</span><span class="n">class</span><span class="p">)</span>
+<span class="p">//</span> <span class="err">对应的类在</span><span class="n">classpath</span><span class="err">中有存在时才会注入</span>
+<span class="p">@</span><span class="n">ConditionalOnClass</span><span class="p">(</span><span class="n">DruidDataSource</span><span class="p">.</span><span class="n">class</span><span class="p">)</span>
 
-// 对应的前缀和属性名 在classpath中有存在时才会注入
-@ConditionalOnProperty(prefix = "druid", name = "url")
-public class DruidAutoConfiguration {
+<span class="p">//</span> <span class="err">对应的前缀和属性名</span> <span class="err">在</span><span class="n">classpath</span><span class="err">中有存在时才会注入</span>
+<span class="p">@</span><span class="n">ConditionalOnProperty</span><span class="p">(</span><span class="n">prefix</span> <span class="p">=</span> <span class="s2">"druid"</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s2">"url"</span><span class="p">)</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">DruidAutoConfiguration</span> <span class="p">{</span>
 
-    @Autowired
-    private DruidProperties druidProperties;
+    <span class="p">@</span><span class="n">Autowired</span>
+    <span class="n">private</span> <span class="n">DruidProperties</span> <span class="n">druidProperties</span><span class="p">;</span>
 
-    @Bean
-    public DruidDataSource dataSource() {
+    <span class="p">@</span><span class="n">Bean</span>
+    <span class="k">public</span> <span class="n">DruidDataSource</span> <span class="n">dataSource</span><span class="p">()</span> <span class="p">{</span>
 
-        DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUrl(druidProperties.getUrl());
-        druidDataSource.setUsername(druidProperties.getUsername());
-        druidDataSource.setPassword(druidProperties.getPassword());
-        if (druidProperties.getInitialSize() &gt; 0) {
-            druidDataSource.setInitialSize(druidProperties.getInitialSize());
-        }
-        if (druidProperties.getMinIdle() &gt; 0) {
-            druidDataSource.setMinIdle(druidProperties.getMinIdle());
-        }
-        if (druidProperties.getMaxActive() &gt; 0) {
-            druidDataSource.setMaxActive(druidProperties.getMaxActive());
-        }
-        druidDataSource.setTestOnBorrow(druidProperties.isTestOnBorrow());
-        try {
-            druidDataSource.init();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return druidDataSource;
-    }
-}
-</code></pre>
-</div>
+        <span class="n">DruidDataSource</span> <span class="n">druidDataSource</span> <span class="p">=</span> <span class="n">new</span> <span class="n">DruidDataSource</span><span class="p">();</span>
+        <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getUrl</span><span class="p">());</span>
+        <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setUsername</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getUsername</span><span class="p">());</span>
+        <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setPassword</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getPassword</span><span class="p">());</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getInitialSize</span><span class="p">()</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setInitialSize</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getInitialSize</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getMinIdle</span><span class="p">()</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setMinIdle</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getMinIdle</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getMaxActive</span><span class="p">()</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setMaxActive</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">getMaxActive</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="n">druidDataSource</span><span class="p">.</span><span class="n">setTestOnBorrow</span><span class="p">(</span><span class="n">druidProperties</span><span class="p">.</span><span class="n">isTestOnBorrow</span><span class="p">());</span>
+        <span class="n">try</span> <span class="p">{</span>
+            <span class="n">druidDataSource</span><span class="p">.</span><span class="n">init</span><span class="p">();</span>
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">throw</span> <span class="n">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">return</span> <span class="n">druidDataSource</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>接着 在src/main/resources目录下新建META-INF文件夹，然后新建spring.factories文件，这个文件用于告诉Spring Boot去找指定的自动配置文件</p>
 
 <p>所以spring.factories内容为</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Auto Configure
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 tk.yoruo.springboot.druid.DruidAutoConfiguration
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="druid-web">添加Druid Web监控</h3>
+<h3 id="添加druid-web监控">添加Druid Web监控</h3>
 
 <p>分别继承 <strong>Druid</strong>中的过滤器和servlet。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package tk.yoruo.springboot.druid;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">tk</span><span class="p">.</span><span class="n">yoruo</span><span class="p">.</span><span class="n">springboot</span><span class="p">.</span><span class="n">druid</span><span class="p">;</span>
 
-import com.alibaba.druid.support.http.WebStatFilter;
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">alibaba</span><span class="p">.</span><span class="n">druid</span><span class="p">.</span><span class="n">support</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">WebStatFilter</span><span class="p">;</span>
 
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">WebFilter</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">WebInitParam</span><span class="p">;</span>
 
-/**
- * Created by LXC on 2017/2/8.
- */
+<span class="p">/**</span>
+ <span class="p">*</span> <span class="n">Created</span> <span class="n">by</span> <span class="n">LXC</span> <span class="n">on</span> <span class="m">2017</span><span class="p">/</span><span class="m">2</span><span class="p">/</span><span class="m">8.</span>
+ <span class="p">*/</span>
 
-@WebFilter(filterName = "druidWebStatFilter", urlPatterns = "/*",
-        initParams = {
-                @WebInitParam(name = "exclusions", value = "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*")// 忽略资源
-        })
-public class DruidStatFilter extends WebStatFilter {
+<span class="p">@</span><span class="n">WebFilter</span><span class="p">(</span><span class="n">filterName</span> <span class="p">=</span> <span class="s2">"druidWebStatFilter"</span><span class="p">,</span> <span class="n">urlPatterns</span> <span class="p">=</span> <span class="s2">"/*"</span><span class="p">,</span>
+        <span class="n">initParams</span> <span class="p">=</span> <span class="p">{</span>
+                <span class="p">@</span><span class="n">WebInitParam</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">"exclusions"</span><span class="p">,</span> <span class="n">value</span> <span class="p">=</span> <span class="s2">"*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"</span><span class="p">)//</span> <span class="err">忽略资源</span>
+        <span class="p">})</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">DruidStatFilter</span> <span class="n">extends</span> <span class="n">WebStatFilter</span> <span class="p">{</span>
 
-}
-
-
-</code></pre>
-</div>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>package tk.yoruo.springboot.druid;
-
-import com.alibaba.druid.support.http.StatViewServlet;
-
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
-
-/**
- * Created by LXC on 2017/2/8.
- */
-
-@SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/druid/*",
-        initParams = {
-                @WebInitParam(name = "allow", value = "127.0.0.1"),// IP白名单 (没有配置或者为空，则允许所有访问)
-//                @WebInitParam(name="deny",value="192.168.16.111"),// IP黑名单 (存在共同时，deny优先于allow)
-                @WebInitParam(name = "loginUsername", value = "admin"),// 用户名
-                @WebInitParam(name = "loginPassword", value = "admin"),// 密码
-                @WebInitParam(name = "resetEnable", value = "true")// 禁用HTML页面上的“Reset All”功能
-        })
-public class DruidStatViewServlet extends StatViewServlet {
-
-}
-
-</code></pre>
-</div>
-
-<h4 id="application-servletcomponentscanservlet">注意还需要在Application类上加入 <strong>@ServletComponentScan</strong>的注解，否则扫描不到你添加的servlet。</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>package tk.yoruo.springboot;
-
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import tk.yoruo.springboot.util.MyMapper;
-
-/**
- * Created by LXC on 2017/2/9.
- */
+<span class="p">}</span>
 
 
-@Controller
-@ServletComponentScan
-@EnableWebMvc
-//@ComponentScan(basePackages = {"tk.yoruo.springboot.controller","tk.yoruo.springboot.service"})
-@SpringBootApplication
-@MapperScan(basePackages = "tk.yoruo.springboot.mapper", markerInterface = MyMapper.class)
-public class Application {
+</code></pre></div></div>
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">tk</span><span class="p">.</span><span class="n">yoruo</span><span class="p">.</span><span class="n">springboot</span><span class="p">.</span><span class="n">druid</span><span class="p">;</span>
 
-    @RequestMapping("/")
-    String home() {
-        return "redirect:countries";
-    }
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">alibaba</span><span class="p">.</span><span class="n">druid</span><span class="p">.</span><span class="n">support</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">StatViewServlet</span><span class="p">;</span>
 
-}
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">WebInitParam</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">WebServlet</span><span class="p">;</span>
 
-</code></pre>
-</div>
+<span class="p">/**</span>
+ <span class="p">*</span> <span class="n">Created</span> <span class="n">by</span> <span class="n">LXC</span> <span class="n">on</span> <span class="m">2017</span><span class="p">/</span><span class="m">2</span><span class="p">/</span><span class="m">8.</span>
+ <span class="p">*/</span>
+
+<span class="p">@</span><span class="n">SuppressWarnings</span><span class="p">(</span><span class="s2">"serial"</span><span class="p">)</span>
+<span class="p">@</span><span class="n">WebServlet</span><span class="p">(</span><span class="n">urlPatterns</span> <span class="p">=</span> <span class="s2">"/druid/*"</span><span class="p">,</span>
+        <span class="n">initParams</span> <span class="p">=</span> <span class="p">{</span>
+                <span class="p">@</span><span class="n">WebInitParam</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">"allow"</span><span class="p">,</span> <span class="n">value</span> <span class="p">=</span> <span class="s2">"127.0.0.1"</span><span class="p">),//</span> <span class="n">IP</span><span class="err">白名单</span> <span class="p">(</span><span class="err">没有配置或者为空，则允许所有访问</span><span class="p">)</span>
+<span class="p">//</span>                <span class="p">@</span><span class="n">WebInitParam</span><span class="p">(</span><span class="n">name</span><span class="p">=</span><span class="s2">"deny"</span><span class="p">,</span><span class="n">value</span><span class="p">=</span><span class="s2">"192.168.16.111"</span><span class="p">),//</span> <span class="n">IP</span><span class="err">黑名单</span> <span class="p">(</span><span class="err">存在共同时，</span><span class="n">deny</span><span class="err">优先于</span><span class="n">allow</span><span class="p">)</span>
+                <span class="p">@</span><span class="n">WebInitParam</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">"loginUsername"</span><span class="p">,</span> <span class="n">value</span> <span class="p">=</span> <span class="s2">"admin"</span><span class="p">),//</span> <span class="err">用户名</span>
+                <span class="p">@</span><span class="n">WebInitParam</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">"loginPassword"</span><span class="p">,</span> <span class="n">value</span> <span class="p">=</span> <span class="s2">"admin"</span><span class="p">),//</span> <span class="err">密码</span>
+                <span class="p">@</span><span class="n">WebInitParam</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">"resetEnable"</span><span class="p">,</span> <span class="n">value</span> <span class="p">=</span> <span class="s2">"true"</span><span class="p">)//</span> <span class="err">禁用</span><span class="n">HTML</span><span class="err">页面上的“</span><span class="nf">Reset</span> <span class="n">All</span><span class="err">”功能</span>
+        <span class="p">})</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">DruidStatViewServlet</span> <span class="n">extends</span> <span class="n">StatViewServlet</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h4 id="注意还需要在application类上加入-servletcomponentscan的注解否则扫描不到你添加的servlet">注意还需要在Application类上加入 <strong>@ServletComponentScan</strong>的注解，否则扫描不到你添加的servlet。</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">tk</span><span class="p">.</span><span class="n">yoruo</span><span class="p">.</span><span class="n">springboot</span><span class="p">;</span>
+
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">mybatis</span><span class="p">.</span><span class="n">spring</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">MapperScan</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">boot</span><span class="p">.</span><span class="n">SpringApplication</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">boot</span><span class="p">.</span><span class="n">autoconfigure</span><span class="p">.</span><span class="n">SpringBootApplication</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">boot</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">ServletComponentScan</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">stereotype</span><span class="p">.</span><span class="n">Controller</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">bind</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">RequestMapping</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">springframework</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">servlet</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">annotation</span><span class="p">.</span><span class="n">EnableWebMvc</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">tk</span><span class="p">.</span><span class="n">yoruo</span><span class="p">.</span><span class="n">springboot</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">MyMapper</span><span class="p">;</span>
+
+<span class="p">/**</span>
+ <span class="p">*</span> <span class="n">Created</span> <span class="n">by</span> <span class="n">LXC</span> <span class="n">on</span> <span class="m">2017</span><span class="p">/</span><span class="m">2</span><span class="p">/</span><span class="m">9.</span>
+ <span class="p">*/</span>
+
+
+<span class="p">@</span><span class="n">Controller</span>
+<span class="p">@</span><span class="n">ServletComponentScan</span>
+<span class="p">@</span><span class="n">EnableWebMvc</span>
+<span class="p">//@</span><span class="n">ComponentScan</span><span class="p">(</span><span class="n">basePackages</span> <span class="p">=</span> <span class="p">{</span><span class="s2">"tk.yoruo.springboot.controller"</span><span class="p">,</span><span class="s2">"tk.yoruo.springboot.service"</span><span class="p">})</span>
+<span class="p">@</span><span class="n">SpringBootApplication</span>
+<span class="p">@</span><span class="n">MapperScan</span><span class="p">(</span><span class="n">basePackages</span> <span class="p">=</span> <span class="s2">"tk.yoruo.springboot.mapper"</span><span class="p">,</span> <span class="n">markerInterface</span> <span class="p">=</span> <span class="n">MyMapper</span><span class="p">.</span><span class="n">class</span><span class="p">)</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">Application</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">SpringApplication</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="n">class</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="n">RequestMapping</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+    <span class="k">String</span> <span class="n">home</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="s2">"redirect:countries"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+</code></pre></div></div>
 
 <hr />
 
-<h3 id="section-3">注意</h3>
+<h3 id="注意">注意</h3>
 
 <p><strong>Application</strong> springboot启动的类，不建议放在顶级的包。例如<strong>src/main/java</strong>下面。</p>
 
@@ -512,9 +519,8 @@ public class Application {
 
 <p>如果一定要这样做，需要在<strong>Application</strong>上加这样的注解。标明你要扫描的包</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@ComponentScan(basePackages = {"tk.yoruo.springboot.controller","tk.yoruo.springboot.service"})
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ComponentScan(basePackages = {"tk.yoruo.springboot.controller","tk.yoruo.springboot.service"})
+</code></pre></div></div>
 <p>这样话静态资源会找不到。</p>
 
 <p>那应该怎么找到… 我还没去试 = =</p>
@@ -528,8 +534,67 @@ public class Application {
   </section>
 </article>
 
-
 <section>
+
+            <div class="content-play">
+              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
+              <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
        <ul class="pager">
         
         <li class="previous">
@@ -547,26 +612,29 @@ public class Application {
 </section>
 
 <section class="post-comments">
-  <div id="disqus_thread"></div>
-  <script>
 
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://yoruo.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2017/02/Spring-Boot%E5%85%A5%E9%97%A8/";
+        this.page.identifier = "/2017/02/Spring-Boot%E5%85%A5%E9%97%A8/";
+    };
+    var disqus_shortname = 'YoRuo';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+
+  
+
 </section>
 
 
@@ -577,46 +645,73 @@ public class Application {
           <ul class="navigation">
 
           
-          <!-- Weibo -->
-          <li class="navigation__item_social">
-            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
-              <i class='social fa fa-weibo fa-2x'></i>
-              <span class="label">Weibo</span>
-            </a>
-          </li>
-          
-
-          
           <!-- Github -->
           <li class="navigation__item_social">
             <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
-              <i class='social fa fa-github fa-2x'></i>
-              <span class="label">Github</span>
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
             </a>
           </li>
           
-          
-          
 
           
-
-          <!-- RSS -->
+          <!-- Zhihu -->
           <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <i class='social fa fa-rss fa-2x'></i>
-              <span class="label">RSS</span>
+            <a href="https://www.zhihu.com/people/YoRuo_" title="@YoRuo_" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/zhihu.png);"></div>
             </a>
           </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://juejin.im/user/582c38c6d203090067f1800a" title="@582c38c6d203090067f1800a" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/juejin.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://www.jianshu.com/u/da2a8508169c" title="@da2a8508169c" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/jianshu.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/weibo.png);"></div>
+            </a>
+          </li>
+          
+
+          
+          
+
 
           
           <!-- Email -->
           <li class="navigation__item_social">
             <a href="mailto:yoruolxc@outlook.com" title="Contact me">
-              <i class='social fa fa-envelope fa-2x'></i>
-              <span class="label">Email</span>
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
             </a>
           </li>
           
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
 
           </ul>
         </nav>
@@ -625,7 +720,7 @@ public class Application {
 
         <div class = "footer_div">  
            <p class="copyright text-muted">
-            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            Copyright &copy; YoRuo:想变得更好 2019 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"
@@ -651,70 +746,13 @@ public class Application {
     
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+
 <script type="text/javascript" src="/js/highlight.pack.js"></script>
-<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
 <script>hljs.initHighlightingOnLoad();</script>
 
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
     
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https'){
-   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else{
-  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    
-
   </body>
 
 </html>

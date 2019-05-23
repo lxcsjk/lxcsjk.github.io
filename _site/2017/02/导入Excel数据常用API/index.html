@@ -8,35 +8,43 @@
 
   <title>POI导入Excel数据常用API</title>
   <meta name="description" content="原文链接">
-  <meta name="author" content="lxc">
+  <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="POI导入Excel数据常用API">
   <meta name="twitter:description" content="原文链接">
-
+  
   <meta property="og:type" content="article">
   <meta property="og:title" content="POI导入Excel数据常用API">
   <meta property="og:description" content="原文链接">
-
-  <meta name="baidu-site-verification" content="3Qj8KIsSik" />
-
+  
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-
+  
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="canonical" href="http://localhost:4000/2017/02/%E5%AF%BC%E5%85%A5Excel%E6%95%B0%E6%8D%AE%E5%B8%B8%E7%94%A8API/">
   <link rel="alternate" type="application/rss+xml" title="YoRuo:想变得更好" href="http://localhost:4000/feed.xml">
-
+  
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
 
 <!-- 站点统计 -->
-  <script
-  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
 
 <!-- 百度统计 -->
+  
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
   
 
 <!-- google 统计 -->
@@ -50,6 +58,14 @@
       ga('send', 'pageview');
   </script>
   
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
 
 </head>
 
@@ -89,18 +105,18 @@
       </div>
     </span>
     
-    <header class="panel-cover panel-cover--collapsed">
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
     <div class="panel-main__content">
         <!-- 头像效果-start -->
-        <div class="ih-item circle effect right_to_left">
+        <div class="ih-item circle effect right_to_left">            
             <a href="/#blog" title="前往 YoRuo:想变得更好 的主页" class="blog-button">
                 <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
                 <div class="info">
                     <div class="info-back">
-                        <h2>
+                        <h2> 
                             
                                 YoRuo
                             
@@ -122,9 +138,9 @@
         <hr class="panel-cover__divider" />
         <p class="panel-cover__description">欢迎来到我的Blog~</p>
         <hr class="panel-cover__divider panel-cover__divider--secondary" />
-
         
-
+        
+        
 
         <div class="navigation-wrapper">
           <div>
@@ -140,16 +156,16 @@
                 
               </ul>
             </nav>
-          </div>
+          </div>          
         </div>
 
 
         </div>
       </div>
     </div>
-
     
-    <div class="panel-cover--overlay cover-disabled"></div>
+    
+    <div class="panel-cover--overlay cover-clear"></div>
     
   </div>
 </header>
@@ -161,19 +177,18 @@
   <header class="post-header">
     <h1 class="post-title">POI导入Excel数据常用API</h1>
     <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/>
-      <time datetime="2017-02-06 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-02-06</time>
-
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2017-02-06 20:00:03 +0800" itemprop="datePublished" class="post-meta__date date">2017-02-06</time>  
+         
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
     </div>
   </header>
 
-
   <section class="post">
     <p><a href="http://blog.sina.com.cn/s/blog_91c0fdb50101kfd4.html">原文链接</a></p>
 
-<h3 id="poi">POI简介</h3>
+<h3 id="poi简介">POI简介</h3>
 
 <ul>
   <li>Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。</li>
@@ -181,7 +196,7 @@
 
 <hr />
 
-<h3 id="hssf">HSSF概况</h3>
+<h3 id="hssf概况">HSSF概况</h3>
 
 <ul>
   <li>HSSF 是Horrible SpreadSheet Format的缩写，通过HSSF，你可以用纯Java代码来读取、写入、修改Excel文件。HSSF 为读取操作提供了两类API：usermodel和eventusermodel，即“用户模型”和“事件-用户模型”。</li>
@@ -189,7 +204,7 @@
 
 <hr />
 
-<h3 id="poi-excel">POI EXCEL文档结构类</h3>
+<h3 id="poi-excel文档结构类">POI EXCEL文档结构类</h3>
 
 <ul>
   <li>HSSFWorkbook excel文档对象</li>
@@ -204,13 +219,13 @@
   <li>HSSFErrorConstants 错误信息表</li>
 </ul>
 
-<h3 id="excel">EXCEL常用操作方法</h3>
+<h3 id="excel常用操作方法">EXCEL常用操作方法</h3>
 
 <ul>
   <li>建立Excel常用对象</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>POIFSFileSystem fs = newPOIFSFileSystem(new FileInputStream("d:/test.xls"));
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POIFSFileSystem fs = newPOIFSFileSystem(new FileInputStream("d:/test.xls"));
 	
 //得到Excel工作簿对象
 HSSFWorkbook wb = new HSSFWorkbook(fs);
@@ -226,14 +241,13 @@ HSSFCell cell = row.getCell((short) j);
 
 //得到单元格样式
 cellStyle = cell.getCellStyle();
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>建立Excel常用对象</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//创建Excel工作簿对象
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//创建Excel工作簿对象
 HSSFWorkbook wb = new HSSFWorkbook();
 
 //创建Excel工作表对象
@@ -250,80 +264,72 @@ row.createCell((short)0).setCellStyle(cellStyle);
 
 //设置Excel工作表的值
 row.createCell((short)0).setCellValue(1);
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置sheet名称和单元格内容</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wb.setSheetName(1, "第一张工作表",HSSFCell.ENCODING_UTF_16);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wb.setSheetName(1, "第一张工作表",HSSFCell.ENCODING_UTF_16);
             
 cell.setEncoding((short) 1);   
    
 cell.setCellValue("单元格内容");  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>取得sheet的数目</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wb.getNumberOfSheets();
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wb.getNumberOfSheets();
+</code></pre></div></div>
 
 <ul>
   <li>根据index取得sheet对象</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.getSheetAt(0);
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFSheet sheet = wb.getSheetAt(0);
+</code></pre></div></div>
 
 <ul>
   <li>取得有效的行数</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>int rowcount = sheet.getLastRowNum();   
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int rowcount = sheet.getLastRowNum();   
+</code></pre></div></div>
 
 <ul>
   <li>取得一行的有效单元格个数</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>row.getLastCellNum();
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>row.getLastCellNum();
+</code></pre></div></div>
 
 <ul>
   <li>单元格值类型读写</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//设置单元格为STRING类型
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//设置单元格为STRING类型
 cell.setCellType(HSSFCell.CELL_TYPE_STRING);
 	
 //读取为数值类型的单元格内容
 cell.getNumericCellValue();
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置列宽、行高</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setColumnWidth((short)column,(short)width);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sheet.setColumnWidth((short)column,(short)width);
 
 row.setHeight((short)height);
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>添加区域，合并单元格</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//合并从第rowFrom行columnFrom列
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//合并从第rowFrom行columnFrom列
 Region region = new Region((short)rowFrom,(short)columnFrom,(short)rowTo  
 (short)columnTo);
 
@@ -332,23 +338,21 @@ sheet.addMergedRegion(region);
 
 //得到所有区域       
 sheet.getNumMergedRegions()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>保存Excel文件</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>FileOutputStream fileOut = new FileOutputStream(path); 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FileOutputStream fileOut = new FileOutputStream(path); 
 wb.write(fileOut); 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>根据单元格不同属性返回字符串数值</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    public String getCellStringValue(HSSFCell cell) {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    public String getCellStringValue(HSSFCell cell) {
         String cellValue = "";
         switch (cell.getCellType()) {
             case HSSFCell.CELL_TYPE_STRING://字符串类型 
@@ -375,14 +379,13 @@ wb.write(fileOut); 
         }
         return cellValue;
     }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>保存Excel文件</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFCellStyle style = wb.createCellStyle();
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFCellStyle style = wb.createCellStyle();
 //下边框
 style.setBorderBottom(HSSFCellStyle.BORDER_DOTTED);
 //左边框  
@@ -391,14 +394,13 @@ style.setBorderLeft(HSSFCellStyle.BORDER_DOTTED);
 style.setBorderRight(HSSFCellStyle.BORDER_THIN);
 //上边框
 style.setBorderTop(HSSFCellStyle.BORDER_THIN);
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置字体和内容位置</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFFont f  = wb.createFont();
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFFont f  = wb.createFont();
 //字号
 f.setFontHeightInPoints((short) 11);
 //加粗
@@ -418,14 +420,13 @@ style1.setDataFormat(df.getFormat("0.00%"));
 cell.setCellFormula(string);
 //单元格内容的旋转的角度     
 style.setRotation(short rotation);  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>插入图片</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray       
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray       
 ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();      
 BufferedImage bufferImg = ImageIO.read(new File("ok.jpg"));      
 ImageIO.write(bufferImg,"jpg",byteArrayOut);      
@@ -438,163 +439,148 @@ HSSFSheet sheet = wb.getSheetAt(0);      
 HSSFPatriarch patriarch = sheet.createDrawingPatriarch();      
 HSSFClientAnchor anchor = new HSSFClientAnchor(0,0,1023,255,(short) 0,0,(short)10,10);           
 patriarch.createPicture(anchor , wb.addPicture(byteArrayOut.toByteArray(),HSSFWorkbook.PICTURE_TYPE_JPEG));
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>调整工作表位置</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();     
 HSSFSheet sheet = wb.createSheet("format sheet");     
 HSSFPrintSetup ps = sheet.getPrintSetup();     
 sheet.setAutobreaks(true);     
 ps.setFitHeight((short)1);     
 ps.setFitWidth((short)1);   
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置打印区域</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("Sheet1");     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("Sheet1");     
 wb.setPrintArea(0, "$A$1:$C$2");   
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>标注脚注</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("format sheet");     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("format sheet");     
 HSSFFooter footer = sheet.getFooter()     
 footer.setRight( "Page " + HSSFFooter.page() + " of " + HSSFFooter.numPages() );  
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>在工作单中清空行数据，调整行位置</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();     
 HSSFSheet sheet = wb.createSheet("row sheet");     
 // Create various cells and rows for spreadsheet.      
 // Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)      
 sheet.shiftRows(5, 10, -5); 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>选中指定的工作表</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("row sheet");     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("row sheet");     
 heet.setSelected(true); 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>工作表的放大缩小</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet1 = wb.createSheet("new sheet");     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFSheet sheet1 = wb.createSheet("new sheet");     
 sheet1.setZoom(1,2);   // 50 percent magnification   
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>头注和脚注</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("new sheet");     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFSheet sheet = wb.createSheet("new sheet");     
 HSSFHeader header = sheet.getHeader();     
 header.setCenter("Center Header");     
 header.setLeft("Left Header");     
 header.setRight(HSSFHeader.font("Stencil-Normal", "Italic") +     
 HSSFHeader.fontSize((short) 16) + "Right w/ Stencil-Normal Italic font and size 16");    
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>自定义颜色</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFCellStyle style = wb.createCellStyle();     
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFCellStyle style = wb.createCellStyle();     
 style.setFillForegroundColor(HSSFColor.LIME.index);     
 style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);     
 HSSFFont font = wb.createFont();     
 font.setColor(HSSFColor.RED.index);     
 style.setFont(font);     
 cell.setCellStyle(style);    
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h3 id="section">小结</h3>
+<h3 id="小结">小结</h3>
 
 <ul>
   <li>设置不显示excel网格线 </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setDisplayGridlines(false);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sheet.setDisplayGridlines(false);
 其中sheet是Sheet对象 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置excel单元格中的内容换行 </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cellStyle.setWrapText(true);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cellStyle.setWrapText(true);
 
 其中cellStyle是WorkBook创建的CellStyle对象,然后将cellStyle设置到要换行的Cell对象,最后在要换行的对象(一般为字符串)加入"/r/n"。如  topTile.append("/r/n" +"cellContent");
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>单元格的合并 </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sheet.addMergedRegion(new CellRangeAddress(0, 4, 0, 2));
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sheet.addMergedRegion(new CellRangeAddress(0, 4, 0, 2));
 
 本示例为合并4行2列
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置页眉和页脚的页数 </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFHeader header = sheet.getHeader(); 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFHeader header = sheet.getHeader(); 
  header.setCenter("Center Header");
  header.setLeft("Left Header");
  header.setRight(HSSFHeader.font("Stencil-Normal", "Italic") + HSSFHeader.fontSize((short) 16) + "Right w/ Stencil-Normal Italic font and size 16");
  HSSFFooter footer = (HSSFFooter )sheet.getFooter()  footer.setRight( "Page " + HSSFFooter.page() + " of " + HSSFFooter.numPages() );
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>使得一个Sheet适合一页 </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setAutobreaks(true); 
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sheet.setAutobreaks(true); 
+</code></pre></div></div>
 
 <ul>
   <li>设置放大属性 </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setZoom(3,4);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sheet.setZoom(3,4);
 Zoom被明确为一个分数，例如下面的75%使用3作为分子，4作为分母
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>设置打印</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFPrintSetup print = (HSSFPrintSetup) sheet.getPrintSetup();
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFPrintSetup print = (HSSFPrintSetup) sheet.getPrintSetup();
  print.setLandscape(true);//设置横向打印
  print.setScale((short) 70);//设置打印缩放70%
  print.setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);//设置为A4纸张 
@@ -605,36 +591,92 @@ Zoom被明确为一个分数，例如下面的75%使用3作为分子，4作为�
  if (i != 0 &amp;&amp; i % 30 == 0) {
      sheet.setRowBreak(i);//设置每30行分页打印
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>反复的行和列</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();  wb.setRepeatingRowsAndColumns(0, 0, 12, 1, 6);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HSSFWorkbook wb = new HSSFWorkbook();  wb.setRepeatingRowsAndColumns(0, 0, 12, 1, 6);
 //设置1到12列,行1到6每一页重复打印 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>调整单元格宽度</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sheet.setAutobreaks(true);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sheet.setAutobreaks(true);
 sheet.setColumnWidth((short)i,colsWidth[i]);
 //设定单元格长度
  sheet.autoSizeColumn((short) i);
 //自动根据长度调整单元格长度 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
   </section>
 </article>
 
-
 <section>
+
+            <div class="content-play">
+              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
+              <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
        <ul class="pager">
         
         <li class="previous">
@@ -652,26 +694,29 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
 </section>
 
 <section class="post-comments">
-  <div id="disqus_thread"></div>
-  <script>
 
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://yoruo.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2017/02/%E5%AF%BC%E5%85%A5Excel%E6%95%B0%E6%8D%AE%E5%B8%B8%E7%94%A8API/";
+        this.page.identifier = "/2017/02/%E5%AF%BC%E5%85%A5Excel%E6%95%B0%E6%8D%AE%E5%B8%B8%E7%94%A8API/";
+    };
+    var disqus_shortname = 'YoRuo';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+
+  
+
 </section>
 
 
@@ -682,46 +727,73 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
           <ul class="navigation">
 
           
-          <!-- Weibo -->
-          <li class="navigation__item_social">
-            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
-              <i class='social fa fa-weibo fa-2x'></i>
-              <span class="label">Weibo</span>
-            </a>
-          </li>
-          
-
-          
           <!-- Github -->
           <li class="navigation__item_social">
             <a href="https://github.com/lxcsjk" title="@lxcsjk 的 Github" target="_blank">
-              <i class='social fa fa-github fa-2x'></i>
-              <span class="label">Github</span>
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
             </a>
           </li>
           
-          
-          
 
           
-
-          <!-- RSS -->
+          <!-- Zhihu -->
           <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <i class='social fa fa-rss fa-2x'></i>
-              <span class="label">RSS</span>
+            <a href="https://www.zhihu.com/people/YoRuo_" title="@YoRuo_" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/zhihu.png);"></div>
             </a>
           </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://juejin.im/user/582c38c6d203090067f1800a" title="@582c38c6d203090067f1800a" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/juejin.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://www.jianshu.com/u/da2a8508169c" title="@da2a8508169c" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/jianshu.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+          <!-- Weibo -->
+          <li class="navigation__item_social">
+            <a href="http://weibo.com/GrazyLXC" title="@GrazyLXC 的微博" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/weibo.png);"></div>
+            </a>
+          </li>
+          
+
+          
+          
+
 
           
           <!-- Email -->
           <li class="navigation__item_social">
             <a href="mailto:yoruolxc@outlook.com" title="Contact me">
-              <i class='social fa fa-envelope fa-2x'></i>
-              <span class="label">Email</span>
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
             </a>
           </li>
           
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
 
           </ul>
         </nav>
@@ -730,7 +802,7 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
 
         <div class = "footer_div">  
            <p class="copyright text-muted">
-            Copyright &copy; YoRuo:想变得更好 2017 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            Copyright &copy; YoRuo:想变得更好 2019 Theme by <a href="http://baixin.io/">leopardpan</a> |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"
@@ -756,70 +828,13 @@ sheet.setColumnWidth((short)i,colsWidth[i]);
     
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+
 <script type="text/javascript" src="/js/highlight.pack.js"></script>
-<!-- <script type="text/javascript" src="http://meet.xpro.im/v2/api/xmeet.api.js"></script> -->
 <script>hljs.initHighlightingOnLoad();</script>
 
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?3faa942a6a653accc643509d0c44b314";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?41e6519316b78acb0f86b69b1ca93bc2";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
     
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87669753-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https'){
-   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else{
-  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    
-
   </body>
 
 </html>
